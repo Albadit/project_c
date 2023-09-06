@@ -1,11 +1,10 @@
-# Installing Node.js, npm, Yarn, and Next.js
+# Installing Node.js, npm and Next.js
 
-This guide will walk you through the process of installing Node.js, npm (Node Package Manager), Yarn, and Next.js on your system. These tools are commonly used for developing modern web applications and JavaScript projects.
+This guide will walk you through the process of installing Node.js, npm (Node Package Manager) and Next.js on your system. These tools are commonly used for developing modern web applications and JavaScript projects.
 
 ## Table of Contents
 - [Installing Node.js](#installing-nodejs)
 - [Installing npm](#installing-npm)
-- [Installing Yarn](#installing-yarn)
 - [Creating a Next.js App](#creating-a-nextjs-app)
 
 ## Installing Node.js
@@ -27,7 +26,7 @@ node -v
 npm -v
 ```
 
-You should see the versions of Node.js and npm displayed in the terminal. if you don't see the npm version go to [Installing npm](#installing-npm). if npm is install go [Installing Yarn](#installing-yarn).
+You should see the versions of Node.js and npm displayed in the terminal. if you don't see the npm version go to [Installing npm](#installing-npm).
 
 ## Installing npm
 
@@ -52,30 +51,6 @@ npm -v
 ```
 
 You should see the npm version displayed in the terminal.
-
-## Installing Yarn
-
-Yarn is an alternative package manager to npm that offers faster and more reliable package installation.
-
-### Step 1: Install Yarn
-
-To install Yarn, you can use npm itself. Open your terminal or command prompt and run:
-
-```
-npm install -g yarn
-```
-
-The -g flag installs Yarn globally on your system.
-
-### Step 2: Verify Installation
-
-After installing Yarn, verify it by running:
-
-```
-yarn -v
-```
-
-You should see the Yarn version displayed in the terminal.
 
 ## Creating a Next.js App
 Next.js is a popular framework for building React applications with server-side rendering, routing, and other features.
