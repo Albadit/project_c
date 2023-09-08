@@ -1,5 +1,8 @@
 import subprocess
+import os
 
+script_directory = os.path.dirname(os.path.realpath(__file__))
+os.chdir(script_directory)
 try:
   # Define the command as a list of strings
   cmd = ['docker-compose', 'up', '-d']
