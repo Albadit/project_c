@@ -1,22 +1,22 @@
-# pip install fastapi uvicorn psycopg2-binary
+# pip install fastapi uvicorn mysql-connector-python
 from fastapi import FastAPI
 import psycopg2
+import mysql.connector
 
 app = FastAPI()
 
-# Database configuration
-db_config = {
-    'database': 'test',
-    'user': 'postgres',
-    'password': '',
-    'host': 'localhost',  # Change to your PostgreSQL host
-    'port': '5432',       # Change to your PostgreSQL port
-}
-
-# Connect to PostgreSQL
+# Connect to MySQL
 def connect_to_db():
+    # Database configuration
+    db_config = {
+        'user': 'root',
+        'password': 'admin',
+        'host': 'localhost',    # Change to your MySQL host
+        'database': 'test',    # Change to your MySQL database name
+    }
+
     try:
-        connection = psycopg2.connect(**db_config)
+        connection = mysql.connector.connect(**db_config)
         return connection
     except Exception as e:
         print(f"Database connection error: {e}")
@@ -28,7 +28,7 @@ async def read_root():
     connection = connect_to_db()
     if connection:
         cursor = connection.cursor()
-        cursor.execute("SELECT 'Hello, PostgreSQL!'")
+        cursor.execute("SELECT 'Hello, MySQL!'")
         result = cursor.fetchone()[0]
         cursor.close()
         connection.close()
@@ -41,12 +41,13 @@ async def test():
     connection = connect_to_db()
 
     if connection:
-        cursor = connection.cursor()
-        cursor.execute("SELECT * FROM public.testing ORDER BY id ASC")
+        cursor = connection.cursor(dictionary=True)
+        cursor.execute("SELECT * FROM `test` ORDER BY id ASC")
         customer_data = cursor.fetchall()
         cursor.close()
         connection.close()
-        return {"customers": customer_data}
+        # return {"test": customer_data}
+        return customer_data
     else:
         return {"message": "Unable to connect to the database"}
 
