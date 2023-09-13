@@ -73,7 +73,8 @@ On installation, you'll see the following prompts:
 4.  Would you like to use Tailwind CSS? No/ <ins>Yes</ins> 
 5.  Would you like to use `src/` directory? No / <ins>Yes</ins>
 6.  Would you like to use App Router? (recommended) No / <ins>Yes</ins>
-7.  Would you like to customize the default import alias? <ins>No</ins> / Yes
+7.  Would you like to customize the default import alias? No / <ins>Yes</ins>
+8.  What import alias would you like configured? @/* <ins>Press enter</ins>
 
 After the prompts, create-next-app will create a folder with your project name and install the required dependencies.
 
