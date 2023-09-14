@@ -1,0 +1,42 @@
+# app.quickdatabasediagrams.com
+User
+-
+Id int(11) PK
+Name varchar(50)
+Email varchar(50)
+Password varchar(50) NULL
+Key varchar(50)
+RoleId int(11) FK >- Role.Id
+Intro boolean DEFAULT=FASLE
+
+Role
+-
+Id int(11) PK
+Level int(2)
+Name varchar(50)
+
+Course
+-
+Id int PK
+Title varchar(50)
+Discription text
+
+CourseProgression
+-
+Id int(11) PK
+UserId int(11) FK >- User.Id
+CourseId int(11) FK >- Course.Id
+CourseDateFinish date NULL
+
+Event
+-
+Id int(11) PK
+Title varchar(50)
+Discription text
+Date date
+
+EventVoting
+-
+Id int(11) PK
+EventId int(11) FK >- Event.Id
+UserId int(11) FK >- User.Id
