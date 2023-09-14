@@ -12,7 +12,7 @@ def connect_to_db():
         'user': 'root',
         'password': 'admin',
         'host': 'localhost',    # Change to your MySQL host
-        'database': 'test',    # Change to your MySQL database name
+        'database': 'anges',    # Change to your MySQL database name
     }
 
     try:
@@ -36,13 +36,13 @@ async def read_root():
     else:
         return {"message": "Unable to connect to the database"}
 
-@app.get("/test")
-async def test():
+@app.get("/user")
+async def user():
     connection = connect_to_db()
 
     if connection:
         cursor = connection.cursor(dictionary=True)
-        cursor.execute("SELECT * FROM `test` ORDER BY id ASC")
+        cursor.execute("SELECT * FROM `user` ORDER BY id ASC")
         customer_data = cursor.fetchall()
         cursor.close()
         connection.close()
