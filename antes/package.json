@@ -3,9 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev:app1": "cd ./src/app && npm run dev -- -p 3001",
-    "dev:app2": "cd ./src/app2 && npm run dev -- -p 3002",
-    "dev:both": "npm-run-all --parallel dev:app1 dev:app2",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
