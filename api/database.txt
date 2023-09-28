@@ -1,42 +1,45 @@
 # app.quickdatabasediagrams.com
-User
+user
 -
-Id int(11) PK
-Name varchar(50)
-Email varchar(50)
-Password varchar(50) NULL
-Key varchar(50)
-RoleId int(11) FK >- Role.Id
-Intro boolean DEFAULT=FASLE
+id int(11) PK IDENTITY
+name varchar(50)
+email varchar(50)
+password varchar(50) NULL
+key varchar(50)
+role_id int(11) FK >- role.id
+intro boolean default=FALSE
 
-Role
+role
 -
-Id int(11) PK
-Level int(2)
-Name varchar(50)
+id int(11) PK IDENTITY 
+level int(2)
+name varchar(50)
+page_access json
 
-Course
+course
 -
-Id int PK
-Title varchar(50)
-Discription text
+id int(11) PK IDENTITY 
+title varchar(50)
+discription text
+data json
 
-CourseProgression
+course_progression
 -
-Id int(11) PK
-UserId int(11) FK >- User.Id
-CourseId int(11) FK >- Course.Id
-CourseDateFinish date NULL
+id int(11) PK IDENTITY 
+user_id int(11) FK >- user.id
+course_id int(11) FK >- course.id
+course_date_finish date NULL
+progression json
 
-Event
+event
 -
-Id int(11) PK
-Title varchar(50)
-Discription text
-Date date
+id int(11) PK IDENTITY 
+title varchar(50)
+discription text
+date datetime
 
-EventVoting
+event_voting
 -
-Id int(11) PK
-EventId int(11) FK >- Event.Id
-UserId int(11) FK >- User.Id
+id int(11) PK IDENTITY 
+event_id int(11) FK >- event.id
+user_id int(11) FK >- user.id
