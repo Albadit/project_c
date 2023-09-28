@@ -9,10 +9,10 @@ app = FastAPI()
 def connect_to_db():
     # Database configuration
     db_config = {
-        'user': 'root',
-        'password': 'admin',
+        'user': 'superadmin',
+        'password': 'Lekker123',
         'host': 'localhost',    # Change to your MySQL host
-        'database': 'test',    # Change to your MySQL database name
+        'database': 'antes',    # Change to your MySQL database name
     }
 
     try:
@@ -53,4 +53,4 @@ async def test():
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="127.0.0.1", port=8000)
+    uvicorn.run(app, host="broeagle.mooo.com", port=8000)
