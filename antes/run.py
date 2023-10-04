@@ -6,8 +6,9 @@ script_directory = os.path.dirname(os.path.realpath(__file__))
 install_commands = [
   # "npm install next@latest react@latest react-dom@latest",
   "npm install next@13.4.19 react@18.2.0 react-dom@18.2.0",
-  "npm install -D prettier prettier-plugin-tailwindcss",
-  "npm install npm-run-all --save-dev"
+  "npm install tailwindcss@latest",
+  "npm install @headlessui/react @heroicons/react",
+  "npm install -D prettier prettier-plugin-tailwindcss"
 ]
 run_dev_command = "npm run dev"
 
