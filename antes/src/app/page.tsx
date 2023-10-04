@@ -1,9 +1,11 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Image from "next/image";
 import HeaderHome from "./components/HeaderHome";
 
-export default function Home() {
+export default function Page() {
   return (
-    <HeaderHome/>
+    <div>
+      <HeaderHome />
+    </div>
   );
 }
