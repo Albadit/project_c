@@ -1,13 +1,10 @@
-import React from 'react'
-import Image from "next/image";
-import Test from './components/test';
-import InputLogin from './components/InputLogin';
+import Image from 'next/image'
+import HeaderHome from '@/app/components/header_home'
 
-export default function Page() {
+export default function Home() {
   return (
-    <div>
-      <InputLogin />
-      <InputLogin />
-    </div>
-  );
+    <>
+      <HeaderHome/>
+    </>
+  )
 }
