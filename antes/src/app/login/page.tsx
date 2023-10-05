@@ -1,13 +1,13 @@
 import React from 'react'
 import Image from "next/image";
-import Test from './components/test';
-import InputLogin from './components/InputLogin';
+import InputLogin from './../components/InputLogin';
 
-export default function Page() {
+export default function login() {
   return (
     <div>
       <InputLogin />
       <InputLogin />
+      <h1>login</h1>
     </div>
   );
 }
