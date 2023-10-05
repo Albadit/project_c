@@ -5,14 +5,9 @@ import os
 script_directory = os.path.dirname(os.path.realpath(__file__))
 install_commands = [
   # "npm install next@latest react@latest react-dom@latest",
-  "npm install next@13.4.19 react@18.2.0 react-dom@18.2.0",
-  # "npm install tailwindcss@latest",
-  "npm install -D tailwindcss postcss autoprefixer",
-  "npx tailwindcss init -p",
-  "npm install @headlessui/react @heroicons/react",
-  # "npm install -D prettier prettier-plugin-tailwindcss"
+  "npm install next@13.5.4 react@18 react-dom@18",
+  "npm install tailwindcss@latest",
 ]
-run_dev_command = "npm run dev"
 
 os.chdir(script_directory)
 if not (os.path.exists(f'{script_directory}/node_modules') and os.path.isdir(f'{script_directory}/node_modules')):
@@ -31,7 +26,3 @@ if not (os.path.exists(f'{script_directory}/node_modules') and os.path.isdir(f'{
 
   except Exception as e:
     print("An error occurred:", str(e))
-
-# Run the npm run dev command
-run_dev_process = subprocess.Popen(run_dev_command, shell=True)
-run_dev_process.wait()

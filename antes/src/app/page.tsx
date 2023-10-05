@@ -1,14 +1,10 @@
-"use client";
+import Image from 'next/image'
+import HeaderHome from '@/app/components/header_home'
 
-import React from 'react'
-import Image from "next/image";
-import Test from '@/app/components/test';
-import HeaderHome from '@/app/components/header_home';
-
-export default function Page() {
+export default function Home() {
   return (
-    <div>
-      <HeaderHome />
-    </div>
-  );
+    <>
+      <HeaderHome/>
+    </>
+  )
 }
