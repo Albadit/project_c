@@ -7,6 +7,7 @@ const navigation = [
   { name: 'Features', href: '#' },
   { name: 'Marketplace', href: '#' },
   { name: 'Company', href: '#' },
+  { name: 'asdf', href: '#' },
 ]
 
 export default function HeaderHome() {

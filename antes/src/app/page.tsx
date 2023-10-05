@@ -1,11 +1,11 @@
 import React from 'react'
 import Image from "next/image";
-import HeaderHome from "./components/HeaderHome";
+import Test from './components/test';
 
 export default function Page() {
   return (
     <div>
-      <HeaderHome />
+      <Test />
     </div>
   );
 }
