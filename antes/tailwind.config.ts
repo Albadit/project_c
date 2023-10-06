@@ -19,8 +19,15 @@ const config: Config = {
       hyperlink: 'rgb(var(--color-hyperlink) / <alpha-value>)',
       inputBorder: 'rgb(var(--color-input-border) / <alpha-value>)'
     },
-    extend: {},
+    extend: {
+      fontFamily: {
+        'font1': ['Montserrat', 'sans-serif'],
+        'font2': ['Roboto', 'sans-serif']
+      },
+    },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/typography'),
+  ],
 }
 export default config
