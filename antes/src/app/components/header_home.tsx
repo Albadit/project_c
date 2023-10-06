@@ -78,7 +78,6 @@ export default function HeaderHome() {
               Inloggen
             </a>
           </div>
-          
         </div>
       </nav>
     </header>
