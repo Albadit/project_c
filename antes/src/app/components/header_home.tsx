@@ -49,7 +49,7 @@ export default function HeaderHome() {
           </a>
         </div>
         <div className={`lg:hidden flex flex-col absolute top-0 right-0 h-full w-full sm:w-[300px] outline outline-1 outline-font1/20 bg-background ${mobileMenuOpen ? 'block' : 'hidden'}`}>
-          <div className="flex 3xl:justify-between justify-end p-5">
+          <div className="flex justify-between sm:justify-end p-5">
             <div className="flex sm:hidden">
             <a href="#" className="-m-1.5 p-1.5">
               <img
@@ -78,7 +78,6 @@ export default function HeaderHome() {
               Inloggen
             </a>
           </div>
-          
         </div>
       </nav>
     </header>
