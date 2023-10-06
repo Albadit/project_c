@@ -7,6 +7,7 @@ install_commands = [
   # "npm install next@latest react@latest react-dom@latest",
   "npm install next@13.5.4 react@18 react-dom@18",
   "npm install tailwindcss@latest",
+  "npm install @tailwindcss/typography",
 ]
 
 os.chdir(script_directory)
