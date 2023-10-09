@@ -16,7 +16,7 @@ export default function HeaderHome() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   return (
-    <header className="bg-background shadow-lg">
+    <header className="bg-background shadow-cbs">
       <nav className="flex items-center justify-between p-5 lg:px-8" aria-label="Global">
         <div className="flex lg:flex-1">
           <a href="#" className="-m-1.5 p-1.5">
