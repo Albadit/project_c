@@ -4,6 +4,7 @@ import { useState } from 'react'
 import IconHamburgerMenu from '@/app/components/icon/hambuger_menu';
 import IconArrowForwardRounded from '@/app/components/icon/arrow_forward_rounded';
 import IconClose from '@/app/components/icon/close';
+import Link from 'next/link';
 
 const navigation = [
   { name: 'Home', href: '#' },
@@ -21,30 +22,31 @@ export default function HeaderHome() {
         {/* Desktop */}
         <ul>
           <li className="flex lg:flex-1">
-            <a href="#" aria-label="logo" className="-m-1.5 p-1.5">
-              <img src="antes_logo.png" alt="antes logo" className="h-8 w-auto"/>
-            </a>
+            <Link href="#" aria-label="logo" className="-m-1.5 p-1.5">
+              <img src="img/antes_logo.png" alt="antes logo" className="h-8 w-auto"/>
+            </Link>
           </li>
         </ul>
         <ul className='hidden lg:flex gap-x-12'>
         {navigation.map((item) => (
           <li key={item.name}>
-            <a href={item.href} className="text-base font-font1 leading-6 text-font1">
+            <Link href={item.href} className="text-base font-font1 leading-6 text-font1">
               {item.name}
-            </a>
+            </Link>
           </li>
         ))}
         </ul>
         <ul className="hidden lg:flex">
           <li>
-            <a href="#" className="flex items-center text-base font-font1 font-medium leading-6">
+            <Link href="#" className="flex items-center text-base font-font1 font-medium leading-6">
               Inloggen <IconArrowForwardRounded className="w-4 ml-1"/>
-            </a>
+            </Link>
           </li>
         </ul>
         <div className="flex lg:hidden">
           <button type="button"
             className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5"
+            title='openMenu'
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
             <IconHamburgerMenu  className="w-8"/>
@@ -55,30 +57,34 @@ export default function HeaderHome() {
         <div className={`lg:hidden flex flex-col absolute top-0 right-0 h-full w-full sm:w-[300px] outline outline-1 outline-font1/20 bg-background ${mobileMenuOpen ? 'block' : 'hidden'}`}>
           <div className="flex justify-between sm:justify-end p-5">
             <div className="flex sm:hidden">
-            <a href="#" className="-m-1.5 p-1.5">
-              <img src="antes_logo.png" alt="antes logo" className="h-8 w-auto"/>
-            </a>
+            <Link href="#" className="-m-1.5 p-1.5">
+              <img src="img/antes_logo.png" alt="antes logo" className="h-8 w-auto"/>
+            </Link>
           </div>
             <button type="button"
               className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
+              title='closeMenu'
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             >
               <IconClose className='w-7'/>
             </button>
           </div>
-          <ul className="flex flex-col gap-y-8 p-5">
-          {navigation.map((item) => (
-            <li key={item.name}>
-              <a href={item.href} className="text-base font-font1 leading-6 text-font1">
-                {item.name}
-              </a>
-            </li>
-          ))}
+          <div className="flex flex-col gap-y-8 p-5">
+            <ul className="flex flex-col gap-y-8">
+            {navigation.map((item) => (
+              <li key={item.name}>
+                <Link href={item.href} className="text-base font-font1 leading-6 text-font1">
+                  {item.name}
+                </Link>
+              </li>
+            ))}
+            </ul>
             <hr className='border-font1/20'/>
-            <a href="#" className="flex items-center text-base font-font1 font-medium leading-6">
+            <Link href="#" className="flex items-center text-base font-font1 font-medium leading-6">
               Inloggen
-            </a>
-          </ul>
+            </Link>
+          </div>
+          
         </div>
       </nav>
     </header>
