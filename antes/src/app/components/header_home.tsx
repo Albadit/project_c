@@ -17,7 +17,7 @@ export default function HeaderHome() {
 
   return (
     <header className="bg-background shadow-cbs">
-      <nav className="flex items-center justify-between p-5 lg:px-8" >
+      <nav className="flex items-center justify-between p-5 lg:px-8">
         {/* Desktop */}
         <ul>
           <li className="flex lg:flex-1">

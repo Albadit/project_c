@@ -10,13 +10,13 @@ const navigation = [
   { name: 'Contact', href: '#' },
 ]
 
-const iconSize = "[22px]"
+const iconSize = "h-[22px]"
 const socialMedia = [
-  { name: 'Facebook', icon: <Facebook className={`h-${iconSize}`}/>, href: '#' },
-  { name: 'Linkedin', icon: <Linkedin className={`h-${iconSize}`}/>, href: '#' },
-  { name: 'Twitter', icon: <Twitter className={`h-${iconSize}`}/>, href: '#' },
-  { name: 'Youtube', icon: <Youtube className={`h-${iconSize}`}/>, href: '#' },
-  { name: 'Instagram', icon: <Instagram className={`h-${iconSize}`}/>, href: '#' },
+  { name: 'Facebook', icon: <Facebook className={`${iconSize}`}/>, href: '#' },
+  { name: 'Linkedin', icon: <Linkedin className={`${iconSize}`}/>, href: '#' },
+  { name: 'Twitter', icon: <Twitter className={`${iconSize}`}/>, href: '#' },
+  { name: 'Youtube', icon: <Youtube className={`${iconSize}`}/>, href: '#' },
+  { name: 'Instagram', icon: <Instagram className={`${iconSize}`}/>, href: '#' },
 ]
 
 const year = (new Date().getFullYear())
