@@ -23,12 +23,12 @@ export const EventCard: FC<EventCardProps> = ({ event }) => {
         <p className='text-base font-font1 text-extra line-clamp-5'>{description}</p>
         <p className='text-base font-font1 text-font1'>Locatie: {location}</p>
       </div>
-      <div className='flex flex-row items-center justify-between'>
-        <div className='flex flex-row items-center gap-2'>
+      <div className='flex lg:flex-row flex-col lg:items-center justify-between gap-5'>
+        <div className='flex flex-row items-center '>
           <Calendar className='fill-extra h-5'/> 
           <p className='text-extra'>{date}</p>
         </div>
-        <Link href="#" className='flex flex-row items-center gap-2 px-4 py-3 rounded-lg text-base bg-primary text-font2 font-semibold'>Lees meer <IconArrowForwardRounded className='fill-font2 h-5'/></Link>
+        <Link href="#" className='flex flex-row items-center justify-center gap-2 px-4 py-3 rounded-lg text-base bg-primary text-font2 font-semibold'>Lees meer <IconArrowForwardRounded className='fill-font2 h-5'/></Link>
       </div>
     </div>
   );

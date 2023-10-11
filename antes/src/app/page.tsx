@@ -16,7 +16,7 @@ export default function Home() {
     <>
       <HeaderHome/>
       <br />
-      <main className='flex justify-center'>
+      <main className='flex justify-center m-5'>
         <EventCard event={event} />
       </main>
       <br />
