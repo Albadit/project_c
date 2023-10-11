@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from 'react'
-import IconHamburgerMenu from '@/app/components/icon/hambuger_menu';
-import IconArrowForwardRounded from '@/app/components/icon/arrow_forward_rounded';
-import IconClose from '@/app/components/icon/close';
+import HamburgerMenu from '@/app/components/icon/hambuger_menu';
+import ArrowForwardRounded from '@/app/components/icon/arrow_forward_rounded';
+import Close from '@/app/components/icon/close';
 import Link from 'next/link';
 
 const navigation = [
@@ -39,7 +39,7 @@ export default function HeaderHome() {
         <ul className="hidden lg:flex">
           <li>
             <Link href="#" className="flex items-center font-medium leading-6">
-              Inloggen <IconArrowForwardRounded className="w-4 ml-1"/>
+              Inloggen <ArrowForwardRounded className="w-4 ml-1"/>
             </Link>
           </li>
         </ul>
@@ -49,7 +49,7 @@ export default function HeaderHome() {
             title='openMenu'
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
-            <IconHamburgerMenu  className="w-8"/>
+            <HamburgerMenu  className="w-8"/>
           </button>
         </div>
 
@@ -66,7 +66,7 @@ export default function HeaderHome() {
               title='closeMenu'
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             >
-              <IconClose className='w-7'/>
+              <Close className='w-7'/>
             </button>
           </div>
           <div className="flex flex-col gap-y-8 p-5">
@@ -84,7 +84,6 @@ export default function HeaderHome() {
               Inloggen
             </Link>
           </div>
-          
         </div>
       </nav>
     </header>

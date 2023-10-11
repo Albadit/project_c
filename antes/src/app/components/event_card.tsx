@@ -10,11 +10,12 @@ interface EventCardProps {
     description: string
     location: string
     date: string
+    link: string
   }
 }
 
 export const EventCard: FC<EventCardProps> = ({ event }) => {
-  const { image, title, description, location, date } = event;
+  const { image, title, description, location, date, link } = event;
   return (
     <div className='flex flex-col justify-between w-[555px] min-h-[700px] p-7 rounded-lg bg-background shadow-cbs text-base font-font1 text-font1'>
       <img src={image} alt="event" className='h-[350px] object-cover object-center rounded'/>
@@ -24,11 +25,11 @@ export const EventCard: FC<EventCardProps> = ({ event }) => {
         <p>Locatie: {location}</p>
       </div>
       <div className='flex lg:flex-row flex-col lg:items-center justify-between gap-5'>
-        <div className='flex flex-row items-center '>
+        <div className='flex flex-row items-center gap-2'>
           <Calendar className='fill-extra h-5'/> 
-          <p className='text-extra'>{date}</p>
+          <p className='text-extra text-sm'>{date}</p>
         </div>
-        <Link href="#" className='flex flex-row items-center justify-center gap-2 px-4 py-3 rounded-lg bg-primary text-font2 font-semibold'>Lees meer <IconArrowForwardRounded className='fill-font2 h-5'/></Link>
+        <Link href={link} className='flex flex-row items-center justify-center gap-2 px-4 py-3 rounded-lg bg-primary text-font2 font-semibold text-sm'>Lees meer <IconArrowForwardRounded className='fill-font2 h-5'/></Link>
       </div>
     </div>
   );
