@@ -18,7 +18,7 @@ export default function HeaderHome() {
 
   return (
     <header className="bg-background shadow-cbs">
-      <nav className="flex items-center justify-between p-5 lg:px-8">
+      <nav className="flex items-center justify-between p-5 lg:px-8 text-font1 font-font1 text-base">
         {/* Desktop */}
         <ul>
           <li className="flex lg:flex-1">
@@ -30,7 +30,7 @@ export default function HeaderHome() {
         <ul className='hidden lg:flex gap-x-12'>
         {navigation.map((item) => (
           <li key={item.name}>
-            <Link href={item.href} className="text-base font-font1 leading-6 text-font1">
+            <Link href={item.href} className="leading-6">
               {item.name}
             </Link>
           </li>
@@ -38,14 +38,14 @@ export default function HeaderHome() {
         </ul>
         <ul className="hidden lg:flex">
           <li>
-            <Link href="#" className="flex items-center text-base font-font1 font-medium leading-6">
+            <Link href="#" className="flex items-center font-medium leading-6">
               Inloggen <IconArrowForwardRounded className="w-4 ml-1"/>
             </Link>
           </li>
         </ul>
         <div className="flex lg:hidden">
           <button type="button"
-            className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5"
+            className="-m-2.5 inline-flex items-center justify-center p-2.5"
             title='openMenu'
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
@@ -62,7 +62,7 @@ export default function HeaderHome() {
             </Link>
           </div>
             <button type="button"
-              className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
+              className="-m-2.5 inline-flex items-center justify-center p-2.5"
               title='closeMenu'
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             >
@@ -73,14 +73,14 @@ export default function HeaderHome() {
             <ul className="flex flex-col gap-y-8">
             {navigation.map((item) => (
               <li key={item.name}>
-                <Link href={item.href} className="text-base font-font1 leading-6 text-font1">
+                <Link href={item.href} className="leading-6">
                   {item.name}
                 </Link>
               </li>
             ))}
             </ul>
             <hr className='border-font1/20'/>
-            <Link href="#" className="flex items-center text-base font-font1 font-medium leading-6">
+            <Link href="#" className="flex items-center font-medium leading-6">
               Inloggen
             </Link>
           </div>

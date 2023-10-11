@@ -24,14 +24,14 @@ const year = (new Date().getFullYear())
 export default function Footer() {
   return (
     <footer className='flex justify-center justify-items-center bg:background shadow-cbs'>
-      <nav className='flex flex-col gap-5 p-5 max-w-[1040px] w-full'>
+      <nav className='flex flex-col gap-5 p-5 max-w-[1040px] w-full text-base font-font1 text-extra fill-extra'>
         <p className='text-extra'>&copy;{year} Antes</p>
         <hr className='text-extra/50'/>
         <div className='flex flex-col sm:flex-row gap-5 justify-between'>
           <ul className='flex gap-x-10'>
           {navigation.map((item) => (
             <li key={item.name}>
-              <a href={item.href} className="text-base font-font1 text-extra">
+              <a href={item.href}>
                 {item.name}
               </a>
             </li>
@@ -40,7 +40,7 @@ export default function Footer() {
           <ul className='flex items-center gap-x-4'>
           {socialMedia.map((item) => (
             <li key={item.name}>
-              <a href={item.href} aria-label={item.name} className="text-base font-font1 fill-extra">
+              <a href={item.href} aria-label={item.name}>
                 {item.icon}
               </a>
             </li>
