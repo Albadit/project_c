@@ -19,6 +19,7 @@
     --color-extra: 116 116 116;
     --color-hyperlink: 0 122 255;
     --color-input-border: 229 229 229;
+    --color-box-shadow: 0 0 0;
   }
 
   :root[data-theme="dark"] {
@@ -32,5 +33,6 @@
     --color-extra: 108 117 125;
     --color-hyperlink: 0 174 239;
     --color-input-border: 169 169 169;
+    --color-box-shadow: 255 255 255;
   }
 }
