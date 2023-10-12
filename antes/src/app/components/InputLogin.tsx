@@ -1,7 +1,7 @@
 export default function InputLogin() {
   return (
-    <>
-      <h1>Hi</h1>
-    </>
+   <div>
+    <input type="text" className="flex h-11 w-[390px] px-[10px] gap-2" />
+   </div>
   )
 }
