@@ -9,7 +9,7 @@ interface EventCardProps {
 
 export const EventCard: FC<EventCardProps> = ({ title, date, location, imageSrc }) => {
     return (
-        <div style={{ marginLeft: "800px", marginTop: "400px", width: '525px', height: '625px', padding: '22px', background: 'white', boxShadow: '0px 0px 60px rgba(21, 90, 148, 0.15)', borderRadius: '8px', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start', gap: '18px', display: 'inline-flex' }}>
+        <div style={{  width: '525px', height: '625px', padding: '22px', background: 'white', boxShadow: '0px 0px 60px rgba(21, 90, 148, 0.15)', borderRadius: '8px', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start', gap: '18px', display: 'inline-flex'}}>
             <div style={{ height: '364px', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start', gap: '10px', display: 'flex' }}>
                 <img style={{ width: '482px', height: '365px', borderRadius: '8px' }} src={imageSrc} alt={title} />
             </div>
@@ -26,5 +26,8 @@ export const EventCard: FC<EventCardProps> = ({ title, date, location, imageSrc 
                 <button style={{ height: '50px', paddingLeft: '30px', paddingRight: '30px', paddingTop: '10px', paddingBottom: '10px', background: '#A2102C', borderRadius: '8px', justifyContent: 'center', alignItems: 'center', gap: '10px', display: 'flex', color: 'white', fontSize: '13px', fontFamily: 'Montserrat', fontWeight: 600, lineHeight: '30px', wordWrap: 'break-word' }}>Lees meer</button>
             </div>
         </div>
+
+        
+        
     );
 };
