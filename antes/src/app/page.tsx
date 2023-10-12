@@ -1,8 +1,21 @@
-import Image from 'next/image'
-import HeaderHome from '@/app/components/header_home'
+import NavHome from '@/app/components/nav_home'
 import Footer from '@/app/components/footer'
 import { EventCard } from '@/app/components/event_card'
 import { QAndACard } from '@/app/components/q-and-a_card'
+import { Title } from '@/app/components/title'
+import { Work } from '@/app/components/work'
+
+const work = { 
+  image: "title-background", 
+  text: "Hoe kunnen wij je helpen?",
+  link: "#",
+}
+
+const title = { 
+  image: "title-background", 
+  text: "Hoe kunnen wij je helpen?",
+  link: "#",
+}
 
 const event = { 
   image: "img/event.png", 
@@ -27,11 +40,15 @@ const qanda = {
 export default function Home() {
   return (
     <>
-      <HeaderHome/>
+      <header>
+        <NavHome/>
+        <Title title={title}/>
+      </header>
       <br />
       <main className='flex flex-wrap justify-evenly m-5 gap-10'>
-        <QAndACard qanda={qanda} />
-        <EventCard event={event} />
+        <Work work={work}/>
+        <QAndACard qanda={qanda}/>
+        <EventCard event={event}/>
       </main>
       <br />
       <Footer/>

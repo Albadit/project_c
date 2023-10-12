@@ -3,8 +3,8 @@ import Link from 'next/link';
 import Calendar from '@/app/components/icon/calendar';
 import ArrowForwardRounded from '@/app/components/icon/arrow_forward_rounded';
 
-interface EventCardProps {
-  event: {
+interface WorkProps {
+  work: {
     image: string
     title: string
     description: string
@@ -14,8 +14,8 @@ interface EventCardProps {
   }
 }
 
-export const EventCard: FC<EventCardProps> = ({ event }) => {
-  const { image, title, description, location, date, link } = event;
+export const Work: FC<WorkProps> = ({ work }) => {
+  const { image, title, description, location, date, link } = work;
   return (
     <div className='flex flex-col justify-between w-[555px] min-h-[700px] p-7 rounded-lg bg-background shadow-cbs text-base font-font1 text-font1'>
       <img src={image} alt="event" className='h-[350px] object-cover object-center rounded'/>

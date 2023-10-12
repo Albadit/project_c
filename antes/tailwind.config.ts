@@ -27,6 +27,9 @@ const config: Config = {
         'font1': ['Montserrat', 'sans-serif'],
         'font2': ['Roboto', 'sans-serif']
       },
+      backgroundImage: {
+        'title-background': "url('/img/title_bg.png')"
+      }
     },
   },
   plugins: [
