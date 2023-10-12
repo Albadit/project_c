@@ -28,7 +28,7 @@ const config: Config = {
         'font2': ['Roboto', 'sans-serif']
       },
       backgroundImage: {
-        'title-background': "url('/img/title_bg.png')"
+        'title-background': "url('img/title_bg.png')"
       }
     },
   },

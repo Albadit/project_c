@@ -6,8 +6,9 @@ import { Title } from '@/app/components/title'
 import { Work } from '@/app/components/work'
 
 const work = { 
-  image: "title-background", 
-  text: "Hoe kunnen wij je helpen?",
+  image: "img/event.png", 
+  title: "Hoe kunnen wij je helpen?",
+  description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
   link: "#",
 }
 
@@ -45,7 +46,7 @@ export default function Home() {
         <Title title={title}/>
       </header>
       <br />
-      <main className='flex flex-wrap justify-evenly m-5 gap-10'>
+      <main className='flex flex-wrap justify-center [1280px]:justify-between mx-10 my-auto gap-10 max-w-[1280px]'>
         <Work work={work}/>
         <QAndACard qanda={qanda}/>
         <EventCard event={event}/>
