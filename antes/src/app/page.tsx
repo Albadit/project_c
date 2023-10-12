@@ -46,7 +46,7 @@ export default function Home() {
         <Title title={title}/>
       </header>
       <br />
-      <main className='flex flex-wrap justify-center [1280px]:justify-between mx-10 my-auto gap-10 max-w-[1280px]'>
+      <main className='flex flex-wrap justify-center xl:justify-between m-auto p-5 gap-10 max-w-[1280px]'>
         <Work work={work}/>
         <QAndACard qanda={qanda}/>
         <EventCard event={event}/>

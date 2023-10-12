@@ -17,11 +17,11 @@ interface EventCardProps {
 export const EventCard: FC<EventCardProps> = ({ event }) => {
   const { image, title, description, location, date, link } = event;
   return (
-    <div className='flex flex-col justify-between w-[555px] min-h-[700px] p-7 rounded-lg bg-background shadow-cbs text-base font-font1 text-font1'>
-      <img src={image} alt="event" className='h-[350px] object-cover object-center rounded'/>
+    <div className='flex flex-col justify-between w-[525px] gap-5 p-7 rounded-lg bg-background shadow-cbs text-base font-font1 text-font1'>
+      <img src={image} alt="event" className='h-[320px] object-cover object-center rounded'/>
       <div className='flex flex-col justify-center gap-3'>
         <h2 className='text-xl font-semibold text-primary'>Event: {title}</h2>
-        <p className='text-extra line-clamp-5'>{description}</p>
+        <p className='text-extra line-clamp-4 lg:line-clamp-5'>{description}</p>
         <p>Locatie: {location}</p>
       </div>
       <div className='flex lg:flex-row flex-col lg:items-center justify-between gap-5'>

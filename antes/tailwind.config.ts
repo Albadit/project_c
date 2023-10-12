@@ -1,4 +1,5 @@
 import type { Config } from 'tailwindcss'
+import bg from './public/img/title_bg.png'
 
 const config: Config = {
   content: [
@@ -28,7 +29,7 @@ const config: Config = {
         'font2': ['Roboto', 'sans-serif']
       },
       backgroundImage: {
-        'title-background': "url('img/title_bg.png')"
+        'title-background': "var(--bg-title)"
       }
     },
   },

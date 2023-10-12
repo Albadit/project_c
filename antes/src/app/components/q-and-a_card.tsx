@@ -20,10 +20,10 @@ interface QAndACardProps {
 export const QAndACard: FC<QAndACardProps> = ({ qanda }) => {
   const { image, title, description, date, reactions, icon, name, link } = qanda;
   return (
-    <div className='flex flex-col justify-between w-[555px] min-h-[700px] p-7 rounded-lg bg-background shadow-cbs text-base font-font1 text-font1'>
+    <div className='flex flex-col justify-between w-[525px] gap-5 p-7 rounded-lg bg-background shadow-cbs text-base font-font1 text-font1'>
       <img src={image} alt="event" className='h-[280px] object-cover object-center rounded'/>
       <div className='flex flex-row items-center gap-2 text-extra'>
-        <Calendar className='fill-extra h-5'/> 
+        <Calendar className='fill-extra h-5'/>
         <p className='text-sm'>{date}</p>
         <p>|</p>
         <Chat className='fill-extra h-5'/>

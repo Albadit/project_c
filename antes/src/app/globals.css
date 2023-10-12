@@ -8,6 +8,10 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --bg-title: url("../../public/img/title_bg.png");
+  }
+
   :root[data-theme="light"] {
     --color-primary: 141 12 51;
     --color-secondary: 8 80 163;
