@@ -1,8 +1,8 @@
 import { FC } from 'react';
-import Calendar from './icon/calendar';
 import Link from 'next/link';
-import ArrowForwardRounded from '@/app/components/icon/arrow_forward_rounded';
-import Chat from '@/app/components/icon/chat';
+import Calendar from '@/app/components/icons/calendar';
+import ArrowForwardRounded from '@/app/components/icons/arrow_forward_rounded';
+import Chat from '@/app/components/icons/chat';
 
 interface QAndACardProps {
   qanda: {

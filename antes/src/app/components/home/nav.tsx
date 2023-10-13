@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from 'react'
-import HamburgerMenu from '@/app/components/icon/hambuger_menu';
-import ArrowForwardRounded from '@/app/components/icon/arrow_forward_rounded';
-import Close from '@/app/components/icon/close';
+import HamburgerMenu from '@/app/components/icons/hambuger_menu';
+import ArrowForwardRounded from '@/app/components/icons/arrow_forward_rounded';
+import Close from '@/app/components/icons/close';
 import Link from 'next/link';
 
 const navigation = [

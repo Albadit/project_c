@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import Link from 'next/link';
-import Calendar from '@/app/components/icon/calendar';
-import ArrowForwardRounded from '@/app/components/icon/arrow_forward_rounded';
+import Calendar from '@/app/components/icons/calendar';
+import ArrowForwardRounded from '@/app/components/icons/arrow_forward_rounded';
 
 interface EventCardProps {
   event: {

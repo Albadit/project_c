@@ -1,8 +1,8 @@
-import Facebook from '@/app/components/icon/facebook';
-import Linkedin from '@/app/components/icon/linkedin';
-import Twitter from '@/app/components/icon/twitter';
-import Youtube from '@/app/components/icon/youtube';
-import Instagram from '@/app/components/icon/instagram';
+import Facebook from '@/app/components/icons/facebook';
+import Linkedin from '@/app/components/icons/linkedin';
+import Twitter from '@/app/components/icons/twitter';
+import Youtube from '@/app/components/icons/youtube';
+import Instagram from '@/app/components/icons/instagram';
 
 const navigation = [
   { name: 'Home', href: '#' },
