@@ -4,9 +4,9 @@ import { EventCard } from '@/app/components/event_card'
 import { QAndACard } from '@/app/components/q-and-a_card'
 import { Title } from '@/app/components/home/title'
 import { Work } from '@/app/components/home/work'
+import { Info } from '@/app/components/home/info'
 
-const title = { 
-  image: "title-background", 
+const title = {
   text: "Hoe kunnen wij je helpen?",
   link: "#",
 }
@@ -38,6 +38,11 @@ const qanda = {
   link: "#",
 }
 
+const info = {
+  title: "Vind jouw talent",
+  link: "#",
+}
+
 export default function Home() {
   return (
     <>
@@ -48,15 +53,14 @@ export default function Home() {
       <br />
       <main className='flex flex-wrap justify-center m-auto p-5 gap-10 max-w-[1280px]'>
         <Work work={work}/>
-        <div className='flex flex-col w-full gap-10'>
-          <h2 className='text-center'>asdfasdfasdf</h2>
+        <div className='flex flex-col w-full gap-10 mt-12'>
+          <h2 className='font-font1 font-semibold text-center text-primary text-5xl'>ANTES NIEUWS</h2>
           <div className='flex flex-wrap lg:justify-between justify-center gap-10'>
             <QAndACard qanda={qanda}/>
             <EventCard event={event}/>
           </div>
         </div>
-        
-        
+        <Info info={info}/>
       </main>
       <br />
       <Footer/>

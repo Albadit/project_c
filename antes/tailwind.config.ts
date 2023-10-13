@@ -29,7 +29,8 @@ const config: Config = {
         'font2': ['Roboto', 'sans-serif']
       },
       backgroundImage: {
-        'title-background': "var(--bg-title)"
+        'title': "var(--bg-title)",
+        'info': "var(--bg-info)",
       }
     },
   },

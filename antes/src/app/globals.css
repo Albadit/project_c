@@ -10,6 +10,7 @@
 @layer base {
   :root {
     --bg-title: url("../../public/img/title_bg.png");
+    --bg-info: url("../../public/img/info_bg.png");
   }
 
   :root[data-theme="light"] {
