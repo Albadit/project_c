@@ -6,12 +6,15 @@ import ArrowForwardRounded from '@/app/components/icons/arrow_forward_rounded';
 import Close from '@/app/components/icons/close';
 import Link from 'next/link';
 
-const navigation = [
-  { name: 'Home', href: '#' },
-  { name: 'Werken bij ons', href: '#' },
-  { name: 'Over ons ', href: '#' },
-  { name: 'Contact', href: '#' },
-]
+const context = {
+  login_text: "Inloggen",
+  navigation: [
+    { name: 'Home', href: '#' },
+    { name: 'Werken bij ons', href: '#' },
+    { name: 'Over ons ', href: '#' },
+    { name: 'Contact', href: '#' },
+  ]
+}
 
 export default function HeaderHome() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -27,7 +30,7 @@ export default function HeaderHome() {
         </li>
       </ul>
       <ul className='hidden lg:flex gap-x-12'>
-      {navigation.map((item) => (
+      {context.navigation.map((item) => (
         <li key={item.name}>
           <Link href={item.href} className="leading-6">
             {item.name}
@@ -38,7 +41,7 @@ export default function HeaderHome() {
       <ul className="hidden lg:flex">
         <li>
           <Link href="#" className="flex items-center font-medium leading-6">
-            Inloggen <ArrowForwardRounded className="w-4 ml-1"/>
+            {context.login_text} <ArrowForwardRounded className="w-4 ml-1"/>
           </Link>
         </li>
       </ul>
@@ -70,7 +73,7 @@ export default function HeaderHome() {
         </div>
         <div className="flex flex-col gap-y-8 p-5">
           <ul className="flex flex-col gap-y-8">
-          {navigation.map((item) => (
+          {context.navigation.map((item) => (
             <li key={item.name}>
               <Link href={item.href} className="leading-6">
                 {item.name}
@@ -79,9 +82,7 @@ export default function HeaderHome() {
           ))}
           </ul>
           <hr className='border-font1/20'/>
-          <Link href="#" className="flex items-center font-medium leading-6">
-            Inloggen
-          </Link>
+          <Link href="#" className="flex items-center font-medium leading-6">{context.login_text}</Link>
         </div>
       </div>
     </nav>
