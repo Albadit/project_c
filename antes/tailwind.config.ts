@@ -1,5 +1,4 @@
 import type { Config } from 'tailwindcss'
-import bg from './public/img/title_bg.png'
 
 const config: Config = {
   content: [
