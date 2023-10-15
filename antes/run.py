@@ -8,6 +8,9 @@ install_commands = [
   "npm install next@13.5.4 react@18 react-dom@18",
   "npm install tailwindcss@latest",
   "npm install @tailwindcss/typography",
+  "npm install @tailwindcss/forms",
+  "npm install @tailwindcss/aspect-ratio",
+  "npm install @tailwindcss/container-queries",
 ]
 
 os.chdir(script_directory)

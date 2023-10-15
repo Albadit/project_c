@@ -1,3 +1,4 @@
+import React from 'react';
 import Link from 'next/link';
 import ArrowForwardRounded from '@/app/components/icons/arrow_forward_rounded';
 

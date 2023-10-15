@@ -1,25 +1,38 @@
 "use client";
 
 import React from 'react';
-import { useState } from 'react'
+import { useState, FC } from 'react'
 import HamburgerMenu from '@/app/components/icons/hambuger_menu';
-import ArrowForwardRounded from '@/app/components/icons/arrow_forward_rounded';
 import Close from '@/app/components/icons/close';
 import Link from 'next/link';
 
-const context = {
-  home: { name: "Home", url: "/"},
-  login: { name: "Inloggen", url: "./dashboard"},
-  navigation: [
-    { name: 'Home', href: '/' },
-    { name: 'Werken bij ons', href: '#' },
-    { name: 'Over ons', href: '#' },
-    { name: 'Contact', href: '#' },
-  ]
+interface NavDashboardProps {
+  user: object
 }
 
-export default function Nav() {
+export const NavDashboard: FC<NavDashboardProps> = ({ user }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+
+  const context = {
+    home: { name: "Home", url: "/"},
+    login: { name: "Inloggen", url: "#"},
+    navigation: [
+      { name: 'Dashboard', href: '/dashboard' },
+      { name: 'Agenda', href: '#' },
+      { name: 'E-learning', href: '#' },
+      { name: 'Q & A', href: '#' },
+    ],
+    user: {
+      name: 'Sara Leekman',
+      email: 'saraleekman@outlook.com',
+      profile: './img/profile.png',
+      navigation: [
+        { name: 'Jouw Profiel', href: '#' },
+        { name: 'instellingen', href: '#' },
+        { name: 'Uitloggen', href: '#' },
+      ]
+    }
+  }
 
   return (
     <nav className="flex items-center justify-between py-2 px-5 lg:px-8 h-[64px] text-font1 font-font1 text-base bg-background shadow-cbs">
@@ -34,23 +47,33 @@ export default function Nav() {
       <ul className='hidden lg:flex gap-x-12'>
       {context.navigation.map((item) => (
         <li key={item.name}>
-          <Link href={item.href}>{item.name}</Link>
+          <Link href={item.href}>
+            {item.name}
+          </Link>
         </li>
       ))}
       </ul>
-      <ul className="hidden lg:flex">
-        <li>
-          <Link href={context.login.url} className="flex items-center font-medium leading-6">
-            {context.login.name} <ArrowForwardRounded className="w-4 ml-1"/>
-          </Link>
-        </li>
-      </ul>
+      <div className='hidden lg:flex flex-col relative'>
+        <button type="button"
+          title='openMenu'
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+        >
+          <img src={context.user.profile} alt={context.user.name} className='h-full'/>
+        </button>
+        <ul className={`flex flex-col absolute top-12 right-0 bg-background shadow-cbs p-3 gap-y-3 w-max pr-24 rounded outline outline-1 outline-font1/10 ${mobileMenuOpen ? 'block' : 'hidden'}`}>
+        {context.user.navigation.map((item) => (
+          <li key={item.name}>
+            <Link href={item.href}>{item.name}</Link>
+          </li>
+        ))}
+        </ul>
+      </div>
       <div className="flex lg:hidden">
         <button type="button"
           title='openMenu'
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
         >
-          <HamburgerMenu className="h-9"/>
+          <HamburgerMenu className="w-8"/>
         </button>
       </div>
 
@@ -66,7 +89,7 @@ export default function Nav() {
             title='closeMenu'
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
-            <Close className='w-8'/>
+            <Close className='w-7'/>
           </button>
         </div>
         <div className="flex flex-col gap-y-8 p-5">
@@ -77,9 +100,18 @@ export default function Nav() {
             </li>
           ))}
             <hr className='border-font1/20'/>
-            <li>
-              <Link href={context.login.url} className="font-medium">{context.login.name}</Link>
+            <li className='flex items-center gap-3'>
+              <img src={context.user.profile} alt={context.user.name} className='h-max'/>
+              <div className='truncate leading-5'>
+                <p className='truncate font-semibold'>{context.user.name}</p>
+                <p className='truncate'>{context.user.email}</p>
+              </div>
             </li>
+          {context.user.navigation.map((item) => (
+            <li key={item.name}>
+              <Link href={item.href}>{item.name}</Link>
+            </li>
+          ))}
           </ul>
         </div>
       </div>

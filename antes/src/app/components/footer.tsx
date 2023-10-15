@@ -1,15 +1,16 @@
+import React from 'react';
 import Facebook from '@/app/components/icons/facebook';
 import Linkedin from '@/app/components/icons/linkedin';
 import Twitter from '@/app/components/icons/twitter';
 import Youtube from '@/app/components/icons/youtube';
 import Instagram from '@/app/components/icons/instagram';
 
+
 const navigation = [
   { name: 'Home', href: '#' },
   { name: 'Over ons ', href: '#' },
   { name: 'Contact', href: '#' },
 ]
-
 const iconSize = "h-[22px]"
 const socialMedia = [
   { name: 'Facebook', icon: <Facebook className={`${iconSize}`}/>, href: '#' },
