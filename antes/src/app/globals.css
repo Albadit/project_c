@@ -11,6 +11,7 @@
   :root {
     --bg-title: url("../../public/img/title_bg.png");
     --bg-info: url("../../public/img/info_bg.png");
+    --bg-login: url("../../public/img/login_bg.png");
   }
 
   :root[data-theme="light"] {

@@ -30,6 +30,7 @@ const config: Config = {
       backgroundImage: {
         'title': "var(--bg-title)",
         'info': "var(--bg-info)",
+        'login': "var(--bg-login)",
       }
     },
   },
