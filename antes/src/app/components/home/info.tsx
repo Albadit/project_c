@@ -4,8 +4,7 @@ import ArrowForwardRounded from "@/app/components/icons/arrow_right";
 
 const context = {
   title: "Vind jouw talent",
-  description:
-    "Wat je doet, doet ertoe binnen Parnassia Groep. Elke dag zetten ruim 13.500 collega's zich in voor mensen met psychische en/of verslavingsproblemen. Vol passie en deskundigheid. Om dagelijks het verschil voor onze cliënten te maken. Help je mee?",
+  description: "Wat je doet, doet ertoe binnen Parnassia Groep. Elke dag zetten ruim 13.500 collega's zich in voor mensen met psychische en/of verslavingsproblemen. Vol passie en deskundigheid. Om dagelijks het verschil voor onze cliënten te maken. Help je mee?",
   link: [
     {
       url: "#",
@@ -32,7 +31,7 @@ const context = {
       fill_color: "fill-callToAction",
     },
   ],
-};
+}
 
 export default function Info() {
   return (
@@ -43,18 +42,15 @@ export default function Info() {
       </div>
       <div className="flex flex-warp lg:flex-row flex-col gap-5 w-full min-h-[175px]">
         {context.link.map((item) => (
-          <Link
-            href={item.url}
-            className={`flex flex-col items-start justify-between w-full gap-2 px-4 py-3 rounded-lg font-semibold ${item.background_color} ${item.font_color}`}
-          >
+          <Link href={item.url} className={`flex flex-col items-start justify-between w-full gap-2 px-4 py-3 rounded-lg font-semibold ${item.background_color} ${item.font_color}`}>
             <p className="lg:text-3xl text-2xl">{item.title}</p>
             <p className="flex flex-row items-center justify-center gap-2 font-semibold text-sm">
-              {item.link_text}{" "}
+              {item.link_text}
               <ArrowForwardRounded className={`h-5 ${item.fill_color}`} />
             </p>
           </Link>
         ))}
       </div>
     </div>
-  );
+  )
 }

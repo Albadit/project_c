@@ -4,10 +4,16 @@ import { Input } from '@/app/components/input';
 
 const context = {
   logo: { url: "/", img: "/img/antes_logo.png", alt: "antes logo"},
-  passwordForget: { url:"/reset_password", text: "Wachtwoord vergeten?" },
-  cacheLogin: { text: "Onthoud mij" },
-  btn: { url: "/dashboard",text: "Login" }
+  account: { url:"/login", text: "Heb je al een account?" },
+  btn: { text: "Registreer" }
 }
+
+const functies = [
+  { id: 1, name: 'Wade Cooper' },
+  { id: 2, name: 'Arlene Mccoy' },
+  { id: 3, name: 'Devon Webb' },
+  { id: 4, name: 'Tom Cook'},
+]
 
 export default function Login() {
   return (
@@ -19,17 +25,16 @@ export default function Login() {
             <img src={context.logo.img} alt={context.logo.alt} className='w-max'/>
           </Link>
           <form action="" className='flex flex-col justify-center gap-5'>
+            <Input name="Name" type="text"/>
+            <Input name="Last_name" type="text"/>
+            <Input name="Functions" type="select" value={functies}/>
             <Input name="Email" type="email"/>
             <Input name="Password" type="password"/>
+            <Input name="Confirm_password" type="password"/>
             <div className='flex md:flex-row flex-col justify-between lg:items-center items-start'>
-              <div className='flex flex-row gap-3 items-center'>
-                <input type="checkbox" name="" id="remember" className='rounded'/> 
-                <label htmlFor="remember">{context.cacheLogin.text}</label>
-              </div>
-              <Link href={context.passwordForget.url} className='underline text-hyperlink'>{context.passwordForget.text}</Link>
+              <Link href={context.account.url} className='underline text-hyperlink'>{context.account.text}</Link>
             </div>
-            <Link href={context.btn.url} className='flex flex-row items-center justify-center w-full lg:w-auto gap-2 px-4 py-3 rounded-lg bg-primary text-font2 font-semibold text-base'>Login</Link>
-            {/* <button className='flex flex-row items-center justify-center w-full lg:w-auto gap-2 px-4 py-3 rounded-lg bg-primary text-font2 font-semibold text-base'>{context.btn.text}</button> */}
+            <button className='flex flex-row items-center justify-center w-full lg:w-auto gap-2 px-4 py-3 rounded-lg bg-primary text-font2 font-semibold text-base'>{context.btn.text}</button>
           </form>
         </div>
       </main>

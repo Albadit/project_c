@@ -1,46 +1,46 @@
 "use client";
 
 import React from 'react';
-import { useState, FC } from 'react'
+import { useState } from 'react'
 import HamburgerMenu from '@/app/components/icons/hambuger_menu';
 import Close from '@/app/components/icons/close';
 import Link from 'next/link';
 
-interface NavDashboardProps {
+type Props = {
   user: object
 }
 
-export const NavDashboard: FC<NavDashboardProps> = ({ user }) => {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-
-  const context = {
-    home: { name: "Home", url: "/"},
-    login: { name: "Inloggen", url: "#"},
+const context = {
+  logo: { img: "/img/antes_logo.png", url: "/" },
+  login: { name: "Inloggen", url: "#"},
+  navigation: [
+    { name: 'Dashboard', href: '/dashboard' },
+    { name: 'Agenda', href: '#' },
+    { name: 'E-learning', href: '#' },
+    { name: 'Q & A', href: '#' },
+  ],
+  user: {
+    name: 'Sara Leekman',
+    email: 'saraleekman@outlook.com',
+    profile: './img/profile.png',
     navigation: [
-      { name: 'Dashboard', href: '/dashboard' },
-      { name: 'Agenda', href: '#' },
-      { name: 'E-learning', href: '#' },
-      { name: 'Q & A', href: '#' },
-    ],
-    user: {
-      name: 'Sara Leekman',
-      email: 'saraleekman@outlook.com',
-      profile: './img/profile.png',
-      navigation: [
-        { name: 'Jouw Profiel', href: '#' },
-        { name: 'instellingen', href: '#' },
-        { name: 'Uitloggen', href: '#' },
-      ]
-    }
+      { name: 'Jouw Profiel', href: '#' },
+      { name: 'instellingen', href: '#' },
+      { name: 'Uitloggen', href: '#' },
+    ]
   }
+}
+
+export const NavDashboard = (props: Props) => {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   return (
     <nav className="flex items-center justify-between py-2 px-5 lg:px-8 h-[64px] text-font1 font-font1 text-base bg-background shadow-cbs">
       {/* Desktop */}
       <ul className='h-[80%]'>
         <li className="h-full">
-          <Link href={context.home.url} aria-label="logo">
-            <img src="img/antes_logo.png" alt="antes logo" className="h-full"/>
+          <Link href={context.logo.url} aria-label="logo">
+            <img src={context.logo.img} alt="antes logo" className="h-full"/>
           </Link>
         </li>
       </ul>
@@ -81,8 +81,8 @@ export const NavDashboard: FC<NavDashboardProps> = ({ user }) => {
       <div className={`lg:hidden flex flex-col absolute top-0 right-0 h-full w-full sm:w-[300px] outline outline-1 outline-font1/10 bg-background ${mobileMenuOpen ? 'block' : 'hidden'}`}>
         <div className="flex justify-between items-center sm:justify-end py-2 px-5 h-[64px]">
           <div className="flex sm:hidden h-[80%]">
-            <Link href={context.home.url} aria-label="logo">
-              <img src="img/antes_logo.png" alt="antes logo" className="h-full"/>
+            <Link href={context.logo.url} aria-label="logo">
+              <img src={context.logo.img} alt="antes logo" className="h-full"/>
             </Link>
           </div>
           <button type="button"

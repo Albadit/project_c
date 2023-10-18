@@ -1,24 +1,23 @@
 import React from "react";
-import { FC } from "react";
 import Link from "next/link";
 import Calendar from "@/app/components/icons/calendar";
 import ArrowForwardRounded from "@/app/components/icons/arrow_right";
 
-interface EventCardProps {
+type Props = {
   event: object;
 }
 
-export const EventCard: FC<EventCardProps> = ({ event }) => {
-  const context = {
-    image: "img/event.png",
-    title: "Connectiedag!",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    location: "Rotterdam",
-    date: "12-12-2024",
-    link: "#",
-  };
+const context = {
+  image: "img/event.png",
+  title: "Connectiedag!",
+  description:
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+  location: "Rotterdam",
+  date: "12-12-2024",
+  link: "#",
+}
 
+export const EventCard = (props: Props) => {
   return (
     <>
       <div className="flex flex-col justify-between w-[525px] gap-5 p-7 rounded-lg bg-background shadow-cbs text-base font-font1 text-font1">
@@ -50,5 +49,5 @@ export const EventCard: FC<EventCardProps> = ({ event }) => {
         </div>
       </div>
     </>
-  );
-};
+  )
+}
