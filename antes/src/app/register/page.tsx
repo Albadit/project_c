@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { Input } from '@/app/components/input';
+import { SelectMenu } from '../components/select_menu';
 
 const context = {
   logo: { url: "/", img: "/img/antes_logo.png", alt: "antes logo"},
@@ -27,7 +28,7 @@ export default function Login() {
           <form action="" className='flex flex-col justify-center gap-5'>
             <Input name="Name" type="text"/>
             <Input name="Last_name" type="text"/>
-            <Input name="Functions" type="select" value={functies}/>
+            <SelectMenu name="Functions" value={functies}/>
             <Input name="Email" type="email"/>
             <Input name="Password" type="password"/>
             <Input name="Confirm_password" type="password"/>
