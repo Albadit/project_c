@@ -14,7 +14,7 @@ export default function Login() {
     <>
       <main className='flex flex-row justify-center'>
         <div className="bg-login bg-center h-screen grow bg-cover bg-no-repeat md:block hidden"></div>
-        <div className='flex flex-col gap-12 justify-center w-full max-w-[30.625rem] p-12'>
+        <div className='flex flex-col gap-12 justify-center w-full max-w-[30.625rem] p-5 md:p-12'>
           <Link href={context.logo.url}>
             <img src={context.logo.img} alt={context.logo.alt} className='w-max'/>
           </Link>
