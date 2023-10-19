@@ -20,10 +20,16 @@ const config: Config = {
       inputBorder: 'rgb(var(--color-input-border) / <alpha-value>)'
     },
     extend: {
+      boxShadow: {
+        'cbs': '0px 10px 15px -3px rgb(var(--color-box-shadow) / 0.1), 0px -10px 15px -3px rgb(var(--color-box-shadow) / 0.1)'
+      },
       fontFamily: {
         'font1': ['Montserrat', 'sans-serif'],
         'font2': ['Roboto', 'sans-serif']
       },
+      backgroundImage: {
+        'title-background': "url('/img/title_bg.png')"
+      }
     },
   },
   plugins: [
