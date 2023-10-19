@@ -1,7 +1,7 @@
 "use client"
 
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect, useRef} from 'react';
 import ArrowDown from './icons/arrow_down';
 
 type SelectOption = {
@@ -21,7 +21,7 @@ type MenuItemProps = {
 }
 
 const MenuItem = ({ functions: { name }, onClick }: MenuItemProps) => (
-  <span className="text-font1 block px-4 py-2 text-sm" tabIndex={-1} onClick={onClick}>
+  <span className="text-font1 block px-4 py-2 text-sm hover:bg-extra hover:text-font2 rounded cursor-pointer select-none" tabIndex={-1} onClick={onClick}>
     {name}
   </span>
 )
@@ -30,44 +30,49 @@ export const SelectMenu = (props: Props) => {
   const [value, setValue] = useState(props.value[0]);
   const [disabled] = useState(props.disabled);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  }
+  const ref = useRef<HTMLDivElement>(null);
 
   const chaneSelected = (functions: SelectOption) => {
     setValue(functions)
-    setIsMenuOpen(!isMenuOpen);
+    setIsMenuOpen(false);
   }
+  
+  useEffect(() => {
+    const onOutsideClick = (e: MouseEvent) => {
+      if (!ref.current?.contains(e.target as Node)) {
+        setIsMenuOpen(false);
+      }
+    };
 
-  const handleBlur = () => {
-    setTimeout(() => {
-      setIsMenuOpen(false);
-    }, 100);
-  };
+    if (isMenuOpen) {
+      document.addEventListener('mousedown', onOutsideClick);
+    }
 
-  return (
-    <div className="relative text-left w-full text-font1">
+    return () => {
+      document.removeEventListener('mousedown', onOutsideClick);
+    };
+  }, [isMenuOpen]);
+
+
+  return (<>
+    <div className="relative text-left w-full text-font1" ref={ref}>
       <label htmlFor={props.name} className="block text-sm font-medium leading-5">{props.name}</label>
       <div className="mt-2 relative">
         <button type="button"
           aria-expanded={isMenuOpen}
           disabled={disabled}
           aria-haspopup="true"
-          onClick={toggleMenu}
-          onBlur={handleBlur}
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
           className={`flex w-full ${value.name ? 'justify-between' : 'justify-end' } rounded bg-[#fff] px-3 py-3 text-sm shadow-sm ring-1  ring-font1/20 focus:ring-2 focus:ring-inset focus:ring-callToAction sm:text-sm disabled:bg-slate-50 disabled:text-text-slate-500 disabled:border-slate-200 disabled:shadow-none invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500 disabled:opacity-75`}>
             {value.name}
           <ArrowDown className='h-5'/>
         </button>
       </div>
-      <div className={`${isMenuOpen ? 'block' : 'hidden'} absolute right-0 z-10 mt-2 w-full origin-top-right rounded bg-[#fff] shadow-sm ring-1 ring-inset ring-font1/20 focus:outline-none`} role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabIndex={-1}>
-        <div className="py-1">
-        {props.value.map((role) => (
-          <MenuItem key={role.id} functions={role} onClick={() => chaneSelected(role)} />
-        ))}
-        </div>
+      <div className={`${isMenuOpen ? 'block' : 'hidden'} absolute right-0 z-10 mt-1.5 w-full origin-top-right rounded bg-[#fff] shadow-sm ring-1 ring-inset ring-font1/20 focus:outline-none`} role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabIndex={-1}>
+      {props.value.map((role) => (
+        <MenuItem key={role.id} functions={role} onClick={() => chaneSelected(role)} />
+      ))}
       </div>
     </div>
-  )
+    </>)
 }
