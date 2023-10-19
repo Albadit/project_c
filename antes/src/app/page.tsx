@@ -6,6 +6,7 @@ import Work from '@/app/components/home/work'
 import { QACard } from '@/app/components/qa_card'
 import { EventCard } from '@/app/components/event_card'
 import Info from '@/app/components/home/info'
+import Link from 'next/link';
 
 export default function Home() {
   return (
