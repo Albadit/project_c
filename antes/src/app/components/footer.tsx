@@ -6,7 +6,7 @@ import Twitter from "@/app/components/icons/twitter";
 import Youtube from "@/app/components/icons/youtube";
 import Instagram from "@/app/components/icons/instagram";
 
-const iconSize = "h-[22px]";
+const iconStyle = "h-[22px] fill-extra";
 
 const context = {
   navigation: [
@@ -18,27 +18,27 @@ const context = {
     {
       url: "https://www.facebook.com/AntesZorg/",
       name: "Facebook",
-      icon: <Facebook className={`${iconSize}`} />,
+      icon: <Facebook className={iconStyle} />,
     },
     {
       url: "https://www.linkedin.com/company/antes/",
       name: "Linkedin",
-      icon: <Linkedin className={`${iconSize}`} />,
+      icon: <Linkedin className={iconStyle} />,
     },
     {
       url: "https://twitter.com/AntesZorg",
       name: "Twitter",
-      icon: <Twitter className={`${iconSize}`} />,
+      icon: <Twitter className={iconStyle} />,
     },
     {
       url: "",
       name: "Youtube",
-      icon: <Youtube className={`${iconSize}`} />,
+      icon: <Youtube className={iconStyle} />,
     },
     {
       url: "",
       name: "Instagram",
-      icon: <Instagram className={`${iconSize}`} />,
+      icon: <Instagram className={`${iconStyle}`} />,
     },
   ],
   year: new Date().getFullYear(),
