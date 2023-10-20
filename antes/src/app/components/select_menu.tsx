@@ -54,7 +54,7 @@ export const SelectMenu = (props: Props) => {
   }, [isMenuOpen]);
 
 
-  return (<>
+  return (
     <div className="relative text-left w-full text-font1" ref={ref}>
       <label htmlFor={props.name} className="block text-sm font-medium leading-5">{props.name}</label>
       <div className="mt-2 relative">
@@ -74,5 +74,5 @@ export const SelectMenu = (props: Props) => {
       ))}
       </div>
     </div>
-    </>)
+  )
 }

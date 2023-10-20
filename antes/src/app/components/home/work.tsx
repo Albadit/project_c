@@ -12,7 +12,7 @@ const context = {
 
 export default function Work() {
   return (
-    <div className="flex justify-between lg:flex-row-reverse flex-col lg:h-[380px] lg:w-full w-[525px] gap-5 p-7 rounded-lg bg-background shadow-cbs text-base font-font1 text-font1">
+    <section className="flex justify-between lg:flex-row-reverse flex-col lg:h-[380px] lg:w-full w-[525px] gap-5 p-7 rounded-lg bg-background shadow-cbs text-base font-font1 text-font1">
       <img src={context.img} alt="work" className="lg:w-[470px] w-full lg:h-full object-cover object-center rounded" />
       <div className="flex flex-col justify-between items-start grow gap-5 max-w-[600px]">
         <h2 className="lg:text-4xl text-xl font-semibold text-primary">
@@ -26,6 +26,6 @@ export default function Work() {
           Lees meer <ArrowForwardRounded className="fill-font2 h-5" />
         </Link>
       </div>
-    </div>
+    </section>
   )
 }
