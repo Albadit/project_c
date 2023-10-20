@@ -19,7 +19,7 @@ const context = {
 
 export const EventCard = (props: Props) => {
   return (
-    <div className="flex flex-col justify-between w-[525px] gap-5 p-7 rounded-lg bg-background shadow-cbs text-base font-font1 text-font1">
+    <div className="flex flex-col justify-between w-[525px] gap-5 p-7 rounded-lg bg-section shadow-cbs text-base font-font1 text-font1">
       <img
         src={context.image}
         alt="event"

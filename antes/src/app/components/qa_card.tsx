@@ -9,7 +9,7 @@ type Props = {
 }
 
 const context = {
-  image: "img/q-and-a.png",
+  image: "img/qa.png",
   date: "12-12-2024",
   reactions: 12,
   title: "Suggesties voor beginner?",
@@ -21,7 +21,7 @@ const context = {
 
 export const QACard = (props: Props) => {
   return (
-    <div className="flex flex-col justify-between w-[525px] gap-5 p-7 rounded-lg bg-background shadow-cbs text-base font-font1 text-font1">
+    <div className="flex flex-col justify-between w-[525px] gap-5 p-7 rounded-lg bg-section shadow-cbs text-base font-font1 text-font1">
       <img src={context.image} alt="event" className="h-[280px] object-cover object-center rounded"/>
       <div className="flex flex-row items-center gap-2 text-extra">
         <Calendar className="fill-extra h-5" />

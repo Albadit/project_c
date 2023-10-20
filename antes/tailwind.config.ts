@@ -14,6 +14,7 @@ const config: Config = {
       font1: 'rgb(var(--color-font-1) / <alpha-value>)',
       font2: 'rgb(var(--color-font-2) / <alpha-value>)',
       background: 'rgb(var(--color-background) / <alpha-value>)',
+      section: 'rgb(var(--color-section) / <alpha-value>)',
       icon: 'rgb(var(--color-icon) / <alpha-value>)',
       extra: 'rgb(var(--color-extra) / <alpha-value>)',
       hyperlink: 'rgb(var(--color-hyperlink) / <alpha-value>)',

@@ -35,7 +35,7 @@ export const NavDashboard = (props: Props) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   return (
-    <nav className="flex items-center justify-between py-2 px-5 lg:px-8 h-[64px] text-font1 font-font1 text-base bg-background shadow-cbs">
+    <nav className="flex items-center justify-between py-2 px-5 lg:px-8 h-[64px] text-font1 font-font1 text-base bg-section shadow-cbs">
       {/* Desktop */}
       <ul className='h-[80%]'>
         <li className="h-full">
@@ -58,7 +58,7 @@ export const NavDashboard = (props: Props) => {
           title='openMenu'
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
         >
-          <img src={context.user.profile} alt={context.user.name} className='h-full'/>
+          <img src={context.user.profile} alt={context.user.name} className='h-full rounded-full'/>
         </button>
         <ul className={`flex flex-col absolute top-12 right-0 bg-background shadow-cbs p-3 gap-y-3 w-max pr-24 rounded outline outline-1 outline-font1/10 ${mobileMenuOpen ? 'block' : 'hidden'}`}>
         {context.user.navigation.map((item) => (

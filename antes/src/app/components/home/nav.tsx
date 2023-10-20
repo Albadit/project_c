@@ -22,7 +22,7 @@ export default function Nav() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <nav className="flex items-center justify-between py-2 px-5 lg:px-8 h-[64px] text-font1 font-font1 text-base bg-background shadow-cbs">
+    <nav className="flex items-center justify-between py-2 px-5 lg:px-8 h-[64px] text-font1 font-font1 text-base bg-section shadow-cbs">
       {/* Desktop */}
       <ul className="h-[80%]">
         <li className="h-full">
@@ -41,7 +41,7 @@ export default function Nav() {
       <ul className="hidden lg:flex">
         <li>
           <Link href={context.login.url} className="flex items-center font-medium leading-6">
-            {context.login.name} <ArrowForwardRounded className="w-4 ml-1" />
+            {context.login.name} <ArrowForwardRounded className="w-4 ml-1 fill-font1" />
           </Link>
         </li>
       </ul>

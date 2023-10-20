@@ -14,7 +14,7 @@ export default function Title() {
       <h1 className="text-font2 lg:text-8xl text-center text-6xl">
         {context.title}
       </h1>
-      <Link href={context.link} className="flex flex-row items-center justify-center gap-2 px-6 py-3 rounded-lg bg-background text-font1 text-xl">
+      <Link href={context.link} className="flex flex-row items-center justify-center gap-2 px-6 py-3 rounded-lg bg-section text-font1 text-xl">
         {context.link_text} <ArrowForwardRounded className="fill-font1 h-6" />
       </Link>
     </section>
