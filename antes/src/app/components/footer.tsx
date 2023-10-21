@@ -6,8 +6,6 @@ import Twitter from "@/app/components/icons/twitter";
 import Youtube from "@/app/components/icons/youtube";
 import Instagram from "@/app/components/icons/instagram";
 
-const iconStyle = "h-[22px] fill-extra";
-
 const context = {
   navigation: [
     { name: "Home", url: "#" },
@@ -18,28 +16,28 @@ const context = {
     {
       url: "https://www.facebook.com/AntesZorg/",
       name: "Facebook",
-      icon: <Facebook className={iconStyle} />,
+      icon: <Facebook/>,
     },
     {
       url: "https://www.linkedin.com/company/antes/",
       name: "Linkedin",
-      icon: <Linkedin className={iconStyle} />,
+      icon: <Linkedin/>,
     },
     {
       url: "https://twitter.com/AntesZorg",
       name: "Twitter",
-      icon: <Twitter className={iconStyle} />,
+      icon: <Twitter/>,
     },
-    {
-      url: "",
-      name: "Youtube",
-      icon: <Youtube className={iconStyle} />,
-    },
-    {
-      url: "",
-      name: "Instagram",
-      icon: <Instagram className={`${iconStyle}`} />,
-    },
+    // {
+    //   url: "",
+    //   name: "Youtube",
+    //   icon: <Youtube/>,
+    // },
+    // {
+    //   url: "",
+    //   name: "Instagram",
+    //   icon: <Instagram/>,
+    // },
   ],
   year: new Date().getFullYear(),
 }
@@ -50,18 +48,18 @@ export default function Footer() {
       <nav className="flex flex-col gap-5 p-5 max-w-[1040px] w-full text-base font-font1 text-extra fill-extra">
         <p className="text-extra">&copy;{context.year} Antes</p>
         <hr className="text-extra/50" />
-        <div className="flex flex-col sm:flex-row gap-5 justify-between">
-          <ul className="flex gap-x-10">
+        <div className="flex flex-col sm:flex-row gap-8 justify-between">
+          <ul className="flex sm:flex-row flex-col gap-8 items-center">
             {context.navigation.map((item) => (
             <li key={item.name}>
               <Link href={item.url}>{item.name}</Link>
             </li>
             ))}
           </ul>
-          <ul className="flex items-center gap-x-4">
+          <ul className="flex items-center justify-center gap-5">
             {context.socialMedia.map((item) => (
             <li key={item.name}>
-              <Link href={item.url} aria-label={item.name}>
+              <Link href={item.url} aria-label={item.name} className="sm:[&>*]:h-[24px] [&>*]:h-[28px] [&>*]:fill-extra">
                 {item.icon}
               </Link>
             </li>

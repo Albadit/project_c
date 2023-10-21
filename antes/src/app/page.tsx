@@ -6,7 +6,6 @@ import Work from '@/app/components/home/work'
 import { QACard } from '@/app/components/qa_card'
 import { EventCard } from '@/app/components/event_card'
 import Info from '@/app/components/home/info'
-import Link from 'next/link';
 
 export default function Home() {
   return (
@@ -18,13 +17,13 @@ export default function Home() {
       <br />
       <main className='flex flex-wrap justify-center m-auto p-5 gap-10 max-w-[1280px]'>
         <Work/>
-        <div className='flex flex-col w-full gap-10 my-12 '>
+        <section className='flex flex-col w-full gap-10 my-12 '>
           <h2 className='font-font1 font-semibold text-center text-primary text-5xl'>ANTES NIEUWS</h2>
           <div className='flex flex-wrap xl:justify-between justify-center gap-10'>
             <QACard qa={{}} />
             <EventCard event={{}}/>
           </div>
-        </div>
+        </section>
         <Info/>
       </main>
       <br />

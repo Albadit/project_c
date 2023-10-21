@@ -35,7 +35,7 @@ const context = {
 
 export default function Info() {
   return (
-    <section className="flex justify-between flex-col min-h-[600px] lg:w-full w-[525px] gap-10 p-7 rounded-lg bg-info bg-no-repeat bg-cover bg-center shadow-cbs text-base font-font1 text-font2">
+    <section className="flex justify-between flex-col min-h-[600px] w-full gap-10 p-7 rounded-lg bg-info bg-no-repeat bg-cover bg-center shadow-cbs text-base font-font1 text-font2">
       <div className="flex flex-col gap-5 max-w-[450px]">
         <h2 className="lg:text-6xl text-5xl font-semibold">{context.title}</h2>
         <h2 className="text-xl font-light font-font2">{context.description}</h2>

@@ -21,7 +21,7 @@ const progressBarStyle = { width: `${progression}%` };
 
 export const ELearingCard = (props: Props) => {
   return (
-    <div className="flex flex-col justify-between w-[525px] gap-5 p-7 rounded-lg bg-section shadow-cbs text-base font-font1 text-font1">
+    <div className="flex flex-col justify-between w-full md:w-[525px] gap-5 p-7 rounded-lg bg-section shadow-cbs text-base font-font1 text-font1">
       <img src={context.image} alt="event" className="h-[280px] object-cover object-center rounded" />
       <div className="flex flex-col justify-center gap-3">
         <h2 className="text-xl font-semibold text-primary">{context.title}</h2>

@@ -14,11 +14,9 @@ const context = {
 export default function Dashboard() {
   return (
     <>
-      <header>
-        <NavDashboard user={{}}/>
-      </header>
+      <NavDashboard user={{}}/>
       <main className='flex flex-wrap justify-center m-auto p-5 gap-10 max-w-[1280px]'>
-        <div className='flex flex-col w-full gap-20 my-12'>
+        <section className='flex flex-col w-full gap-20 my-12'>
           <h2 className='font-font1 font-bold text-center text-primary text-5xl'>Goeiedag {context.user.name}</h2>
           <div className='flex flex-wrap justify-between gap-10 gap-y-20 [&>*]:flex-[1_1_525px]'>
             <div className='flex flex-col items-center justify-center gap-10'>
@@ -34,7 +32,7 @@ export default function Dashboard() {
               <ELearingCard elearing={{}}/>
             </div>
           </div>
-        </div>
+        </section> 
       </main>
       <Footer/>
     </>
