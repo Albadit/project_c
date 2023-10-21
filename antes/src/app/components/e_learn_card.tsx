@@ -29,8 +29,7 @@ export const ELearnCard = (props: Props) => {
                         </div>
                         <div className='mb-8'>
                             <div className='bg-[#ECECEC] relative top-5 h-[10px] w-full rounded-2xl'>
-                                <div className='bg-secondary absolute top-0 left-0 flex h-[10px] w-[90%] items-center justify-center rounded-2xl text-xs font-semibold text-[#FAFAFA]'>
-                                </div>
+                                <div className='bg-secondary absolute top-0 left-0 flex h-[10px] w-[[{context.progression}] items-center justify-center rounded-2xl text-xs font-semibold text-[#FAFAFA]'></div>
                             </div>
                             <div className="mt-7 text-xs font-semibold text-[#6b6969]">{context.progression}</div>
                             <div className="mt--6 text-right text-xs font-semibold text-[#6b6969]">les {context.currentlesson} van {context.maxlesson}</div>
