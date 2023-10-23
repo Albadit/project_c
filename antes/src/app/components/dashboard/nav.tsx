@@ -17,7 +17,7 @@ const context = {
     { name: 'Dashboard', href: '/dashboard' },
     { name: 'Agenda', href: '#' },
     { name: 'E-learning', href: '#' },
-    { name: 'Q & A', href: '#' },
+    { name: 'Q & A', href: '/qa' },
   ],
   user: {
     name: 'Sara Leekman',

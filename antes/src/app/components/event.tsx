@@ -1,7 +1,6 @@
 import React from "react";
 import Link from "next/link";
 import Calendar from "@/app/components/icons/calendar";
-import ArrowForwardRounded from "@/app/components/icons/arrow_right";
 
 type Props = {
   event: object;
