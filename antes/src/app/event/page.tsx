@@ -5,23 +5,26 @@ export default function Home() {
   return (
     <div>
       <HeaderHome />
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="grid grid-cols-2 mx-auto rounded-lg shadow-lg">
-          <div className="p-1 w-2/3 flex flex-col justify-center text-center">
-            <h5 className="mb-2 text-xl font-medium text-red-600">
+      <div className="flex justify-center items-center min-h-screen ">
+        <div className="shadow-lg p-4 flex ">
+          <div className="flex flex-col justify-center p-1">
+            <h5 className="mb-2 text-xl font-medium text-primary">
               Connectiedag!
             </h5>
-            <p className="mb-4 text-base text-neutral-600 dark:text-neutral-200">
+            <p className="">
               Op 24 oktober 2023 is het weer de connectiedag!
               <br />We gaan leuke activiteiten aanmelden, dus meld je aan.
             </p>
-            <p className="text-xs text-neutral-500 dark:text-neutral-300">
+            <p className="text-xs p-2">
               Locatie: Antes hoofdkantoor
             </p>
+            <button className="text-[#fcfcfc] bg-primary py-1 rounded ">
+              Meld je aan!
+            </button>
           </div>
-          <div className="p-3 w-full h-full rounded-t-lg overflow-hidden">
+          <div className=" w-full h-full ">
             <img
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover "
               src="/handdag.png"
               alt=""
             />
