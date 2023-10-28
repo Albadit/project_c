@@ -2,24 +2,23 @@ import React from "react";
 import Link from "next/link";
 import Chat from "@/app/components/icons/chat";
 
-type QAItem = {
-  id: number;
-  name: string;
-  img: string;
-  datetime: string;
-  title: string;
-  latestComment: string;
-  tags: string[];
-  reactions: number;
-  url: string;
-};
+type QAItems = {
+  id: number
+  name: string
+  img: string
+  datetime: string
+  title: string
+  latestComment: string
+  tags: string[]
+  reactions: number
+  url: string
+}
 
 type Props = {
-  qaList: QAItem[];
+  qaList: QAItems[]
 }
 
 export const QACardList = (props: Props) => {
-  console.log(props.qaList)
   return (
     <>
     {props.qaList.map((item) => (
@@ -39,7 +38,7 @@ export const QACardList = (props: Props) => {
         <div className='flex flex-row justify-between'>
           <div className='flex flex-row gap-2'>
           {item.tags.map((tag) => (
-            <span key={tag} className='bg-[#EAEAEA] py-1 px-2.5 rounded text-sm text-extra'>{tag}</span>
+            <span key={tag} className='bg-[#EAEAEA] py-1 px-2.5 rounded text-[12px] text-extra'>{tag}</span>
           ))}
           </div>
           <div className='flex flex-row items-center gap-2'>

@@ -6,34 +6,45 @@ import HamburgerMenu from '@/app/components/icons/hambuger_menu';
 import Close from '@/app/components/icons/close';
 import Link from 'next/link';
 
-type Props = {
-  user: object
+type UserTtems = {
+  id: number
+  role_id: number
+  profile: string
+  first_name: string
+  last_name: string
+  function: string
+  bio: string
+  email: string
 }
 
-const context = {
-  logo: { img: "/img/antes_logo.png", url: "/" },
-  login: { name: "Inloggen", url: "#"},
-  navigation: [
-    { name: 'Dashboard', href: '/dashboard' },
-    { name: 'Agenda', href: '#' },
-    { name: 'E-learning', href: '#' },
-    { name: 'Q & A', href: '/qa' },
-  ],
-  user: {
-    name: 'Sara Leekman',
-    email: 'saraleekman@outlook.com',
-    profile: './img/profile.png',
-    navigation: [
-      { name: 'Jouw Profiel', href: '#' },
-      { name: 'instellingen', href: '#' },
-      { name: 'Uitloggen', href: '#' },
-    ]
-  }
+type Props = {
+  user: UserTtems
 }
 
 export const NavDashboard = (props: Props) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
+  const context = {
+    logo: { img: "/img/antes_logo.png", url: "/" },
+    login: { name: "Inloggen", url: "#"},
+    navigation: [
+      { name: 'Dashboard', href: '/dashboard' },
+      { name: 'Agenda', href: '#' },
+      { name: 'E-learning', href: '#' },
+      { name: 'Q & A', href: '/qa' },
+    ],
+    user: {
+      name: `${props.user.first_name} ${props.user.last_name}`,
+      email: props.user.email,
+      profile: props.user.profile,
+      navigation: [
+        { name: 'Jouw Profiel', href: '#' },
+        { name: 'instellingen', href: '#' },
+        { name: 'Uitloggen', href: '#' },
+      ]
+    }
+  }
+  
   return (
     <header>
       <nav className="flex items-center justify-between py-2 px-5 lg:px-8 h-[64px] text-font1 font-font1 text-base bg-section shadow-cbs">
