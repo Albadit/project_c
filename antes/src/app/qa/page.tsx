@@ -3,7 +3,7 @@ import React from 'react';
 import Footer from '@/app/components/footer';
 import { NavDashboard } from '@/app/components/dashboard/nav'
 import { QACardList } from '@/app/components/dashboard/qa_card_list';
-import { Paginator } from '../components/paginator';
+import { Paginator } from '@/app/components/paginator';
 
 const user = {
   id: 1,
@@ -28,7 +28,7 @@ const question = [
     tags: ["stress", "rlex", "boek"],
     latestComment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Consequat aliquet maecenas ut sit nulla",
     reactions: 12,
-    url: "#"
+    url: "/qa/chat"
   },
   {
     id: 2,
@@ -39,7 +39,7 @@ const question = [
     tags: ["stress", "rlex", "boek"],
     latestComment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Consequat aliquet maecenas ut sit nulla",
     reactions: 12,
-    url: "#"
+    url: "/qa/chat"
   }
 ]
 
@@ -48,7 +48,7 @@ export default function Qa() {
     <>
       <NavDashboard user={user}/>
       <main className='m-auto p-5 max-w-[750px]'>
-        <section className='flex flex-col w-full gap-8 my-12 font-font2'>
+        <section className='flex flex-col w-full gap-5 my-12 font-font2'>
           <h1 className='font-font1 font-bold text-primary text-5xl'>Q & A Vragen</h1>
           <hr />
           <div className='flex flex-row gap-2'>
