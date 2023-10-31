@@ -22,7 +22,7 @@ type MenuItemProps = {
 }
 
 const MenuItem = ({ functions: { name }, onClick }: MenuItemProps) => (
-  <span className="text-font1 block px-4 py-2 text-sm hover:bg-extra hover:text-font2 rounded cursor-pointer select-none" tabIndex={-1} onClick={onClick}>
+  <span className="text-font1 block px-4 py-2 sm:text-sm hover:bg-extra hover:text-font2 rounded cursor-pointer select-none" tabIndex={-1} onClick={onClick}>
     {name}
   </span>
 )
@@ -67,7 +67,7 @@ export const SelectMenu = (props: Props) => {
         disabled={disabled}
         aria-haspopup="true"
         onClick={() => setIsMenuOpen(!isMenuOpen)}
-        className={`flex w-full ${value.name ? 'justify-between' : 'justify-end' } rounded bg-[#fff] px-3 py-3 text-font1 text-sm shadow-sm ring-1 ring-font1/20 focus:ring-2 focus:ring-inset focus:ring-callToAction sm:text-sm disabled:bg-slate-50 disabled:text-text-slate-500 disabled:border-slate-200 disabled:shadow-none invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500 disabled:opacity-75`}>
+        className={`flex w-full ${value.name ? 'justify-between' : 'justify-end' } rounded bg-[#fff] px-3 py-3 text-font1 sm:text-sm shadow-sm ring-1 ring-font1/20 focus:ring-2 focus:ring-inset focus:ring-callToAction sm:text-sm disabled:bg-slate-50 disabled:text-text-slate-500 disabled:border-slate-200 disabled:shadow-none invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500 disabled:opacity-75`}>
           {value.name}
         <ArrowDown className='h-5'/>
       </button>

@@ -34,7 +34,14 @@ export default function Profile() {
           <hr />
           <form action="" className='flex flex-col gap-5'>
             <h2 className='font-font1 font-bold text-font1 text-3xl'>Persoonlijke informatie</h2>
-            <div className='flex flex-row justify-stretch gap-5'>
+            <div className='flex flex-row gap-5 items-center'>
+              <img src="img/profile.png" alt="profile" className='h-[100px]'/>
+              <div className='flex flex-col gap-2'>
+                <button className='w-fit px-5 py-2 rounded-lg bg-secondary text-font2 font-semibold text-sm'>Verander Avatar</button>
+                <p className='text-sm text-font1'>JPG, GIF or PNG. 1MB max.</p>
+              </div>
+            </div>
+            <div className='flex sm:flex-row flex-col justify-stretch gap-5'>
               <Input label='Voornaam' name='first_name' type='text' value={user.first_name}/>
               <Input label='Achternaam' name='last_name' type='text' value={user.last_name}/>
             </div>
