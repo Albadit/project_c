@@ -10,10 +10,11 @@ const context = {
 }
 
 const functies = [
-  { id: 1, name: 'Wade Cooper' },
-  { id: 2, name: 'Arlene Mccoy' },
-  { id: 3, name: 'Devon Webb' },
-  { id: 4, name: 'Tom Cook'},
+  { id: 1, name: 'Behavioral neuroscience' },
+  { id: 2, name: 'Behavioral psychology' },
+  { id: 3, name: 'Clinical psychology' },
+  { id: 4, name: 'Cognitive psychology'},
+  { id: 5, name: 'Community psychology'},
 ]
 
 export default function Login() {

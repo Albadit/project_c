@@ -50,7 +50,7 @@ export const Input = (props: Props) => {
   }
 
   return (
-    <div>
+    <div className='w-full'>
       <label htmlFor={props.name.toLowerCase()} className="block text-sm font-medium leading-5 text-font1">{props.label}</label>
       <div className="mt-2 relative">
         <input

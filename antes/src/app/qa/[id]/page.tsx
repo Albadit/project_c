@@ -11,7 +11,7 @@ const user = {
   profile: "/img/profile.png",
   first_name: "Sara",
   last_name: "Leekman",
-  function: "psycholoog",
+  function_id: 2,
   bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
   email: "saraleekman@outlook.com",
 }
@@ -81,8 +81,7 @@ export default function Chat() {
           ))}
           <div className='flex flex-row gap-5'>
             <img src={user.profile} alt="" className='h-full sm:block hidden'/>
-            <div className='comment bg-section flex flex-col gap-2 p-3 w-[500px] h-[120px] rounded-lg shadow-sm border-[1px] border-font1/20 focus-within:outline focus-within:outline-2 focus-within:outline-callToAction focus-within:outline-offset-[-2px] sm:text-sm sm:leading-6 disabled:bg-slate-50 disabled:text-text-slate-500 disabled:border-slate-200 disabled:shadow-none invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500 disabled:opacity-75'>
-              {/* <textarea name="comment" id="comment" placeholder='Schrijf jouw comment...' className='w-[500px] h-[120px] rounded border-0 py-2.5 shadow-sm ring-1 ring-inset ring-font1/20 placeholder:font1 focus:ring-2 focus:ring-inset focus:ring-callToAction sm:text-sm sm:leading-6 disabled:bg-slate-50 disabled:text-text-slate-500 disabled:border-slate-200 disabled:shadow-none invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500 disabled:opacity-75'> */}
+            <form action="" className='comment bg-section flex flex-col gap-2 p-3 w-[500px] h-[120px] rounded-lg shadow-sm border-[1px] border-font1/20 focus-within:outline focus-within:outline-2 focus-within:outline-callToAction focus-within:outline-offset-[-2px] sm:text-sm sm:leading-6 disabled:bg-slate-50 disabled:text-text-slate-500 disabled:border-slate-200 disabled:shadow-none invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500 disabled:opacity-75'>
               <textarea name="comment" placeholder='Schrijf jouw comment...' className='grow border-0 p-0 m-0 bg-section resize-none focus:ring-0 focus:border-transparent'>
               </textarea>
               <div className='flex flex-row justify-between'>
@@ -92,7 +91,7 @@ export default function Chat() {
                 </div>
                 <button className='px-2.5 py-1.5 rounded-lg bg-secondary text-font2 font-semibold text-sm'>comment</button>
               </div>
-            </div>
+            </form>
           </div>
         </section>
       </main>

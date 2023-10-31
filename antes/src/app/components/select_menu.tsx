@@ -11,6 +11,7 @@ type SelectOption = {
 
 type Props = {
   name: string
+  index?: number
   disabled?: boolean
   value: SelectOption[]
 }
@@ -27,7 +28,10 @@ const MenuItem = ({ functions: { name }, onClick }: MenuItemProps) => (
 )
 
 export const SelectMenu = (props: Props) => {
-  const [value, setValue] = useState(props.value[0]);
+  const functionItem = props.value.findIndex(func => func.id === props.index);
+  const index = functionItem === -1 ? 0 : functionItem;
+
+  const [value, setValue] = useState(props.value[index]);
   const [disabled] = useState(props.disabled);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);

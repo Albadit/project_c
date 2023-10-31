@@ -42,7 +42,7 @@ const user = {
   profile: "/img/profile.png",
   first_name: "Sara",
   last_name: "Leekman",
-  function: "psycholoog",
+  function_id: 3,
   bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
   email: "saraleekman@outlook.com",
 }

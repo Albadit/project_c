@@ -6,19 +6,19 @@ import HamburgerMenu from '@/app/components/icons/hambuger_menu';
 import Close from '@/app/components/icons/close';
 import Link from 'next/link';
 
-type UserTtems = {
+type UserItems = {
   id: number
   role_id: number
   profile: string
   first_name: string
   last_name: string
-  function: string
+  function_id: number
   bio: string
   email: string
 }
 
 type Props = {
-  user: UserTtems
+  user: UserItems
 }
 
 export const NavDashboard = (props: Props) => {
@@ -38,7 +38,7 @@ export const NavDashboard = (props: Props) => {
       email: props.user.email,
       profile: props.user.profile,
       navigation: [
-        { name: 'Jouw Profiel', href: '#' },
+        { name: 'Jouw Profiel', href: '/profile' },
         { name: 'instellingen', href: '#' },
         { name: 'Uitloggen', href: '#' },
       ]
