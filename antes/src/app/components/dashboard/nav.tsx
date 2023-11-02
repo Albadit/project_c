@@ -29,7 +29,7 @@ export const NavDashboard = (props: Props) => {
     login: { name: "Inloggen", url: "#"},
     navigation: [
       { name: 'Dashboard', href: '/dashboard' },
-      { name: 'Agenda', href: '#' },
+      { name: 'Agenda', href: '/calendar' },
       { name: 'E-learning', href: '#' },
       { name: 'Q & A', href: '/qa' },
     ],
