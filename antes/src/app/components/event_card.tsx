@@ -1,36 +1,40 @@
-import { FC } from 'react';
-import Calendar from './icon/calendar';
-import Link from 'next/link';
-import IconArrowForwardRounded from '@/app/components/icon/arrow_forward_rounded';
+import React from "react";
+import Link from "next/link";
+import Calendar from "@/app/components/icons/calendar";
+import ArrowForwardRounded from "@/app/components/icons/arrow_right";
 
-interface EventCardProps {
-  event: {
-    image: string
-    title: string
-    description: string
-    location: string
-    date: string
-    link: string
-  }
+type EventItems = {
+  id: number;
+  image: string;
+  title: string;
+  description: string;
+  location: string;
+  date: string;
+  url: string;
 }
 
-export const EventCard: FC<EventCardProps> = ({ event }) => {
-  const { image, title, description, location, date, link } = event;
+type Props = {
+  event: EventItems;
+}
+
+export const EventCard = (props: Props) => {
   return (
-    <div className='flex flex-col justify-between w-[555px] min-h-[700px] p-7 rounded-lg bg-background shadow-cbs text-base font-font1 text-font1'>
-      <img src={image} alt="event" className='h-[350px] object-cover object-center rounded'/>
-      <div className='flex flex-col grow gap-3 py-5'>
-        <h2 className='text-xl font-semibold text-primary'>Event: {title}</h2>
-        <p className='text-extra line-clamp-5'>{description}</p>
-        <p>Locatie: {location}</p>
+    <div className="flex flex-col justify-between md:max-w-[525px] w-full gap-5 p-7 rounded-lg bg-section shadow-cbs text-base font-font1 text-font1">
+      <img src={props.event.image} alt="event" className="h-[320px] object-cover object-center rounded"/>
+      <div className="flex flex-col justify-center gap-3">
+        <h2 className="text-xl font-semibold text-primary">Event: {props.event.title}</h2>
+        <p className="text-extra line-clamp-4 lg:line-clamp-5">{props.event.description}</p>
+        <p>Locatie: {props.event.location}</p>
       </div>
-      <div className='flex lg:flex-row flex-col lg:items-center justify-between gap-5'>
-        <div className='flex flex-row items-center gap-2'>
-          <Calendar className='fill-extra h-5'/> 
-          <p className='text-extra text-sm'>{date}</p>
+      <div className="flex lg:flex-row flex-col lg:items-center justify-between gap-5">
+        <div className="flex flex-row items-center gap-2">
+          <Calendar className="fill-extra h-5" />
+          <p className="text-extra text-sm">{props.event.date}</p>
         </div>
-        <Link href={link} className='flex flex-row items-center justify-center gap-2 px-4 py-3 rounded-lg bg-primary text-font2 font-semibold text-sm'>Lees meer <IconArrowForwardRounded className='fill-font2 h-5'/></Link>
+        <Link href={props.event.url} className="flex flex-row items-center justify-center gap-2 px-4 py-3 rounded-lg bg-primary text-font2 font-semibold text-sm">
+          Lees meer <ArrowForwardRounded className="fill-font2 h-5" />
+        </Link>
       </div>
     </div>
-  );
-};
+  )
+}

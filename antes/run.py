@@ -4,10 +4,13 @@ import os
 # Define the npm commands
 script_directory = os.path.dirname(os.path.realpath(__file__))
 install_commands = [
-  # "npm install next@latest react@latest react-dom@latest",
-  "npm install next@13.5.4 react@18 react-dom@18",
+  "npm install next@latest react@latest react-dom@latest",
+  # "npm install next@13.5.4 react@18 react-dom@18",
   "npm install tailwindcss@latest",
   "npm install @tailwindcss/typography",
+  "npm install @tailwindcss/forms",
+  "npm install @tailwindcss/aspect-ratio",
+  "npm install @tailwindcss/container-queries",
 ]
 
 os.chdir(script_directory)
