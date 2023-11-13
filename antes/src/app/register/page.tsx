@@ -38,9 +38,7 @@ export default function Login() {
             <label htmlFor="remember" className='m-[-1px]'>{context.cacheRegister.text}</label>
           </div>
           <button type="button" title="register" className='flex flex-row items-center justify-center w-full lg:w-auto gap-2 px-4 py-3 rounded-lg bg-primary text-font2 font-semibold text-base'>{context.btn.text}</button>
-          <div className='flex md:flex-row flex-col justify-between lg:items-center items-start'>
-            <Link href={context.account.url} className='underline text-hyperlink'>{context.account.text}</Link>
-          </div>
+          <Link href={context.account.url} className='underline text-hyperlink'>{context.account.text}</Link>
         </form>
       </div>
     </main>

@@ -28,8 +28,8 @@ export default function Profile() {
   return (
     <>
       <NavDashboard user={user}/>
-      <main className='m-auto p-5 max-w-[1000px]'>
-        <section className='flex flex-col gap-5 mt-12 font-font2'>
+      <main className='m-auto px-5 py-12 max-w-[1000px]'>
+        <section className='flex flex-col gap-5  font-font2'>
           <h1 className='font-font1 font-bold text-primary text-5xl'>Profiel</h1>
           <hr />
           <form action="" className='flex flex-col gap-5'>
@@ -37,7 +37,8 @@ export default function Profile() {
             <div className='flex flex-row gap-5 items-center'>
               <img src="img/profile.png" alt="profile" className='h-[100px]'/>
               <div className='flex flex-col gap-2'>
-                <button className='w-fit px-5 py-2 rounded-lg bg-secondary text-font2 font-semibold text-sm'>Verander Avatar</button>
+                <label htmlFor="upload-photo" className='w-fit px-5 py-2 rounded-lg bg-secondary text-font2 font-semibold text-sm'>Verander Avatar</label>
+                <input type="file" name="photo" id="upload-photo" className='hidden'/>
                 <p className='text-sm text-font1'>JPG, GIF or PNG. 1MB max.</p>
               </div>
             </div>
@@ -47,7 +48,7 @@ export default function Profile() {
             </div>
             <SelectMenu name="Functie" value={functies}/>
             <Input label='Email' name='email' type='email' value={user.email}/>
-            <Input label='Bio' name='bio' type='text' value={user.bio}/>
+            <Input label='Bio' name='bio' type='textarea' value={user.bio}/>
             <button className='w-fit px-6 py-2.5 rounded-lg bg-secondary text-font2 font-semibold text-sm'>Opslaan</button>
           </form>
           <hr />
