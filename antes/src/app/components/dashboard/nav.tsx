@@ -90,7 +90,7 @@ export const NavDashboard = (props: Props) => {
         </div>
 
         {/* Mobile */}
-        <div className={`lg:hidden flex flex-col absolute top-0 right-0 h-full w-full sm:w-[300px] outline outline-1 outline-font1/10 bg-background ${mobileMenuOpen ? 'block' : 'hidden'}`}>
+        <div className={`z-50 lg:hidden flex flex-col absolute top-0 right-0 h-full w-full sm:w-[300px] outline outline-1 outline-font1/10 bg-background ${mobileMenuOpen ? 'block' : 'hidden'}`}>
           <div className="flex justify-between items-center sm:justify-end py-2 px-5 h-[64px]">
             <div className="flex sm:hidden h-[80%]">
               <Link href={context.logo.url} aria-label="logo">

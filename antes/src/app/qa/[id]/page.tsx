@@ -28,7 +28,6 @@ const question = {
       id: 1,
       name:"Michael Foster",
       profile: "/img/profile.png",
-      title: "Suggesties voor beginner?",
       datetime: "23-10-2023",
       comment: "Het behouden van een gezonde werk-privébalans is cruciaal voor je welzijn. Stel duidelijke grenzen tussen je werkuren en vrije tijd. Leer ook 'nee' te zeggen als je te veel taken op je bord krijgt. Zorg voor voldoende ontspanning en hobby's om stress te verminderen.",
     },
@@ -36,7 +35,6 @@ const question = {
       id: 2,
       name:"Whitney Francis",
       profile: "/img/profile.png",
-      title: "Suggesties voor beginner?",
       datetime: "23-10-2023",
       comment: "Stress is onvermijdelijk, maar je kunt leren hoe je er beter mee omgaat. Praktijkmethoden zoals ademhalingsoefeningen, meditatie en mindfulness kunnen helpen. Daarnaast is communiceren met collega's en leidinggevenden over je stressbronnen belangrijk, omdat ze vaak kunnen helpen bij het vinden van oplossingen.",
     },
@@ -44,7 +42,6 @@ const question = {
       id: 3,
       name:"Lindsay Walton",
       profile: "/img/profile.png",
-      title: "Suggesties voor beginner?",
       datetime: "23-10-2023",
       comment: "Blijf leren en groeien door training, bijscholing en het bijhouden van de nieuwste ontwikkelingen in je vakgebied. Zoek mentors of collega's met meer ervaring voor begeleiding en feedback. Overweeg ook om aanvullende certificeringen te behalen om je vaardigheden en kansen te vergroten.",
     },
@@ -52,7 +49,6 @@ const question = {
       id: 4,
       name:"Sara Leekman",
       profile: "/img/profile.png",
-      title: "Suggesties voor beginner?",
       datetime: "23-10-2023",
       comment: "Dank je wel voor het stellen van deze drie essentiële vragen over werken en professionele groei. Het is geweldig om te zien dat je al vroeg in je carrière nadenkt over deze aspecten, omdat dit een teken is van je toewijding om te groeien en te gedijen in de professionele wereld. Onthoud dat leren en evolueren een continu proces is, en ik wens je veel succes en voldoening in je werk. Als je nog meer vragen hebt of hulp nodig hebt in de toekomst, aarzel dan niet om terug te komen voor advies. Blijf nieuwsgierig en blijf groeien!",
     },
@@ -63,10 +59,9 @@ export default function Chat() {
   return (
     <>
       <NavDashboard user={user}/>
-      <main className='m-auto p-5 max-w-[800px]'>
+      <main className='m-auto p-5 max-w-[1000px]'>
         <section className='flex flex-col w-full gap-5 mt-12 font-font2'>
-          <h1 className='font-font1 font-bold text-primary text-5xl'>Q & A Vragen</h1>
-          <h2 className='font-font1 font-bold text-2xl'>Title: {question.user.title}</h2>
+          <h1 className='font-font1 font-bold text-primary text-5xl'>{question.user.title}</h1>
           <div className='flex flex-col text-extra'>
             <p>Gevraagd: {question.user.requested}</p>
             <p>Datum: {question.user.datetime}</p>
@@ -79,8 +74,9 @@ export default function Chat() {
                 <p className={`font-font1 text-lg font-semibold ${user.id == item.id ? 'hidden' : 'block'}`}>{item.name}</p>
                 <p className='text-extra text-ms leading-5 '>{item.comment}</p>
                 <p className='font-font1 text-extra text-right text-sm'>{item.datetime}</p>
+                <div className='w-[40px] h-[40px] sm:p-5 p-2'></div>
               </div>
-              <div className='w-[40px] h-[40px] sm:p-5 p-2'></div>
+              
             </div>
           ))}
           <div className='flex flex-row gap-5'>
