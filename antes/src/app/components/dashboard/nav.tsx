@@ -1,5 +1,6 @@
 "use client";
 
+import Image from 'next/image';
 import React from 'react';
 import { useState } from 'react'
 import HamburgerMenu from '@/app/components/icons/hambuger_menu';
@@ -25,6 +26,7 @@ export const NavDashboard = (props: Props) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   const context = {
+    size: { w: 500, h: 500},
     logo: { img: "/img/antes_logo.png", url: "/" },
     login: { name: "Inloggen", url: "#"},
     navigation: [
@@ -51,8 +53,8 @@ export const NavDashboard = (props: Props) => {
         {/* Desktop */}
         <ul className='h-[80%]'>
           <li className="h-full">
-            <Link href={context.logo.url} aria-label="logo">
-              <img src={context.logo.img} alt="antes logo" className="h-full"/>
+            <Link href={context.logo.url} aria-label="logo" >
+              <Image src={context.logo.img} alt="antes logo" width={context.size.w} height={context.size.h} className="h-full w-auto"/>
             </Link>
           </li>
         </ul>
@@ -70,7 +72,7 @@ export const NavDashboard = (props: Props) => {
             title='openMenu'
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
-            <img src={context.user.profile} alt={context.user.name} className='h-full rounded-full'/>
+            <Image src={context.user.profile} alt="profile" width={context.size.w} height={context.size.h} className="h-full w-auto rounded-full"/>
           </button>
           <ul className={`flex flex-col absolute top-12 right-0 bg-background shadow-cbs p-3 gap-y-3 w-max pr-24 rounded outline outline-1 outline-font1/10 ${mobileMenuOpen ? 'block' : 'hidden'}`}>
           {context.user.navigation.map((item) => (
@@ -94,7 +96,7 @@ export const NavDashboard = (props: Props) => {
           <div className="flex justify-between items-center sm:justify-end py-2 px-5 h-[64px]">
             <div className="flex sm:hidden h-[80%]">
               <Link href={context.logo.url} aria-label="logo">
-                <img src={context.logo.img} alt="antes logo" className="h-full"/>
+                <Image src={context.logo.img} alt="antes logo" width={context.size.w} height={context.size.h} className="h-full w-full"/>
               </Link>
             </div>
             <button type="button"
@@ -113,7 +115,7 @@ export const NavDashboard = (props: Props) => {
             ))}
               <hr className='border-font1/20'/>
               <li className='flex items-center gap-3'>
-                <img src={context.user.profile} alt={context.user.name} className='h-max'/>
+                <Image src={context.user.profile} alt={context.user.name} width={context.size.w} height={context.size.h} className="h-max w-auto"/>
                 <div className='truncate leading-5'>
                   <p className='truncate font-semibold'>{context.user.name}</p>
                   <p className='truncate'>{context.user.email}</p>

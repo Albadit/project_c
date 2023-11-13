@@ -1,15 +1,3 @@
-import {
-  Calendar as BigCalendar,
-  momentLocalizer,
-  Views
-} from "react-big-calendar";
-import moment from "moment";
-import "react-big-calendar/lib/css/react-big-calendar.css";
-
-moment.locale("en-GB");
-//momentLocalizer(moment);
-const localizer = momentLocalizer(moment);
-
 const events = [
   {
     id: 0,
@@ -59,19 +47,7 @@ const styles = {
 
 export default function CustomCalendar() {
   return (
-    <div style={styles.container}>
-      <BigCalendar
-        selectable
-        localizer={localizer}
-        events={events}
-        defaultView={Views.DAY}
-        views={[Views.DAY, Views.WEEK, Views.MONTH]}
-        steps={60}
-        defaultDate={new Date(2018, 0, 29)}
-        resources={resourceMap}
-        resourceIdAccessor="resourceId"
-        resourceTitleAccessor="resourceTitle"
-      />
-    </div>
+    <>
+    </>
   );
 }
