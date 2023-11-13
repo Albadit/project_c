@@ -20,7 +20,7 @@ const functies = [
 
 export default function Login() {
   return (
-    <main className='flex flex-row justify-center fit:h-screen h-fit'>
+    <main className='flex flex-row justify-center register:h-screen h-fit'>
       <div className="bg-login bg-center grow bg-cover bg-no-repeat md:block hidden"></div>
       <div className='flex flex-col gap-12 justify-center w-full max-w-[30.625rem] p-5 md:p-12'>
         <Link href={context.logo.url}>

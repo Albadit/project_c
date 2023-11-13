@@ -11,7 +11,7 @@ const context = {
 
 export default function Login() {
   return (
-    <main className='flex flex-row justify-center h-screen'>
+    <main className='flex flex-row justify-center login:h-screen h-fit'>
       <div className="bg-login bg-center grow bg-cover bg-no-repeat md:block hidden"></div>
       <div className='flex flex-col justify-center gap-12 w-full max-w-[490px] p-5 md:p-12'>
         <Link href={context.logo.url}>

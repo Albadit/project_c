@@ -22,7 +22,9 @@ const config: Config = {
     },
     extend: {
       screens: {
-        'fit': { 'raw': '(min-height: 924px)' },
+        'login': { 'raw': '(min-height: 489px)' },
+        'reset': { 'raw': '(min-height: 353px)' },
+        'register': { 'raw': '(min-height: 924px)' },
       },
       boxShadow: {
         'cbs': '0px 10px 15px -3px rgb(var(--clr-box-shadow) / 0.1), 0px -10px 15px -3px rgb(var(--clr-box-shadow) / 0.1)',
