@@ -21,6 +21,9 @@ const config: Config = {
       inputBorder: 'rgb(var(--clr-input-border) / <alpha-value>)'
     },
     extend: {
+      screens: {
+        'fit': { 'raw': '(min-height: 924px)' },
+      },
       boxShadow: {
         'cbs': '0px 10px 15px -3px rgb(var(--clr-box-shadow) / 0.1), 0px -10px 15px -3px rgb(var(--clr-box-shadow) / 0.1)',
         'cbs-sm': '0px 2px 8px 0px rgb(var(--clr-box-shadow) / 0.1)'

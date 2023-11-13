@@ -7,7 +7,7 @@ type Props = {
 }
 
 const context = {
-  image: "img/event.png",
+  image: "/img/event.png",
   title: "Connectiedag!",
   description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
   location: "Rotterdam",
@@ -18,7 +18,7 @@ const context = {
 export const Event = (props: Props) => {
   return (
     <section className="flex lg:flex-row-reverse flex-col justify-between lg:w-full w-[600px] gap-5 p-7 rounded-lg bg-section shadow-cbs text-base font-font1 text-font1">
-      <img src={context.image} alt="event" className="lg:w-[60%] w-full lg:min-h-[580px] h-[280px] object-cover object-center rounded" />
+      <img src={context.image} alt="event" className="lg:w-[60%] w-full lg:min-h-[580px] h-[280px] object-cover object-center rounded"/>
       <div className="flex flex-col justify-center gap-5">
         <div className="flex flex-col justify-center gap-3">
           <h2 className="text-xl font-semibold text-primary">Event: {context.title}</h2>

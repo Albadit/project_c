@@ -20,7 +20,7 @@ type Props = {
 export const EventCard = (props: Props) => {
   return (
     <div className="flex flex-col justify-between md:max-w-[525px] w-full gap-5 p-7 rounded-lg bg-section shadow-cbs text-base font-font1 text-font1">
-      <img src={props.event.image} alt="event" className="h-[320px] object-cover object-center rounded"/>
+      <img src={props.event.image} alt="event_card" className="h-[320px] object-cover object-center rounded"/>
       <div className="flex flex-col justify-center gap-3">
         <h2 className="text-xl font-semibold text-primary">Event: {props.event.title}</h2>
         <p className="text-extra line-clamp-4 lg:line-clamp-5">{props.event.description}</p>

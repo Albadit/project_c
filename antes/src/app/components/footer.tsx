@@ -46,7 +46,7 @@ export default function Footer() {
   return (
     <footer className="flex justify-center justify-items-center bg-section shadow-cbs">
       <nav className="flex flex-col gap-5 p-5 max-w-[1040px] w-full text-base font-font1 text-extra fill-extra">
-        <p className="text-extra">&copy;{context.year} Antes</p>
+        <p className="text-extra sm:text-left text-center">&copy;{context.year} Antes.</p>
         <hr className="text-extra/50" />
         <div className="flex flex-col sm:flex-row gap-8 justify-between">
           <ul className="flex sm:flex-row flex-col gap-8 items-center">

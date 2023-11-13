@@ -24,7 +24,7 @@ const question = [
     name:"Sara Leekman",
     img: "/img/profile.png",
     datetime: "23-10-2023",
-    title: "Hoe gaan jullie om met stress?",
+    title: "Suggesties voor beginner?",
     tags: ["stress", "rlex", "boek"],
     latestComment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Consequat aliquet maecenas ut sit nulla",
     reactions: 12,
@@ -32,6 +32,17 @@ const question = [
   },
   {
     id: 2,
+    name:"Sara Leekman",
+    img: "/img/profile.png",
+    datetime: "23-10-2023",
+    title: "Hoe gaan jullie om met stress?",
+    tags: ["stress", "rlex", "boek"],
+    latestComment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Consequat aliquet maecenas ut sit nulla",
+    reactions: 12,
+    url: "/qa/chat"
+  },
+  {
+    id: 3,
     name:"Sara Leekman",
     img: "/img/profile.png",
     datetime: "23-10-2023",
@@ -51,9 +62,9 @@ export default function Qa() {
         <section className='flex flex-col w-full gap-5 my-12 font-font2'>
           <h1 className='font-font1 font-bold text-primary text-5xl'>Q & A Vragen</h1>
           <hr />
-          <div className='flex flex-row gap-2'>
+          <div className='flex flex-row gap-2 overflow-x-auto'>
           {tags.map((item) => (
-            <span key={item} className='bg-[#EAEAEA] text-extra py-1 px-4 rounded-full hover:bg-primary hover:text-font2 ease-in duration-300'>{item}</span>
+            <span key={item} className='bg-[#EAEAEA] whitespace-nowrap text-extra py-2 px-4 rounded-full hover:bg-primary hover:text-font2 ease-in duration-300'>{item}</span>
           ))}
           </div>
           <QACardList qaList={question}/>

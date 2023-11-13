@@ -17,7 +17,7 @@ export default function Login() {
           <img src={context.logo.img} alt={context.logo.alt} className='w-max'/>
         </Link>
         <form action="" className='flex flex-col justify-center gap-5'>
-          <Input label='Emaik' name="email" type="email" value=''/>
+          <Input label='Email' name="email" type="email" value=''/>
           <button title="reset_password" className='flex flex-row items-center justify-center w-full lg:w-auto gap-2 px-4 py-3 rounded-lg bg-primary text-font2 font-semibold text-base'>{context.btn.text}</button>
         </form>
       </div>

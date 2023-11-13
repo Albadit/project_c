@@ -3,23 +3,23 @@ import Footer from '@/app/components/footer';
 import { NavDashboard } from '@/app/components/dashboard/nav'
 import { QACard } from '@/app/components/qa_card';
 import { EventCard} from '@/app/components/event_card';
-import { ELearingCard } from '@/app/components/e_learing_card';
+import { ELearingCard } from '@/app/components/elearing_card';
 
 const qa = {
   id: 1,
   name: "Sara Leekman",
-  image: "img/qa.png",
+  image: "/img/qa.png",
   datetime: "12-12-2024",
   title: "Suggesties voor beginner?",
   latest_comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
   reactions: 12,
-  profile: "img/profile.png",
-  url: "#",
+  profile: "/img/profile.png",
+  url: "/qa/1",
 }
 
 const event = {
   id: 1,
-  image: "img/event.png",
+  image: "/img/event.png",
   title: "Connectiedag!",
   description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
   location: "Rotterdam",
@@ -33,7 +33,7 @@ const elearing = {
   title: "H1. Introduction.",
   user_chapters: 8,
   max_chapters: 11,
-  url: "#",
+  url: "/elearing",
 }
 
 const user = {

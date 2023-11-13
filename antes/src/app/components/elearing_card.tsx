@@ -15,22 +15,13 @@ type Props = {
   elearing: ElearingItems;
 }
 
-// const context = {
-//   image: "img/e_learing.png",
-//   props.elearing: "H1. Introduction.",
-//   user_chapters: 8,
-//   max_chapters: 11,
-//   link: "#",
-// }
-
 export const ELearingCard = (props: Props) => {
-  
   const progression = Math.ceil(100 / props.elearing.max_chapters * props.elearing.user_chapters)
   const progressBarStyle = { width: `${progression}%` };
 
   return (
     <div className="flex flex-col justify-between w-full md:w-[525px] gap-5 p-7 rounded-lg bg-section shadow-cbs text-base font-font1 text-font1">
-      <img src={props.elearing.image} alt="event" className="h-[280px] object-cover object-center rounded" />
+      <img src={props.elearing.image} alt="elearing" className="h-[280px] object-cover object-center rounded"/>
       <div className="flex flex-col justify-center gap-3">
         <h2 className="text-xl font-semibold text-primary">{props.elearing.title}</h2>
       </div>

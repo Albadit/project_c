@@ -27,7 +27,7 @@ export default function Nav() {
       <ul className="h-[80%]">
         <li className="h-full">
           <Link href={context.logo.url} aria-label="logo">
-            <img src={context.logo.img} alt="antes logo" className="h-full" />
+            <img src={context.logo.img} alt="antes logo" className="h-full w-auto"/>
           </Link>
         </li>
       </ul>
@@ -59,7 +59,7 @@ export default function Nav() {
         <div className="flex justify-between items-center sm:justify-end py-2 px-5 h-[64px]">
           <div className="flex sm:hidden h-[80%]">
             <Link href={context.logo.url} aria-label="logo">
-              <img src={context.logo.img} alt="antes logo" className="h-full"/>
+              <img src={context.logo.img} alt="antes logo" className="h-full w-auto"/>
             </Link>
           </div>
           <button
@@ -67,7 +67,7 @@ export default function Nav() {
             title="closeMenu"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
-            <Close className="w-8" />
+            <Close className="w-9 px-0.5" />
           </button>
         </div>
         <div className="flex flex-col gap-y-8 p-5">
