@@ -3,6 +3,7 @@ import React, { useState, useMemo } from 'react';
 import Footer from '@/app/components/footer';
 import { NavDashboard } from '@/app/components/dashboard/nav'
 import ArrowRight from '@/app/components/icons/arrow_right';
+import Link from 'next/link';
 
 const user = {
   id: 1,
@@ -20,25 +21,29 @@ const events = [
     id: 0,
     title: "Board meeting",
     start: new Date(2023, 1, 1, 9, 0, 0),
-    end: new Date(2023, 1, 1, 13, 0, 0)
+    end: new Date(2023, 1, 1, 13, 0, 0),
+    url: "/event"
   },
   {
     id: 1,
     title: "MS training",
     start: new Date(2023, 2, 5, 14, 0, 0),
     end: new Date(2023, 2, 5, 16, 30, 0),
+    url: "/event"
   },
   {
     id: 2,
     title: "Team lead meeting",
     start: new Date(2023, 3, 12, 8, 30, 0),
     end: new Date(2023, 3, 12, 12, 30, 0),
+    url: "/event"
   },
   {
     id: 3,
     title: "Birthday Party",
     start: new Date(2023, 4, 11, 7, 0, 0),
-    end: new Date(2023, 4, 11, 10, 30, 0)
+    end: new Date(2023, 4, 11, 10, 30, 0),
+    url: "/event"
   }
 ];
 
@@ -146,13 +151,13 @@ export default function Calendar() {
     <NavDashboard user={user}/>
     <main className="flex flex-col justify-center items-center gap-5 p-5 my-12">
       <h1 className='font-font1 font-bold text-center text-primary text-5xl'>Calender</h1>
-      <div className='flex flex-col'>
+      <section className='max-w-full'>
         <div className='flex flex-row justify-between items-center max-w-[350px] w-full mt-8'>
           <button onClick={goToPrevMonth}><ArrowRight className='w-5 fill-extra rotate-180'/></button>
           <p className='font-semibold text-xl font-font1'>{monthName} {currentYear}</p>
           <button onClick={goToNextMonth}><ArrowRight className='w-5 fill-extra'/></button>
         </div>
-        <div className='text-font1 font-font2 overflow-x-auto max-w-full'>
+        <div className='text-font1 font-font2 overflow-x-auto'>
           <table>
             <thead>
               <tr className='text-center'>
@@ -174,7 +179,7 @@ export default function Calendar() {
             </tbody>
           </table>
         </div>
-      </div>
+      </section>
       <section className='flex flex-col gap-5 font-font2 text-font1 max-w-[750px] w-full'>
         <h2 className='font-semibold text-xl font-font1'>Aankomende evenementen</h2>
         <div className=''>
@@ -183,11 +188,13 @@ export default function Calendar() {
             <p className='grow'>Er staat niets op het programma van vandaag</p>
           </div>
           {events.map((item) => 
-          <div key={item.id} className="flex sm:flex-row flex-col py-4 border-b-[1px] border-extra/20">
-            <p className='text-extra w-28 sm:p-0 pb-4'>{item.start.toLocaleDateString(local, { weekday: 'short' })}, {item.start.toLocaleDateString(local, { month: 'short' })} {item.start.getDate()}</p>
-            <p className='grow font-medium'>{item.title}</p>
-            <p>{item.start.toLocaleTimeString(local, { hour: '2-digit', minute: '2-digit', hour12: false })} - {item.end.toLocaleTimeString(local, { hour: '2-digit', minute: '2-digit', hour12: false })}</p>
-          </div>
+          <Link href={item.url}>
+            <div key={item.id} className="flex sm:flex-row flex-col py-4 border-b-[1px] border-extra/20">
+              <p className='text-extra w-28 sm:p-0 pb-4'>{item.start.toLocaleDateString(local, { weekday: 'short' })}, {item.start.toLocaleDateString(local, { month: 'short' })} {item.start.getDate()}</p>
+              <p className='grow font-medium'>{item.title}</p>
+              <p>{item.start.toLocaleTimeString(local, { hour: '2-digit', minute: '2-digit', hour12: false })} - {item.end.toLocaleTimeString(local, { hour: '2-digit', minute: '2-digit', hour12: false })}</p>
+            </div>
+          </Link>
           )}
         </div>
       </section>
