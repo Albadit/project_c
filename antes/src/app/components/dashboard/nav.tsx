@@ -48,7 +48,7 @@ export const NavDashboard = (props: Props) => {
   
   return (
     <header>
-      <nav className="flex items-center justify-between py-2 px-5 lg:px-8 h-[64px] text-font1 font-font1 text-base bg-section shadow-cbs">
+      <nav className="z-50 flex items-center justify-between py-2 px-5 lg:px-8 h-[64px] text-font1 font-font1 text-base bg-section shadow-cbs">
         {/* Desktop */}
         <ul className='h-[80%]'>
           <li className="h-full">
