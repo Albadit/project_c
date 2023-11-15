@@ -1,42 +1,45 @@
-import React from "react"
-import Link from "next/link"
+import React from "react";
+import Link from "next/link";
+import ArrowForwardRounded from "@/app/components/icons/arrow_right";
 
 type Props = {
-    elearn: object;
+    elearing: object;
 }
 
 const context = {
-    image: "/E-Learning_picture.png",
+    image: "img/E-Learning_picture.png",
     title: "H1. Introduction.",
-    progression: "50%",
-    currentlesson: "8",
-    maxlesson: "10",
+    learing: {
+        user_chapters: 8,
+        max_chapters: 11
+    },
     link: "#",
 }
 
-export const ELearnCard = (props: Props) => {
+const progression = Math.ceil(100 / context.learing.max_chapters * context.learing.user_chapters)
+const progressBarStyle = { width: `${progression}%` };
+
+export const ELearingCard = (props: Props) => {
     return (
-        <>
-            <div className='flex flex-col w-full gap-10 my-12'>
-                <div className='flex flex-wrap x1:justify-between justify-center gap-10'>
-                    <div className="box-border h-[400px] w-[500px] p-4 shadow-2xl mb-8 shadow-2x1">
-                        <div>
-                            <img className='mt-2'
-                                src={context.image}
-                                alt="elearn">
-                            </img>
-                            <div className="text-primary mb-3 mt-3 text-font1 text-xl font-semibold">{context.title}</div>
-                        </div>
-                        <div className='mb-8'>
-                            <div className='bg-[#ECECEC] relative top-5 h-[10px] w-full rounded-2xl'>
-                                <div className='bg-secondary absolute top-0 left-0 flex h-[10px] w-[[{context.progression}] items-center justify-center rounded-2xl text-xs font-semibold text-[#FAFAFA]'></div>
-                            </div>
-                            <div className="mt-7 text-xs font-semibold text-[#6b6969]">{context.progression}</div>
-                            <div className="mt--6 text-right text-xs font-semibold text-[#6b6969]">les {context.currentlesson} van {context.maxlesson}</div>
-                        </div>
-                    </div>
+        <div className="flex flex-col shadow-2xl justify-between w-full md:w-[525px] gap-5 p-7 rounded-lg bg-section text-base font-font1 text-font1">
+            <img src={context.image} alt="event" className="h-[280px] object-cover object-center rounded" />
+            <div className="flex flex-col justify-center gap-3">
+                <h2 className="text-xl font-semibold text-primary">{context.title}</h2>
+            </div>
+            <div className="flex flex-col w-full gap-5">
+                <div className="w-full bg-extra/30 h-3 rounded">
+                    <div style={progressBarStyle} className='h-full bg-secondary rounded'></div>
+                </div>
+                <div className="flex text-sm 2xl:text-lg flex-row justify-between gap-5">
+                    <p>{progression} %</p>
+                    <p>les {context.learing.user_chapters} van {context.learing.max_chapters}</p>
                 </div>
             </div>
-        </>
+            <div className="flex lg:flex-row flex-col lg:items-center justify-end gap-5">
+                <Link href={context.link} className="flex flex-row items-center justify-center gap-2 px-4 py-3 rounded-lg bg-primary text-font2 font-semibold text-sm">
+                    Ga verder <ArrowForwardRounded className="fill-font2 h-5" />
+                </Link>
+            </div>
+        </div>
     )
 }

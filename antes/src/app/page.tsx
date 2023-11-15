@@ -1,12 +1,15 @@
 import Image from 'next/image'
 import HeaderHome from '@/app/components/header_home'
-import Dashboard from '@/app/components/Dashboard'
+import E_Learning from '@/app/components/E_Learning'
+// import Dashboard from '@/app/components/Dashboard'
 
 export default function Home() {
   return (
     <>
       <HeaderHome />
-      <Dashboard />
+      {/* <Dashboard /> */}
+      <E_Learning />
+
     </>
   )
 }

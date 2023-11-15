@@ -3,7 +3,7 @@ import Image from 'next/image'
 import { useState } from 'react'
 import { QACard } from '@/app/components/qa_card'
 import { EventCard } from '@/app/components/event_card'
-import { ELearnCard } from '@/app/components/e_learn_card';
+import { ELearingCard } from '@/app/components/e_learn_card';
 
 
 export default function Dashboard() {
@@ -33,7 +33,7 @@ export default function Dashboard() {
             </div>
             <div className='flex flex-col w-full gap-10'>
                 <div className='flex flex-wrap x1:justify-between justify-center gap-10'>
-                    <ELearnCard elearn={{}} />
+                    <ELearingCard elearing={{}} />
                 </div>
             </div>
         </main>
