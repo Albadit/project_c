@@ -24,7 +24,7 @@ const elearing = {
   title: "H1. Introduction.",
   user_chapters: 8,
   max_chapters: 11,
-  url: "/elearing",
+  url: "/elearing/1",
 }
 
 const subject = {
@@ -32,7 +32,7 @@ const subject = {
   image: "img/e_learing.png",
   title: "Psychiatrie",
   description: "La lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae nisi eget nunc aliquam aliquet.",
-  url: "/elearing",
+  url: "/elearing/1",
 }
 
 export default function ELearning() {
