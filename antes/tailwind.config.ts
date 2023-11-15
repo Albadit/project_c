@@ -18,7 +18,8 @@ const config: Config = {
       icon: 'rgb(var(--clr-icon) / <alpha-value>)',
       extra: 'rgb(var(--clr-extra) / <alpha-value>)',
       hyperlink: 'rgb(var(--clr-hyperlink) / <alpha-value>)',
-      inputBorder: 'rgb(var(--clr-input-border) / <alpha-value>)'
+      inputBorder: 'rgb(var(--clr-input-border) / <alpha-value>)',
+      light_gray: 'rgb(var(--clr-light_gray) / <alpha-value>)',
     },
     extend: {
       boxShadow: {
