@@ -3,7 +3,7 @@ import Footer from '@/app/components/footer';
 import { NavDashboard } from '@/app/components/dashboard/nav'
 import { QACard } from '@/app/components/qa_card';
 import { EventCard} from '@/app/components/event_card';
-import { ELearingCard } from '@/app/components/elearing_card';
+import { ELearningCard } from '@/app/components/elearning_card';
 
 const qa = {
   id: 1,
@@ -27,7 +27,7 @@ const event = {
   url: "/event",
 }
 
-const elearing = {
+const elearning = {
   id: 1,
   image: "img/e_learing.png",
   title: "H1. Introduction.",
@@ -51,8 +51,8 @@ export default function Dashboard() {
   return (
     <>
       <NavDashboard user={user}/>
-      <main className='flex flex-wrap justify-center m-auto p-5 gap-10 max-w-[1280px]'>
-        <section className='flex flex-col w-full gap-20 my-12'>
+      <main className='flex flex-wrap justify-center m-auto p-5 my-12 max-w-[1280px]'>
+        <section className='flex flex-col w-full gap-20'>
           <h1 className='font-font1 font-bold text-center text-primary text-5xl'>Goeiedag {`${user.first_name} ${user.last_name}`}</h1>
           <div className='flex flex-wrap justify-between gap-10 gap-y-20 [&>*]:flex-[1_1_525px]'>
             <div className='flex flex-col items-center justify-center gap-10'>
@@ -65,7 +65,7 @@ export default function Dashboard() {
             </div>
             <div className='flex flex-col items-center justify-center gap-10'>
               <h2 className='font-font1 font-semibold text-center text-primary text-3xl'>E-learing progressie</h2>
-              <ELearingCard elearing={elearing}/>
+              <ELearningCard elearning={elearning}/>
             </div>
           </div>
         </section> 

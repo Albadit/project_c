@@ -58,8 +58,8 @@ export default function Qa() {
   return (
     <>
       <NavDashboard user={user}/>
-      <main className='m-auto p-5 max-w-[750px]'>
-        <section className='flex flex-col w-full gap-5 my-12 font-font2'>
+      <main className='m-auto p-5 my-12 max-w-[750px]'>
+        <section className='flex flex-col w-full gap-5 font-font2'>
           <h1 className='font-font1 font-bold text-primary text-5xl'>Q & A Vragen</h1>
           <hr />
           <div className='flex flex-row gap-2 overflow-x-auto'>

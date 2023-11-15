@@ -59,8 +59,8 @@ export default function Chat() {
   return (
     <>
       <NavDashboard user={user}/>
-      <main className='m-auto p-5 max-w-[1000px]'>
-        <section className='flex flex-col w-full gap-5 mt-12 font-font2'>
+      <main className='m-auto p-5 my-12 max-w-[1000px]'>
+        <section className='flex flex-col w-full gap-5  font-font2'>
           <h1 className='font-font1 font-bold text-primary text-5xl'>{question.user.title}</h1>
           <div className='flex flex-col text-extra'>
             <p>Gevraagd: {question.user.requested}</p>
