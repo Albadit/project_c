@@ -21,7 +21,7 @@ const TermsAndConditions = () => {
               className="mr-2"
             />
             <label htmlFor="acceptTerms" className="text-sm">
-            Ja, ik heb de informatie gelezen en begrepen en stem in met
+            Ja, ik heb de informatie gelezen en begrepen en stem in met {' '}
             <Link href="/terms_page">
              <a href="/terms_page" className="text-blue-500">deze voorwaarden</a>.
             </Link>
