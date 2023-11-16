@@ -74,9 +74,7 @@ export default function Chat() {
                 <p className={`font-font1 text-lg font-semibold ${user.id == item.id ? 'hidden' : 'block'}`}>{item.name}</p>
                 <p className='text-extra text-ms leading-5 '>{item.comment}</p>
                 <p className='font-font1 text-extra text-right text-sm'>{item.datetime}</p>
-                <div className='w-[40px] h-[40px] sm:p-5 p-2'></div>
               </div>
-              
             </div>
           ))}
           <div className='flex flex-row gap-5'>
