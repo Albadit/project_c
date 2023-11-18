@@ -16,33 +16,33 @@ const user = {
   email: "saraleekman@outlook.com",
 }
 
-const events = [
+let events = [
   {
     id: 0,
     title: "Connectiedag!",
-    start: new Date(2024, 11, 12, 9, 0, 0),
-    end: new Date(2024, 1, 1, 13, 0, 0),
+    start: new Date(2023, 11, 12, 9, 0, 0),
+    end: new Date(2023, 11, 1, 13, 0, 0),
     url: "/event/1"
   },
   {
     id: 1,
     title: "MS training",
-    start: new Date(2023, 2, 5, 14, 0, 0),
-    end: new Date(2023, 2, 5, 16, 30, 0),
+    start: new Date(2024, 2, 5, 14, 0, 0),
+    end: new Date(2024, 2, 5, 16, 30, 0),
     url: "/event/1"
   },
   {
     id: 2,
     title: "Team lead meeting",
-    start: new Date(2023, 3, 12, 8, 30, 0),
-    end: new Date(2023, 3, 12, 12, 30, 0),
+    start: new Date(2024, 3, 12, 8, 30, 0),
+    end: new Date(2024, 3, 12, 12, 30, 0),
     url: "/event/1"
   },
   {
     id: 3,
     title: "Birthday Party",
-    start: new Date(2023, 4, 11, 7, 0, 0),
-    end: new Date(2023, 4, 11, 10, 30, 0),
+    start: new Date(2024, 4, 11, 7, 0, 0),
+    end: new Date(2024, 4, 11, 10, 30, 0),
     url: "/event/1"
   }
 ];
@@ -108,6 +108,26 @@ function getWeekDays(baseDate: Date, local: string, weekdays: "long" | "short" |
   return weekDays;
 }
 
+function isEventCurrentDay(day: any) {
+  if (!events.some(event => event.start.getDate() === day.getDate())) {
+    const placeholderEvent = {
+      id: -1,
+      title: "Er staat niets op het programma van vandaag",
+      start: day,
+      end: day,
+      url: ""
+    };
+  
+    events.unshift(placeholderEvent);
+  }
+
+  // Filter out events that have already passed (excluding the current day)
+  events = events.filter(event => event.start > day || event.start.getDate() === day.getDate());
+
+  // Sort events based on start date
+  events.sort((a: any, b: any) => a.start - b.start);
+}
+
 export default function Calendar() {
   const today = new Date();
   const [currentMonth, setCurrentMonth] = useState(today.getMonth() + 1);
@@ -119,6 +139,8 @@ export default function Calendar() {
   const weeks = useMemo(() => generateMonth(currentYear, currentMonth, startOnMonday), [currentYear, currentMonth]);
 
   const monthName = new Intl.DateTimeFormat(local, { month: 'long' }).format(new Date(currentYear, currentMonth - 1));
+
+  isEventCurrentDay(today);
 
   const isCurrentDay = (day: any) => {
     const currentDay = today.getDate();
@@ -158,42 +180,37 @@ export default function Calendar() {
           <button onClick={goToNextMonth}><ArrowRight className='w-5 fill-extra'/></button>
         </div>
         <div className='text-font1 font-font2 overflow-x-auto'>
-          <table>
-            <thead>
-              <tr className='text-center'>
-                {days.map((day, index) => 
-                <th key={index} className="py-2 font-normal">{day}</th>
-                )}
-              </tr>
-            </thead>
-            <tbody>
-              {weeks.map((week: any, i: any) => (
-                <tr key={i}>
-                  {week.map((day: any, index: any) => (
-                    <td key={index} className={`text-center border border-inputBorder px-4 py-2.5 ${isCurrentMonth(day) ? 'bg-section' : 'text-extra bg-[#f9fafb]'}`}>
-                      <span className={`${isCurrentDay(day) ? 'text-font2 font-medium bg-secondary rounded-full p-1.5 m-[-6px]' : ''}`}>{day.day}</span>
-                    </td>
-                  ))}
-                </tr>
+          <div className='w-max'>
+            {/* Weekday Headers */}
+            <div className="grid grid-cols-7">
+              {days.map((day, index) => (
+                <span key={index} className="text-center py-2 font-normal">{day}</span>
               ))}
-            </tbody>
-          </table>
+            </div>
+
+            {/* Calendar Days */}
+            <div className='calender grid grid-rows-7 p-0.5'>
+              {weeks.map((week: any, i: any) => (
+                <div key={i} className='grid grid-cols-7'>
+                  {week.map((day: any, index: any) => (
+                    <div key={index} className={`text-center outline outline-[1px] outline-offset-0 outline-inputBorder px-4 py-2.5 ${isCurrentMonth(day) ? 'bg-section' : 'text-extra bg-[#f9fafb]'}`}>
+                      <span className={`${isCurrentDay(day) ? 'text-font2 font-medium bg-secondary rounded-full p-1.5 m-[-6px]' : ''}`}>{day.day}</span>
+                    </div>
+                  ))}
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
       <section className='flex flex-col gap-5 font-font2 text-font1 max-w-[750px] w-full'>
         <h2 className='font-semibold text-xl font-font1'>Aankomende evenementen</h2>
-        <div className=''>
-          <div className="flex sm:flex-row flex-col text-extra py-4 border-b-[1px] border-extra/20 ">
-            <p className='w-28 sm:p-0 pb-4'>{new Date().toLocaleDateString(local, { weekday: 'short' })}, {new Date().toLocaleDateString(local, { month: 'short' })} {new Date().getDate()}</p>
-            <p className='grow'>Er staat niets op het programma van vandaag</p>
-          </div>
+        <div>
           {events.map((item) => 
-          <Link key={item.id} href={item.url}>
-            <div className="flex sm:flex-row flex-col py-4 border-b-[1px] border-extra/20">
-              <p className='text-extra w-28 sm:p-0 pb-4'>{item.start.toLocaleDateString(local, { weekday: 'short' })}, {item.start.toLocaleDateString(local, { month: 'short' })} {item.start.getDate()}</p>
-              <p className='grow font-medium'>{item.title}</p>
-              <p>{item.start.toLocaleTimeString(local, { hour: '2-digit', minute: '2-digit', hour12: false })} - {item.end.toLocaleTimeString(local, { hour: '2-digit', minute: '2-digit', hour12: false })}</p>
-            </div>
+          <Link key={item.id} href={item.url} className="flex sm:flex-row flex-col py-4 border-b-[1px] border-extra/20">
+            <p className='text-extra w-28 sm:p-0 pb-4'>{item.start.toLocaleDateString(local, { weekday: 'short' })}, {item.start.toLocaleDateString(local, { month: 'short' })} {item.start.getDate()}</p>
+            <p className={`grow ${item.id === -1 ? 'text-extra' : 'font-medium'}`}>{item.title}</p>
+            <p className={`${item.id === -1 ? 'hidden' : ''}`}>{item.start.toLocaleTimeString(local, { hour: '2-digit', minute: '2-digit', hour12: false })} - {item.end.toLocaleTimeString(local, { hour: '2-digit', minute: '2-digit', hour12: false })}</p>
           </Link>
           )}
         </div>
