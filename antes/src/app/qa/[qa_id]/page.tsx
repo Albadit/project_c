@@ -75,6 +75,7 @@ export default function Chat() {
                 <p className='text-extra text-ms leading-5 '>{item.comment}</p>
                 <p className='font-font1 text-extra text-right text-sm'>{item.datetime}</p>
               </div>
+              <div className='w-[40px] h-[40px]'></div>
             </div>
           ))}
           <div className='flex flex-row gap-5'>
