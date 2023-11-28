@@ -42,7 +42,7 @@ export const lesson = (props: Props) => {
       </div>
       <div className="py-24">
         <Link
-          href={"#"}
+          href={"#"} // TODO 
           className="bg-primary h-[50px] w-full sm:w-[100px] rounded-xl font-medium my-6 mx-auto px-2 sm:px-20 py-3 text-[#fff]"
         >
           Take quiz

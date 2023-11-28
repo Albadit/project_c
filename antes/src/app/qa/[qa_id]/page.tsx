@@ -59,31 +59,29 @@ export default function Chat() {
   return (
     <>
       <NavDashboard user={user}/>
-      <main className='m-auto p-5 max-w-[800px]'>
-        <section className='flex flex-col w-full gap-5 mt-12 font-font2'>
-          <h1 className='font-font1 font-bold text-primary text-5xl'>Q & A Vragen</h1>
+      <main className='m-auto p-5 my-12 max-w-[1000px]'>
+        <section className='flex flex-col w-full gap-5  font-font2'>
+          <h1 className='font-font1 font-bold text-primary text-5xl'>{question.user.title}</h1>
           <div className='flex flex-col text-extra'>
             <p>Gevraagd: {question.user.requested}</p>
             <p>Datum: {question.user.datetime}</p>
           </div>
           <hr />
           {question.answers.map((item) => (
-            <div key={item.id} className={`flex ${user.id == item.id ? 'flex-row-reverse justify-start' : 'flex-row justify-start'} gap-5`}>
-              <img src={item.profile} alt="" className='h-full sm:block hidden'/>
-              <div className='flex flex-col p-3 gap-3 rounded-lg bg-section shadow-cbs-sm max-w-[500px]'>
-                <div className='flex flex-row justify-between items-center'>
-                  <p className='font-font1 text-lg font-semibold'>{item.name}</p>
-                  <p className='font-font1 text-extra text-sm'>{item.datetime}</p>
-                </div>
+            <div key={item.id} className={`flex ${user.id == item.id ? 'flex-row-reverse justify-start' : 'flex-row justify-start'} sm:gap-5 gap-2`}>
+              <img src={item.profile} alt="profile" className={`h-full ${user.id == item.id ? 'hidden' : 'block'}`}/>
+              <div className={`flex flex-col p-3 gap-3 rounded-lg shadow-cbs-sm w-full max-w-[500px] ${user.id == item.id ? 'bg-section' : 'bg-[#F0F0F0]'}`}>
+                <p className={`font-font1 text-lg font-semibold ${user.id == item.id ? 'hidden' : 'block'}`}>{item.name}</p>
                 <p className='text-extra text-ms leading-5 '>{item.comment}</p>
+                <p className='font-font1 text-extra text-right text-sm'>{item.datetime}</p>
               </div>
+              <div className='w-[40px] h-[40px]'></div>
             </div>
           ))}
           <div className='flex flex-row gap-5'>
             <img src={user.profile} alt="" className='h-full sm:block hidden'/>
             <form action="" className='comment bg-section flex flex-col gap-2 p-3 w-[500px] h-[120px] rounded-lg shadow-sm border-[1px] border-font1/20 focus-within:outline focus-within:outline-2 focus-within:outline-callToAction focus-within:outline-offset-[-2px] sm:text-sm sm:leading-6 disabled:bg-slate-50 disabled:text-text-slate-500 disabled:border-slate-200 disabled:shadow-none invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500 disabled:opacity-75'>
-              <textarea name="comment" placeholder='Schrijf jouw comment...' className='grow border-0 p-0 m-0 bg-section resize-none focus:ring-0 focus:border-transparent'>
-              </textarea>
+              <textarea name="comment" placeholder='Schrijf jouw comment...' className='grow border-0 p-0 m-0 bg-section resize-none focus:ring-0 focus:border-transparent'/>
               <div className='flex flex-row justify-between'>
                 <div className='flex flex-row items-center gap-1'>
                   <AttachFile className='h-[75%] rotate-[210deg] fill-extra'/>

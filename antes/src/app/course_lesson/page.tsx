@@ -32,6 +32,7 @@ export default function LessonPage() {
         <NavDashboard user={user} />
       </header>
 
+
       <main className="px-24 py-24">
         <Lesson lesson={lesson } />
       </main>

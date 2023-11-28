@@ -10,7 +10,7 @@ const context = {
 
 export default function Title() {
   return (
-    <section className="flex flex-col justify-center items-center gap-12 w-full min-h-[500px] text-base font-font2 text-font1 bg-title bg-no-repeat bg-cover bg-center">
+    <section className="flex flex-col justify-center items-center gap-12 w-full min-h-[500px] text-base font-font2 text-font1 bg-title bg-no-repeat bg-cover bg-center px-2">
       <h1 className="text-font2 lg:text-8xl text-center text-6xl">
         {context.title}
       </h1>

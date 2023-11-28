@@ -13,7 +13,7 @@ const context = {
 export default function Work() {
   return (
     <section className="flex justify-between md:flex-row-reverse flex-col w-full gap-5 p-7 rounded-lg bg-section shadow-cbs text-base font-font1 text-font1">
-      <img src={context.img} alt="work" className="md:w-[40%] w-full h-[280px] md:min-h-[320px] object-cover object-center rounded" />
+      <img src={context.img} alt="work" className="md:w-[40%] w-full h-[280px] md:min-h-[320px] object-cover object-center rounded"/>
       <div className="flex flex-col justify-between items-start grow gap-5 max-w-[600px]">
         <h2 className="lg:text-4xl text-xl font-semibold text-primary">
           {context.title}

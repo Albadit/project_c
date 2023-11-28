@@ -61,20 +61,22 @@ export const SelectMenu = (props: Props) => {
   return (
     <div className="relative text-left w-full text-font1" ref={ref}>
       <label htmlFor={props.name} className="block text-sm font-medium leading-5">{props.name}</label>
-      <button type="button"
-        id={props.name}
-        aria-expanded={isMenuOpen}
-        disabled={disabled}
-        aria-haspopup="true"
-        onClick={() => setIsMenuOpen(!isMenuOpen)}
-        className={`flex w-full ${value.name ? 'justify-between' : 'justify-end' } rounded bg-[#fff] px-3 py-3 text-font1 sm:text-sm shadow-sm ring-1 ring-font1/20 focus:ring-2 focus:ring-inset focus:ring-callToAction disabled:bg-slate-50 disabled:text-text-slate-500 disabled:border-slate-200 disabled:shadow-none invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500 disabled:opacity-75`}>
-          {value.name}
-        <ArrowDown className='h-5'/>
-      </button>
-      <div className={`${isMenuOpen ? 'block' : 'hidden'} absolute right-0 z-10 mt-1.5 w-full origin-top-right rounded bg-[#fff] shadow-sm ring-1 ring-inset ring-font1/20 focus:outline-none`}>
-      {props.value.map((role) => (
-        <MenuItem key={role.id} functions={role} onClick={() => chaneSelected(role)} />
-      ))}
+      <div className='mt-2 relative'>
+        <button type="button"
+          id={props.name}
+          aria-expanded={isMenuOpen}
+          disabled={disabled}
+          aria-haspopup="true"
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          className={`flex w-full items-center ${value.name ? 'justify-between' : 'justify-end' } rounded-[3px] bg-[#fff] sm:p-3 p-2.5 text-font1 sm:text-sm shadow-sm ring-1 ring-font1/20 focus:ring-2 focus:ring-inset focus:ring-callToAction disabled:bg-slate-50 disabled:text-text-slate-500 disabled:border-slate-200 disabled:shadow-none invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500 disabled:opacity-75`}>
+            {value.name}
+          <ArrowDown className='h-5'/>
+        </button>
+        <div className={`${isMenuOpen ? 'block' : 'hidden'} absolute right-0 z-10 mt-1.5 w-full origin-top-right rounded bg-[#fff] shadow-sm ring-1 ring-inset ring-font1/20 focus:outline-none`}>
+        {props.value.map((role) => (
+          <MenuItem key={role.id} functions={role} onClick={() => chaneSelected(role)} />
+        ))}
+        </div>
       </div>
     </div>
   )
