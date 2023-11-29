@@ -1,8 +1,9 @@
 import { PrismaClient } from '@prisma/client'
 
-const prisma = new PrismaClient()
+export const prisma = new PrismaClient()
 
 async function main() {
+  console.log("connect")
   // ... you will write your Prisma Client queries here
 }
 
