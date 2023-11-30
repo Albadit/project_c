@@ -11,3 +11,124 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model users {
+  id           Int            @id @default(autoincrement())
+  role_id      Int
+  first_name   String         @db.VarChar(50)
+  last_name    String         @db.VarChar(50)
+  function_id  Int
+  bio          String?        @db.Text
+  email        String         @db.VarChar(255)
+  password     String         @db.VarChar(32)
+  roles        roles          @relation(fields: [role_id], references: [id])
+  functions    functions      @relation(fields: [function_id], references: [id])
+  calendar     calendar[]
+  qa_questions qa_questions[]
+  qa_answers   qa_answers[]
+  user_lesson  user_lesson[]
+}
+
+model roles {
+  id    Int     @id @default(autoincrement())
+  level Int
+  name  String  @db.VarChar(50)
+  users users[]
+}
+
+model functions {
+  id    Int     @id @default(autoincrement())
+  name  String  @db.VarChar(50)
+  users users[]
+}
+
+model events {
+  id          Int        @id @default(autoincrement())
+  title       String     @db.VarChar(50)
+  description String     @db.VarChar(50)
+  start       DateTime
+  end         DateTime
+  calendar    calendar[]
+}
+
+model calendar {
+  id       Int    @id @default(autoincrement())
+  user_id  Int
+  event_id Int
+  users    users  @relation(fields: [user_id], references: [id])
+  events   events @relation(fields: [event_id], references: [id])
+}
+
+model tags {
+  id      Int       @id @default(autoincrement())
+  name    String    @db.VarChar(50)
+  qa_tags qa_tags[]
+}
+
+model qa_tags {
+  id             Int          @id @default(autoincrement())
+  qa_question_id Int
+  tag_id         Int
+  qa_questions   qa_questions @relation(fields: [qa_question_id], references: [id])
+  tags           tags         @relation(fields: [tag_id], references: [id])
+}
+
+model qa_questions {
+  id          Int          @id @default(autoincrement())
+  user_id     Int
+  question    String       @db.Text
+  date_create DateTime
+  users       users        @relation(fields: [user_id], references: [id])
+  qa_answers  qa_answers[]
+  qa_tags     qa_tags[]
+}
+
+model qa_answers {
+  id           Int          @id @default(autoincrement())
+  question_id  Int
+  user_id      Int
+  answer       String       @db.Text
+  date_create  DateTime
+  qa_questions qa_questions @relation(fields: [question_id], references: [id])
+  users        users        @relation(fields: [user_id], references: [id])
+}
+
+model subject {
+  id           Int    @id @default(autoincrement())
+  lesson_id    Int
+  lesson_order Int
+  name         String @db.VarChar(50)
+  description  String @db.VarChar(50)
+  lesson       lesson @relation(fields: [lesson_id], references: [id])
+}
+
+model lesson {
+  id          Int           @id @default(autoincrement())
+  quiz_id     Int
+  title       String        @db.VarChar(50)
+  description String        @db.VarChar(50)
+  time        String // Storing time as a string in HH:MM:SS format
+  quiz        quiz          @relation(fields: [quiz_id], references: [id])
+  subject     subject[]
+  user_lesson user_lesson[]
+}
+
+model quiz {
+  id          Int      @id @default(autoincrement())
+  title       String   @db.VarChar(50)
+  description String   @db.VarChar(50)
+  time        String // Storing time as a string in HH:MM:SS format
+  quiz        Json
+  lesson      lesson[]
+}
+
+model user_lesson {
+  id         Int     @id @default(autoincrement())
+  user_id    Int
+  lesson_id  Int
+  time       String // Storing time as a string in HH:MM:SS format
+  completion Boolean
+  results    Json
+  users      users   @relation(fields: [user_id], references: [id])
+  lesson     lesson  @relation(fields: [lesson_id], references: [id])
+}
