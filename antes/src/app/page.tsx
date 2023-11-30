@@ -1,22 +1,38 @@
-import Image from 'next/image'
-import HeaderHome from '@/app/header_home'
-import About_Us from '@/app/AboutUs/page'
-import Bestuur from '@/app/Bestuur/page'
-import Jaarcijfers from '@/app/Jaarcijfers/page'
-import Dashboard from '@/app/components/Dashboard'
-import MissieKernWaarden from '@/app/MissieKernWaarden/page'
-import Organogram from '@/app/Organogram/page'
+import React from 'react';
+import Nav from '@/app/components/home/nav'
+import Footer from '@/app/components/footer'
+import Title from '@/app/components/home/title'
+import Work from '@/app/components/home/work'
+import { QACard } from '@/app/components/qa_card'
+import { EventCard } from '@/app/components/event_card'
+import Info from '@/app/components/home/info'
+
+const qa = {
+  id: 1,
+  name: "Sara Leekman",
+  image: "/img/qa.png",
+  datetime: "12-12-2024",
+  title: "Suggesties voor beginner?",
+  latest_comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+  reactions: 12,
+  profile: "img/profile.png",
+  url: "/qa/1",
+}
+
+const event = {
+  id: 1,
+  image: "/img/event.png",
+  title: "Connectiedag!",
+  description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+  location: "Rotterdam",
+  date: "12-12-2024",
+  url: "/event",
+}
 
 export default function Home() {
   return (
     <>
       <HeaderHome />
-      {/* <Dashboard /> */}
-      {/* <Bestuur /> */}
-      <About_Us />
-      {/* <Jaarcijfers /> */}
-      {/* <MissieKernWaarden /> */}
-      {/* <Organogram /> */}
     </>
   )
 }
