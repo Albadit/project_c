@@ -129,9 +129,9 @@ function isEventCurrentDay(day: any) {
 }
 
 export default function Calendar() {
-  const today = new Date();
-  const [currentMonth, setCurrentMonth] = useState(today.getMonth() + 1);
-  const [currentYear, setCurrentYear] = useState(today.getFullYear());
+  const currentDate = new Date();
+  const [currentMonth, setCurrentMonth] = useState(currentDate.getMonth() + 1);
+  const [currentYear, setCurrentYear] = useState(currentDate.getFullYear());
 
   const startOnMonday = true;
   const local = 'nl-NL'
@@ -140,12 +140,12 @@ export default function Calendar() {
 
   const monthName = new Intl.DateTimeFormat(local, { month: 'long' }).format(new Date(currentYear, currentMonth - 1));
 
-  isEventCurrentDay(today);
+  isEventCurrentDay(currentDate);
 
   const isCurrentDay = (day: any) => {
-    const currentDay = today.getDate();
-    const currentMonth = today.getMonth() + 1;
-    const currentYear = today.getFullYear();
+    const currentDay = currentDate.getDate();
+    const currentMonth = currentDate.getMonth() + 1;
+    const currentYear = currentDate.getFullYear();
     
     return day.day === currentDay && day.month === currentMonth && day.year === currentYear;
   };
