@@ -1,4 +1,4 @@
-// npx prisma db seed
+// database seed: npx prisma db seed
 
 import { PrismaClient } from '@prisma/client';
 
