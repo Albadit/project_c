@@ -5,28 +5,37 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 async function main() {
+  const deleteUsers = await prisma.role.deleteMany({})
+
   const superadmin = await prisma.role.create({
     data: {
       level: 1,
-      name: 'superadmin'
+      name: 'Super Admin'
     }
   });
 
   const admin = await prisma.role.create({
     data: {
       level: 2,
-      name: 'admin'
+      name: 'Eigenaar'
     }
   });
-
-  const worker = await prisma.role.create({
+  
+  const manager = await prisma.role.create({
     data: {
       level: 3,
-      name: 'worker'
+      name: 'Manager'
     }
   });
 
-  console.log({ superadmin, admin, worker });
+  const employee = await prisma.role.create({
+    data: {
+      level: 3,
+      name: 'werknemer'
+    }
+  });
+
+  console.log({ superadmin, admin, manager, employee });
 }
 
 main()
