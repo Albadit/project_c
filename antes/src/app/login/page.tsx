@@ -4,7 +4,7 @@ import { Input } from '@/app/components/input';
 
 const context = {
   logo: { url: "/", img: "/img/antes_logo.png", alt: "antes logo"},
-  passwordForget: { url:"/reset_password", text: "Wachtwoord vergeten?" },
+  passwordForget: { url:"/forget_password", text: "Wachtwoord vergeten?" },
   cacheLogin: { text: "Onthoud mij" },
   btn: { url: "/dashboard",text: "Login" }
 }
