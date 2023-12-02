@@ -5,21 +5,21 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 async function main() {
-  const superadmin = await prisma.roles.create({
+  const superadmin = await prisma.role.create({
     data: {
       level: 1,
       name: 'superadmin'
     }
   });
 
-  const admin = await prisma.roles.create({
+  const admin = await prisma.role.create({
     data: {
       level: 2,
       name: 'admin'
     }
   });
 
-  const worker = await prisma.roles.create({
+  const worker = await prisma.role.create({
     data: {
       level: 3,
       name: 'worker'
