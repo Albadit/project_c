@@ -47,17 +47,17 @@ export default function ElearningLesson() {
               {lesson.title}
             </p>
             <p className="font-semibold text-xl font-med">
-              Welcome to {lesson.title}!
+              Welkom bij {lesson.title}!
             </p>
             <p className="">{lesson.description}</p>
             <p className="py-2 font-light">
-              After finishing this video you will need to answer a couple of questions about the lesson to move on to the next lesson.
+              Na het bekijken van deze video zal je een paar vragen moeten beantwoorden om door te kunnen naar de volgende les.
             </p>
           </div>
           <div className="py-24">  
             <Link href={lesson.url} // TODO
             className="bg-primary h-[50px] w-full sm:w-[100px] rounded-xl font-medium my-6 mx-auto px-2 sm:px-20 py-3 text-[#fff]">
-              Take quiz 
+              Quiz afnemen
             </Link>
           </div>
         </section>

@@ -1,8 +1,21 @@
 'use client'
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { quizData } from './quizData';
+import quizData  from './quizData.json';
 
+async function getData() {
+  const res = await fetch('http://localhost:3000/api/v1/elearning')
+  // The return value is *not* serialized
+  // You can return Date, Map, Set, etc.
+ 
+  if (!res.ok) {
+    // This will activate the closest `error.js` Error Boundary
+    throw new Error('Failed to fetch data')
+  }
+ 
+  return res.json()
+}
+ 
 const QuizPage: React.FC = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [userAnswers, setUserAnswers] = useState<string[]>([]);
@@ -38,13 +51,13 @@ const QuizPage: React.FC = () => {
     <div className="flex justify-center items-center">
       {showResults ? (
         <div className='px-36 py-36'>
-          <h1 className="text-3xl font-bold mb-4 ">Quiz Results</h1>
+          <h1 className="text-3xl font-bold mb-4 ">Quiz Resultaat</h1>
           <ul>
             {quizData.map((question, index) => (
               <li key={index} className="mb-2">
                 <strong>{question.question}</strong>
                 <div>
-                  Your answer: {userAnswers[index]}
+                  Uw antwoord: {userAnswers[index]}
                   {userAnswers[index] === question.correctAnswer ? (
                     <span className="text-[#4e9138] font-bold ml-2">Correct!</span>
                   ) : (
@@ -57,43 +70,43 @@ const QuizPage: React.FC = () => {
 
 
           <p className={`pt-6 font-bold text-xl ${passed ? 'text-[#4e9138]' : 'text-[#f32f2f]'}`}>
-            {passed ? 'Congratulations! You passed!' : 'Sorry, you did not pass.'}
+            {passed ? 'Gefeliciteerd je hebt de quiz behaald!' : 'Helaas, u heeft de quiz niet behaald :('}
           </p>
           <p className='font-semibold'>
-            You need to have at least 60% of the answers correct
+            U moest minstens 60% van de vragen goed hebben.
           </p>
           <p className='font-semibold'>
-            You answered {correctAnswers.length} out of {quizData.length} questions correctly
+            U heeft {correctAnswers.length} van de {quizData.length} vragen goed.
           </p>
           <p className={`font-semibold ${passed ? 'text-[#4e9138]' : 'text-[#f32f2f]'}`}>
-            Your score: {score.toFixed(2)}%
+            Uw score: {score.toFixed(2)}%
           </p>
 
           <div className='flex justify-between rounded-md text-[#ffff] py-12 px-12 font-semibold'>
             <Link href={"/elearing/1"} className='bg-primary flex justify-center items-center rounded-md px-3 ml-8 py-4'>
-              Go back to course overview 
+              Terug naar de cursus
             </Link>
             {!passed && (
               <button
                 className="bg-primary py-4 rounded-md px-3 "
                 onClick={resetQuiz}
               >
-                Retake Quiz
+                Quiz hernemen
               </button>
             )}
           </div>
         </div>
       ) : (
         <div className='py-40 px-40'>
-          <h1 className="text-primary text-3xl font-bold mb-4  flex justify-start">Question {currentQuestion + 1}</h1>
+          <h1 className="text-primary text-3xl font-bold mb-4  flex justify-start">Vraag {currentQuestion + 1}</h1>
           <p className="mt-12 text-xl font-semibold mb-12 border-b-2">{quizData[currentQuestion].question}</p>
-          <div>
+          <div className='min-w-[800px]'>
             {quizData[currentQuestion].options.map((option, index) => (
               <button
                 key={index}
                 className={`${
                   selectedOption === option
-                    ? 'bg-primary text-[#ffff] rounded-md border light-gray-border font-semibold'
+                    ? 'bg-white text-white rounded-md border light-black'
                     : 'bg-white text-white border light-gray-border rounded-md'
                 } py-2 px-4 mb-2 cursor-pointer w-full mt-1`}
                 onClick={() => setSelectedOption(option)}
@@ -106,7 +119,7 @@ const QuizPage: React.FC = () => {
             className="bg-secondary text-[#ffff] py-2 px-4 mt-12 rounded-md cursor-pointer"
             onClick={handleOptionSelect}
           >
-            Next Question
+            Volgende vraag
           </button>
         
         </div>

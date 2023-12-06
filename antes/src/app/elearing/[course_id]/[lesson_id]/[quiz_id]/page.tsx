@@ -2,6 +2,8 @@ import React from 'react';
 import QuizPage from './quizPage';
 import Footer from '@/app/components/footer';
 import { NavDashboard } from '@/app/components/dashboard/nav';
+import { prisma } from '@/../../prisma/index';
+
 
 const user = {
   id: 1,
@@ -18,10 +20,10 @@ const App: React.FC = () => {
   return (
     <>
       <NavDashboard user={user} />
-      <div className='relative '>
-        <main className='flex items-center justify-center min-h-screen'>
+      <div className=''>
+        <main className='min-h-screen flex items-center justify-center'>
           <section> 
-            <div className='border-2 light-gray-border rounded-xl shadow-2xl '>
+            <div className='border light-gray-border rounded-xl shadow-2xl w-full md:w-3/4 min-h-[500px] min-w-[1000px] overflow-hidden'>
               <QuizPage />
             </div>
           </section>
