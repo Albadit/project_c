@@ -14,7 +14,7 @@ type context = {
     link: string,
 }
 
-export const Bestuur_card = (props: Props) => {
+export const Board_card = (props: Props) => {
     return (
         <div className="flex flex-col shadow-2xl justify-between w-full md:w-[350px] gap-5 p-7 rounded-lg bg-section text-base font-font1 text-font1">
             <img src={props.bestuur.image} alt="event" className="h-[300px] w-[300px] object-center rounded" />

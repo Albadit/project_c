@@ -32,7 +32,21 @@ const event = {
 export default function Home() {
   return (
     <>
-      <HeaderHome />
+      <Nav />
+      <Title />
+      <main className='flex flex-wrap justify-center m-auto p-5 my-12 gap-10 max-w-[1280px]'>
+        <Work />
+        <section className='flex flex-col w-full gap-10 my-12 '>
+          <h2 className='font-font1 font-semibold text-center text-primary text-5xl'>ANTES NIEUWS</h2>
+          <div className='flex flex-wrap xl:justify-between justify-center gap-10'>
+            <QACard qa={qa} />
+            <EventCard event={event} />
+          </div>
+        </section>
+        <Info />
+      </main>
+      <br />
+      <Footer />
     </>
   )
 }

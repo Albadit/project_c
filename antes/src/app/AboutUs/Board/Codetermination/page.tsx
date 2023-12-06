@@ -3,14 +3,14 @@ import Image from 'next/image'
 import Link from "next/link";
 import { useState } from 'react'
 import ArrowForwardRounded from "@/app/components/icons/arrow_right";
-import { Bestuur_card } from '@/app/components/Bestuur_card';
-import SideMenu from '@/app/SideMenu/page';
-import HeaderHome from '@/app/header_home'
+import { Bestuur_card } from '@/app/components/Board_card';
+import SideMenu from '@/app/SideMenuAboutUs/page';
+import Nav from '@/app/components/home/nav'
 
-export default function Medezeggenschap() {
+export default function Codetermination() {
     return (
         <main>
-            <HeaderHome />
+            <Nav />
             <div className='flex flex-col w-full gap-10 my-12'>
                 <div className='flex flex-wrap x1:justify-between justify-center gap-10'>
                     <p className="text-center text-primary text-5xl font-bold drop-shadow-lg">Medezeggenschap</p>
@@ -19,23 +19,23 @@ export default function Medezeggenschap() {
                     <SideMenu />
                     <div className='flex flex-col shadow-2xl justify-between w-full md:w-[900px] gap-5 p-7 rounded-lg bg-section text-base font-font1 text-font1'>
                         <p className='text-secondary text-left text-2xl'> Medezeggenschap is bij Antes geregeld in de cliëntenraad, de familieraad en de ondernemingsraad.</p>
-                        <div className='flex justify-start gap-5 2xl:gap-10'>
-                            <p className='font-bold text-secondary text-2xl'>De cliëntenraad</p>
+                        <div className='flex justify-start gap-5 xl:gap-10'>
+                            <p className='font-bold text-secondary text-xl'>De cliëntenraad</p>
                         </div>
                         <div className='flex justify-start gap-5 2xl:gap-10'>
-                            <p className='text-secondary text-2xl'>De cliëntenraad van Antes komt op voor de gemeenschappelijke belangen van cliënten van Antes.</p>
+                            <p className='text-secondary text-xl'>De cliëntenraad van Antes komt op voor de gemeenschappelijke belangen van cliënten van Antes.</p>
                         </div>
                         <div className='flex justify-start gap-5 2xl:gap-10'>
-                            <p className='font-bold text-secondary text-2xl'>De familieraad</p>
+                            <p className='font-bold text-secondary text-xl'>De familieraad</p>
                         </div>
                         <div className='flex justify-start gap-5 2xl:gap-10'>
-                            <p className='text-secondary text-2xl'>De familieraad komt op voor de gezamenlijke belangen van familie en naasten en draagt zo bij aan goede zorg voor hen. De familieraad is een medezeggenschapsorgaan en heeft bevoegdheden gebaseerd op een overeenkomst met de bestuurder van Antes als vertegenwoordiger in de regio.</p>
+                            <p className='text-secondary text-xl'>De familieraad komt op voor de gezamenlijke belangen van familie en naasten en draagt zo bij aan goede zorg voor hen. De familieraad is een medezeggenschapsorgaan en heeft bevoegdheden gebaseerd op een overeenkomst met de bestuurder van Antes als vertegenwoordiger in de regio.</p>
                         </div>
                         <div className='flex justify-start gap-5 2xl:gap-10'>
-                            <p className='font-bold text-secondary text-2xl'>De ondernemingsraad</p>
+                            <p className='font-bold text-secondary text-xl'>De ondernemingsraad</p>
                         </div>
                         <div className='flex justify-start gap-5 2xl:gap-10'>
-                            <p className='text-secondary text-2xl'>In de <Link href='https://or-online.nl/wet-op-de-ondernemingsraden-wor/' className='text-primary'>Wet op de Ondernemingsraden</Link> (WOR) staat precies vermeld waar de ondernemingsraad invloed op kan uitoefenen. De ondernemingsraad kan al naar gelang het onderwerp advies of instemming geven.</p>
+                            <p className='text-secondary text-xl'>In de <Link href='https://or-online.nl/wet-op-de-ondernemingsraden-wor/' className='text-primary'>Wet op de Ondernemingsraden</Link> (WOR) staat precies vermeld waar de ondernemingsraad invloed op kan uitoefenen. De ondernemingsraad kan al naar gelang het onderwerp advies of instemming geven.</p>
                         </div>
                     </div>
                 </div>

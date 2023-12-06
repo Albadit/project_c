@@ -3,13 +3,13 @@ import Image from 'next/image'
 import Link from "next/link";
 import { useState } from 'react'
 import ArrowForwardRounded from "@/app/components/icons/arrow_right";
-import SideMenu from '@/app/SideMenu/page';
-import HeaderHome from '@/app/header_home'
+import SideMenu from '@/app/SideMenuAboutUs/page';
+import Nav from '@/app/components/home/nav'
 
-export default function MissieKernWaarden() {
+export default function MissionCoreValues() {
     return (
         <main>
-            <HeaderHome />
+            <Nav />
             <div className='flex flex-col w-full gap-10 my-12'>
                 <div className='flex flex-wrap x1:justify-between justify-center gap-10'>
                     <p className="text-center text-primary text-5xl font-bold drop-shadow-lg">Missie en kernwaarden</p>
@@ -21,7 +21,7 @@ export default function MissieKernWaarden() {
                             <div className='text-secondary text-left text-2xl'>Antes is specialist in psychiatrie en verslaving. Antes richt zich als ggz-instelling op het herstel van volwassenen en ouderen met (ernstige) psychiatrische problemen..</div>
                         </div>
                         <div className='flex gap-5 font-semibold 2xl:gap-10'>
-                            <div className='text-secondary text-left text-2xl'>Missie en kernwaarden</div>
+                            <div className='text-secondary text-left text-xl'>Missie en kernwaarden</div>
                         </div>
                         <div className='flex gap-5 2xl:gap-10'>
                             <div className='text-secondary text-left text-xl'>
@@ -29,7 +29,7 @@ export default function MissieKernWaarden() {
                             </div>
                         </div>
                         <div className='flex gap-5 font-semibold 2xl:gap-10'>
-                            <div className='text-secondary text-left text-2xl'>Aanbod</div>
+                            <div className='text-secondary text-left text-xl'>Aanbod</div>
                         </div>
                         <div className='flex gap-5 2xl:gap-10'>
                             <div className='text-secondary text-left text-xl'>
@@ -37,7 +37,7 @@ export default function MissieKernWaarden() {
                             </div>
                         </div>
                         <div className='flex gap-5 font-semibold 2xl:gap-10'>
-                            <div className='text-secondary text-left text-2xl'>Doelgroepen</div>
+                            <div className='text-secondary text-left text-xl'>Doelgroepen</div>
                         </div>
                         <div className='flex gap-5 2xl:gap-10'>
                             <div className='text-secondary text-left text-xl'>

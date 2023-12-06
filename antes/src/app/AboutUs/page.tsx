@@ -4,43 +4,43 @@ import Link from "next/link";
 import { useState } from 'react'
 import ArrowForwardRounded from "@/app/components/icons/arrow_right";
 import { AboutUs_card } from '@/app/components/AboutUs_card';
-import SideMenu from '@/app/SideMenu/page';
-import HeaderHome from '@/app/header_home'
+import SideMenu from '@/app/SideMenuAboutUs/page';
+import Nav from '@/app/components/home/nav'
 
 const aboutus1 = {
     id: 1,
     image: "img/e_learing.png",
     title: "Bestuur",
     description: "La lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae nisi eget nunc aliquam aliquet.",
-    link: "",
+    link: "AboutUs/Board",
 }
 const aboutus2 = {
     id: 2,
     image: "img/e_learing.png",
     title: "Jaarcijfers",
     description: "La lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae nisi eget nunc aliquam aliquet.",
-    link: "",
+    link: "AboutUs/Annualfigures",
 }
 const aboutus3 = {
     id: 3,
     image: "img/e_learing.png",
     title: "Missie en kernwaarden",
     description: "La lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae nisi eget nunc aliquam aliquet.",
-    link: "",
+    link: "AboutUs/MissieKernWaarden",
 }
 const aboutus4 = {
     id: 4,
     image: "img/e_learing.png",
     title: "Organogram",
     description: "La lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae nisi eget nunc aliquam aliquet.",
-    link: "",
+    link: "AboutUs/Organogram",
 }
 
 
 export default function AboutUs() {
     return (
         <main>
-            <HeaderHome />
+            <Nav />
             <div className='flex flex-col w-full gap-10 my-12'>
                 <div className='flex flex-wrap x1:justify-between justify-center gap-10'>
                     <p className="text-center text-primary text-5xl font-bold drop-shadow-lg">Over Ons</p>
