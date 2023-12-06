@@ -17,22 +17,53 @@ const user = {
 }
 
 export default function Calendar() {
-  // Fixed time slots and grid lines
   const timeSlots = ["08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00"];
   const dayLabels = ["Ma", "Di", "Wo", "Do", "Vr", "Za", "Zo"];
-
-  const timeSlotHeight = 100 / timeSlots.length; 
-
+  const timeSlotHeight = 100 / timeSlots.length;
   const currentDate = new Date();
-  const currentMonth = currentDate.toLocaleString('default', { month: 'long' })
+  // const currentMonth = currentDate.toLocaleString('default', { month: 'long' }).charAt(0).toUpperCase() + currentDate.toLocaleString('default', { month: 'long' }).slice(1);
   const currentYear = currentDate.getFullYear()
-  const startDayOfWeek = getStartDayOfWeek()
+  const startDayOfWeek = getStartDayOfWeek();
+
+
+  const [currentWeek, setCurrentWeek] = useState(0);
+  const [currentMonth, setCurrentMonth] = useState("");
+
+  const handleWeekChange = (direction) => {
+    console.log(`Changing week by ${direction}`);
+    setCurrentWeek((prevWeek) => prevWeek + direction);
+  };
+
+  const handleCurrentWeek = () => {
+    setCurrentWeek(0);
+  };
+
+  const handlePreviousWeek = () => {
+    handleWeekChange(-1);
+  };
+
+  const handleNextWeek = () => {
+    handleWeekChange(1);
+  };
+
+
+  const adjustedDate = useMemo(() => {
+    const date = new Date(currentDate);
+    date.setDate(date.getDate() + currentWeek * 7);
+    return date;
+  }, [currentDate, currentWeek]);
+
+  React.useEffect(() => {
+    const month = adjustedDate.toLocaleString('default', { month: 'long' }).charAt(0).toUpperCase() + adjustedDate.toLocaleString('default', { month: 'long' }).slice(1);
+    setCurrentMonth(month);
+  }, [adjustedDate]);
+
 
   return (
     <>
       {/* Header */}
-      <NavDashboard user={user}/>
-      
+      <NavDashboard user={user} />
+
       <main className='m-auto p-5 my-12 max-w-[1280px]'>
         <section className='flex flex-col justify-center items-center gap-10'>
           {/* Title */}
@@ -40,8 +71,19 @@ export default function Calendar() {
 
           {/* Month and Week Selector */}
           <div className="flex flex-row justify-between items-center w-full">
-            <div className="text-3xl font-bold">{`${currentMonth} ${currentYear}`}</div>
-            <button className="bg-[#3939bf] font-bold text py-2 px-4 text-[#ffffff] rounded">← Week →</button>
+            <div className="text-3xl font-bold">{`${currentMonth} ${adjustedDate.getFullYear()}`}</div>
+            <div className="flex gap-2">
+              <button className="bg-[#3939bf] font-bold text py-2 px-4 text-[#ffffff] rounded" onClick={() => handleWeekChange(-1)}>
+                ←
+              </button>
+              <button className="bg-[#3939bf] font-bold text py-2 px-4 text-[#ffffff] rounded" onClick={handleCurrentWeek}>
+                Week
+              </button>
+              <button className="bg-[#3939bf] font-bold text py-2 px-4 text-[#ffffff] rounded" onClick={() => handleWeekChange(1)}>
+                →
+              </button>
+
+            </div>
           </div>
 
           {/* Calendar Box */}
@@ -51,11 +93,14 @@ export default function Calendar() {
 
             {/* Days of the week */}
             <div className="col-span-7 flex py-2 px-4 rounded-md">
-              {dayLabels.map((day, index) => (
-                <div key={`day-label-${index}`} className="flex-1 text-center">
-                  {day} {getUpdatedDayNumber(index, startDayOfWeek)}
-                </div>
-              ))}
+              {dayLabels.map((day, index) => {
+                const { dayNumber } = getUpdatedDayNumber(index, startDayOfWeek, currentWeek);
+                return (
+                  <div key={`day-label-${index}`} className="flex-1 text-center">
+                    {`${day} ${dayNumber} `}
+                  </div>
+                );
+              })}
             </div>
 
             {/* Time slots */}
@@ -97,7 +142,7 @@ export default function Calendar() {
           </div>
         </section>
       </main>
-      <Footer/>
+      <Footer />
     </>
   );
 
@@ -116,17 +161,46 @@ export default function Calendar() {
     return daysOfWeek.indexOf(dayLabels[0]);
   }
 
-  function getUpdatedDayNumber(index: any, startDayOfWeek: any) {
-    const dayNumber = currentDate.getDate() + index - startDayOfWeek - 2;
-    return dayNumber > 0 ? dayNumber : "";
+
+  function getUpdatedDayNumber(index, startDayOfWeek, currentWeek) {
+    const currentDate = new Date();
+    const mondayDate = new Date(currentDate);
+    mondayDate.setDate(mondayDate.getDate() - mondayDate.getDay() + (mondayDate.getDay() === 0 ? -6 : 1) + startDayOfWeek);
+
+    let dayNumber = mondayDate.getDate() + index + currentWeek * 7;
+
+    // Houd het aantal dagen in de huidige maand bij
+    let daysInMonth = new Date(mondayDate.getFullYear(), mondayDate.getMonth() + 1, 0).getDate();
+
+    let monthOffset = 0; // Variabele om bij te houden hoeveel maanden we zijn veranderd
+
+    // Als de dag kleiner is dan 1, ga een maand terug en herhaal dit tot de dag binnen het bereik van de maand valt
+    while (dayNumber <= 0) {
+      monthOffset -= 1;
+      mondayDate.setMonth(mondayDate.getMonth() - 1);
+      daysInMonth = new Date(mondayDate.getFullYear(), mondayDate.getMonth() + 1, 0).getDate();
+      dayNumber += daysInMonth;
+    }
+
+    // Als de dag groter is dan het aantal dagen in de maand, ga een maand vooruit en herhaal dit tot de dag binnen het bereik van de maand valt
+    while (dayNumber > daysInMonth) {
+      monthOffset += 1;
+      dayNumber -= daysInMonth;
+      mondayDate.setMonth(mondayDate.getMonth() + 1);
+      daysInMonth = new Date(mondayDate.getFullYear(), mondayDate.getMonth() + 1, 0).getDate();
+    }
+
+    return { dayNumber, monthOffset };
   }
+
+
 
   function generateEventCard(day: any, startTime: any, endTime: any, eventName: any) {
     const startMinutes = convertTimeToMinutes(startTime);
     const endMinutes = convertTimeToMinutes(endTime);
     const top = `calc(${startMinutes / 60 - 8} * ${timeSlotHeight}%)`;
     const height = `calc(${(endMinutes - startMinutes) / 60 * timeSlotHeight}%)`;
-    const left = `calc(${getDayIndex(day) * (100 / 7)}%)`; 
+    const left = `calc(${getDayIndex(day) * (100 / 7)}%)`;
     const width = 'calc(100% / 7)';
 
     return (
