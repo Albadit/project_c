@@ -1,10 +1,28 @@
-'use client'
-import React, { useState } from 'react';
+"use client"
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-import quizData  from './quizData.json';
+// import quizData  from './quizData.json';
 
-async function getData() {
-  const res = await fetch('http://localhost:3000/api/v1/elearning')
+type QuizData = {
+  id: number
+  title: string
+  time: string
+  description: string
+  quiz: QuizQuestion[]
+}
+
+type QuizQuestion = {
+  question: string;
+  options: string[];
+  correctAnswer: string;
+};
+
+export const getData = async () => {
+  // return await fetch('http://localhost:3000/api/v1/quiz')
+  //   .then(res => res.json())
+  //   .catch(err => { throw new Error('Failed to fetch data')} )
+
+  const res = await fetch('http://localhost:3000/api/v1/quiz')
   // The return value is *not* serialized
   // You can return Date, Map, Set, etc.
  
@@ -12,25 +30,40 @@ async function getData() {
     // This will activate the closest `error.js` Error Boundary
     throw new Error('Failed to fetch data')
   }
- 
   return res.json()
 }
  
-const QuizPage: React.FC = () => {
+export default function QuizPage({}) {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [userAnswers, setUserAnswers] = useState<string[]>([]);
   const [showResults, setShowResults] = useState(false);
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
 
+  const [data, setData] = useState<QuizData | undefined>(undefined);
+
+  useEffect	(() => {
+    const fetch = async () => {
+      const data = await getData();
+      console.log("fetch", data[0])
+      setData(data[0]);
+    }
+    fetch();
+  }, [])
+
+  // const Data = getData();
+
+
+
   const handleOptionSelect = () => {
     if (selectedOption) {
       setUserAnswers([...userAnswers.slice(0, currentQuestion), selectedOption]);
 
-      if (currentQuestion + 1 < quizData.length) {
+      if (data && currentQuestion + 1 < data.quiz.length) {
         setCurrentQuestion(currentQuestion + 1);
         setSelectedOption(null); // Reset selected option after moving to the next question
       } else {
         setShowResults(true);
+        // getData(quizData)
       }
     }
   };
@@ -41,19 +74,20 @@ const QuizPage: React.FC = () => {
     setShowResults(false);
   };
   const correctAnswers = userAnswers.filter(
-    (answer, index) => answer === quizData[index].correctAnswer
+    (answer, index) => data && answer === data.quiz[index].correctAnswer
   );
-  const score = (correctAnswers.length / quizData.length) * 100;
+  const score = (correctAnswers.length / (data ? data.quiz.length : 0)) * 100;
   const passed = score >= 60;
-
+  // console.log(data)
 
   return (
     <div className="flex justify-center items-center">
-      {showResults ? (
+      {!data ? <div>Loading...</div>
+      : showResults ? (
         <div className='px-36 py-36'>
           <h1 className="text-3xl font-bold mb-4 ">Quiz Resultaat</h1>
           <ul>
-            {quizData.map((question, index) => (
+            {data.quiz.map((question, index) => (
               <li key={index} className="mb-2">
                 <strong>{question.question}</strong>
                 <div>
@@ -76,7 +110,7 @@ const QuizPage: React.FC = () => {
             U moest minstens 60% van de vragen goed hebben.
           </p>
           <p className='font-semibold'>
-            U heeft {correctAnswers.length} van de {quizData.length} vragen goed.
+            U heeft {correctAnswers.length} van de {data.quiz.length} vragen goed.
           </p>
           <p className={`font-semibold ${passed ? 'text-[#4e9138]' : 'text-[#f32f2f]'}`}>
             Uw score: {score.toFixed(2)}%
@@ -99,9 +133,9 @@ const QuizPage: React.FC = () => {
       ) : (
         <div className='py-40 px-40'>
           <h1 className="text-primary text-3xl font-bold mb-4  flex justify-start">Vraag {currentQuestion + 1}</h1>
-          <p className="mt-12 text-xl font-semibold mb-12 border-b-2">{quizData[currentQuestion].question}</p>
+          <p className="mt-12 text-xl font-semibold mb-12 border-b-2">{data.quiz[currentQuestion].question}</p>
           <div className='min-w-[800px]'>
-            {quizData[currentQuestion].options.map((option, index) => (
+            {data.quiz[currentQuestion].options.map((option, index) => (
               <button
                 key={index}
                 className={`${
@@ -127,5 +161,3 @@ const QuizPage: React.FC = () => {
     </div>
   );
 };
-
-export default QuizPage;
