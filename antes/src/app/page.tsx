@@ -1,5 +1,5 @@
 import React from 'react';
-import Nav from '@/app/components/home/nav'
+import NavHome from '@/app/components/home/nav'
 import Footer from '@/app/components/footer'
 import Title from '@/app/components/home/title'
 import Work from '@/app/components/home/work'
@@ -32,8 +32,9 @@ const event = {
 export default function Home() {
   return (
     <>
-      <Nav />
+      <NavHome />
       <Title />
+      Ardit
       <main className='flex flex-wrap justify-center m-auto p-5 my-12 gap-10 max-w-[1280px]'>
         <Work />
         <section className='flex flex-col w-full gap-10 my-12 '>

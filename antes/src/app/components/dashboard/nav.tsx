@@ -40,8 +40,7 @@ export const NavDashboard = (props: Props) => {
       profile: props.user.profile,
       navigation: [
         { name: 'Jouw Profiel', href: '/profile' },
-        { name: 'instellingen', href: '#' },
-        { name: 'Uitloggen', href: '#' },
+        { name: 'Uitloggen', href: '/login' },
       ]
     }
   }
