@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 
 const quizData = [
@@ -35,6 +35,21 @@ export default function Quiz() {
   const [userAnswers, setUserAnswers] = useState<string[]>([]);
   const [showResults, setShowResults] = useState(false);
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
+
+  const [data, setData] = useState([Object])
+
+  useEffect(() => {
+    fetch('http://localhost:3000/api/v1/elearning')
+      .then((res) => res.json())
+      .then((data) => {
+        setData(data);
+      })
+  }, [])
+
+  // console.log(data)
+  // console.log(data[0].quiz_data)
+
+  // const quizData = data[0].quiz_data
 
   const handleOptionSelect = () => {
     if (selectedOption) {
