@@ -1,4 +1,3 @@
-"use client"
 import React from 'react';
 import NavHome from '@/app/components/home/nav'
 import Footer from '@/app/components/footer'
@@ -7,7 +6,6 @@ import Work from '@/app/components/home/work'
 import { QACard } from '@/app/components/qa_card'
 import { EventCard } from '@/app/components/event_card'
 import Info from '@/app/components/home/info'
-import { useState, useEffect } from 'react'
 
 const qa = {
   id: 1,
@@ -31,20 +29,7 @@ const event = {
   url: "/event",
 }
 
-
 export default function Home() {
-  const [data, setData] = useState(null)
-
-  useEffect(() => {
-    fetch('http://localhost:3000/api/v1/user')
-      .then((res) => res.json())
-      .then((data) => {
-        setData(data);
-      })
-  }, [])
-  
-
-  console.log(data)
   return (
     <>
       <NavHome/>
