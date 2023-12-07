@@ -1,32 +1,41 @@
-// npx prisma db seed
+// database seed: npx prisma db seed
 
 import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
 async function main() {
-  const superadmin = await prisma.roles.create({
+  const deleteUsers = await prisma.role.deleteMany({})
+
+  const superadmin = await prisma.role.create({
     data: {
       level: 1,
-      name: 'superadmin'
+      name: 'Super Admin'
     }
   });
 
-  const admin = await prisma.roles.create({
+  const admin = await prisma.role.create({
     data: {
       level: 2,
-      name: 'admin'
+      name: 'Eigenaar'
     }
   });
-
-  const worker = await prisma.roles.create({
+  
+  const manager = await prisma.role.create({
     data: {
       level: 3,
-      name: 'worker'
+      name: 'Manager'
     }
   });
 
-  console.log({ superadmin, admin, worker });
+  const employee = await prisma.role.create({
+    data: {
+      level: 4,
+      name: 'werknemer'
+    }
+  });
+
+  console.log({ superadmin, admin, manager, employee });
 }
 
 main()

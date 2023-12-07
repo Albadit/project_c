@@ -4,15 +4,15 @@ import os
 # Define the npm commands
 script_directory = os.path.dirname(os.path.realpath(__file__))
 install_commands = [
-  'npm install next@latest react@latest react-dom@latest',
-  'npm install tailwindcss@latest',
-  'npm install @tailwindcss/typography',
-  'npm install @tailwindcss/forms',
-  'npm install @tailwindcss/aspect-ratio',
-  'npm install @tailwindcss/container-queries',
-  'npm install prisma --save-dev',
-  'npm install @prisma/client',
-  'npm install -D typescript ts-node @types/node',
+  # 'npm install next@latest react@latest react-dom@latest',
+  # 'npm install tailwindcss@latest',
+  # 'npm install @tailwindcss/typography',
+  # 'npm install @tailwindcss/forms',
+  # 'npm install @tailwindcss/aspect-ratio',
+  # 'npm install @tailwindcss/container-queries',
+  # 'npm install prisma --save-dev',
+  # 'npm install @prisma/client',
+  # 'npm install -D typescript ts-node @types/node',
   'docker compose -f "docker-compose-postgres.yaml" up -d --build',
 ]
 

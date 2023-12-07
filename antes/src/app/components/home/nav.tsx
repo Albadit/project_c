@@ -12,13 +12,13 @@ const context = {
   login: { name: "Inloggen", url: "/login" },
   navigation: [
     { name: "Home", href: "/" },
-    { name: "Werken bij ons", href: "#" },
-    { name: "Over ons", href: "#" },
+    { name: "Over ons", href: "/about" },
+    { name: "Werken bij ons", href: "/work" },
     { name: "Contact", href: "#" },
   ],
 }
 
-export default function Nav() {
+export default function NavHome() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (

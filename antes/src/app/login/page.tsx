@@ -1,15 +1,35 @@
-import React from 'react';
+"use client"
+
+import React, { useState } from 'react';
 import Link from 'next/link';
 import { Input } from '@/app/components/input';
+import { useRouter } from 'next/navigation'
+
 
 const context = {
   logo: { url: "/", img: "/img/antes_logo.png", alt: "antes logo"},
-  passwordForget: { url:"/reset_password", text: "Wachtwoord vergeten?" },
+  passwordForget: { url:"/forget_password", text: "Wachtwoord vergeten?" },
   cacheLogin: { text: "Onthoud mij" },
   btn: { url: "/dashboard",text: "Login" }
 }
 
 export default function Login() {
+  const [message, setMessage] = useState('');
+  const router = useRouter(); 
+
+  const handleSubmit = (event: any) => {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    const email = formData.get('email');
+    const password = formData.get('password');
+    if (email && password) {
+      // update in database
+      router.push("/dashboard");
+    } else {
+      setMessage("Verkeerde email of wachtwoord.");
+    }
+  }
+
   return (
     <main className='flex flex-row justify-center login:h-screen h-fit'>
       <div className="bg-login bg-center grow bg-cover bg-no-repeat md:block hidden"></div>
@@ -17,7 +37,7 @@ export default function Login() {
         <Link href={context.logo.url}>
           <img src={context.logo.img} alt={context.logo.alt} className='w-max'/>
         </Link>
-        <form action="" className='flex flex-col justify-center gap-5'>
+        <form onSubmit={handleSubmit} className='flex flex-col justify-center gap-5'>
           <Input label="Email" name="email" type="email" value=''/>
           <Input label="Wachtword" name="password" type="password" value=''/>
           <div className='flex md:flex-row flex-col justify-between lg:items-center items-start gap-2'>
@@ -26,8 +46,8 @@ export default function Login() {
               <label htmlFor="remember">{context.cacheLogin.text}</label>
             </div>
           </div>
-          <Link href={context.btn.url} className='flex flex-row items-center justify-center w-full lg:w-auto gap-2 px-4 py-3 rounded-lg bg-primary text-font2 font-semibold text-base'>Login</Link>
-          {/* <button title="login" className='flex flex-row items-center justify-center w-full lg:w-auto gap-2 px-4 py-3 rounded-lg bg-primary text-font2 font-semibold text-base'>{context.btn.text}</button> */}
+          <button type='submit' title="login" className='flex flex-row items-center justify-center w-full lg:w-auto gap-2 px-4 py-3 rounded-lg bg-primary text-font2 font-semibold text-base'>{context.btn.text}</button>
+          <p className='text-error'>{message}</p>
           <Link href={context.passwordForget.url} className='underline text-hyperlink'>{context.passwordForget.text}</Link>
         </form>
       </div>

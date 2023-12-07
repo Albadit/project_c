@@ -18,7 +18,10 @@ const config: Config = {
       icon: 'rgb(var(--clr-icon) / <alpha-value>)',
       extra: 'rgb(var(--clr-extra) / <alpha-value>)',
       hyperlink: 'rgb(var(--clr-hyperlink) / <alpha-value>)',
-      inputBorder: 'rgb(var(--clr-input-border) / <alpha-value>)'
+      inputBorder: 'rgb(var(--clr-input-border) / <alpha-value>)',
+      boxShadow: 'rgb(var(--clr-box-shadow) / <alpha-value>)',
+      success: 'rgb(var(--clr-success) / <alpha-value>)',
+      error: 'rgb(var(--clr-error) / <alpha-value>)',
     },
     extend: {
       screens: {

@@ -8,8 +8,8 @@ import Instagram from "@/app/components/icons/instagram";
 
 const context = {
   navigation: [
-    { name: "Home", url: "#" },
-    { name: "Over ons ", url: "#" },
+    { name: "Home", url: "/" },
+    { name: "Over ons ", url: "/about" },
     { name: "Contact", url: "#" },
   ],
   socialMedia: [
