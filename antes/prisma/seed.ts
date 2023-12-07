@@ -30,7 +30,7 @@ async function main() {
 
   const employee = await prisma.role.create({
     data: {
-      level: 3,
+      level: 4,
       name: 'werknemer'
     }
   });

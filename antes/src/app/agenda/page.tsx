@@ -29,7 +29,7 @@ export default function Calendar() {
   const [currentWeek, setCurrentWeek] = useState(0);
   const [currentMonth, setCurrentMonth] = useState("");
 
-  const handleWeekChange = (direction) => {
+  const handleWeekChange = (direction: any) => {
     console.log(`Changing week by ${direction}`);
     setCurrentWeek((prevWeek) => prevWeek + direction);
   };
@@ -162,7 +162,7 @@ export default function Calendar() {
   }
 
 
-  function getUpdatedDayNumber(index, startDayOfWeek, currentWeek) {
+  function getUpdatedDayNumber(index: any, startDayOfWeek: any, currentWeek: any) {
     const currentDate = new Date();
     const mondayDate = new Date(currentDate);
     mondayDate.setDate(mondayDate.getDate() - mondayDate.getDay() + (mondayDate.getDay() === 0 ? -6 : 1) + startDayOfWeek);

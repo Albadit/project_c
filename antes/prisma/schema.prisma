@@ -108,7 +108,7 @@ model lesson {
   title        String        @db.VarChar(50)
   description  String        @db.VarChar(50)
   time         DateTime
-  data         Json
+  lesson_data  Json
   subject      subject       @relation(fields: [subject_id], references: [id])
   quiz         quiz          @relation(fields: [quiz_id], references: [id])
   user_lessons user_lesson[]
@@ -124,12 +124,12 @@ model quiz {
 }
 
 model user_lesson {
-  id         Int     @id @default(autoincrement())
+  id         Int      @id @default(autoincrement())
   user_id    Int
   lesson_id  Int
   time       DateTime
   completion Boolean
   results    Json
-  user       user    @relation(fields: [user_id], references: [id])
-  lesson     lesson  @relation(fields: [lesson_id], references: [id])
+  user       user     @relation(fields: [user_id], references: [id])
+  lesson     lesson   @relation(fields: [lesson_id], references: [id])
 }

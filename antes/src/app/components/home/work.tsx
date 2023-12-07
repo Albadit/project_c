@@ -7,7 +7,7 @@ const context = {
   title: "Werken bij Antes!",
   description: "Wij hebben jou veel te bieden. Om aan te sluiten op jouw wensen, talenten en ambities kijken we samen waar jij het beste tot je recht komt. Jij staat centraal.",
   extra: "Een vak met toekomst<br>Verschillende specialisaties<br>Volop uitdagingen",
-  link: "#",
+  link: "/work",
 }
 
 export default function Work() {
