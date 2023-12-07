@@ -96,7 +96,7 @@ model qa_answer {
 model subject {
   id          Int      @id @default(autoincrement())
   name        String   @db.VarChar(50)
-  description String   @db.Text
+  description String   @db.VarChar(50)
   lessons     lesson[]
 }
 
@@ -106,7 +106,8 @@ model lesson {
   quiz_id      Int
   order        Int
   title        String        @db.VarChar(50)
-  description  String        @db.Text
+  description  String        @db.VarChar(50)
+  time         DateTime
   lesson_data  Json
   subject      subject       @relation(fields: [subject_id], references: [id])
   quiz         quiz          @relation(fields: [quiz_id], references: [id])
@@ -114,16 +115,21 @@ model lesson {
 }
 
 model quiz {
-  id        Int      @id @default(autoincrement())
-  quiz_data Json
-  lessons   lesson[]
+  id          Int      @id @default(autoincrement())
+  title       String   @db.VarChar(50)
+  description String   @db.VarChar(50)
+  time        DateTime
+  quiz_data   Json
+  lessons     lesson[]
 }
 
 model user_lesson {
-  id         Int     @id @default(autoincrement())
+  id         Int      @id @default(autoincrement())
   user_id    Int
   lesson_id  Int
+  time       DateTime
   completion Boolean
-  user       user    @relation(fields: [user_id], references: [id])
-  lesson     lesson  @relation(fields: [lesson_id], references: [id])
+  results    Json
+  user       user     @relation(fields: [user_id], references: [id])
+  lesson     lesson   @relation(fields: [lesson_id], references: [id])
 }
