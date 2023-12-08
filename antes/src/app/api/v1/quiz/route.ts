@@ -7,10 +7,7 @@ export async function POST(req: Request){
 
         const quiz = await prisma.quiz.create({
             data:{
-                title: 'H2',
-                description: 'Sed ut peris',
-                time: "10:00",
-                quiz: body,
+                quiz_data: body,
         }
         })
         return NextResponse.json(quiz)
@@ -28,7 +25,7 @@ export async function POST(req: Request){
 
 export async function GET() {
     try {
-      const user = await prisma.quiz.findFirst({ where : { id: 1 } })
+      const user = await prisma.quiz.findFirstOrThrow({ where : { id: 1 } })
       return NextResponse.json(user)
     } catch (error) {
       return NextResponse.json({body: "error"})

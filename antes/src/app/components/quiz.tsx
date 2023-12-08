@@ -1,5 +1,5 @@
-"use client"
-import React, { useEffect, useState } from 'react';
+'use client'
+import { useState, useEffect } from 'react'
 import Link from 'next/link';
 
 type QuizData = {
