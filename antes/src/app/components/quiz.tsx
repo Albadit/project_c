@@ -1,5 +1,5 @@
 'use client'
-import { useState, useEffect } from 'react'
+import React, { useState } from 'react';
 import Link from 'next/link';
 
 const quizData = [
@@ -36,18 +36,6 @@ export default function Quiz() {
   const [showResults, setShowResults] = useState(false);
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
 
-  const [data, setData] = useState(null)
-
-  useEffect(() => {
-    fetch('http://localhost:3000/api/v1/elearning')
-      .then((res) => res.json())
-      .then((data) => {
-        setData(data)
-      })
-  }, [])
-
-  console.log(data);
-
   const handleOptionSelect = () => {
     if (selectedOption) {
       setUserAnswers([...userAnswers.slice(0, currentQuestion), selectedOption]);
@@ -78,7 +66,7 @@ export default function Quiz() {
         <div className='flex flex-col gap-8 w-full'>
           <h1 className="text-3xl font-bold">Quiz Results</h1>
           <ul className='flex flex-col gap-2'>
-            {quizData.map((question: any, index: any) => (
+            {quizData.map((question, index) => (
               <li key={index}>
                 <strong>{question.question}</strong>
                 <div>
@@ -130,7 +118,7 @@ export default function Quiz() {
             <hr />
           </div>
           <div className='flex flex-col gap-4'>
-            {quizData[currentQuestion].options.map((option: any, index: any) => (
+            {quizData[currentQuestion].options.map((option, index) => (
               <button
                 key={index}
                 className={`${
