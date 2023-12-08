@@ -8,7 +8,7 @@ export async function POST(req: Request){
         const quiz = await prisma.quiz.create({
             data:{
                 title: 'H2',
-                description: 'Sed ut erspiciatis',
+                description: 'Sed ut perspiciatis',
                 time: "10:00",
                 quiz: body,
         }

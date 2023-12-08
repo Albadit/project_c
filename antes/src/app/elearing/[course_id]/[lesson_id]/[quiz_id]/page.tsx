@@ -1,9 +1,7 @@
-import React from 'react';
-import QuizPage from './quizPage';
-import Footer from '@/app/components/footer';
-import { NavDashboard } from '@/app/components/dashboard/nav';
-import { prisma } from '@/../../prisma/index';
-
+import React from "react";
+import Footer from "@/app/components/footer";
+import { NavDashboard } from "@/app/components/dashboard/nav";
+import Quiz from "@/app/components/quiz";
 
 const user = {
   id: 1,
@@ -14,28 +12,18 @@ const user = {
   function_id: 3,
   bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
   email: "saraleekman@outlook.com",
-}
+};
 
-const App: React.FC = () => {
+export default function ElearningQuiz() {
   return (
     <>
       <NavDashboard user={user} />
-      <div className=''>
-        <main className='min-h-screen flex items-center justify-center'>
-          <section> 
-            <div className='border light-gray-border rounded-xl shadow-2xl w-full md:w-3/4 min-h-[500px] min-w-[1000px] overflow-hidden'>
-              <QuizPage />
-            </div>
-          </section>
-        </main>
-      </div>
-      <footer>
-        <Footer />
-      </footer>
+      <main className="flex flex-col justify-center items-center mt-6 mb-6 m-auto p-5 quiz">
+        <section className="max-w-[500px] w-full">
+          <Quiz />
+        </section>
+      </main>
+      <Footer />
     </>
   );
-};
-
-
-
-export default App;
+}

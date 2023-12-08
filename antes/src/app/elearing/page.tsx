@@ -46,7 +46,7 @@ export default function ELearning() {
           <ELearingCard elearing={elearing} />
           <ELearingCard elearing={elearing} />
         </div>
-        <div className='flex items-stretch justify-center 2xl:justify-end 2xl:mr-[331px] gap-6'>
+        <div className='flex items-center justify-center gap-6'>
           <button className="bg-secondary hover:bg-[#0840A3] text-[#FAFAFA] font-bold py-3 px-10 rounded">
             <Arrowright className="rotate-180 fill-font2 h-5" />
           </button>

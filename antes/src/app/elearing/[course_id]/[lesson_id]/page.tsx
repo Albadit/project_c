@@ -54,9 +54,8 @@ export default function ElearningLesson() {
               Na het bekijken van deze video zal je een paar vragen moeten beantwoorden om door te kunnen naar de volgende les.
             </p>
           </div>
-          <div className="py-24">  
-            <Link href={lesson.url} // TODO
-            className="bg-primary h-[50px] w-full sm:w-[100px] rounded-xl font-medium my-6 mx-auto px-2 sm:px-20 py-3 text-[#fff]">
+          <div className="py-24">
+            <Link href={lesson.url} className="bg-primary h-[50px] w-full sm:w-[100px] rounded-xl font-medium my-6 mx-auto px-2 sm:px-20 py-3 text-[#fff]">
               Quiz afnemen
             </Link>
           </div>

@@ -13,6 +13,10 @@
   .calender div:last-child div:last-child { border-bottom-right-radius: var(--border-radius); }
   .calender div:last-child div:first-child { border-bottom-left-radius: var(--border-radius); }
 
+  .quiz {
+    height: calc(100vh - (129px + 64px));
+  }
+
   :root {
     --bg-title: url("../../public/img/title_bg.png");
     --bg-info: url("../../public/img/info_bg.png");
@@ -33,7 +37,8 @@
     --clr-hyperlink: 0 122 255;
     --clr-input-border: 229 229 229;
     --clr-box-shadow: 0 0 0;
-    --clr-light_gray: 128 128 128;
+    --clr-success: 103 184 60;
+    --clr-error: 229 52 48;
   }
 
   :root[data-theme="light"] a, :root[data-theme="light"] button {

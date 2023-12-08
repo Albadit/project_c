@@ -1,7 +1,6 @@
 "use client"
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-// import quizData  from './quizData.json';
 
 type QuizData = {
   id: number

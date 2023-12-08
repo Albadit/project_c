@@ -19,7 +19,9 @@ const config: Config = {
       extra: 'rgb(var(--clr-extra) / <alpha-value>)',
       hyperlink: 'rgb(var(--clr-hyperlink) / <alpha-value>)',
       inputBorder: 'rgb(var(--clr-input-border) / <alpha-value>)',
-      light_gray: 'rgb(var(--clr-light_gray) / <alpha-value>)',
+      boxShadow: 'rgb(var(--clr-box-shadow) / <alpha-value>)',
+      success: 'rgb(var(--clr-success) / <alpha-value>)',
+      error: 'rgb(var(--clr-error) / <alpha-value>)',
     },
     extend: {
       screens: {

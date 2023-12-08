@@ -5,7 +5,7 @@ import ArrowForwardRounded from "@/app/components/icons/arrow_right";
 const context = {
   title: "Hoe kunnen wij je helpen?",
   link_text: "Meer informatie",
-  link: "#",
+  link: "/about",
 }
 
 export default function Title() {
