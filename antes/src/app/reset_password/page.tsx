@@ -5,8 +5,15 @@ import Link from 'next/link';
 import { Input } from '@/app/components/input';
 import { useRouter } from 'next/navigation'
 
+<<<<<<< HEAD
 const context = {
   logo: { url: "/", img: "/img/antes_logo.png", alt: "antes logo"},
+=======
+
+const context = {
+  logo: { url: "/", img: "/img/antes_logo.png", alt: "antes logo"},
+  account: { url:"/login", text: "Heb je al een account?" },
+>>>>>>> parent of 09c69e5 (done)
   btn: { text: "Stuur Email" }
 }
 
@@ -17,6 +24,7 @@ export default function ResetPassword() {
   const handleSubmit = (event: any) => {
     event.preventDefault();
     const formData = new FormData(event.target);
+<<<<<<< HEAD
     const password = formData.get('password');
     const confirmPassword = formData.get('confirm_password');
     if (password === confirmPassword) {
@@ -24,6 +32,15 @@ export default function ResetPassword() {
       router.push("/login");
     } else {
       setMessage("Wachtwoorden komen niet overeen.");
+=======
+    const email = formData.get('email');
+    if (email) {
+      setMessage("Email is verzonden.");
+      // update in database
+      setTimeout(() => {
+        router.push("/login");
+      }, 2000)
+>>>>>>> parent of 09c69e5 (done)
     }
   }
 
@@ -35,10 +52,16 @@ export default function ResetPassword() {
           <img src={context.logo.img} alt={context.logo.alt} className='w-max'/>
         </Link>
         <form onSubmit={handleSubmit} className='flex flex-col justify-center gap-5'>
+<<<<<<< HEAD
           <Input label="Wachtwoord" name="password" type="password" value=""/>
           <Input label="Bevestigen Wachtwoord" name="confirm_password" type="password" value=""/>
           <button type="submit" title="reset_password" className='flex flex-row items-center justify-center w-full lg:w-auto gap-2 px-4 py-3 rounded-lg bg-primary text-font2 font-semibold text-base'>{context.btn.text}</button>
           <p className='text-error'>{message}</p>
+=======
+          <Input label='Email' name="email" type="email" value=''/>
+          <button title="reset_password" className='flex flex-row items-center justify-center w-full lg:w-auto gap-2 px-4 py-3 rounded-lg bg-primary text-font2 font-semibold text-base'>{context.btn.text}</button>
+          <p className='text-success'>{message}</p>
+>>>>>>> parent of 09c69e5 (done)
         </form>
       </div>
     </main>

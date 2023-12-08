@@ -18,7 +18,7 @@ const context = {
   ],
 }
 
-export default function NavHome() {
+export default function Nav() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (

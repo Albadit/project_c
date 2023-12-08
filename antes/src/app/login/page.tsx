@@ -8,7 +8,7 @@ import { useRouter } from 'next/navigation'
 
 const context = {
   logo: { url: "/", img: "/img/antes_logo.png", alt: "antes logo"},
-  passwordForget: { url:"/forget_password", text: "Wachtwoord vergeten?" },
+  passwordForget: { url:"/reset_password", text: "Wachtwoord vergeten?" },
   cacheLogin: { text: "Onthoud mij" },
   btn: { url: "/dashboard",text: "Login" }
 }
