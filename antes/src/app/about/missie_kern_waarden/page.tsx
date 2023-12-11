@@ -1,5 +1,3 @@
-"use client";
-
 import Link from "next/link";
 import SideMenu from '@/app/about/side_menu_about/page';
 import Nav from '@/app/components/home/nav'
