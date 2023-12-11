@@ -103,7 +103,9 @@ export default function Quiz() {
       ) : (
         isLoading ? (
           // Render a loading state or return null
-          <p>Loading quiz data...</p>
+          <div className='flex flex-col gap-6 w-full'>
+            <p className="text-xl font-semibold">Loading quiz data...</p>
+          </div>
         ) : (
           <div className='flex flex-col gap-6 w-full'>
           <h1 className="text-primary text-3xl font-bold">Question {currentQuestion + 1}</h1>

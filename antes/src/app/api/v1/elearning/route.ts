@@ -8,9 +8,11 @@ export async function GET() {
         id: 1,
       },
     })
-    return NextResponse.json(quiz?.quiz_data)
+    return NextResponse.json(quiz?.quiz_data, { status: 200 })
   } catch (error) {
-    return NextResponse.json({body: "error"})
+    return NextResponse.json({ error: "server error"}, { status: 500 })
+  } finally {
+    await prisma.$disconnect()
   }
 }
 

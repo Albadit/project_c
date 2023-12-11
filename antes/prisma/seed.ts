@@ -5,8 +5,6 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 async function main() {
-  const deleteUsers = await prisma.role.deleteMany({})
-
   const superadmin = await prisma.role.create({
     data: {
       level: 1,
@@ -32,6 +30,18 @@ async function main() {
     data: {
       level: 4,
       name: 'werknemer'
+    }
+  });
+
+  const user = await prisma.user.create({
+    data: {
+      roleId: 4,
+      firstName: 'Hans',
+      lastName: 'Bever',
+      userFunctionId: 1,
+      bio: 'Ik weet niks',
+      email: 'Hans@niks.com',
+      password: '1234',
     }
   });
   
@@ -68,7 +78,8 @@ async function main() {
   });
 
   // console.log({ superadmin, admin, manager, employee });
-  console.log({ quiz });
+  // console.log({ quiz });
+  console.log({ user });
 }
 
 main()
