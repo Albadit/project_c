@@ -3,12 +3,12 @@ import { prisma } from '@/../../prisma/index'
 
 export async function GET() {
   try {
-    const user = await prisma.quiz.findUnique({
+    const quiz = await prisma.quiz.findUnique({
       where: {
         id: 1,
       },
     })
-    return NextResponse.json(user)
+    return NextResponse.json(quiz?.quiz_data)
   } catch (error) {
     return NextResponse.json({body: "error"})
   }

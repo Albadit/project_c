@@ -1,40 +1,30 @@
 'use client'
-import React, { useState } from 'react';
+import { useState, useEffect } from 'react'
 import Link from 'next/link';
 
-const quizData = [
-  {
-    "question": "Sinds wanneer bestaat GGZ-Nederland?",
-    "options": ["1923", "1975", "1948", "1900"],
-    "correctAnswer": "1975"
-  },
-  {
-    "question": "Wat is de reden dat er minder bedden beschikbaar zijn bij de GGZ?",
-    "options": ["Bezuinigen", "Behandeling aan huis beter voor patient", "Aantal bedden is afgestemd op omringde landen"],
-    "correctAnswer": "Bezuinigen"
-  },
-  {
-    "question": "Wat is het Dolhuys?",
-    "options": ["Een krankzinngenstichting in Nederland", "Simulatie voor schizofrenie", "Museum voor psychiatrie in Haarlem"],
-    "correctAnswer": "Museum voor psychiatrie in Haarlem"
-  },
-  {
-    "question": "Hoeveel persoonlijkheidsstoornissen zijn er?",
-    "options": ["8", "12", "14", "10"],
-    "correctAnswer": "10"
-  },
-  {
-    "question": "Hoelang duurt een jaar?",
-    "options": ["1", "2", "3", "365"],
-    "correctAnswer": "365"
-  }
-];
+type QuizItems = {
+  options: string[];
+  question: string;
+  correctAnswer: string;
+}
 
 export default function Quiz() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [userAnswers, setUserAnswers] = useState<string[]>([]);
   const [showResults, setShowResults] = useState(false);
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
+
+  const [quizData, setData] = useState<QuizItems[]>([]);
+  const [isLoading, setLoading] = useState(true)
+
+  useEffect(() => {
+    fetch('/api/v1/elearning')
+      .then((res) => res.json())
+      .then((data) => {
+        setData(data)
+        setLoading(false)
+      })
+  }, [])
 
   const handleOptionSelect = () => {
     if (selectedOption) {
@@ -111,7 +101,11 @@ export default function Quiz() {
           </div>
         </div>
       ) : (
-        <div className='flex flex-col gap-6 w-full'>
+        isLoading ? (
+          // Render a loading state or return null
+          <p>Loading quiz data...</p>
+        ) : (
+          <div className='flex flex-col gap-6 w-full'>
           <h1 className="text-primary text-3xl font-bold">Question {currentQuestion + 1}</h1>
           <div className='flex flex-col gap-2'>
             <p className="text-xl font-semibold">{quizData[currentQuestion].question}</p>
@@ -139,6 +133,7 @@ export default function Quiz() {
             Next Question
           </button>
         </div>
+        )
       )}
     </>
   );
