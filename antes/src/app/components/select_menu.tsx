@@ -1,82 +1,40 @@
 "use client"
-
 import React from 'react';
-import { useState, useEffect, useRef} from 'react';
-import ArrowDown from './icons/arrow_down';
+import { useState} from 'react';
 
 type SelectOption = {
-  id: number;
+  id: string;
   name: string;
 };
 
 type Props = {
+  label: string
   name: string
   index?: number
   disabled?: boolean
-  value: SelectOption[]
+  options: SelectOption[]
 }
-
-type MenuItemProps = {
-  functions: { id: number; name: string };
-  onClick: () => void;
-}
-
-const MenuItem = ({ functions: { name }, onClick }: MenuItemProps) => (
-  <span className="text-font1 block px-4 py-2 sm:text-sm hover:bg-extra hover:text-font2 rounded cursor-pointer select-none" tabIndex={-1} onClick={onClick}>
-    {name}
-  </span>
-)
 
 export const SelectMenu = (props: Props) => {
-  const functionItem = props.value.findIndex(func => func.id === props.index);
-  const index = functionItem === -1 ? 0 : functionItem;
-
-  const [value, setValue] = useState(props.value[index]);
   const [disabled] = useState(props.disabled);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
-
-  const chaneSelected = (functions: SelectOption) => {
-    setValue(functions)
-    setIsMenuOpen(false);
-  }
-  
-  useEffect(() => {
-    const onOutsideClick = (e: MouseEvent) => {
-      if (!ref.current?.contains(e.target as Node)) {
-        setIsMenuOpen(false);
-      }
-    };
-
-    if (isMenuOpen) {
-      document.addEventListener('mousedown', onOutsideClick);
-    }
-
-    return () => {
-      document.removeEventListener('mousedown', onOutsideClick);
-    };
-  }, [isMenuOpen]);
-
 
   return (
-    <div className="relative text-left w-full text-font1" ref={ref}>
-      <label htmlFor={props.name} className="block text-sm font-medium leading-5">{props.name}</label>
+    <div className="relative text-left w-full text-font1">
+      <label htmlFor={props.name} className="block text-sm font-medium leading-5">{props.label}</label>
       <div className='mt-2 relative'>
-        <button type="button"
-          id={props.name}
-          aria-expanded={isMenuOpen}
+        <select
+          id={props.name.toLowerCase()}
+          name={props.name.toLowerCase()}
           disabled={disabled}
-          aria-haspopup="true"
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className={`flex w-full items-center ${value.name ? 'justify-between' : 'justify-end' } rounded-[3px] bg-[#fff] sm:p-3 p-2.5 text-font1 sm:text-sm shadow-sm ring-1 ring-font1/20 focus:ring-2 focus:ring-inset focus:ring-callToAction disabled:bg-slate-50 disabled:text-text-slate-500 disabled:border-slate-200 disabled:shadow-none invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500 disabled:opacity-75`}>
-            {value.name}
-          <ArrowDown className='h-5'/>
-        </button>
-        <div className={`${isMenuOpen ? 'block' : 'hidden'} absolute right-0 z-10 mt-1.5 w-full origin-top-right rounded bg-[#fff] shadow-sm ring-1 ring-inset ring-font1/20 focus:outline-none`}>
-        {props.value.map((role) => (
-          <MenuItem key={role.id} functions={role} onClick={() => chaneSelected(role)} />
-        ))}
-        </div>
+          required
+          className='block w-full rounded border-0 py-2.5 shadow-sm ring-1 ring-inset ring-font1/20 placeholder:font1 focus:ring-2 focus:ring-inset focus:ring-callToAction sm:text-sm sm:leading-6 disabled:bg-slate-50 disabled:text-text-slate-500 disabled:border-slate-200 disabled:shadow-none'>
+          <option hidden value="">-- kies je functie --</option>
+          {props.options.map(option => (
+            <option key={option.id} value={option.id}>
+              {option.name}
+            </option>
+          ))}
+        </select>
       </div>
     </div>
   )

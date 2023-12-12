@@ -11,8 +11,6 @@ export async function GET() {
     return NextResponse.json(quiz?.quiz_data, { status: 200 })
   } catch (error) {
     return NextResponse.json({ error: "server error"}, { status: 500 })
-  } finally {
-    await prisma.$disconnect()
   }
 }
 

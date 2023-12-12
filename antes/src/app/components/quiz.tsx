@@ -18,7 +18,7 @@ export default function Quiz() {
   const [isLoading, setLoading] = useState(true)
 
   useEffect(() => {
-    fetch('/api/v1/elearning')
+    fetch('/api/v1/quiz')
       .then((res) => res.json())
       .then((data) => {
         setData(data)
@@ -101,12 +101,7 @@ export default function Quiz() {
           </div>
         </div>
       ) : (
-        isLoading ? (
-          // Render a loading state or return null
-          <div className='flex flex-col gap-6 w-full'>
-            <p className="text-xl font-semibold">Loading quiz data...</p>
-          </div>
-        ) : (
+        !isLoading ? (
           <div className='flex flex-col gap-6 w-full'>
           <h1 className="text-primary text-3xl font-bold">Question {currentQuestion + 1}</h1>
           <div className='flex flex-col gap-2'>
@@ -135,6 +130,10 @@ export default function Quiz() {
             Next Question
           </button>
         </div>
+        ) : (
+          <div className='flex flex-col justify-center items-center gap-6 w-full'>
+            <p className="text-xl font-semibold">Loading quiz data...</p>
+          </div>
         )
       )}
     </>
