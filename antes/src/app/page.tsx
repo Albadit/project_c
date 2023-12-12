@@ -34,7 +34,6 @@ export default function Home() {
     <>
       <NavHome />
       <Title />
-      Ardit
       <main className='flex flex-wrap justify-center m-auto p-5 my-12 gap-10 max-w-[1280px]'>
         <Work />
         <section className='flex flex-col w-full gap-10 my-12 '>

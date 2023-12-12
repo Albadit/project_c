@@ -14,8 +14,10 @@ export default function WorkAsResidentialSupervisor() {
                     <p className="text-center text-primary text-5xl font-bold drop-shadow-lg">Werken als woonbegeleider</p>
                 </div>
                 <div className='flex justify-center gap-5 2xl:gap-10'>
-                    <SideMenuWork />
+                    {/* <SideMenuWork /> */}
+                    <div className='hidden sm:flex'><SideMenuWork /></div>
                     <div className='flex flex-col shadow-2xl justify-between w-full md:w-[900px] gap-5 p-7 rounded-lg bg-section text-base font-font1 text-font1'>
+                        <div className='md:hidden'><SideMenuWork /></div>
                         <div className='flex gap-5 4xl:gap-10'>
                             <div className='text-secondary text-left text-2xl'>Antes heeft <Link href='https://www.anteszorg.nl/hulp-bij-psychische-klachten/wonen-met-begeleiding' className='text-primary'>verschillende woonlocaties in de regio Rijnmond</Link>. Dit zijn woonlocaties waar bewoners zelfstandig met (intensieve) begeleiding wonen en waar sprake is van psychiatrische problemen, soms gecombineerd met middelengebruik.</div>
                         </div>

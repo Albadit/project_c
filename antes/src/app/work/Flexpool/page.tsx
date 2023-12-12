@@ -12,8 +12,10 @@ export default function Flexpool() {
                     <p className="text-center text-primary text-5xl font-bold drop-shadow-lg">Flexpool</p>
                 </div>
                 <div className='flex justify-center gap-5 2xl:gap-10'>
-                    <SideMenuWork />
+                    {/* <SideMenuWork /> */}
+                    <div className='hidden sm:flex'><SideMenuWork /></div>
                     <div className='flex flex-col shadow-2xl justify-between w-full md:w-[900px] gap-5 p-7 rounded-lg bg-section text-base font-font1 text-font1'>
+                        <div className='md:hidden'><SideMenuWork /></div>
                         <div className='flex gap-5 4xl:gap-10'>
                             <div className='text-secondary text-left text-2xl'>Onze Flexpool bestaat uit ervaren professionals en studenten. Begeleiders, verzorgenden en verpleegkundigen die zich flexibel inzetten op verschillende locaties van Antes.</div>
                         </div>

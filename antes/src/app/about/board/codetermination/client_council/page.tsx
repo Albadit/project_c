@@ -12,8 +12,10 @@ export default function ClientCouncil() {
                     <p className="text-center text-primary text-5xl font-bold drop-shadow-lg">Cliëntenraad</p>
                 </div>
                 <div className='flex justify-center gap-5 2xl:gap-10'>
-                    <SideMenu />
+                    {/* <SideMenu /> */}
+                    <div className='hidden sm:flex'><SideMenu /></div>
                     <div className='flex flex-col shadow-2xl justify-between w-full md:w-[900px] gap-5 p-7 rounded-lg bg-section text-base font-font1 text-font1'>
+                        <div className='md:hidden'><SideMenu /></div>
                         <p className='text-secondary text-left text-xl'> De cliëntenraad van Antes komt op voor de gemeenschappelijke belangen van cliënten van Antes.</p>
                         <div className='flex justify-start gap-5 2xl:gap-10'>
                             <p className='font-bold text-secondary text-xl'>Wat doet de cliëntenraad?</p>

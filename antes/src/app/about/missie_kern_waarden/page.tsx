@@ -13,8 +13,10 @@ export default function MissionCoreValues() {
                     <p className="text-center text-primary text-5xl font-bold drop-shadow-lg">Missie en kernwaarden</p>
                 </div>
                 <div className='flex justify-center gap-5 2xl:gap-10'>
-                    <SideMenu />
+                    {/* <SideMenu /> */}
+                    <div className='hidden sm:flex'><SideMenu /></div>
                     <div className='flex flex-col shadow-2xl justify-between w-full md:w-[900px] gap-5 p-7 rounded-lg bg-section text-base font-font1 text-font1'>
+                        <div className='md:hidden'><SideMenu /></div>
                         <div className='flex gap-5 4xl:gap-10'>
                             <div className='text-secondary text-left text-2xl'>Antes is specialist in psychiatrie en verslaving. Antes richt zich als ggz-instelling op het herstel van volwassenen en ouderen met (ernstige) psychiatrische problemen..</div>
                         </div>

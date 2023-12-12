@@ -3,7 +3,7 @@ import SideMenu from '@/app/about/side_menu_about/page';
 import Nav from '@/app/components/home/nav'
 
 export default function Organogram() {
-	return (
+  return (
     <main>
       <Nav />
       <div className='flex flex-col w-full gap-10 my-12'>
@@ -11,8 +11,10 @@ export default function Organogram() {
           <p className="text-center text-primary text-5xl font-bold drop-shadow-lg">Organogram</p>
         </div>
         <div className='flex justify-center gap-5 2xl:gap-10'>
-          <SideMenu />
+          {/* <SideMenu /> */}
+          <div className='hidden sm:flex'><SideMenu /></div>
           <div className='flex flex-col shadow-2xl justify-between w-full md:w-[900px] gap-5 p-7 rounded-lg bg-section text-base font-font1 text-font1'>
+            <div className='md:hidden'><SideMenu /></div>
             <div className='flex gap-5 4xl:gap-10'>
               <div className='text-secondary text-left text-2xl'>Het bestuur is samen met de directeuren zorg en directeuren bedrijfsvoering gemeenschappelijk verantwoordelijk voor het gezamenlijke eindresultaat van Antes. Onder Antes vallen vijf divisies:</div>
             </div>
@@ -37,5 +39,5 @@ export default function Organogram() {
         </div>
       </div>
     </main>
-	)
+  )
 }

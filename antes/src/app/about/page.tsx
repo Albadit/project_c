@@ -41,15 +41,17 @@ export default function AboutUs() {
                 <div className='flex flex-wrap x1:justify-between justify-center gap-10'>
                     <p className="text-center text-primary text-5xl font-bold drop-shadow-lg">Over Ons</p>
                 </div>
-                <div className='flex flex-row flex-wrap justify-end gap-5 2xl:gap-10'>
-                    <SideMenu />
-                    <AboutCard aboutus={aboutus1} />
-                    <AboutCard aboutus={aboutus2} />
-                    <AboutCard aboutus={aboutus3} />
-                    <AboutCard aboutus={aboutus4} />
-                </div>
                 <div className='flex justify-center gap-5 2xl:gap-10'>
-                    <div className='flex flex-col shadow-2xl justify-between w-full md:w-[1400px] gap-5 p-7 rounded-lg bg-section text-base font-font1 text-font1'>
+                    {/* <SideMenu /> */}
+                    <div className='hidden sm:flex'><SideMenu /></div>
+                    <div className='flex flex-col shadow-2xl justify-between w-full md:w-[900px] gap-5 p-7 rounded-lg bg-section text-base font-font1 text-font1'>
+                        <div className='md:hidden'><SideMenu /></div>
+                        <div className='flex flex-col md:flex-row gap-5'>
+                            <AboutCard aboutus={aboutus1} />
+                            <AboutCard aboutus={aboutus2} />
+                            <AboutCard aboutus={aboutus3} />
+                            <AboutCard aboutus={aboutus4} />
+                        </div>
                         <div className='flex gap-5 4xl:gap-10'>
                             <div className='text-secondary font-bold text-left text-2xl'>Over Ons</div>
                         </div>

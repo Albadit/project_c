@@ -12,8 +12,10 @@ export default function FamilyCouncil() {
                     <p className="text-center text-primary text-5xl font-bold drop-shadow-lg">Familiebeleid</p>
                 </div>
                 <div className='flex justify-center gap-5 2xl:gap-10'>
-                    <SideMenu />
+                    {/* <SideMenu /> */}
+                    <div className='hidden sm:flex'><SideMenu /></div>
                     <div className='flex flex-col shadow-2xl justify-between w-full md:w-[900px] gap-5 p-7 rounded-lg bg-section text-base font-font1 text-font1'>
+                        <div className='md:hidden'><SideMenu /></div>
                         <p className='text-secondary text-left text-2xl'> Binnen Parnassia Groep wordt hard gewerkt aan het realiseren van een goed familiebeleid. Een belangrijk onderdeel daarvan is de Familieraad. Deze is in de regio Rijnmond ingesteld voor de zorgbedrijven Antes, Indigo, i-psy, Youz, Reakt en PsyQ die allemaal onderdeel zijn van Parnassia Groep.</p>
                         <p className='text-secondary text-left text-xl'> De Familieraad komt op voor de gezamenlijke belangen van familie en naasten en draagt zo bij aan goede zorg voor hen. De Familieraad is een medezeggenschapsorgaan en heeft bevoegdheden gebaseerd op een overeenkomst met de bestuurder van Antes als vertegenwoordiger in de regio.</p>
                         <p><Link href="https://www.parnassiagroep.nl/documents/10193/3980893/PGfolderRegioRijnmond-0804B.pdf/7b721d59-3520-28d9-f3a2-7b26f18c0060?_ga=2.188899051.1915736437.1701171356-1970662864.1694080243"><button className="text-[#FAFAFA] bg-secondary py-2 px-4 rounded">Informatiefolder regio Rijnmond</button></Link></p>
