@@ -136,7 +136,7 @@ export default function Calendar() {
   const startOnMonday = true;
   const local = 'nl-NL'
   const days = getWeekDays(new Date(), local, "narrow", startOnMonday);
-  const weeks = useMemo(() => generateMonth(currentYear, currentMonth, startOnMonday), [currentYear, currentMonth]);
+  const weeks = useMemo(() => generateMonth(currentYear, currentMonth, startOnMonday), [currentYear, currentMonth, startOnMonday]);
 
   const monthName = new Intl.DateTimeFormat(local, { month: 'long' }).format(new Date(currentYear, currentMonth - 1));
 

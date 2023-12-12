@@ -12,124 +12,118 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model user {
-  id               Int           @id @default(autoincrement())
-  role_id          Int
-  first_name       String        @db.VarChar(50)
-  last_name        String        @db.VarChar(50)
-  user_function_id Int
-  bio              String        @db.Text
-  email            String        @db.VarChar(255)
-  password         String        @db.VarChar(32) // assuming hash format
-  user_function    user_function @relation(fields: [user_function_id], references: [id])
-  role             role          @relation(fields: [role_id], references: [id])
-  calendars        calendar[]
-  qa_questions     qa_question[]
-  qa_answers       qa_answer[]
-  user_lessons     user_lesson[]
+model User {
+  id             Int          @id @default(autoincrement())
+  roleId         Int
+  firstName      String       @db.Text
+  lastName       String       @db.Text
+  userFunctionId Int
+  bio            String       @db.Text
+  email          String       @db.VarChar(255)
+  password       String       @db.VarChar(32) // assuming hash format
+  role           Role         @relation(fields: [roleId], references: [id])
+  userFunction   UserFunction @relation(fields: [userFunctionId], references: [id])
+  calendars      Calendar[]
+  qaQuestions    QaQuestion[]
+  qaAnswers      QaAnswer[]
+  userLessons    UserLesson[]
 }
 
-model role {
+model Role {
   id    Int    @id @default(autoincrement())
   level Int
-  name  String @db.VarChar(50)
-  users user[]
+  name  String @db.Text
+  users User[]
 }
 
-model user_function {
+model UserFunction {
   id    Int    @id @default(autoincrement())
-  name  String @db.VarChar(50)
-  users user[]
+  name  String @db.Text
+  users User[]
 }
 
-model event {
+model Event {
   id          Int        @id @default(autoincrement())
-  title       String     @db.VarChar(50)
-  description String     @db.VarChar(50)
+  title       String     @db.Text
+  description String     @db.Text
   start       DateTime
   end         DateTime
-  calendars   calendar[]
+  calendars   Calendar[]
 }
 
-model calendar {
-  id       Int   @id @default(autoincrement())
-  user_id  Int
-  event_id Int
-  user     user  @relation(fields: [user_id], references: [id])
-  event    event @relation(fields: [event_id], references: [id])
+model Calendar {
+  id      Int   @id @default(autoincrement())
+  userId  Int
+  eventId Int
+  user    User  @relation(fields: [userId], references: [id])
+  event   Event @relation(fields: [eventId], references: [id])
 }
 
-model tag {
-  id      Int      @id @default(autoincrement())
-  name    String   @db.VarChar(50)
-  qa_tags qa_tag[]
+model Tag {
+  id     Int     @id @default(autoincrement())
+  name   String  @db.Text
+  qaTags QaTag[]
 }
 
-model qa_tag {
-  id             Int         @id @default(autoincrement())
-  qa_question_id Int
-  tag_id         Int
-  qa_question    qa_question @relation(fields: [qa_question_id], references: [id])
-  tag            tag         @relation(fields: [tag_id], references: [id])
+model QaTag {
+  id           Int        @id @default(autoincrement())
+  qaQuestionId Int
+  tagId        Int
+  qaQuestion   QaQuestion @relation(fields: [qaQuestionId], references: [id])
+  tag          Tag        @relation(fields: [tagId], references: [id])
 }
 
-model qa_question {
-  id          Int         @id @default(autoincrement())
-  user_id     Int
-  question    String      @db.Text
-  date_create DateTime
-  user        user        @relation(fields: [user_id], references: [id])
-  qa_answers  qa_answer[]
-  qa_tags     qa_tag[]
+model QaQuestion {
+  id         Int        @id @default(autoincrement())
+  userId     Int
+  question   String     @db.Text
+  dateCreate DateTime
+  user       User       @relation(fields: [userId], references: [id])
+  qaAnswers  QaAnswer[]
+  qaTags     QaTag[]
 }
 
-model qa_answer {
-  id          Int         @id @default(autoincrement())
-  question_id Int
-  user_id     Int
-  answer      String      @db.Text
-  date_create DateTime
-  qa_question qa_question @relation(fields: [question_id], references: [id])
-  user        user        @relation(fields: [user_id], references: [id])
+model QaAnswer {
+  id         Int        @id @default(autoincrement())
+  questionId Int
+  userId     Int
+  answer     String     @db.Text
+  dateCreate DateTime
+  qaQuestion QaQuestion @relation(fields: [questionId], references: [id])
+  user       User       @relation(fields: [userId], references: [id])
 }
 
-model subject {
+model Subject {
   id          Int      @id @default(autoincrement())
-  name        String   @db.VarChar(50)
-  description String   @db.VarChar(50)
-  lessons     lesson[]
+  name        String   @db.Text
+  description String   @db.Text
+  lessons     Lesson[]
 }
 
-model lesson {
-  id           Int           @id @default(autoincrement())
-  subject_id   Int
-  quiz_id      Int
-  order        Int
-  title        String        @db.VarChar(50)
-  description  String        @db.VarChar(50)
-  time         DateTime
-  lesson_data  Json
-  subject      subject       @relation(fields: [subject_id], references: [id])
-  quiz         quiz          @relation(fields: [quiz_id], references: [id])
-  user_lessons user_lesson[]
+model Lesson {
+  id          Int          @id @default(autoincrement())
+  subjectId   Int
+  quizId      Int
+  order       Int
+  title       String       @db.Text
+  description String       @db.Text
+  lesson_data Json
+  subject     Subject      @relation(fields: [subjectId], references: [id])
+  quiz        Quiz         @relation(fields: [quizId], references: [id])
+  userLessons UserLesson[]
 }
 
-model quiz {
-  id          Int      @id @default(autoincrement())
-  title       String   @db.VarChar(50)
-  description String   @db.VarChar(50)
-  time        DateTime
-  quiz_data   Json
-  lessons     lesson[]
+model Quiz {
+  id        Int      @id @default(autoincrement())
+  quiz_data Json
+  lessons   Lesson[]
 }
 
-model user_lesson {
-  id         Int      @id @default(autoincrement())
-  user_id    Int
-  lesson_id  Int
-  time       DateTime
+model UserLesson {
+  id         Int     @id @default(autoincrement())
+  userId     Int
+  lessonId   Int
   completion Boolean
-  results    Json
-  user       user     @relation(fields: [user_id], references: [id])
-  lesson     lesson   @relation(fields: [lesson_id], references: [id])
+  user       User    @relation(fields: [userId], references: [id])
+  lesson     Lesson  @relation(fields: [lessonId], references: [id])
 }

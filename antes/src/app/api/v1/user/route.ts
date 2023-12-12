@@ -9,9 +9,11 @@ export async function GET() {
         name: 'boss',
       },
     })
-    return NextResponse.json(user)
+    return NextResponse.json(user, { status: 200 })
   } catch (error) {
-    return NextResponse.json({body: "error"})
+    return NextResponse.json({ error: "server error"}, { status: 500 })
+  } finally {
+    await prisma.$disconnect()
   }
 }
 
@@ -30,5 +32,7 @@ export async function POST(req: Request) {
     return NextResponse.json(user)
   } catch (error) {
     return NextResponse.json({body: "error"})
+  } finally {
+    await prisma.$disconnect()
   }
 }

@@ -14,7 +14,7 @@ export default function ClientCouncil() {
                 <div className='flex justify-center gap-5 2xl:gap-10'>
                     <SideMenu />
                     <div className='flex flex-col shadow-2xl justify-between w-full md:w-[900px] gap-5 p-7 rounded-lg bg-section text-base font-font1 text-font1'>
-                        <p className='text-secondary text-left text-xl'> De cliëntenraad van Antes komt op voor de gemeenschappelijke belangen van cliënten van Antes.</p>
+                        <p className='text-secondary text-left text-xl'>De cliëntenraad van Antes komt op voor de gemeenschappelijke belangen van cliënten van Antes.</p>
                         <div className='flex justify-start gap-5 2xl:gap-10'>
                             <p className='font-bold text-secondary text-xl'>Wat doet de cliëntenraad?</p>
                         </div>
@@ -45,7 +45,7 @@ export default function ClientCouncil() {
                             <p className='text-secondary text-xl'>De cliëntenraad vergadert regelmatig. Ze bespreekt dan onderwerpen die op dat moment relevant zijn. Regelmatig is de directie of het bestuur van Antes aanwezig om te overleggen.</p>
                         </div>
                         <div className='flex justify-start gap-5 2xl:gap-10'>
-                            <p className='text-secondary text-xl'>Verder bezoekt de raad regelmatig de afdelingen. Of er is daar een spreekuur. Tijdens zo'n spreekuur evalueren we de zorg en wat er beter kan. Ook horen we graag wat jij belangrijk vindt. Heb je vragen? Deze beantwoorden we graag. Als we het antwoord niet hebben, word je gekkoppeld aan de juiste persoon. </p>
+                            <p className='text-secondary text-xl'>Verder bezoekt de raad regelmatig de afdelingen. Of er is daar een spreekuur. Tijdens zo&apos;n spreekuur evalueren we de zorg en wat er beter kan. Ook horen we graag wat jij belangrijk vindt. Heb je vragen? Deze beantwoorden we graag. Als we het antwoord niet hebben, word je gekkoppeld aan de juiste persoon.</p>
                         </div>
                         <div className='flex justify-start gap-5 2xl:gap-10'>
                             <p className='font-bold text-secondary text-xl'>Wat doet de cliëntenraad niet?</p>
