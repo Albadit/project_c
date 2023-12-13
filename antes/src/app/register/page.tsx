@@ -17,14 +17,6 @@ const context = {
   register: { url: "/terms" }
 }
 
-const functies = [
-  { id: 1, name: 'Behavioral neuroscience' },
-  { id: 2, name: 'Behavioral psychology' },
-  { id: 3, name: 'Clinical psychology' },
-  { id: 4, name: 'Cognitive psychology'},
-  { id: 5, name: 'Community psychology'},
-]
-
 async function Post(data: any) {
   try {
     const response = await fetch('/api/v1/register', {
@@ -76,10 +68,7 @@ export default function Login() {
         password: password,
       })
       console.log(register)
-      setMessage(register);
-      if (register.status) {
-
-      }
+      // setMessage(register);
       // update in database
       // router.push("/login");
     } else {

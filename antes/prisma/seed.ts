@@ -2,6 +2,7 @@
 // database reset and seed: npx prisma db push --force-reset && npx prisma db seed
 
 import { PrismaClient } from '@prisma/client';
+import bcrypt from 'bcrypt'
 
 const prisma = new PrismaClient();
 
@@ -50,12 +51,12 @@ async function main() {
       roleId: roleId.id,
       userFunctionId: userFunctionId.id,
       image: "/img/profile.png",
-      firstName: 'Hans',
-      lastName: 'Bever',
+      firstName: 'admin',
+      lastName: 'admin',
       bio: null,
-      email: 'Hans@niks.com',
+      email: 'admin@admin.com',
       emailVerified: null,
-      password: '1234',
+      password: await bcrypt.hash("admin", 10),
     }
   })
   
@@ -90,9 +91,6 @@ async function main() {
       ]
     }
   })
-
-  // console.log({ roles });
-  // console.log({ quiz });
 }
 
 main()

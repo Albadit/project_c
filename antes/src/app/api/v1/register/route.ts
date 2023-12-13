@@ -2,21 +2,6 @@ import { NextResponse } from "next/server"
 import { prisma } from '@/../../prisma/index'
 import bcrypt from 'bcrypt'
 
-
-// export async function GET() {
-//   try {
-//     // const body = {test: "test"}
-//     const user = await prisma.user.findFirst({
-//       where: {
-//         id: "asd",
-//       },
-//     })
-//     return NextResponse.json(user, { status: 200 })
-//   } catch (error) {
-//     return NextResponse.json({ error: "server error"}, { status: 500 })
-//   }
-// }
-
 export async function POST(req: Request) {
   try {
     const body = await req.json()
@@ -26,7 +11,7 @@ export async function POST(req: Request) {
     })
 
     if (exist) {
-      return NextResponse.json("Gebruiker bestaat al" , { status: 400 })
+      return NextResponse.json({ body: "Gebruiker bestaat al" } , { status: 400 })
     }
 
     // check if from inpput not empty
@@ -36,8 +21,6 @@ export async function POST(req: Request) {
     })
 
     if (!role) { console.error("Role not found"); return; }
-    
-    const hashedPassword = await bcrypt.hash(body.password, 10)
 
     const user = await prisma.user.create({
       data: {
@@ -49,7 +32,7 @@ export async function POST(req: Request) {
         bio: null,
         email: body.email,
         emailVerified: null,
-        password: hashedPassword,
+        password: await bcrypt.hash(body.password, 10),
       }
     })
 
