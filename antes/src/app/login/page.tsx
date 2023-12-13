@@ -4,49 +4,13 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { Input } from '@/app/components/input';
 import { useRouter } from 'next/navigation'
+import { signIn } from 'next-auth/react';
 
 const context = {
   logo: { url: "/", img: "/img/antes_logo.png", alt: "antes logo"},
   passwordForget: { url:"/forget_password", text: "Wachtwoord vergeten?" },
   cacheLogin: { text: "Onthoud mij" },
   btn: { url: "/dashboard",text: "Login" }
-}
-
-async function Post(data: any) {
-  try {
-    const response = await fetch('/api/v1/register', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    });
-
-    if (!response.ok) {
-      throw new Error(`Error: ${response.status}`);
-    }
-
-    const responseData = await response.json();
-    return responseData
-  } catch (error) {
-    console.error('Error submitting form:', error);
-  }
-}
-
-async function Get() {
-  try {
-    const response = await fetch('/api/v1/register', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      }
-    });
-
-    const responseData = await response.json();
-    return responseData
-  } catch (error) {
-    console.error('Error submitting form:', error);
-  }
 }
 
 export default function Login() {
@@ -59,20 +23,19 @@ export default function Login() {
     const email = formData.get('email');
     const password = formData.get('password');
     if (email && password) {
-      // update in database
-
-      // const userInfo = Post({email: email, password: password})
-      const userInfo = Get()
-      // const response = await fetch('/api/v1/register', {
-      //   method: 'POST',
-      //   headers: {
-      //     'Content-Type': 'application/json',
-      //   },
-      //   body: JSON.stringify({email: email, password: password}),
-      // });
-      // const userInfo = await response.json()
-      console.log(userInfo)
-      // router.push("/dashboard");
+      const exist = await signIn('credentials', {
+        ...{
+          email: email,
+          password: password,
+        },
+        redirect: false,
+      })
+      console.log(exist)
+      // if(exist?.status === 200) {
+      //   router.push("/dashboard");
+      // } else {
+      //   setMessage("Verkeerde email of wachtwoord.");
+      // }
     } else {
       setMessage("Verkeerde email of wachtwoord.");
     }

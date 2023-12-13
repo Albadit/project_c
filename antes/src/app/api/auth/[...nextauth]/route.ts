@@ -4,34 +4,51 @@ import bcrypt from "bcrypt";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { prisma } from '@/../../prisma/index'
 
+const status_error = {
+  "error": "CredentialsSignin",
+  "status": 401,
+  "ok": false,
+  "url": null
+}
+
+const status_succes = {
+  "error": null,
+  "status": 200,
+  "ok": true,
+  "url": "http://localhost:3000/login"
+}
+
 const handler = NextAuth({
   adapter: PrismaAdapter(prisma),
   providers: [
     CredentialsProvider({
       name: 'Credentials',
       credentials: {
-        username: { label: "Username", type: "text", placeholder: "jsmith" },
-        password: { label: "Password", type: "password" }
+        password: { label: "Password", type: "password" },
+        email: { label: "Email", type: "email" },
       },
       async authorize(credentials: any, req: any) {
-        const res = await fetch("/your/endpoint", {
-          method: 'POST',
-          body: JSON.stringify(credentials),
-          headers: { "Content-Type": "application/json" }
+        if (!credentials.email || !credentials.password) { return null }
+
+        const user = await prisma.user.findUnique({
+          where: { email: credentials.email }
         })
-        const user = await res.json()
-  
-        // If no error and we have user data, return it
-        if (res.ok && user) {
-          return user
-        }
-        // Return null if user data could not be retrieved
-        return null
+
+        if (!user) { return null }
+        
+        const passwordMatch = await bcrypt.compare(credentials.password, user.password)
+
+        if (!passwordMatch) { return null }
+
+        return user
       }
     })
   ],
   session: {
-    strategy: "jwt"
+    strategy: "jwt",
+    // strategy: "database",
+    maxAge: 1 * 24 * 60 * 60,
+    updateAge: 24 * 60 * 60,
   },
   secret: process.env.NEXTAUTH_SECRECT,
   debug: process.env.NODE_ENV === "development"
