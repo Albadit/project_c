@@ -11,9 +11,11 @@ install_commands = [
   'npm install @tailwindcss/forms',
   'npm install @tailwindcss/aspect-ratio',
   'npm install @tailwindcss/container-queries',
+  'npm install @prisma/client @auth/prisma-adapter',
   'npm install prisma --save-dev',
-  'npm install @prisma/client',
   'npm install -D typescript ts-node @types/node',
+  'npm i next-auth bcrypt',
+  'npm i --save-dev @types/bcrypt',
   # 'docker compose -f "docker-compose-postgres.yaml" up -d --build',
 ]
 

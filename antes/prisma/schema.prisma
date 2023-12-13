@@ -12,118 +12,163 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model user {
-  id               Int           @id @default(autoincrement())
-  role_id          Int
-  first_name       String        @db.Text
-  last_name        String        @db.Text
-  user_function_id Int
-  bio              String        @db.Text
-  email            String        @db.VarChar(255)
-  password         String        @db.VarChar(32) // assuming hash format
-  user_function    user_function @relation(fields: [user_function_id], references: [id])
-  role             role          @relation(fields: [role_id], references: [id])
-  calendars        calendar[]
-  qa_questions     qa_question[]
-  qa_answers       qa_answer[]
-  user_lessons     user_lesson[]
+model Account {
+  id                String  @id @default(cuid())
+  userId            String  @map("user_id")
+  type              String
+  provider          String
+  providerAccountId String  @map("provider_account_id")
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@map("accounts")
 }
 
-model role {
-  id    Int    @id @default(autoincrement())
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique @map("session_token")
+  userId       String   @map("user_id")
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("sessions")
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+  @@map("verificationtokens")
+}
+
+model User {
+  id             String       @id @default(cuid())
+  roleId         String
+  userFunctionId String
+  image          String?
+  firstName      String       @db.Text
+  lastName       String       @db.Text
+  bio            String?      @db.Text
+  email          String       @unique
+  emailVerified  DateTime?    @map("email_verified")
+  password       String // assuming hash format
+  role           Role         @relation(fields: [roleId], references: [id])
+  userFunction   UserFunction @relation(fields: [userFunctionId], references: [id])
+  calendars      Calendar[]
+  qaQuestions    QaQuestion[]
+  qaAnswers      QaAnswer[]
+  userLessons    UserLesson[]
+  accounts       Account[]
+  sessions       Session[]
+
+  @@map("users")
+}
+
+model Role {
+  id    String @id @default(cuid())
   level Int
   name  String @db.Text
-  users user[]
+  users User[]
 }
 
-model user_function {
-  id    Int    @id @default(autoincrement())
+model UserFunction {
+  id    String @id @default(cuid())
   name  String @db.Text
-  users user[]
+  users User[]
 }
 
-model event {
-  id          Int        @id @default(autoincrement())
+model Event {
+  id          String     @id @default(cuid())
   title       String     @db.Text
   description String     @db.Text
   start       DateTime
   end         DateTime
-  calendars   calendar[]
+  calendars   Calendar[]
 }
 
-model calendar {
-  id       Int   @id @default(autoincrement())
-  user_id  Int
-  event_id Int
-  user     user  @relation(fields: [user_id], references: [id])
-  event    event @relation(fields: [event_id], references: [id])
+model Calendar {
+  id      String @id @default(cuid())
+  userId  String
+  eventId String
+  user    User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  event   Event  @relation(fields: [eventId], references: [id])
 }
 
-model tag {
-  id      Int      @id @default(autoincrement())
-  name    String   @db.Text
-  qa_tags qa_tag[]
+model Tag {
+  id     String  @id @default(cuid())
+  name   String  @db.Text
+  qaTags QaTag[]
 }
 
-model qa_tag {
-  id             Int         @id @default(autoincrement())
-  qa_question_id Int
-  tag_id         Int
-  qa_question    qa_question @relation(fields: [qa_question_id], references: [id])
-  tag            tag         @relation(fields: [tag_id], references: [id])
+model QaTag {
+  id           String     @id @default(cuid())
+  qaQuestionId String
+  tagId        String
+  qaQuestion   QaQuestion @relation(fields: [qaQuestionId], references: [id])
+  tag          Tag        @relation(fields: [tagId], references: [id])
 }
 
-model qa_question {
-  id          Int         @id @default(autoincrement())
-  user_id     Int
-  question    String      @db.Text
-  date_create DateTime
-  user        user        @relation(fields: [user_id], references: [id])
-  qa_answers  qa_answer[]
-  qa_tags     qa_tag[]
+model QaQuestion {
+  id         String     @id @default(cuid())
+  userId     String
+  question   String     @db.Text
+  dateCreate DateTime
+  user       User       @relation(fields: [userId], references: [id])
+  qaAnswers  QaAnswer[]
+  qaTags     QaTag[]
 }
 
-model qa_answer {
-  id          Int         @id @default(autoincrement())
-  question_id Int
-  user_id     Int
-  answer      String      @db.Text
-  date_create DateTime
-  qa_question qa_question @relation(fields: [question_id], references: [id])
-  user        user        @relation(fields: [user_id], references: [id])
+model QaAnswer {
+  id         String     @id @default(cuid())
+  questionId String
+  userId     String
+  answer     String     @db.Text
+  dateCreate DateTime
+  qaQuestion QaQuestion @relation(fields: [questionId], references: [id])
+  user       User       @relation(fields: [userId], references: [id])
 }
 
-model subject {
-  id          Int      @id @default(autoincrement())
+model Subject {
+  id          String   @id @default(cuid())
   name        String   @db.Text
   description String   @db.Text
-  lessons     lesson[]
+  lessons     Lesson[]
 }
 
-model lesson {
-  id           Int           @id @default(autoincrement())
-  subject_id   Int
-  quiz_id      Int
-  order        Int
-  title        String        @db.Text
-  description  String        @db.Text
-  lesson_data  Json
-  subject      subject       @relation(fields: [subject_id], references: [id])
-  quiz         quiz          @relation(fields: [quiz_id], references: [id])
-  user_lessons user_lesson[]
+model Lesson {
+  id          String       @id @default(cuid())
+  subjectId   String
+  quizId      String
+  order       Int
+  title       String       @db.Text
+  description String       @db.Text
+  lesson_data Json
+  subject     Subject      @relation(fields: [subjectId], references: [id])
+  quiz        Quiz         @relation(fields: [quizId], references: [id])
+  userLessons UserLesson[]
 }
 
-model quiz {
-  id        Int      @id @default(autoincrement())
+model Quiz {
+  id        String   @id @default(cuid())
   quiz_data Json
-  lessons   lesson[]
+  lessons   Lesson[]
 }
 
-model user_lesson {
-  id         Int     @id @default(autoincrement())
-  user_id    Int
-  lesson_id  Int
+model UserLesson {
+  id         String  @id @default(cuid())
+  userId     String
+  lessonId   String
   completion Boolean
-  user       user    @relation(fields: [user_id], references: [id])
-  lesson     lesson  @relation(fields: [lesson_id], references: [id])
+  user       User    @relation(fields: [userId], references: [id])
+  lesson     Lesson  @relation(fields: [lessonId], references: [id])
 }
