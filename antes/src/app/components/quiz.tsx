@@ -14,7 +14,7 @@ export default function Quiz() {
   const [showResults, setShowResults] = useState(false);
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
 
-  const [quizData, setData] = useState<QuizItems[]>([]);
+  const [data, setData] = useState<QuizItems[]>([]);
   const [isLoading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -30,7 +30,7 @@ export default function Quiz() {
     if (selectedOption) {
       setUserAnswers([...userAnswers.slice(0, currentQuestion), selectedOption]);
 
-      if (currentQuestion + 1 < quizData.length) {
+      if (currentQuestion + 1 < data.length) {
         setCurrentQuestion(currentQuestion + 1);
         setSelectedOption(null); // Reset selected option after moving to the next question
       } else {
@@ -45,9 +45,9 @@ export default function Quiz() {
     setShowResults(false);
   };
   const correctAnswers = userAnswers.filter(
-    (answer, index) => answer === quizData[index].correctAnswer
+    (answer, index) => answer === data[index].correctAnswer
   );
-  const score = (correctAnswers.length / quizData.length) * 100;
+  const score = (correctAnswers.length / data.length) * 100;
   const passed = score >= 60;
 
   return (
@@ -56,7 +56,7 @@ export default function Quiz() {
         <div className='flex flex-col gap-8 w-full'>
           <h1 className="text-3xl font-bold">Quiz Results</h1>
           <ul className='flex flex-col gap-2'>
-            {quizData.map((question, index) => (
+            {data.map((question, index) => (
               <li key={index}>
                 <strong>{question.question}</strong>
                 <div>
@@ -79,7 +79,7 @@ export default function Quiz() {
               You need to have at least 60% of the answers correct
             </p>
             <p className='font-semibold'>
-              You answered {correctAnswers.length} out of {quizData.length} questions correctly
+              You answered {correctAnswers.length} out of {data.length} questions correctly
             </p>
             <p className={`font-semibold ${passed ? 'text-success' : 'text-error'}`}>
               Your score: {score.toFixed(2)}%
@@ -105,11 +105,11 @@ export default function Quiz() {
           <div className='flex flex-col gap-6 w-full'>
           <h1 className="text-primary text-3xl font-bold">Question {currentQuestion + 1}</h1>
           <div className='flex flex-col gap-2'>
-            <p className="text-xl font-semibold">{quizData[currentQuestion].question}</p>
+            <p className="text-xl font-semibold">{data[currentQuestion].question}</p>
             <hr />
           </div>
           <div className='flex flex-col gap-4'>
-            {quizData[currentQuestion].options.map((option, index) => (
+            {data[currentQuestion].options.map((option, index) => (
               <button
                 key={index}
                 className={`${

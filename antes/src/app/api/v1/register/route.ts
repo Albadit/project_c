@@ -11,10 +11,16 @@ export async function POST(req: Request) {
     })
 
     if (exist) {
-      return NextResponse.json({ body: "Gebruiker bestaat al" } , { status: 400 })
+      return NextResponse.json("Gebruiker bestaat al", { status: 400 })
     }
 
-    // check if from inpput not empty
+    if (!(body.password === body.confirmPassword)) {
+      return NextResponse.json("Wachtwoord match niet", { status: 400 })
+    }
+
+    if (!(body.agree)) {
+      return NextResponse.json("Ga akkoord met de privacybeleid", { status: 400 })
+    }
 
     const role = await prisma.role.findFirst({
       where: { name: "Werknemer" }
@@ -36,7 +42,7 @@ export async function POST(req: Request) {
       }
     })
 
-    return NextResponse.json(user, { status: 200 })
+    return NextResponse.json(true, { status: 200 })
   } catch (error) {
     return NextResponse.json({ error: "server error"}, { status: 500 })
   }

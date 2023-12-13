@@ -58,21 +58,25 @@ export default function Login() {
     const email = formData.get('email');
     const password = formData.get('password');
     const confirmPassword = formData.get('confirm_password');
+    const agree = formData.get('agree');
     
-    if (firstName && lastName && userFunction && email && password && (password === confirmPassword)) {
+    if (firstName && lastName && userFunction && email && password && confirmPassword) {
       const register = await Post({
         firstName: firstName,
         lastName: firstName,
         userFunctionId: userFunction,
         email: email,
         password: password,
+        confirmPassword: confirmPassword,
+        agree: agree,
       })
-      console.log(register)
-      // setMessage(register);
-      // update in database
-      // router.push("/login");
+      if (register === true) {
+        router.push("/login");
+      } else {
+        setMessage(register);
+      }
     } else {
-      setMessage("Gegevens is fout.");
+      setMessage("De input staat leeg.");
     }
   }
 
@@ -93,7 +97,7 @@ export default function Login() {
             <Input label="Wachtwoord" name="password" type="password" value=''/>
             <Input label="Bevestigen Wachtwoord" name="confirm_password" type="password" value=''/>
             <div className='flex flex-row gap-3 items-top text-font1 text-sm'>
-              <input type="checkbox" name="" className='rounded text-callToAction border-font1/30 focus:ring-2 focus:ring-callToAction sm:text-sm sm:leading-6 disabled:bg-slate-50 disabled:text-text-slate-500 disabled:border-slate-200 disabled:shadow-none invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500 disabled:opacity-75'/> 
+              <input type="checkbox" name="agree" className='rounded text-callToAction border-font1/30 focus:ring-2 focus:ring-callToAction sm:text-sm sm:leading-6 disabled:bg-slate-50 disabled:text-text-slate-500 disabled:border-slate-200 disabled:shadow-none invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500 disabled:opacity-75'/> 
               <label className='m-[-1px]'>Ga akkoord met de <Link href={context.register.url} className='underline underline-offset-1 text-hyperlink'>Antes-gebruikersovereenkomst en het privacybeleid</Link></label>
             </div>
             <button type="submit" title="register" className='flex flex-row items-center justify-center w-full lg:w-auto gap-2 px-4 py-3 rounded-lg bg-primary text-font2 font-semibold text-base'>{context.btn.text}</button>
