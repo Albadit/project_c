@@ -4,6 +4,7 @@ import Footer from '@/app/components/footer';
 import { NavDashboard } from '@/app/components/dashboard/nav'
 import ArrowRight from '@/app/components/icons/arrow_right';
 import Link from 'next/link';
+import Popup from '@/app/components/popup';
 
 const user = {
   id: 1,
