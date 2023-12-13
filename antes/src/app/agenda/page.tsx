@@ -4,6 +4,7 @@ import Footer from '@/app/components/footer';
 import { NavDashboard } from '@/app/components/dashboard/nav'
 import ArrowRight from '@/app/components/icons/arrow_right';
 import Link from 'next/link';
+import { events } from '../event/page';
 
 const user = {
   id: 1,
@@ -23,8 +24,6 @@ export default function Calendar() {
   const currentDate = useMemo(() => {
     return new Date();
   }, []);
-  // const currentMonth = currentDate.toLocaleString('default', { month: 'long' }).charAt(0).toUpperCase() + currentDate.toLocaleString('default', { month: 'long' }).slice(1);
-  // const currentYear = currentDate.getFullYear()
   const startDayOfWeek = getStartDayOfWeek();
 
 
@@ -40,20 +39,12 @@ export default function Calendar() {
     setCurrentWeek(0);
   };
 
-  const handlePreviousWeek = () => {
-    handleWeekChange(-1);
-  };
-
-  const handleNextWeek = () => {
-    handleWeekChange(1);
-  };
-
-
   const adjustedDate = useMemo(() => {
     const date = new Date(currentDate);
+    date.setDate(date.getDate() - date.getDay() + startDayOfWeek);
     date.setDate(date.getDate() + currentWeek * 7);
     return date;
-  }, [currentDate, currentWeek]);
+  }, [currentDate, currentWeek, startDayOfWeek]);
 
   React.useEffect(() => {
     const month = adjustedDate.toLocaleString('default', { month: 'long' }).charAt(0).toUpperCase() + adjustedDate.toLocaleString('default', { month: 'long' }).slice(1);
@@ -135,11 +126,9 @@ export default function Calendar() {
               ))}
 
               {/* Event cards */}
-              {generateEventCard("Di", "12:00", "13:00", "Event: Hans")}
-              {generateEventCard("Za", "09:00", "14:00", "Event: Hans")}
-              {generateEventCard("Ma", "15:00", "17:00", "Event: Hans")}
-              {generateEventCard("Di", "10:00", "11:30", "Event: Hans")}
+              {events.map(event => generateEventCard(event))}
               {/* You can add more event cards here */}
+
             </div>
           </div>
         </section>
@@ -148,10 +137,12 @@ export default function Calendar() {
     </>
   );
 
-  function convertTimeToMinutes(time: any) {
-    const [hours, minutes] = time.split(":").map(Number);
+  function convertTimeToMinutes(date: Date): number {
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
     return hours * 60 + minutes;
   }
+
 
   function getDayIndex(day: string) {
     const daysOfWeek = ["Ma", "Di", "Wo", "Do", "Vr", "Za", "Zo"];
@@ -162,6 +153,7 @@ export default function Calendar() {
     const daysOfWeek = ["Ma", "Di", "Wo", "Do", "Vr", "Za"];
     return daysOfWeek.indexOf(dayLabels[0]);
   }
+
 
 
   function getUpdatedDayNumber(index: any, startDayOfWeek: any, currentWeek: any) {
@@ -195,23 +187,39 @@ export default function Calendar() {
     return { dayNumber, monthOffset };
   }
 
-  function generateEventCard(day: any, startTime: any, endTime: any, eventName: any) {
-    const startMinutes = convertTimeToMinutes(startTime);
-    const endMinutes = convertTimeToMinutes(endTime);
-    const top = `calc(${startMinutes / 60 - 8} * ${timeSlotHeight}%)`;
-    const height = `calc(${(endMinutes - startMinutes) / 60 * timeSlotHeight}%)`;
-    const left = `calc(${getDayIndex(day) * (100 / 7)}%)`;
-    const width = 'calc(100% / 7)';
+  function generateEventCard(event: any) {
+    const startMinutes = convertTimeToMinutes(event.start);
+    const endMinutes = convertTimeToMinutes(event.end);
+    const formattedStartTime = event.start.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    const formattedEndTime = event.end.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
-    return (
-      <div
-        key={`${day}-${startTime}`}
-        className="bg-[#3939bf] text-[#ffffff] p-2 rounded-md mb-2 absolute"
-        style={{ top, height, left, width }}
-      >
-        <div className="font-bold">{eventName}</div>
-        <div className="text-sm">{` ${startTime} - ${endTime}`}</div>
-      </div>
-    );
+    const isSameWeek = adjustedDate.getFullYear() === event.start.getFullYear() &&
+      adjustedDate.getMonth() === event.start.getMonth() &&
+      adjustedDate.getDate() <= event.start.getDate() &&
+      event.start.getDate() <= adjustedDate.getDate() + 6;
+
+      // teveel pijn aan hoofd please fix dit ik kan niet rekenen de datum is een maand en dag verkeerd dacht ik
+
+    if (isSameWeek) {
+      const top = `calc(${startMinutes / 60 - 8} * ${timeSlotHeight}%)`;
+      const height = `calc(${(endMinutes - startMinutes) / 60 * timeSlotHeight}%)`;
+      const left = `calc(${getDayIndex(dayLabels[event.start.getDay()]) * (100 / 7)}%)`;
+      const width = 'calc(100% / 7)';
+
+      return (
+        <div
+          key={`event-${event.id}`}
+          className="bg-[#3939bf] text-[#ffffff] p-2 rounded-md mb-2 absolute"
+          style={{ top, height, left, width }}
+        >
+          <div className="font-bold">{event.title}</div>
+          <div className="text-sm">{`${formattedStartTime} - ${formattedEndTime}`}</div>
+        </div>
+      );
+    }
+
+    return null; // Return null if the event is not in the current week
   }
+
+
 }
