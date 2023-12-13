@@ -5,6 +5,7 @@ import os
 script_directory = os.path.dirname(os.path.realpath(__file__))
 install_commands = [
   # 'npm install next@latest react@latest react-dom@latest',
+  # 'npm install --save typescript @types/node @types/react @types/react-dom @types/jest', # react
   'npm install next@latest react@latest react-dom@latest',
   'npm install tailwindcss@latest',
   'npm install @tailwindcss/typography',
