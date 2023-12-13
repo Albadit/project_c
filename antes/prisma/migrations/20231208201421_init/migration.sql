@@ -10,10 +10,12 @@
 
 */
 -- AlterTable
-ALTER TABLE "event" ALTER COLUMN "description" SET DATA TYPE TEXT;
+ALTER TABLE "event" ALTER COLUMN "title" SET DATA TYPE TEXT,
+ALTER COLUMN "description" SET DATA TYPE TEXT;
 
 -- AlterTable
 ALTER TABLE "lesson" DROP COLUMN "time",
+ALTER COLUMN "title" SET DATA TYPE TEXT,
 ALTER COLUMN "description" SET DATA TYPE TEXT;
 
 -- AlterTable
@@ -22,7 +24,21 @@ DROP COLUMN "time",
 DROP COLUMN "title";
 
 -- AlterTable
-ALTER TABLE "subject" ALTER COLUMN "description" SET DATA TYPE TEXT;
+ALTER TABLE "role" ALTER COLUMN "name" SET DATA TYPE TEXT;
+
+-- AlterTable
+ALTER TABLE "subject" ALTER COLUMN "name" SET DATA TYPE TEXT,
+ALTER COLUMN "description" SET DATA TYPE TEXT;
+
+-- AlterTable
+ALTER TABLE "tag" ALTER COLUMN "name" SET DATA TYPE TEXT;
+
+-- AlterTable
+ALTER TABLE "user" ALTER COLUMN "first_name" SET DATA TYPE TEXT,
+ALTER COLUMN "last_name" SET DATA TYPE TEXT;
+
+-- AlterTable
+ALTER TABLE "user_function" ALTER COLUMN "name" SET DATA TYPE TEXT;
 
 -- AlterTable
 ALTER TABLE "user_lesson" DROP COLUMN "results",

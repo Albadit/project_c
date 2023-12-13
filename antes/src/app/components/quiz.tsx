@@ -2,51 +2,30 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link';
 
-type QuizData = {
-  id: number
-  title: string
-  time: string
-  description: string
-  quiz: QuizQuestion[]
-}
-
-type QuizQuestion = {
-  question: string;
+type QuizItems = {
   options: string[];
+  question: string;
   correctAnswer: string;
-};
-
-export const getData = async () => {
-  // return await fetch('http://localhost:3000/api/v1/quiz')
-  //   .then(res => res.json())
-  //   .catch(err => { throw new Error('Failed to fetch data')} )
-
-  const res = await fetch('http://localhost:3000/api/v1/quiz')
-  // The return value is *not* serialized
-  // You can return Date, Map, Set, etc.
- 
-  if (!res.ok) {
-    // This will activate the closest `error.js` Error Boundary
-    throw new Error('Failed to fetch data')
-  }
-  return res.json()
 }
- 
-export default function QuizPage({}) {
+
+export default function Quiz() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [userAnswers, setUserAnswers] = useState<string[]>([]);
   const [showResults, setShowResults] = useState(false);
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
-  const [data, setData] = useState<QuizData | undefined>(undefined);
 
-  useEffect	(() => {
-    const fetch = async () => {
-      const data = await getData();
-      console.log("fetch", data)
-      setData(data);
-    }
-    fetch();
+  const [quizData, setData] = useState<QuizItems[]>([]);
+  const [isLoading, setLoading] = useState(true)
+
+  useEffect(() => {
+    fetch('/api/v1/quiz')
+      .then((res) => res.json())
+      .then((data) => {
+        setData(data)
+        setLoading(false)
+      })
   }, [])
+
   const handleOptionSelect = () => {
     if (selectedOption) {
       setUserAnswers([...userAnswers.slice(0, currentQuestion), selectedOption]);
@@ -78,8 +57,8 @@ export default function QuizPage({}) {
         <div className='flex flex-col gap-8 w-full'>
           <h1 className="text-3xl font-bold">Quiz Resultaat</h1>
           <ul className='flex flex-col gap-2'>
-            {data.quiz.map((question, index) => (
-              <li key={index} className="mb-2">
+            {quizData.map((question, index) => (
+              <li key={index}>
                 <strong>{question.question}</strong>
                 <div>
                   Uw antwoord: {userAnswers[index]}
@@ -123,15 +102,15 @@ export default function QuizPage({}) {
           </div>
         </div>
       ) : (
-        console.log(data.description),
-        <div className='flex flex-col gap-6 w-full'>
-          <h1 className="text-primary text-3xl font-bold">Vraag {currentQuestion + 1}</h1>
+        !isLoading ? (
+          <div className='flex flex-col gap-6 w-full'>
+          <h1 className="text-primary text-3xl font-bold">Question {currentQuestion + 1}</h1>
           <div className='flex flex-col gap-2'>
           <p className="text-xl font-semibold">{data.quiz[currentQuestion].question}</p>
           <hr />
           </div>
           <div className='flex flex-col gap-4'>
-            {data.quiz[currentQuestion].options.map((option, index) => (
+            {quizData[currentQuestion].options.map((option, index) => (
               <button
                 key={index}
                 className={`${
@@ -153,6 +132,11 @@ export default function QuizPage({}) {
           </button>
         
         </div>
+        ) : (
+          <div className='flex flex-col justify-center items-center gap-6 w-full'>
+            <p className="text-xl font-semibold">Loading quiz data...</p>
+          </div>
+        )
       )}
     </>
   );
