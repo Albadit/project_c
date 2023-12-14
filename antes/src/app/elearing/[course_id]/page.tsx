@@ -61,15 +61,15 @@ export default function ElearningCourse() {
                   </h2>
                 </div>
                 <div className="flex justify-between border-t py-5 pl-8 ">
-                  <p className="font-semibold">Completion Time</p>
-                  <p className="pr-4"> 10h and 3 minutes </p>
+                  <p className="font-semibold">Cursus tijd</p>
+                  <p className="pr-4"> 10 uur en 3 minuten </p>
                 </div>
                 <div className="flex justify-between border-t py-4 pl-8">
-                  <p className="font-semibold">Lessons completed</p>
+                  <p className="font-semibold">Lessen compleet</p>
                   <p className="pr-20">{elearning.user_chapters}</p>
                 </div>
                 <div className="flex justify-between border-t py-4 pl-8 border-b">
-                  <p className="font-semibold">Total lessons</p>
+                  <p className="font-semibold">Totaal aantal lessen</p>
                   <p className="pr-20">{elearning.max_chapters}</p>
                 </div>
               </div>
@@ -92,16 +92,16 @@ export default function ElearningCourse() {
               </p>
               <div className="flex flex-col mt-20 ml-16 space-y-4 font-bold">
                 <div className="flex space-x-20 pb-6">
-                  <p className="border-primary border-b-2">Course</p>
+                  <p className="border-primary border-b-2">Cursus</p>
                 </div>
                 <div className="pb-8">
                   <Link
                     href={lesson.url}
                     className="bg-primary h-[50px] w-full sm:w-[100px] rounded-xl font-medium my-6 mx-auto px-2 sm:px-20 py-3 text-[#fff]"
                   >
-                    Lesson 1
+                    Les 1
                     <span className="hidden lg:inline">
-                      - Introduction to the course
+                       - Introductie
                     </span>
                     <span className=" pl-16">30 min</span>
                     {/* lesson time is now hardcoded */}
@@ -112,9 +112,9 @@ export default function ElearningCourse() {
                     href={lesson.url}
                     className="bg-primary h-[50px] w-full sm:w-[100px] rounded-xl font-medium my-6 mx-auto px-2 sm:px-20 py-3 text-[#fff]"
                   >
-                    Lesson 1
+                    Les 1
                     <span className="hidden lg:inline">
-                      - Introduction to the course
+                      - Introductie
                     </span>
                     <span className=" pl-16">30 min</span>
                   </Link>
@@ -124,9 +124,9 @@ export default function ElearningCourse() {
                     href={lesson.url}
                     className="bg-primary h-[50px] w-full sm:w-[100px] rounded-xl font-medium my-6 mx-auto px-2 sm:px-20 py-3 text-[#fff]"
                   >
-                    Lesson 1
+                    Les 1
                     <span className="hidden lg:inline">
-                      - Introduction to the course
+                      - Introductie
                     </span>
                     <span className=" pl-16">30 min</span>
                   </Link>
@@ -136,9 +136,9 @@ export default function ElearningCourse() {
                     href={lesson.url}
                     className="bg-primary h-[50px] w-full sm:w-[100px] rounded-xl font-medium my-6 mx-auto px-2 sm:px-20 py-3 text-[#fff]"
                   >
-                    Lesson 1
+                    Les 1
                     <span className="hidden lg:inline">
-                      - Introduction to the course
+                      - Introductie
                     </span>
                     <span className=" pl-16">30 min</span>
                   </Link>
@@ -149,7 +149,7 @@ export default function ElearningCourse() {
                   href={lesson.url}
                   className="bg-secondary rounded-md font-bold mx-12 my-12 px-5 py-4 text-[#fff] text-center "
                 >
-                  Start course
+                  Start cursus
                 </Link>
               </div>
             </div>

@@ -47,7 +47,7 @@
 
   :root[data-theme="light"] a:hover, :root[data-theme="light"] button:hover {
     --clr-primary: 179 15 65;
-    --clr-secondary: 8 80 163;
+    --clr-secondary: 68 120 203;
     --clr-callToAction: 89 196 198;
     --clr-font-1: 30 30 30;
     --clr-font-2: 250 250 250;
@@ -58,6 +58,7 @@
     --clr-hyperlink: 0 122 255;
     --clr-input-border: 229 229 229;
     --clr-box-shadow: 0 0 0;
+    --clr-light_gray: 128 128 128;
   }
 
   :root[data-theme="dark"] {
@@ -73,6 +74,7 @@
     --clr-hyperlink: 0 174 239;
     --clr-input-border: 169 169 169;
     --clr-box-shadow: none;
+    --clr-light_gray: 128 128 128;
   }
 
   :root[data-theme="dark"] a, :root[data-theme="dark"] button {
@@ -92,5 +94,12 @@
     --clr-hyperlink: 0 174 239;
     --clr-input-border: 169 169 169;
     --clr-box-shadow: none;
+    --clr-light_gray: 128 128 128;
   }
 }
+
+.light-gray-border {
+  border-color: #D3D3D3;
+}
+
+

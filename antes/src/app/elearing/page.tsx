@@ -4,7 +4,7 @@ import Footer from '@/app/components/footer';
 import { NavDashboard } from '@/app/components/dashboard/nav'
 
 import Arrowright from "@/app/components/icons/arrow_right";
-import { ELearningCard } from '@/app/components/elearning_card';
+import { ELearingCard } from '@/app/components/elearning_card';
 import { SubjectCard } from '@/app/components/dashboard/subject_card';
 
 const user = {
@@ -43,8 +43,8 @@ export default function ELearning() {
       <section className='flex flex-col gap-10 mb-12'>
         <h1 className="font-font1 font-bold text-center text-primary text-5xl">E-Learning</h1>
         <div className='flex md:flex-row flex-col justify-center gap-5 2xl:gap-10'>
-          <ELearningCard elearning={elearing} />
-          <ELearningCard elearning={elearing} />
+          <ELearingCard elearing={elearing} />
+          <ELearingCard elearing={elearing} />
         </div>
         <div className='flex items-center justify-center gap-6'>
           <button className="bg-secondary hover:bg-[#0840A3] text-[#FAFAFA] font-bold py-3 px-10 rounded">

@@ -19,6 +19,7 @@ const qa = {
   url: "/qa/1",
 }
 
+
 const event = {
   id: 1,
   image: "/img/event.png",
@@ -33,6 +34,7 @@ const elearning = {
   id: 1,
   image: "img/e_learing.png",
   title: "H1. Introduction.",
+  description: "efefefefe",
   user_chapters: 8,
   max_chapters: 11,
   url: "/elearing",
@@ -43,7 +45,7 @@ const user = {
   role_id: 1,
   profile: "/img/profile.png",
   first_name: "Sara",
-  last_name: "Leekman",
+  last_name: "Leekmane",
   function_id: 3,
   bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
   email: "saraleekman@outlook.com",
@@ -70,7 +72,7 @@ export default function Dashboard() {
             </div>
             <div className='flex flex-col items-center justify-center gap-10'>
               <h2 className='font-font1 font-semibold text-center text-primary text-3xl'>E-learing progressie</h2>
-              <ELearningCard elearning={elearning}/>
+              <ELearingCard elearing={elearning}/>
             </div>
           </div>
         </section> 
