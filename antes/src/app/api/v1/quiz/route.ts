@@ -3,10 +3,7 @@ import { prisma } from '@/../../prisma/index'
 
 export async function GET() {
   try {
-    const quiz = await prisma.quiz.findUnique({
-      where: {
-        id: 1,
-      },
+    const quiz = await prisma.quiz.findFirst({
     })
     return NextResponse.json(quiz?.quiz_data, { status: 200 })
   } catch (error) {

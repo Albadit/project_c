@@ -148,13 +148,13 @@ model Subject {
 model Lesson {
   id          String       @id @default(cuid())
   subjectId   String
-  quizId      String
+  quizId      String?
   order       Int
   title       String       @db.Text
   description String       @db.Text
   lesson_data Json
-  subject     Subject      @relation(fields: [subjectId], references: [id])
-  quiz        Quiz         @relation(fields: [quizId], references: [id])
+  subject     Subject       @relation(fields: [subjectId], references: [id])
+  quiz        Quiz?         @relation(fields: [quizId], references: [id])
   userLessons UserLesson[]
 }
 

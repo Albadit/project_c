@@ -8,17 +8,10 @@ export async function POST() {
       data: {
         name: 'GGZ kennis',
         description: 'Dit is algemene kennis over de GGZ',
-        lessons: {
-          create: {
-            quiz_id: 1,
-            title: 'Hoofdstuk 1',
-            description: 'Dit is het eerste hoofdstuk',
-            order: 1,
-            lesson_data: "idk",
-          },
           },
       },
-    });
+    );
+
     return NextResponse.json(subject);
   } catch (error: unknown) {
     if (error instanceof Error) {
@@ -31,7 +24,7 @@ export async function POST() {
 
 export async function GET() {
   try {
-    const subject = await prisma.subject.findFirst({ where : { id: 1 } })
+    const subject = await prisma.subject.findFirst({})
     return NextResponse.json(subject)
   } catch (error) {
     return NextResponse.json({body: "error"})
