@@ -38,9 +38,11 @@ export default function WorkWithUs() {
                     <p className="text-center text-primary text-5xl font-bold drop-shadow-lg">Werken Bij Ons</p>
                 </div>
                 <div className='flex justify-center gap-5 2xl:gap-10'>
-                    <SideMenuWork />
-                    <div className='flex flex-col shadow-2xl justify-between w-full md:w-[1000px] gap-5 p-7 rounded-lg bg-section text-base font-font1 text-font1'>
-                        <div className='flex flex-row gap-5'>
+                    {/* <SideMenuWork /> */}
+                    <div className='hidden sm:flex'><SideMenuWork /></div>
+                    <div className='flex flex-col shadow-2xl justify-between w-full md:w-[900px] gap-5 p-7 rounded-lg bg-section text-base font-font1 text-font1'>
+                        <div className='md:hidden'><SideMenuWork /></div>
+                        <div className='flex flex-col md:flex-row gap-5'>
                             <AboutCard aboutus={workwithus1} />
                             <AboutCard aboutus={workwithus2} />
                             <AboutCard aboutus={workwithus3} />
@@ -74,17 +76,17 @@ export default function WorkWithUs() {
                             <div className='text-secondary text-left text-xl'>Daarnaast kun je kiezen voor de doelgroep die jou het meest aanspreekt. Zo bieden we zorg aan cliënten met een intensieve zorgvraag (zoals forensische zorg of bij ernstige of multi-problematiek) of minder intensieve zorgvraag. We bieden verslavingszorg en zorg aan ouderen en cliënten met een niet-aangeboren hersenletsel, waarbij naast psychische zorg ook lichamelijke zorg vaak een belangrijke rol speelt.</div>
                         </div>
                         <div className='flex gap-5 3xl:gap-10'>
-                            <div className='text-secondary text-left text-xl font-bold'>De belangrijkste werkvelden van Antes:
-                                <p className='text-primary'>werken in de kliniek</p>
-                                <p className='text-primary'>werken in de wijk, bij cliënten thuis</p>
-                                <p className='text-primary'>werken als woonbegeleider</p>
-                                <p className='text-primary'>werken in de verslavingszorg</p>
-                                <p className='text-primary'>werken in de ouderenpsychiatrie</p>
-                                <p className='text-primary'>werken in de zorg bij niet-aangeboren hersenletsel (NAH)</p>
-                                <p className='text-primary'>werken in de zorg bij ernstige psychiatrische problemen en multi-problematiek</p>
-                                <p className='text-primary'>werken in de forensische Zorg</p>
-                                <p className='text-primary'>werken als ervaringsdeskundige</p>
-                                <p className='text-primary'>werken in de Flexpool</p>
+                            <div className='text-secondary text-left text-xl'>De belangrijkste werkvelden van Antes:
+                                <p className=''>- werken in de kliniek</p>
+                                <p className='text-primary'><Link href='/work/WorkWithClients'>- werken in de wijk, bij cliënten thuis</Link></p>
+                                <p className='text-primary'><Link href='/work/WorkAsResidentialSupervisor'>- werken als woonbegeleider</Link></p>
+                                <p className=''>- werken in de verslavingszorg</p>
+                                <p className=''>- werken in de ouderenpsychiatrie</p>
+                                <p className=''>- werken in de zorg bij niet-aangeboren hersenletsel (NAH)</p>
+                                <p className=''>- werken in de zorg bij ernstige psychiatrische problemen en multi-problematiek</p>
+                                <p className=''>- werken in de forensische Zorg</p>
+                                <p className=''>- werken als ervaringsdeskundige</p>
+                                <p className='text-primary'><Link href='/work/Flexpool'>- werken in de Flexpool</Link></p>
                             </div>
                         </div>
                         <div className='flex gap-5 3xl:gap-10'>
