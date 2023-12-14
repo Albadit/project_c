@@ -36,7 +36,6 @@ async function Post(data: any) {
 export default function Login() {
   const [message, setMessage] = useState('');
   const router = useRouter(); 
-
   const [userFunctionData, setData] = useState<UserFuntionItems[]>([]);
   const [isLoading, setLoading] = useState(true)
 

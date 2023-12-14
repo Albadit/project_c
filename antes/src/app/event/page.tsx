@@ -3,8 +3,11 @@ import React, { useState, useMemo } from 'react';
 import Footer from '@/app/components/footer';
 import { NavDashboard } from '@/app/components/dashboard/nav'
 import ArrowRight from '@/app/components/icons/arrow_right';
+import { useRouter } from 'next/navigation'
 import Link from 'next/link';
 import Popup from '@/app/components/popup';
+
+
 
 const user = {
   id: 1,
@@ -214,6 +217,9 @@ export default function Calendar() {
             <p className={`${item.id === -1 ? 'hidden' : ''}`}>{item.start.toLocaleTimeString(local, { hour: '2-digit', minute: '2-digit', hour12: false })} - {item.end.toLocaleTimeString(local, { hour: '2-digit', minute: '2-digit', hour12: false })}</p>
           </Link>
           )}
+        </div>
+        <div className='self-center'>
+         <Popup/>
         </div>
       </section>
     </main>

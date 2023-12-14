@@ -1,8 +1,59 @@
 import React, { useState } from "react";
-import LocationPin from "./icons/location_pin";
+import { useRouter } from 'next/navigation'
 
-const Modal = () => {
+async function Post(data: any) {
+  try {
+    const response = await fetch('/api/v1/event', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+    const responseData = await response.json();
+    return responseData
+  } catch (error) {
+    console.error('Error submitting form:', error);
+  }
+}
+
+
+export default function Modal() {
+  const [message, setMessage] = useState('');
+  const router = useRouter(); 
   const [showModal, setShowModal] = useState(false);
+  
+  
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const title = formData.get('title');
+    const description = formData.get('description');
+    const start = formData.get('start');
+    const end = formData.get('end');
+    setShowModal(false)
+    
+    console.log(end)
+
+    if (title && description && start && end) {
+      const event = await Post({
+        title: title,
+        description: description,
+        start: start,
+        end: end  
+      })
+      console.log(event)
+      if (event) {
+        // router.push("/login");
+      } else {
+        setMessage(event);
+      }
+    } else {
+      setMessage("De input staat leeg.");
+    }
+  }
+
+
   return (
     <>
       <button
@@ -30,27 +81,26 @@ const Modal = () => {
                   </button>
                 </div>
                 <div className="relative p-6 flex-center overflow-hidden">
-                  <form className="bg-[#e5e7eb30]  shadow-md rounded px-8 pt-6 pb-8 w-full">
+                  <form onSubmit={handleSubmit} className="bg-[#e5e7eb30]  shadow-md rounded px-8 pt-6 pb-8 w-full">
                   <div className="py-2 items-start">
                       <label className="flex text-[#000000] text-sm font-bold mb-1">
-                         Titel
+                        Titel
                       </label>
-                      <input className="shadow appearance-none border rounded w-full py-2 text-[#000000]" />
+                      <input name="title" type="text" className="shadow appearance-none border rounded w-full py-2 text-[#000000]"/>
                     </div>
                     <div className="py-2 items-start">
                       <label className="items-center flex box-border text-[#000000] text-sm font-bold mb-1">
                          Beschrijving
                       </label>
-                      <input className="shadow appearance-none border rounded w-full py-2 text-[#000000]"  />
+                      <input name="description" type="text"  className="shadow appearance-none border rounded w-full py-2 text-[#000000]"  />
                     </div>
                     <div >
                     <label className="flex text-[#000000] text-sm font-bold mb-1">
                       Begin van het event
                     </label>
                     <input  className="shadow appearance-none border rounded w-full py-2 px-1 text-[#000000]"
-                      id="event"
                       type="datetime-local"
-                      name="eventdate"
+                      name="start"
                     />
                     </div>
                     <div className="py-2">
@@ -58,34 +108,27 @@ const Modal = () => {
                       Einde van het event
                     </label>
                     <input  className="shadow appearance-none border rounded w-full py-2 px-1 text-[#000000]"
-                      id="event"
+                    
                       type="datetime-local"
-                      name="eventdate"
+                      name="end"
                     />
                     </div>
                     <div className="py-2">
                       <label className="flex text-[#000000]text-sm font-bold mb-1">
                          Locatie 
                       </label>
-                      <input className="shadow appearance-none border rounded w-full py-2 text-black" />
+                      <input name="location" type="text" className="shadow appearance-none border rounded w-full py-2 text-black" />
                     </div>
+                    <p className='text-error'>{message}</p>
+                    <div className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
+                      <button
+                        className="text-[#000000] font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1"
+                        type="submit"
+                      >
+                        Bevestig
+                      </button>
+                  </div>
                   </form>
-                </div>
-                <div className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
-                  <button
-                    className="text-[#000000] font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1"
-                    type="button"
-                    onClick={() => setShowModal(false)}
-                  >
-                    Sluiten
-                  </button>
-                  <button
-                    className="text-[#000000] font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1"
-                    type="button"
-                    onClick={() => setShowModal(false)}
-                  >
-                    Bevestig
-                  </button>
                 </div>
               </div>
             </div>
@@ -94,8 +137,5 @@ const Modal = () => {
       ) : null}
     </>
   );
-};
-
-export default Modal;
-
+}
 
