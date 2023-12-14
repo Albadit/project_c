@@ -20,9 +20,11 @@ export default function Calendar() {
   const timeSlots = ["08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00"];
   const dayLabels = ["Ma", "Di", "Wo", "Do", "Vr", "Za", "Zo"];
   const timeSlotHeight = 100 / timeSlots.length;
-  const currentDate = new Date();
+  const currentDate = useMemo(() => {
+    return new Date();
+  }, []);
   // const currentMonth = currentDate.toLocaleString('default', { month: 'long' }).charAt(0).toUpperCase() + currentDate.toLocaleString('default', { month: 'long' }).slice(1);
-  const currentYear = currentDate.getFullYear()
+  // const currentYear = currentDate.getFullYear()
   const startDayOfWeek = getStartDayOfWeek();
 
 
@@ -192,8 +194,6 @@ export default function Calendar() {
 
     return { dayNumber, monthOffset };
   }
-
-
 
   function generateEventCard(day: any, startTime: any, endTime: any, eventName: any) {
     const startMinutes = convertTimeToMinutes(startTime);

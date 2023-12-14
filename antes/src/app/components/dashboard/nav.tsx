@@ -1,6 +1,7 @@
 "use client";
 
 import React from 'react';
+import { signOut } from 'next-auth/react';
 import { useState } from 'react'
 import HamburgerMenu from '@/app/components/icons/hambuger_menu';
 import Close from '@/app/components/icons/close';
@@ -40,7 +41,7 @@ export const NavDashboard = (props: Props) => {
       profile: props.user.profile,
       navigation: [
         { name: 'Jouw Profiel', href: '/profile' },
-        { name: 'Uitloggen', href: '/login' },
+        { name: 'Uitloggen', href: '/logout', redirect: '/' },
       ]
     }
   }
@@ -75,7 +76,12 @@ export const NavDashboard = (props: Props) => {
           <ul className={`flex flex-col absolute top-12 right-0 bg-background shadow-cbs p-3 gap-y-3 w-max pr-24 rounded outline outline-1 outline-font1/10 ${mobileMenuOpen ? 'block' : 'hidden'}`}>
           {context.user.navigation.map((item) => (
             <li key={item.name}>
-              <Link href={item.href}>{item.name}</Link>
+              {item.href === "/logout" ? (
+                <button onClick={() => signOut({ callbackUrl: item.redirect })}>{item.name}</button>
+                ) : (
+                <Link href={item.href}>{item.name}</Link>
+                )
+              }
             </li>
           ))}
           </ul>
@@ -121,7 +127,12 @@ export const NavDashboard = (props: Props) => {
               </li>
             {context.user.navigation.map((item) => (
               <li key={item.name}>
-                <Link href={item.href}>{item.name}</Link>
+                {item.href === "/logout" ? (
+                  <button onClick={() => signOut({ callbackUrl: item.redirect })}>{item.name}</button>
+                  ) : (
+                  <Link href={item.href}>{item.name}</Link>
+                  )
+                }
               </li>
             ))}
             </ul>
