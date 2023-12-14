@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
-const TermsAndConditions = () => {
+
+export default function TermsAndConditions() {
   const [isChecked, setIsChecked] = useState(false);
 
   const handleCheckboxChange = () => {
@@ -11,7 +12,6 @@ const TermsAndConditions = () => {
     <div className="font-sans bg-gray-100">
       <div className="container mx-auto p-4">
         <div className="prose max-w-none">
-
           <div className="mt-4">
             <input
               type="checkbox"
@@ -23,7 +23,7 @@ const TermsAndConditions = () => {
             <label htmlFor="acceptTerms" className="text-sm">
             Ja, ik heb de informatie gelezen en begrepen en stem in met {' '}
             <Link href="/terms_page">
-             <a href="/terms_page" className="text-blue-500">deze voorwaarden</a>.
+              deze voorwaarden.
             </Link>
             </label>
           </div>
@@ -35,12 +35,8 @@ const TermsAndConditions = () => {
           >
             Verder
           </button>
-
         </div>
-
       </div>
     </div>
-  );
-};
-
-export default TermsAndConditions;
+  )
+}

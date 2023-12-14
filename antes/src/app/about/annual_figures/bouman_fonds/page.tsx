@@ -16,8 +16,8 @@ export default function Boumanfonds() {
                     <div className='hidden sm:flex'><SideMenu /></div>
                     <div className='flex flex-col shadow-2xl justify-between w-full md:w-[900px] gap-5 p-7 rounded-lg bg-section text-base font-font1 text-font1'>
                         <div className='md:hidden'><SideMenu /></div>
-                        <p className='text-secondary text-left text-2xl'> De stichting 'Professor Boumanfonds' is de steunstichting van Antes. Hoofddoel van deze ANBI stichting is het verbeteren van de leefomstandigheden van mensen die te maken hebben met meervoudige geestelijke gezondheidszorg- en verslavingsproblematiek.</p>
-                        <p className='text-secondary text-left text-xl'> De Stichting wil een platform zijn voor het bevorderen van (sociale) netwerken en wil bijdragen aan het vormen van oplossingen voor maatschappelijke problemen die voortvloeien uit meervoudige geestelijke gezondheidszorg- en verslavingsproblematiek. </p>
+                        <p className='text-secondary text-left text-2xl'>De stichting &apos;Professor Boumanfonds&apos; is de steunstichting van Antes. Hoofddoel van deze ANBI stichting is het verbeteren van de leefomstandigheden van mensen die te maken hebben met meervoudige geestelijke gezondheidszorg- en verslavingsproblematiek.</p>
+                        <p className='text-secondary text-left text-xl'>De Stichting wil een platform zijn voor het bevorderen van (sociale) netwerken en wil bijdragen aan het vormen van oplossingen voor maatschappelijke problemen die voortvloeien uit meervoudige geestelijke gezondheidszorg- en verslavingsproblematiek. </p>
                         <div className='flex justify-start gap-5 2xl:gap-10'>
                             <p className='font-bold text-secondary text-xl'>Bestuur</p>
                         </div>
