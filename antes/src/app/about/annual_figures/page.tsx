@@ -12,8 +12,10 @@ export default function Annualfigures() {
                     <p className="text-center text-primary text-5xl font-bold drop-shadow-lg">Kerngegevens en jaarcijfers</p>
                 </div>
                 <div className='flex justify-center gap-5 2xl:gap-10'>
-                    <SideMenu />
+                    {/* <SideMenu /> */}
+                    <div className='hidden sm:flex'><SideMenu /></div>
                     <div className='flex flex-col shadow-2xl justify-between w-full md:w-[900px] gap-5 p-7 rounded-lg bg-section text-base font-font1 text-font1'>
+                        <div className='md:hidden'><SideMenu /></div>
                         <div className='flex gap-5 4xl:gap-10'>
                             <div className='text-secondary text-left text-2xl'>Antes Zorg B.V. is onderdeel van Parnassia Groep. Voor informatie over kerngegevens en jaarcijfers verwijzen we naar het <Link href="https://www.parnassiagroep.nl/wie-we-zijn/jaarbericht-2022?_ga=2.217191254.1915736437.1701171356-1970662864.1694080243" className='text-primary'>Jaarbericht 2022 van Parnassia Groep</Link>.</div>
                         </div>

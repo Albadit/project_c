@@ -12,8 +12,10 @@ export default function Codetermination() {
                     <p className="text-center text-primary text-5xl font-bold drop-shadow-lg">Medezeggenschap</p>
                 </div>
                 <div className='flex justify-center gap-5 2xl:gap-10'>
-                    <SideMenu />
+                    {/* <SideMenu /> */}
+                    <div className='hidden sm:flex'><SideMenu /></div>
                     <div className='flex flex-col shadow-2xl justify-between w-full md:w-[900px] gap-5 p-7 rounded-lg bg-section text-base font-font1 text-font1'>
+                        <div className='md:hidden'><SideMenu /></div>
                         <p className='text-secondary text-left text-2xl'> Medezeggenschap is bij Antes geregeld in de cliëntenraad, de familieraad en de ondernemingsraad.</p>
                         <div className='flex justify-start gap-5 xl:gap-10'>
                             <p className='font-bold text-secondary text-xl'>De cliëntenraad</p>

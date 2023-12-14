@@ -28,9 +28,11 @@ export default function Board() {
                     <p className="text-center text-primary text-5xl font-bold drop-shadow-lg">Bestuur</p>
                 </div>
                 <div className='flex justify-center gap-5 2xl:gap-10'>
-                    <SideMenu />
+                    {/* <SideMenu /> */}
+                    <div className='hidden sm:flex'><SideMenu /></div>
                     <div className='flex flex-col shadow-2xl justify-between w-full md:w-[900px] gap-5 p-7 rounded-lg bg-section text-base'>
-                        <p className='text-secondary text-left text-2xl'> Antes heeft <Link href='/Organogram' className='text-primary'>vijf divisies</Link> die worden aangestuurd door een collegiaal bestuur, dat bestuurlijk en statutair verantwoordelijk is voor het strategisch beleid en de behaalde resultaten van het zorgbedrijf. Het bestuur bestaat uit een bestuurder Zorg en een bestuurder Bedrijfsvoering.</p>
+                        <div className='md:hidden'><SideMenu /></div>
+                        <p className='text-secondary text-left text-2xl'> Antes heeft <Link href='/about/organogram' className='text-primary'>vijf divisies</Link> die worden aangestuurd door een collegiaal bestuur, dat bestuurlijk en statutair verantwoordelijk is voor het strategisch beleid en de behaalde resultaten van het zorgbedrijf. Het bestuur bestaat uit een bestuurder Zorg en een bestuurder Bedrijfsvoering.</p>
                         <div className='flex justify-start gap-5 2xl:gap-10'>
                             <p className='font-bold text-secondary text-2xl'>Ons Bestuur:</p>
                         </div>
