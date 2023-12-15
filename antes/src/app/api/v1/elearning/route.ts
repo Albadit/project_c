@@ -6,7 +6,7 @@ export async function GET() {
     const quiz = await prisma.lesson.findFirst()
     return NextResponse.json(quiz)
   } catch (error) {
-    return NextResponse.json({body: "error"})
+    return NextResponse.json({body: error})
   }
 }
 

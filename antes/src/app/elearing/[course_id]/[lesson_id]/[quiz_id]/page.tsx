@@ -1,7 +1,9 @@
+'use client'
 import React from "react";
 import Footer from "@/app/components/footer";
 import { NavDashboard } from "@/app/components/dashboard/nav";
 import Quiz from "@/app/components/quiz";
+import { useParams } from "next/navigation";
 
 const user = {
   id: 1,
@@ -15,12 +17,16 @@ const user = {
 };
 
 export default function ElearningQuiz() {
+
+  const { course_id, lesson_id, quiz_id } = useParams();
+  console.log("course:", course_id, lesson_id, quiz_id);
+
   return (
     <>
       <NavDashboard user={user} />
       <main className="flex flex-col justify-center items-center mt-6 mb-6 m-auto p-5 quiz">
         <section className="max-w-[500px] w-full">
-          <Quiz />
+          <Quiz lesson_id={lesson_id as string} />
         </section>
       </main>
       <Footer />

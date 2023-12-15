@@ -23,7 +23,7 @@ type Props = {
 //   link: "#",
 // }
 
-export const ELearingCard = (props: Props) => {
+export const ELearningCard = (props: Props) => {
   
   const progression = Math.ceil(100 / props.elearing.max_chapters * props.elearing.user_chapters)
   const progressBarStyle = { width: `${progression}%` };

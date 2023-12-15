@@ -1,7 +1,9 @@
-import React from 'react';
+'use client'
+import React, { useEffect } from 'react';
 import Link from "next/link";
 import Footer from '@/app/components/footer';
-import { NavDashboard } from '@/app/components/dashboard/nav'
+import { NavDashboard } from '@/app/components/dashboard/nav';
+import { useParams } from 'next/navigation';
 
 const user = {
   id: 1,
@@ -34,6 +36,10 @@ const lesson = {
 }
 
 export default function ElearningCourse() {
+
+  const { course_id } = useParams();
+  console.log("course:", course_id);
+
   return (
     <>
       <NavDashboard user={user} />

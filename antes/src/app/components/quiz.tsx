@@ -9,7 +9,7 @@ type QuizItems = {
 }
 
 
-export default function Quiz() {
+export default function Quiz(props: { lesson_id: string }) {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [userAnswers, setUserAnswers] = useState<string[]>([]);
   const [showResults, setShowResults] = useState(false);
@@ -19,13 +19,13 @@ export default function Quiz() {
   const [isLoading, setLoading] = useState(true)
 
   useEffect(() => {
-    fetch('/api/v1/quiz')
+    fetch(`/api/v1/quiz/${props.lesson_id}`)
       .then((res) => res.json())
       .then((data) => {
         setData(data)
         setLoading(false)
       })
-  }, [])
+  }, [props])
 
   const handleOptionSelect = () => {
     if (selectedOption) {

@@ -72,7 +72,7 @@ export default function Dashboard() {
             </div>
             <div className='flex flex-col items-center justify-center gap-10'>
               <h2 className='font-font1 font-semibold text-center text-primary text-3xl'>E-learing progressie</h2>
-              <ELearingCard elearing={elearning}/>
+              <ELearningCard elearing={elearning}/>
             </div>
           </div>
         </section> 

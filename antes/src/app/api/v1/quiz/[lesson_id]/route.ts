@@ -1,9 +1,18 @@
 import { NextResponse } from "next/server";
 import { prisma } from '@/../../prisma/index'
 
-export async function GET() {
+export async function GET(
+  request: Request,
+  { params}: { params: { lesson_id: string } }
+) {
+  
   try {
-    const quiz = await prisma.quiz.findFirst({})
+    const lesson = await prisma.lesson.findFirst({where: {id: params.lesson_id}})
+    const quiz_id = lesson?.quizId
+    if (!quiz_id) {
+      return NextResponse.json({ error: "lesson doesn't have a quiz"}, { status: 404})
+    }
+    const quiz = await prisma.quiz.findFirst({where: {id: quiz_id}})
     return NextResponse.json(quiz?.quiz_data, { status: 200 })
   } catch (error) {
     return NextResponse.json({ error: "server error"}, { status: 500 })

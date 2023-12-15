@@ -1,7 +1,9 @@
+'use client'
 import React from "react";
 import Link from "next/link";
 import Footer from "@/app/components/footer";
 import { NavDashboard } from "@/app/components/dashboard/nav";
+import { useParams } from "next/navigation";
 
 const user = {
   id: 1,
@@ -25,6 +27,9 @@ const lesson = {
 
 export default function ElearningLesson() {
   const embedId = "I-MmRYP9bdk"; // Extracted from the YouTube URL
+
+  const { course_id, lesson_id } = useParams();
+  console.log("course:", course_id, lesson_id);
 
   return (
     <>
