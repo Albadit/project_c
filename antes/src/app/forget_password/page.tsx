@@ -1,10 +1,8 @@
 "use client"
-
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { Input } from '@/app/components/input';
 import { useRouter } from 'next/navigation'
-
 
 const context = {
   logo: { url: "/", img: "/img/antes_logo.png", alt: "antes logo"},

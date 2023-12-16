@@ -8,23 +8,18 @@ import Close from '@/app/components/icons/close';
 import Link from 'next/link';
 
 type UserItems = {
-  id: number
-  role_id: number
-  profile: string
-  first_name: string
-  last_name: string
-  function_id: number
-  bio: string
   email: string
+  image: string
+  name: string
 }
 
 type Props = {
-  user: UserItems
+  user: UserItems | any
 }
 
 export const NavDashboard = (props: Props) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-
+  
   const context = {
     logo: { img: "/img/antes_logo.png", url: "/" },
     login: { name: "Inloggen", url: "#"},
@@ -36,9 +31,9 @@ export const NavDashboard = (props: Props) => {
       { name: 'Q & A', href: '/qa' },
     ],
     user: {
-      name: `${props.user.first_name} ${props.user.last_name}`,
+      name: props.user.name,
       email: props.user.email,
-      profile: props.user.profile,
+      profile: props.user.image,
       navigation: [
         { name: 'Jouw Profiel', href: '/profile' },
         { name: 'Uitloggen', href: '/logout', redirect: '/' },

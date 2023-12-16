@@ -100,8 +100,7 @@ export default function Quiz() {
             )}
           </div>
         </div>
-      ) : (
-        !isLoading ? (
+      ) : (isLoading ? (<p className='text-center'>Loading data...</p>) : (!data ? (<p className='text-center'>No profile data</p>) : (
           <div className='flex flex-col gap-6 w-full'>
           <h1 className="text-primary text-3xl font-bold">Question {currentQuestion + 1}</h1>
           <div className='flex flex-col gap-2'>
@@ -130,11 +129,7 @@ export default function Quiz() {
             Next Question
           </button>
         </div>
-        ) : (
-          <div className='flex flex-col justify-center items-center gap-6 w-full'>
-            <p className="text-xl font-semibold">Loading quiz data...</p>
-          </div>
-        )
+        ))
       )}
     </>
   );

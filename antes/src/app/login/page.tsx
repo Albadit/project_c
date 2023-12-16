@@ -1,10 +1,10 @@
 "use client"
-
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { Input } from '@/app/components/input';
 import { useRouter } from 'next/navigation'
 import { signIn } from 'next-auth/react';
+import { useSession } from 'next-auth/react';
 
 const context = {
   logo: { url: "/", img: "/img/antes_logo.png", alt: "antes logo"},
@@ -16,7 +16,10 @@ const context = {
 export default function Login() {
   const [message, setMessage] = useState('');
   const router = useRouter();
+  const { data: session, status } = useSession()
 
+  if (session && status === "authenticated") router.push("/dashboard");
+  
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     const formData = new FormData(e.target);

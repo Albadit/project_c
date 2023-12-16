@@ -7,14 +7,9 @@ import Link from 'next/link';
 import Popup from '@/app/components/popup';
 
 const user = {
-  id: 1,
-  role_id: 1,
-  profile: "/img/profile.png",
-  first_name: "Sara",
-  last_name: "Leekman",
-  function_id: 3,
-  bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+  name: "Sara",
   email: "saraleekman@outlook.com",
+  image: "/img/profile.png",
 }
 
 let events = [
@@ -209,7 +204,7 @@ export default function Calendar() {
         <div>
           {events.map((item) => 
           <Link key={item.id} href={item.url} className="flex sm:flex-row flex-col py-4 border-b-[1px] border-extra/20">
-            <p className='text-extra w-28 sm:p-0 pb-4'>{item.start.toLocaleDateString(local, { weekday: 'short' })}, {item.start.toLocaleDateString(local, { month: 'short' })} {item.start.getDate()}</p>
+            <p className='text-extra w-28 sm:p-0 pb-4'>{item.start.toLocaleDateString(local, { weekday: 'short' })}, {item.start.getDate()} {item.start.toLocaleDateString(local, { month: 'short' })}</p>
             <p className={`grow ${item.id === -1 ? 'text-extra' : 'font-medium'}`}>{item.title}</p>
             <p className={`${item.id === -1 ? 'hidden' : ''}`}>{item.start.toLocaleTimeString(local, { hour: '2-digit', minute: '2-digit', hour12: false })} - {item.end.toLocaleTimeString(local, { hour: '2-digit', minute: '2-digit', hour12: false })}</p>
           </Link>

@@ -56,8 +56,7 @@ model User {
   roleId         String
   userFunctionId String
   image          String?
-  firstName      String       @db.Text
-  lastName       String       @db.Text
+  name           String       @db.Text
   bio            String?      @db.Text
   email          String       @unique
   emailVerified  DateTime?    @map("email_verified")
@@ -122,7 +121,7 @@ model QaTag {
 model QaQuestion {
   id         String     @id @default(cuid())
   userId     String
-  question   String     @db.Text
+  title      String     @db.Text
   dateCreate DateTime
   user       User       @relation(fields: [userId], references: [id])
   qaAnswers  QaAnswer[]
@@ -133,7 +132,7 @@ model QaAnswer {
   id         String     @id @default(cuid())
   questionId String
   userId     String
-  answer     String     @db.Text
+  comment    String     @db.Text
   dateCreate DateTime
   qaQuestion QaQuestion @relation(fields: [questionId], references: [id])
   user       User       @relation(fields: [userId], references: [id])

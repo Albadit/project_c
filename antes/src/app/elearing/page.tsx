@@ -7,16 +7,10 @@ import { ELearningCard } from '@/app/components/elearning_card';
 import { SubjectCard } from '@/app/components/dashboard/subject_card';
 import { useRouter } from 'next/navigation'
 
-
 const user = {
-  id: 1,
-  role_id: 1,
-  profile: "/img/profile.png",
-  first_name: "Sara",
-  last_name: "Leekman",
-  function_id: 3,
-  bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+  name: "Sara",
   email: "saraleekman@outlook.com",
+  image: "/img/profile.png",
 }
 
 const elearing = {

@@ -36,30 +36,90 @@ async function main() {
     where: { name: "Behavioral neuroscience" }
   })
 
-  if (!roleId) {
-    console.error("Role not found");
-    return;
-  }
+  if (!roleId) { console.error("roleId not found"); return }
   
-  if (!userFunctionId) {
-    console.error("User function not found");
-    return;
-  }
+  if (!userFunctionId) { console.error("userFunctionId not found"); return }
   
   const user = await prisma.user.create({
     data: {
       roleId: roleId.id,
       userFunctionId: userFunctionId.id,
       image: "/img/profile.png",
-      firstName: 'admin',
-      lastName: 'admin',
+      name: 'Ardit Fazliji',
       bio: null,
       email: 'admin@admin.com',
       emailVerified: null,
       password: await bcrypt.hash("admin", 10),
     }
   })
+
+  const user2 = await prisma.user.create({
+    data: {
+      roleId: roleId.id,
+      userFunctionId: userFunctionId.id,
+      image: "/img/profile.png",
+      name: 'Ayoeb El Bali',
+      bio: null,
+      email: 'ayoeb@ayoeb.com',
+      emailVerified: null,
+      password: await bcrypt.hash("admin", 10),
+    },
+  })
+
+  if (!user && !user2) { console.error("user not found"); return }
   
+  // extra
+  //// QA
+  const tag = await prisma.tag.createMany({
+    data: [
+      { name: 'golang'},
+      { name: 'stress' },
+      { name: 'relx' },
+      { name: 'boek' },
+      { name: 'planning maken' },
+    ]
+  })
+
+  const QaQuestion = await prisma.qaQuestion.create({
+    data: {
+      userId: user.id,
+      title: "Wat is de volgende doel als ik klaar ben met de elearing?",
+      dateCreate: new Date(),
+    }
+  })
+
+  if (!QaQuestion) { console.error("QaQuestion not found"); return }
+
+  const tags = await prisma.tag.findMany({ })
+
+  if (!tags) { console.error("tagId not found"); return }
+
+  const qaTags = await prisma.qaTag.createMany({
+    data:[
+      { qaQuestionId: QaQuestion.id, tagId: tags[0].id },
+      { qaQuestionId: QaQuestion.id, tagId: tags[1].id },
+      { qaQuestionId: QaQuestion.id, tagId: tags[2].id },
+    ]
+  })
+
+  const qaAnswer = await prisma.qaAnswer.createMany({
+    data : [
+      {
+        questionId: QaQuestion.id,
+        userId: user2.id,
+        comment: "Lekker bezig jonge. Wat je nu kan doen is dit boek lezen \"Master Your Mindset\"",
+        dateCreate: new Date()
+      },
+      {
+        questionId: QaQuestion.id,
+        userId: user.id,
+        comment: "Bedank voor je support",
+        dateCreate: new Date()
+      },
+    ]
+  })
+
+  //// quiz
   const quiz = await prisma.quiz.create({
     data: {
       quiz_data: [

@@ -6,7 +6,7 @@ export async function GET() {
     const user = await prisma.user.findUnique({
       where: {
         id: "1",
-        firstName: "aridt"
+        name: "aridt"
       },
     })
     return NextResponse.json(user, { status: 200 })

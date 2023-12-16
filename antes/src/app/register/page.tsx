@@ -1,10 +1,10 @@
 "use client"
 
-import React, { useState, useEffect } from 'react';
-import Link from 'next/link';
-import { Input } from '@/app/components/input';
+import React, { useState, useEffect } from 'react'
+import Link from 'next/link'
+import { Input } from '@/app/components/input'
 import { useRouter } from 'next/navigation'
-import { SelectMenu } from '@/app/components/select_menu';
+import { SelectMenu } from '@/app/components/select_menu'
 
 type UserFuntionItems = {
   id: string;
@@ -17,9 +17,9 @@ const context = {
   register: { url: "/terms" }
 }
 
-async function Post(data: any) {
+async function Post(data: any, url: string) {
   try {
-    const response = await fetch('/api/v1/register', {
+    const response = await fetch(url, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -52,24 +52,22 @@ export default function Login() {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     const formData = new FormData(e.target);
-    const firstName = formData.get('first_name');
-    const lastName = formData.get('last_name');
+    const name = formData.get('name');
     const userFunction = formData.get('user_function');
     const email = formData.get('email');
     const password = formData.get('password');
     const confirmPassword = formData.get('confirm_password');
     const agree = formData.get('agree');
     
-    if (firstName && lastName && userFunction && email && password && confirmPassword) {
+    if (name && userFunction && email && password && confirmPassword) {
       const register = await Post({
-        firstName: firstName,
-        lastName: firstName,
         userFunctionId: userFunction,
+        name: name,
         email: email,
         password: password,
         confirmPassword: confirmPassword,
         agree: agree,
-      })
+      }, "/api/v1/register")
       if (register === true) {
         router.push("/login");
       } else {
@@ -90,8 +88,7 @@ export default function Login() {
           <img src={context.logo.img} alt={context.logo.alt} className='w-max'/>
           </Link>
           <form onSubmit={handleSubmit} className='flex flex-col justify-center gap-5'>
-            <Input label="Voornaam" name="first_name" type="text" value=''/>
-            <Input label="Achternaam" name="last_name" type="text" value=''/>
+            <Input label="Naam" name="name" type="text" value=''/>
             <SelectMenu label="Functie" name="user_function" options={userFunctionData}/>
             <Input label="Email" name="email" type="email" value=''/>
             <Input label="Wachtwoord" name="password" type="password" value=''/>

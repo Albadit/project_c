@@ -27,7 +27,7 @@ const handler = NextAuth({
         password: { label: "Password", type: "password" },
         email: { label: "Email", type: "email" },
       },
-      async authorize(credentials: any, req: any) {
+      async authorize(credentials: any) {
         if (!credentials.email || !credentials.password) { return null }
 
         const user = await prisma.user.findUnique({
@@ -46,8 +46,7 @@ const handler = NextAuth({
   ],
   session: {
     strategy: "jwt",
-    // strategy: "database",
-    maxAge: 1 * 24 * 60 * 60,
+    maxAge: 7 * 24 * 60 * 60,
     updateAge: 24 * 60 * 60,
   },
   secret: process.env.NEXTAUTH_SECRECT,

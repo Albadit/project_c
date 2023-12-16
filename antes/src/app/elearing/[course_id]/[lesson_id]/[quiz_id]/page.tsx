@@ -4,15 +4,10 @@ import { NavDashboard } from "@/app/components/dashboard/nav";
 import Quiz from "@/app/components/quiz";
 
 const user = {
-  id: 1,
-  role_id: 1,
-  profile: "/img/profile.png",
-  first_name: "Sara",
-  last_name: "Leekmane",
-  function_id: 3,
-  bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+  name: "Sara",
   email: "saraleekman@outlook.com",
-};
+  image: "/img/profile.png",
+}
 
 export default function ElearningQuiz() {
   return (

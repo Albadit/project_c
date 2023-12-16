@@ -39,26 +39,21 @@ const elearning = {
 }
 
 const user = {
-  id: 1,
-  role_id: 1,
-  profile: "/img/profile.png",
-  first_name: "Sara",
-  last_name: "Leekman",
-  function_id: 3,
-  bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+  name: "Sara",
   email: "saraleekman@outlook.com",
+  image: "/img/profile.png",
 }
 
 export default function Dashboard() {
   const { data: session, status } = useSession()
-  console.log(session)
+  console.log(session?.user)
   console.log(status)
   return (
     <>
       <NavDashboard user={user}/>
       <main className='flex flex-wrap justify-center m-auto p-5 my-12 max-w-[1280px]'>
         <section className='flex flex-col w-full gap-20'>
-          <h1 className='font-font1 font-bold text-center text-primary text-5xl'>Goeiedag {`${user.first_name} ${user.last_name}`}</h1>
+          <h1 className='font-font1 font-bold text-center text-primary text-5xl'>Goeiedag {user.name}</h1>
           <div className='flex flex-wrap justify-between gap-10 gap-y-20 [&>*]:flex-[1_1_525px]'>
             <div className='flex flex-col items-center justify-center gap-10'>
               <h2 className='font-font1 font-semibold text-center text-primary text-3xl'>Nieuwste Q & A</h2>

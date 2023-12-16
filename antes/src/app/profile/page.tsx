@@ -6,14 +6,9 @@ import { Input } from '@/app/components/input';
 import { SelectMenu } from '@/app/components/select_menu';
 
 const user = {
-  id: 4,
-  role_id: 1,
-  profile: "/img/profile.png",
-  first_name: "Sara",
-  last_name: "Leekman",
-  function_id: 3,
-  bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+  name: "Sara",
   email: "saraleekman@outlook.com",
+  image: "/img/profile.png",
 }
 
 const functies = [
@@ -42,13 +37,10 @@ export default function Profile() {
                 <p className='text-sm text-font1'>JPG, GIF or PNG. 1MB max.</p>
               </div>
             </div>
-            <div className='flex sm:flex-row flex-col justify-stretch gap-5'>
-              <Input label='Voornaam' name='first_name' type='text' value={user.first_name}/>
-              <Input label='Achternaam' name='last_name' type='text' value={user.last_name}/>
-            </div>
+            <Input label='Naam' name='first_name' type='text' value={user.name}/>
             <SelectMenu label='User Function' name="user_function" options={functies}/>
             <Input label='Email' name='email' type='email' value={user.email}/>
-            <Input label='Bio' name='bio' type='textarea' value={user.bio}/>
+            {/* <Input label='Bio' name='bio' type='textarea' value={user.bio}/> */}
             <button className='w-fit px-6 py-2.5 rounded-lg bg-secondary text-font2 font-semibold text-sm'>Opslaan</button>
           </form>
           <hr />
