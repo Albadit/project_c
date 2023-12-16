@@ -27,7 +27,7 @@ export async function GET() {
     
     return NextResponse.json(transformedData, { status: 200 })
   } catch (error) {
-    return NextResponse.json({ error: "server error"}, { status: 500 })
+    return NextResponse.json({ status: "error" }, { status: 500 })
   }
 }
 
@@ -44,6 +44,6 @@ export async function POST(req: Request) {
 
     return NextResponse.json(user)
   } catch (error) {
-    return NextResponse.json({body: "error"})
+    return NextResponse.json({ status: "error" }, { status: 500 })
   }
 }

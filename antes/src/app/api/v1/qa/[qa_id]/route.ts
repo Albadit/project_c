@@ -38,7 +38,7 @@ export async function GET(req: Request, { params }: { params: { qa_id: string } 
     
     return NextResponse.json(transformedData, { status: 200 })
   } catch (error) {
-    return NextResponse.json({ status: "error"}, { status: 500 })
+    return NextResponse.json({ status: "error" }, { status: 500 })
   }
 }
 
@@ -50,7 +50,7 @@ export async function POST(req: Request) {
       where: { email: body.userEmail}
     })
 
-    if (!userId) return NextResponse.json("Gebruiker niet gevonden", { status: 401 })
+    if (!userId) return NextResponse.json({ status: "Gebruiker niet gevonden" }, { status: 401 })
 
     const qaAnswers = await prisma.qaAnswer.create({
       data: {
@@ -63,6 +63,6 @@ export async function POST(req: Request) {
 
     return NextResponse.json(qaAnswers, { status: 200 })
   } catch (error) {
-    return NextResponse.json({ error: "server error"}, { status: 500 })
+    return NextResponse.json({ status: "error" }, { status: 500 })
   }
 }
