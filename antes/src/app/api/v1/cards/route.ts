@@ -13,21 +13,38 @@ export async function GET() {
       }
     })
 
-    if (!qaQuestion) return NextResponse.json({ status: "error" }, { status: 500 })
+    const event = await prisma.event.findMany({
+      orderBy: { 
+        dateStart: 'desc'
+      }
+    })
+
+    if (!qaQuestion || !event) return NextResponse.json({ status: "error" }, { status: 500 })
 
     const transformedData = {
       status: "succes",
       data: {
-        tags: Array.from(new Set(qaQuestion.flatMap(question => question.tags))).sort(),
-        question: qaQuestion.map((item) => ({
-          id: item.id,
-          title: item.title,
-          name: item.user.name,
-          image: item.user.image,
-          dateCreate: item.dateCreate,
-          tags: Array.isArray(item.tags) ? item.tags.slice().sort() : [],
-          reactions: item.qaAnswers.length
-        }))
+        qa: {
+          id: qaQuestion[0].id,
+          title: qaQuestion[0].title,
+          name: qaQuestion[0].user.name,
+          profile: qaQuestion[0].user.image,
+          image: qaQuestion[0].image,
+          dateCreate: qaQuestion[0].dateCreate,
+          reactions: qaQuestion[0].qaAnswers.length,
+          bio: qaQuestion[0].user.bio,
+        },
+        event: {
+          id: event[0].id,
+          title: event[0].title,
+          image: event[0].image,
+          description: event[0].description,
+          dateStart: event[0].dateStart,
+          location: event[0].location,
+        },
+        elearing: {
+
+        }
       }
     }
 

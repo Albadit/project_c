@@ -64,6 +64,7 @@ export const Input = (props: Props) => {
             name={props.name.toLowerCase()}
             placeholder={props.placeholder}
             disabled={disabled}
+            required
             onChange={handleChangeTextArea}
             className='resize-none block w-full rounded border-0 py-2.5 shadow-sm ring-1 ring-inset ring-font1/20 placeholder:font1 focus:ring-2 focus:ring-inset focus:ring-callToAction sm:text-sm sm:leading-6 disabled:bg-slate-50 disabled:text-text-slate-500 disabled:border-slate-200 disabled:shadow-none invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500 disabled:opacity-75'/>
         ) : (

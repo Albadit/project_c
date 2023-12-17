@@ -11,19 +11,27 @@ import { useSession } from 'next-auth/react';
 type QAItems = {
   id: string
   name: string
-  img: string
+  image: string
   dateCreate: string
   title: string
   tags: string[]
   reactions: number
 }
 
+type QAData = {
+  tags: string[];
+  question: QAItems[];
+}
+
+type ApiResponse<T> = {
+  status: string;
+  data: T;
+}
+
 export default function Qa() {
   const { data: session, status } = useSession()
-  const [data, setData] = useState<QAItems[]>([])
+  const [data, setData] = useState<ApiResponse<QAData> | null>(null)
   const [isLoading, setLoading] = useState(true)
-  const [datatags, setDatatags] = useState<string[]>([])
-  const [isLoadingtags, setLoadingtags] = useState(true)
 
   useEffect(() => {
     fetch('/api/v1/qa/')
@@ -32,15 +40,8 @@ export default function Qa() {
         setData(data)
         setLoading(false)
       })
-
-    fetch('/api/v1/qa/tags')
-    .then((res) => res.json())
-    .then((data) => {
-      setDatatags(data)
-      setLoadingtags(false)
-    })
   }, [])
-  
+
   return (
     <>
       {session && status === "authenticated" ? (<NavDashboard user={session?.user}/>) : (<NavHome />)}
@@ -48,14 +49,16 @@ export default function Qa() {
         <section className='flex flex-col w-full gap-5 font-font2'>
           <h1 className='font-font1 font-bold text-primary text-5xl'>Q & A Vragen</h1>
           <hr />
-          {isLoading && isLoadingtags ? (<p className='text-center'>Loading data...</p>) : (!data && !datatags ? (<p className='text-center'>No profile data</p>) : 
+          {isLoading ? (<p className='text-center'>Loading data...</p>) : ( data?.status === "error" ? (<p className='text-center'>No data find</p>) : 
           (<>
             <div className='flex flex-row gap-2 overflow-x-auto'>
-            {datatags.map((item) => (
-              <span key={item} className='bg-[#EAEAEA] whitespace-nowrap text-extra py-2 px-4 rounded-full hover:bg-primary hover:text-font2 ease-in duration-300'>{item}</span>
+            {data?.data.tags.map((item: any, index: any) => (
+              <span key={index} className='cursor-pointer bg-[#EAEAEA] whitespace-nowrap text-extra py-2 px-4 rounded-full hover:bg-primary hover:text-font2 ease-in duration-300' >{item}</span>
             ))}
             </div>
-            <QACardList qaList={data}/>
+            {data?.data.question.map((item: any, index: any) => (
+              <QACardList key={index} qaData={item}/>
+            ))}
             {/* <Paginator qaList={question}/> */}
           </>))}
         </section>

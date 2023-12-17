@@ -20,7 +20,6 @@ export default function ResetPassword() {
     const email = formData.get('email');
     if (email) {
       setMessage("Email is verzonden.");
-      // update in database
       setTimeout(() => {
         router.push("/login");
       }, 2000)

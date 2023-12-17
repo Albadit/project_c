@@ -22,13 +22,50 @@ const elearing = {
   url: "/elearing/1",
 }
 
-const subject = {
-  id: 1,
-  image: "img/e_learing.png",
-  title: "Psychiatrie",
-  description: "La lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae nisi eget nunc aliquam aliquet.",
-  url: "/elearing/1",
-}
+const subjects = [
+  {
+    id: 1,
+    image: "img/e_learing.png",
+    title: "Psychiatrie",
+    description: "La lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae nisi eget nunc aliquam aliquet.",
+    url: "/elearing/1",
+  },
+  {
+    id: 1,
+    image: "img/e_learing.png",
+    title: "Psychiatrie",
+    description: "La lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae nisi eget nunc aliquam aliquet.",
+    url: "/elearing/1",
+  },
+  {
+    id: 1,
+    image: "img/e_learing.png",
+    title: "Psychiatrie",
+    description: "La lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae nisi eget nunc aliquam aliquet.",
+    url: "/elearing/1",
+  },
+  {
+    id: 1,
+    image: "img/e_learing.png",
+    title: "Psychiatrie",
+    description: "La lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae nisi eget nunc aliquam aliquet.",
+    url: "/elearing/1",
+  },
+  {
+    id: 1,
+    image: "img/e_learing.png",
+    title: "Psychiatrie",
+    description: "La lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae nisi eget nunc aliquam aliquet.",
+    url: "/elearing/1",
+  },
+  {
+    id: 1,
+    image: "img/e_learing.png",
+    title: "Psychiatrie",
+    description: "La lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae nisi eget nunc aliquam aliquet.",
+    url: "/elearing/1",
+  },
+]
 
 export default function ELearning() {
   return (
@@ -52,17 +89,10 @@ export default function ELearning() {
       </section>
       <section className='flex flex-col gap-10'>
         <h1 className="tfont-font1 font-bold text-center text-primary text-5xl">Onderwerpen</h1>
-        <div className='flex flex-wrap x1:justify-between justify-center gap-10'>
-        {/* </div>
-        <div className='flex flex-wrap 2xl:flex-row justify-center gap-10'> */}
-          <SubjectCard subject={subject} />
-          <SubjectCard subject={subject} />
-          <SubjectCard subject={subject} />
-        {/* </div>
-        <div className='flex flex-wrap 2x;:flex-row justify-center gap-10'> */}
-          <SubjectCard subject={subject} />
-          <SubjectCard subject={subject} />
-          <SubjectCard subject={subject} />
+        <div className='flex flex-wrap justify-center gap-8'>
+          {subjects.map((item, index) => 
+            <SubjectCard key={index} subject={item} />
+          )}
         </div>
       </section>
     </main>

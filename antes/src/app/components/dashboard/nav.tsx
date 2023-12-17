@@ -8,9 +8,9 @@ import Close from '@/app/components/icons/close';
 import Link from 'next/link';
 
 type UserItems = {
-  email: string
-  image: string
   name: string
+  email: string
+  image: string 
 }
 
 type Props = {
@@ -33,9 +33,9 @@ export const NavDashboard = (props: Props) => {
     user: {
       name: props.user.name,
       email: props.user.email,
-      profile: props.user.image,
+      image: props.user.image,
       navigation: [
-        { name: 'Jouw Profiel', href: '/profile' },
+        { name: 'Jouw Profiel', href: '/profile/' },
         { name: 'Uitloggen', href: '/logout', redirect: '/' },
       ]
     }
@@ -47,7 +47,7 @@ export const NavDashboard = (props: Props) => {
         {/* Desktop */}
         <ul className='h-[80%]'>
           <li className="h-full">
-            <Link href={context.logo.url} aria-label="logo" >
+            <Link href={context.logo.url} aria-label="logo">
               <img src={context.logo.img} alt="antes logo" className="h-full w-auto"/>
             </Link>
           </li>
@@ -61,14 +61,11 @@ export const NavDashboard = (props: Props) => {
           </li>
         ))}
         </ul>
-        <div className='hidden lg:flex flex-col relative'>
-          <button type="button"
-            title='openMenu'
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          >
-            <img src={context.user.profile} alt="profile" className="h-full w-auto rounded-full"/>
-          </button>
-          <ul className={`flex flex-col absolute top-12 right-0 bg-background shadow-cbs p-3 gap-y-3 w-max pr-24 rounded outline outline-1 outline-font1/10 ${mobileMenuOpen ? 'block' : 'hidden'}`}>
+        <button className="hidden lg:flex h-[80%]" type="button" title='openMenu' onClick={() => setMobileMenuOpen(!mobileMenuOpen)} >
+          <img src={"/img/" + context.user.image} alt="profile" className="h-full w-auto rounded-full"/>
+        </button>
+        <div className='hidden lg:flex flex-col absolute top-14 right-6'>
+          <ul className={`flex flex-col bg-background shadow-cbs p-3 gap-y-3 w-max pr-24 rounded outline outline-1 outline-font1/10 ${mobileMenuOpen ? 'block' : 'hidden'}`}>
           {context.user.navigation.map((item) => (
             <li key={item.name}>
               {item.href === "/logout" ? (
@@ -82,10 +79,7 @@ export const NavDashboard = (props: Props) => {
           </ul>
         </div>
         <div className="flex lg:hidden">
-          <button type="button"
-            title='openMenu'
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          >
+          <button type="button" title='openMenu' onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
             <HamburgerMenu className="w-8"/>
           </button>
         </div>
@@ -98,10 +92,7 @@ export const NavDashboard = (props: Props) => {
                 <img src={context.logo.img} alt="antes logo" className="h-full w-full"/>
               </Link>
             </div>
-            <button type="button"
-              title='closeMenu'
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            >
+            <button type="button" title='closeMenu' onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
               <Close className='w-9 px-0.5'/>
             </button>
           </div>
@@ -114,7 +105,7 @@ export const NavDashboard = (props: Props) => {
             ))}
               <hr className='border-font1/20'/>
               <li className='flex items-center gap-3'>
-                <img src={context.user.profile} alt={context.user.name} className="h-max w-auto"/>
+                <img src={"/img/" + context.user.image} alt={context.user.name} className="h-[40px] w-auto rounded-full"/>
                 <div className='truncate leading-5'>
                   <p className='truncate font-semibold'>{context.user.name}</p>
                   <p className='truncate'>{context.user.email}</p>

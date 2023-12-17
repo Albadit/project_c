@@ -55,9 +55,9 @@ model User {
   id             String       @id @default(cuid())
   roleId         String
   userFunctionId String
-  image          String?
+  image          String?      @default("profile.png")
   name           String       @db.Text
-  bio            String?      @db.Text
+  bio            String?
   email          String       @unique
   emailVerified  DateTime?    @map("email_verified")
   password       String // assuming hash format
@@ -91,8 +91,9 @@ model Event {
   title       String     @db.Text
   description String     @db.Text
   location    String     @db.Text
-  start       DateTime
-  end         DateTime
+  image       String?    @default("event_card.png")
+  dateStart   DateTime
+  dateEnd     DateTime
   calendars   Calendar[]
 }
 
@@ -104,28 +105,15 @@ model Calendar {
   event   Event  @relation(fields: [eventId], references: [id])
 }
 
-model Tag {
-  id     String  @id @default(cuid())
-  name   String  @db.Text
-  qaTags QaTag[]
-}
-
-model QaTag {
-  id           String     @id @default(cuid())
-  qaQuestionId String
-  tagId        String
-  qaQuestion   QaQuestion @relation(fields: [qaQuestionId], references: [id])
-  tag          Tag        @relation(fields: [tagId], references: [id])
-}
-
 model QaQuestion {
   id         String     @id @default(cuid())
   userId     String
   title      String     @db.Text
   dateCreate DateTime
+  image      String?    @default("qa_card.png")
+  tags       Json?
   user       User       @relation(fields: [userId], references: [id])
   qaAnswers  QaAnswer[]
-  qaTags     QaTag[]
 }
 
 model QaAnswer {

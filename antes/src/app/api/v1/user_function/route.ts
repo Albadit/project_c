@@ -5,9 +5,15 @@ import { prisma } from '@/../../prisma/index'
 export async function GET() {
   try {
     const userFuntion = await prisma.userFunction.findMany({})
-    return NextResponse.json(userFuntion, { status: 200 })
+
+    const transformedData = {
+      status: "success",
+      data: userFuntion
+    }
+
+    return NextResponse.json(transformedData, { status: 200 })
   } catch (error) {
-    return NextResponse.json({ error: "server error"}, { status: 500 })
+    return NextResponse.json({ status: "error" }, { status: 500 })
   }
 }
 

@@ -44,9 +44,7 @@ async function main() {
     data: {
       roleId: roleId.id,
       userFunctionId: userFunctionId.id,
-      image: "/img/profile.png",
       name: 'Ardit Fazliji',
-      bio: null,
       email: 'admin@admin.com',
       emailVerified: null,
       password: await bcrypt.hash("admin", 10),
@@ -57,50 +55,47 @@ async function main() {
     data: {
       roleId: roleId.id,
       userFunctionId: userFunctionId.id,
-      image: "/img/profile.png",
       name: 'Ayoeb El Bali',
-      bio: null,
       email: 'ayoeb@ayoeb.com',
       emailVerified: null,
       password: await bcrypt.hash("admin", 10),
     },
   })
 
+  
   if (!user && !user2) { console.error("user not found"); return }
   
-  // extra
-  //// QA
-  const tag = await prisma.tag.createMany({
-    data: [
-      { name: 'golang'},
-      { name: 'stress' },
-      { name: 'relx' },
-      { name: 'boek' },
-      { name: 'planning maken' },
-    ]
+  const updateUser = await prisma.user.update({
+    where: { id: user.id },
+    data: { bio: `Hoi, mijn naam is ${user.name} en ben een nieuwe mederwerker bij antes.` },
   })
 
+  const updateUser2 = await prisma.user.update({
+    where: { id: user2.id },
+    data: { bio: `Hoi, mijn naam is ${user2.name} en ben een nieuwe mederwerker bij antes.` },
+  })
+
+  // extra
+  //// QA
   const QaQuestion = await prisma.qaQuestion.create({
     data: {
       userId: user.id,
       title: "Wat is de volgende doel als ik klaar ben met de elearing?",
       dateCreate: new Date(),
+      tags: [ "relax", "stress", "golang"]
+    }
+  })
+  
+  const QaQuestion2 = await prisma.qaQuestion.create({
+    data: {
+      userId: user2.id,
+      title: "Wat kan ik verwachten als beginner?",
+      dateCreate: new Date(),
+      tags: [ "relax", "boek", "planning maken"]
     }
   })
 
-  if (!QaQuestion) { console.error("QaQuestion not found"); return }
-
-  const tags = await prisma.tag.findMany({ })
-
-  if (!tags) { console.error("tagId not found"); return }
-
-  const qaTags = await prisma.qaTag.createMany({
-    data:[
-      { qaQuestionId: QaQuestion.id, tagId: tags[0].id },
-      { qaQuestionId: QaQuestion.id, tagId: tags[1].id },
-      { qaQuestionId: QaQuestion.id, tagId: tags[2].id },
-    ]
-  })
+  if (!QaQuestion && QaQuestion2) { console.error("QaQuestion not found"); return }
 
   const qaAnswer = await prisma.qaAnswer.createMany({
     data : [
@@ -108,7 +103,7 @@ async function main() {
         questionId: QaQuestion.id,
         userId: user2.id,
         comment: "Lekker bezig jonge. Wat je nu kan doen is dit boek lezen \"Master Your Mindset\"",
-        dateCreate: new Date()
+        dateCreate: new Date(),
       },
       {
         questionId: QaQuestion.id,
@@ -118,6 +113,19 @@ async function main() {
       },
     ]
   })
+
+  //// event
+  const event = await prisma.event.create({
+    data: {
+      title: "Connectiedag!",
+      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      location: "Rotterdam",
+      dateStart: new Date(),
+      dateEnd: new Date()
+    }
+  })
+
+  if (!event) { console.error("event not found"); return }
 
   //// quiz
   const quiz = await prisma.quiz.create({
