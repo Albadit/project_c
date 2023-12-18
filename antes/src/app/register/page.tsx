@@ -71,7 +71,7 @@ export default function Login() {
         confirmPassword: confirmPassword,
         agree: agree,
       }, "/api/v1/register")
-      if (register === true) {
+      if (register) {
         router.push("/login");
       } else {
         setMessage(register);

@@ -8,6 +8,7 @@ import { Paginator } from '@/app/components/paginator';
 import { useEffect, useState } from 'react';
 import { useSession } from 'next-auth/react';
 import PopupQa from '@/app/components/popup_qa';
+import { Input } from '@/app/components/input';
 
 type QAItems = {
   id: string
@@ -29,26 +30,85 @@ type ApiResponse<T> = {
   data: T;
 }
 
+async function Post(data: any, url: string) {
+  try {
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+    const responseData = await response.json();
+    return responseData
+  } catch (error) {
+    console.error('Error submitting form:', error);
+  }
+}
+
 export default function Qa() {
   const { data: session, status } = useSession()
   const [data, setData] = useState<ApiResponse<QAData> | null>(null)
   const [isLoading, setLoading] = useState(true)
+  const [isPopupOpen, setIsPopupOpen] = useState(false)
+  const [message, setMessage] = useState('')
+
+  async function fetchData() {
+    try {
+      const response = await fetch('/api/v1/qa/');
+      const fetchedData = await response.json();
+      setData(fetchedData);
+      setLoading(false);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  }
 
   useEffect(() => {
-    fetch('/api/v1/qa/')
-      .then((res) => res.json())
-      .then((data) => {
-        setData(data)
-        setLoading(false)
-      })
+    fetchData()
   }, [])
+
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+    const formData = new FormData(e.target)
+    const form = e.target
+    const title = formData.get('title')
+    const image = formData.get('image')
+
+    if (title) {
+      const newQa = await Post({
+        userEmail: session?.user?.email,
+        title: title,
+        image: image,
+      }, "/api/v1/qa")
+
+      if (newQa) {
+        setIsPopupOpen(false)
+        form.elements['title'].value = '';
+        fetchData()
+      } else {
+        setMessage('Er is iets fout gegaan')
+      }
+    } else {
+      setMessage('De input staat leeg')
+    }
+  }
 
   return (
     <>
       {session && status === "authenticated" ? (<NavDashboard user={session?.user}/>) : (<NavHome />)}
       <main className='m-auto p-5 my-12 max-w-[750px]'>
-        <PopupQa/>
         <section className='flex flex-col w-full gap-5 font-font2'>
+          <div className='flex flex-row justify-end'>
+            <PopupQa title='Nieuw Q&A' isPopupOpen={isPopupOpen} setIsPopupOpen={setIsPopupOpen}>
+              <form onSubmit={handleSubmit} className='flex flex-col gap-4 items-end'>
+                <Input label='Vraag' name='title' type='textarea' value=''/>
+                {/* <Input label='Foto banner' name='image' type='text' value=""/> */}
+                <button type='submit' className='w-fit px-6 py-2.5 rounded-lg bg-secondary text-font2 font-semibold text-sm'>Opslaan</button>
+                <p className='text-error'>{message}</p>
+              </form>
+            </PopupQa>
+          </div>
           <h1 className='font-font1 font-bold text-primary text-5xl'>Q & A Vragen</h1>
           <hr />
           {isLoading ? (<p className='text-center'>Loading data...</p>) : ( data?.status === "error" ? (<p className='text-center'>No data find</p>) : 

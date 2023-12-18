@@ -18,7 +18,7 @@ export async function GET() {
     const transformedData = {
       status: "succes",
       data: {
-        tags: Array.from(new Set(qaQuestion.flatMap(question => question.tags))).sort(),
+        tags: Array.from(new Set(qaQuestion.flatMap(question => question.tags).filter(Boolean))).sort(),
         question: qaQuestion.map((item) => ({
           id: item.id,
           title: item.title,
@@ -37,18 +37,40 @@ export async function GET() {
   }
 }
 
+interface QaData {
+  userId: string;
+  title: string;
+  dateCreate: Date;
+  image?: string;
+  tags?: string;
+}
+
 export async function POST(req: Request) {
   try {
     const body = await req.json()
 
-    const user = await prisma.user.findMany({
-      where: { email: body.email },
-      include: {
-        qaQuestions: true
-      },
+    const user = await prisma.user.findUnique({
+      where: { email: body.userEmail }
     })
 
-    return NextResponse.json(user)
+    if (!user) return NextResponse.json({ status: "error" }, { status: 500 })
+
+    const data: QaData = {
+      userId: user.id,
+      title: body.title,
+      dateCreate: new Date(),
+    };
+    
+    // Add the image field only if it's not null
+    if (body.image) {
+      data.image = body.image;
+    }
+
+    const newQa = await prisma.qaQuestion.create({
+      data: data
+    })
+
+    return NextResponse.json(newQa, { status: 200 })
   } catch (error) {
     return NextResponse.json({ status: "error" }, { status: 500 })
   }

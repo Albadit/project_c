@@ -109,7 +109,7 @@ export default function Chat() {
         console.log('has been not send')
       }
     } else {
-      console.log('error')
+      console.log('De input staat leeg.')
     }
   }
   
