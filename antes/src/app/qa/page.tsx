@@ -7,6 +7,7 @@ import { QACardList } from '@/app/components/dashboard/qa_card_list';
 import { Paginator } from '@/app/components/paginator';
 import { useEffect, useState } from 'react';
 import { useSession } from 'next-auth/react';
+import PopupQa from '@/app/components/popup_qa';
 
 type QAItems = {
   id: string
@@ -46,6 +47,7 @@ export default function Qa() {
     <>
       {session && status === "authenticated" ? (<NavDashboard user={session?.user}/>) : (<NavHome />)}
       <main className='m-auto p-5 my-12 max-w-[750px]'>
+        <PopupQa/>
         <section className='flex flex-col w-full gap-5 font-font2'>
           <h1 className='font-font1 font-bold text-primary text-5xl'>Q & A Vragen</h1>
           <hr />

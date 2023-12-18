@@ -60,7 +60,7 @@ model User {
   bio            String?
   email          String       @unique
   emailVerified  DateTime?    @map("email_verified")
-  password       String // assuming hash format
+  password       String // hash format bcrypt
   role           Role         @relation(fields: [roleId], references: [id])
   userFunction   UserFunction @relation(fields: [userFunctionId], references: [id])
   calendars      Calendar[]

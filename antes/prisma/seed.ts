@@ -111,6 +111,12 @@ async function main() {
         comment: "Bedank voor je support",
         dateCreate: new Date()
       },
+      {
+        questionId: QaQuestion2.id,
+        userId: user2.id,
+        comment: "Waar moet ik voor oppassen",
+        dateCreate: new Date()
+      },
     ]
   })
 
@@ -118,7 +124,7 @@ async function main() {
   const event = await prisma.event.create({
     data: {
       title: "Connectiedag!",
-      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
       location: "Rotterdam",
       dateStart: new Date(),
       dateEnd: new Date()

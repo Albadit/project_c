@@ -65,7 +65,7 @@ export const NavDashboard = (props: Props) => {
           <img src={"/img/" + context.user.image} alt="profile" className="h-full w-auto rounded-full"/>
         </button>
         <div className='hidden lg:flex flex-col absolute top-14 right-6'>
-          <ul className={`flex flex-col bg-background shadow-cbs p-3 gap-y-3 w-max pr-24 rounded outline outline-1 outline-font1/10 ${mobileMenuOpen ? 'block' : 'hidden'}`}>
+          <ul className={`flex flex-col p-3 gap-y-3 w-max pr-24 bg-background shadow-cbs rounded outline outline-1 outline-font1/10 ${mobileMenuOpen ? 'block' : 'hidden'}`}>
           {context.user.navigation.map((item) => (
             <li key={item.name}>
               {item.href === "/logout" ? (

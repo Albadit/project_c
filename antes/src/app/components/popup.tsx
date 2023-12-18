@@ -39,7 +39,7 @@ const Modal = () => {
                     </div>
                     <div className="py-2 items-start">
                       <label className="items-center flex box-border text-[#000000] text-sm font-bold mb-1">
-                         Beschrijving
+                        Beschrijving
                       </label>
                       <input className="shadow appearance-none border rounded w-full py-2 text-[#000000]"  />
                     </div>
