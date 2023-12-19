@@ -120,7 +120,7 @@ export default function Chat() {
         <main className='m-auto p-5 my-12 max-w-[1000px]'>
           {isLoading ? (<p className='text-center'>Loading data...</p>) : ( data?.status === "error" ? (<p className='text-center'>No data find</p>) : (
             <section className='flex flex-col w-full gap-5 font-font2'>
-            <h1 className='font-font1 font-bold text-primary text-5xl'>{data?.data.creator.title}</h1>
+            <h1 className='font-font1 font-bold text-primary text-5xl break-words'>{data?.data.creator.title}</h1>
             <div className='flex flex-col text-extra'>
               <p>Gevraagd: {data?.data.creator.name}</p>
               <p>Datum: {formatDate(data?.data.creator.dateCreate ?? '')}</p>

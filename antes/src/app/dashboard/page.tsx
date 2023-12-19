@@ -84,7 +84,7 @@ export default function Dashboard() {
       <NavDashboard user={session?.user}/>
       <main className='flex flex-wrap justify-center m-auto p-5 my-12 max-w-[1280px]'>
         <section className='flex flex-col w-full gap-20'>
-          <h1 className='font-font1 font-bold text-center text-primary text-5xl'>Goedemorgen {session?.user?.name}</h1>
+          <h1 className='font-font1 font-bold text-center text-primary text-5xl break-words'>Goedemorgen {session?.user?.name}</h1>
           <div className='flex flex-wrap justify-between gap-10 gap-y-20 [&>*]:flex-[1_1_525px]'>
             <div className='flex flex-col items-center justify-top gap-10'>
               <h2 className='font-font1 font-semibold text-center text-primary text-3xl'>Nieuwste Q & A</h2>

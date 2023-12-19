@@ -112,7 +112,7 @@ export default function Profile() {
           <form onSubmit={handleSubmitProfile} className='flex flex-col gap-5'>
             <h2 className='font-font1 font-bold text-font1 text-3xl'>Persoonlijke informatie</h2>
             <div className='flex flex-row gap-5 items-center'>
-              <img src={"/img/" + session?.user?.image} alt="profile" className='h-[100px] rounded-full'/>
+              <img src={session?.user?.image|| ""} alt="profile" className='h-[100px] rounded-full'/>
               <div className='flex flex-col gap-2'>
                 <label htmlFor="upload-photo" className='w-fit px-5 py-2 rounded-lg bg-secondary text-font2 font-semibold text-sm'>Verander Avatar</label>
                 <input type="file" name="photo" id="upload-photo" className='hidden'/>

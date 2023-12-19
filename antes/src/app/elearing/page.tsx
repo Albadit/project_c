@@ -75,7 +75,7 @@ export default function ELearning() {
       <NavDashboard user={session?.user}/>
       <main className='m-auto p-5 my-12 max-w-[1280px]'>
         <section className='flex flex-col gap-10 mb-12'>
-          <h1 className="font-font1 font-bold text-center text-primary text-5xl">E-Learning</h1>
+          <h1 className="font-font1 font-bold text-center text-primary text-5xl break-words">E-Learning</h1>
           <div className='flex md:flex-row flex-col justify-center gap-5 2xl:gap-10'>
             <ELearningCard elearning={elearing} />
             <ELearningCard elearning={elearing} />
@@ -90,7 +90,7 @@ export default function ELearning() {
           </div>
         </section>
         <section className='flex flex-col gap-10'>
-          <h1 className="tfont-font1 font-bold text-center text-primary text-5xl">Onderwerpen</h1>
+          <h1 className="tfont-font1 font-bold text-center text-primary text-5xl break-words">Onderwerpen</h1>
           <div className='flex flex-wrap justify-center gap-8'>
             {subjects.map((item, index) => 
               <SubjectCard key={index} subject={item} />

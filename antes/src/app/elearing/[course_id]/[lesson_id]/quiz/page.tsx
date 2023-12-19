@@ -16,8 +16,8 @@ export default function ElearningQuiz() {
   return (
     <>
       <NavDashboard user={session?.user}/>
-      <main className="flex flex-col justify-center items-center m-auto p-5 quiz">
-        <section className="max-w-[500px] w-full">
+      <main className="m-auto p-5 my-12 max-w-[1280px]">
+        <section className="flex flex-col justify-center items-center font-font2">
           <Quiz />
         </section>
       </main>
