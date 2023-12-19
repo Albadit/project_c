@@ -103,7 +103,7 @@ export default function Qa() {
             <PopupQa title='Nieuw Q&A' isPopupOpen={isPopupOpen} setIsPopupOpen={setIsPopupOpen}>
               <form onSubmit={handleSubmit} className='flex flex-col gap-4 items-end'>
                 <Input label='Vraag' name='title' type='textarea' value=''/>
-                {/* <Input label='Foto banner' name='image' type='text' value=""/> */}
+                {/* add image button */}
                 <button type='submit' className='w-fit px-6 py-2.5 rounded-lg bg-secondary text-font2 font-semibold text-sm'>Opslaan</button>
                 <p className='text-error'>{message}</p>
               </form>

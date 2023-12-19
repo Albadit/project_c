@@ -35,7 +35,7 @@ export async function POST(req: Request) {
         image: "/img/profile.png",
         name: body.name,
         bio: null,
-        email: body.email,
+        email: body.email.toLowerCase(),
         emailVerified: null,
         password: await bcrypt.hash(body.password, 10),
       }

@@ -56,9 +56,6 @@ export default function Profile() {
     })
   }, [])
 
-  if (!session && status === "loading") return <p className='text-center'>Loading data...</p>;
-  if (status === "unauthenticated") { router.push('/'); return null; }
-
   const handleSubmitProfile = async (e: any) => {
     e.preventDefault();
     const formData = new FormData(e.target);
@@ -99,6 +96,9 @@ export default function Profile() {
     }
   }
 
+  if (!session && status === "loading") return <p className='text-center'>Loading data...</p>
+  if (status === "unauthenticated") { router.push('/'); return null; }
+
   if (isLoading) return <p className='text-center'>Loading data...</p>
   if (data?.status === "error") return <p className='text-center'>No data find</p>
 
@@ -119,7 +119,7 @@ export default function Profile() {
                 <p className='text-sm text-font1'>JPG, GIF or PNG. 1MB max.</p>
               </div>
             </div>
-            {/* <Input label='Naam' name='first_name' type='text' value={session?.user.name}/> */}
+            {/* <Input label='Naam' name='name' type='text' value={session?.user.name}/> */}
             {/* <SelectMenu label='User Function' name="user_function" options={data?.data || []} index={2}/> */}
             {/* <Input label='Email' name='email' type='email' value={session?.user.email}/> */}
             {/* <Input label='Bio' name='bio' type='textarea' value={user.bio}/> */}

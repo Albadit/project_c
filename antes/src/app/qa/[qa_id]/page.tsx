@@ -73,6 +73,7 @@ export default function Chat() {
   const [data, setData] = useState<ApiResponse<QaItems> | null>(null)
   const [isLoading, setLoading] = useState(true)
   const [comment, setComment] = useState('');
+  const [message, setMessage] = useState('');
 
   async function fetchData() {
     try {
@@ -106,10 +107,10 @@ export default function Chat() {
         setComment('');
         fetchData()
       } else {
-        console.log('has been not send')
+        setMessage('has been not send')
       }
     } else {
-      console.log('De input staat leeg.')
+      setMessage('De input staat leeg')
     }
   }
   
@@ -136,9 +137,9 @@ export default function Chat() {
               </div>
             ))}
             {session && status === "authenticated" ? (
-              <div className='flex flex-row justify-end gap-5 w-full'>
+            <div className='flex flex-col items-end gap-5 w-full'>
               <form onSubmit={handleSubmit} className='comment bg-section flex flex-col gap-2 p-3 max-w-[560px] w-full h-[120px] rounded-lg shadow-sm border-[1px] border-font1/20 focus-within:outline focus-within:outline-2 focus-within:outline-callToAction focus-within:outline-offset-[-2px] sm:text-sm sm:leading-6 disabled:bg-slate-50 disabled:text-text-slate-500 disabled:border-slate-200 disabled:shadow-none invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500 disabled:opacity-75'>
-                <textarea name="comment" value={comment} onChange={(e) => setComment(e.target.value)} placeholder='Schrijf jouw comment...' className='grow border-0 p-0 m-0 bg-section resize-none focus:ring-0 focus:border-transparent'/>
+                <textarea required name="comment" value={comment} onChange={(e) => setComment(e.target.value)} placeholder='Schrijf jouw comment...' className='grow border-0 p-0 m-0 bg-section resize-none focus:ring-0 focus:border-transparent'/>
                 <div className='flex flex-row justify-between'>
                   <div className='flex flex-row items-center gap-1'>
                     <AttachFile className='h-[75%] rotate-[210deg] fill-extra'/>
@@ -147,6 +148,7 @@ export default function Chat() {
                   <button type="submit" className='px-2.5 py-1.5 rounded-lg bg-secondary text-font2 font-semibold text-sm'>comment</button>
                 </div>
               </form>
+              <p className='text-error'>{message}</p>
             </div>
             ) : (<></>)}  
           </section>

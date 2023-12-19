@@ -31,7 +31,7 @@ const handler = NextAuth({
         if (!credentials.email || !credentials.password) { return null }
 
         const user = await prisma.user.findUnique({
-          where: { email: credentials.email }
+          where: { email: credentials.email.toLowerCase() }
         })
 
         if (!user) { return null }
