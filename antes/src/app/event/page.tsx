@@ -5,6 +5,8 @@ import { NavDashboard } from '@/app/components/dashboard/nav'
 import ArrowRight from '@/app/components/icons/arrow_right';
 import Link from 'next/link';
 import Popup from '@/app/components/popup';
+import { useSession } from 'next-auth/react';
+import NavHome from '@/app/components/home/nav';
 
 const user = {
   name: "Sara",
@@ -125,6 +127,7 @@ function isEventCurrentDay(day: any) {
 }
 
 export default function Calendar() {
+  const { data: session, status } = useSession()
   const currentDate = new Date();
   const [currentMonth, setCurrentMonth] = useState(currentDate.getMonth() + 1);
   const [currentYear, setCurrentYear] = useState(currentDate.getFullYear());
@@ -166,53 +169,53 @@ export default function Calendar() {
 
   return (
     <>
-    <NavDashboard user={user}/>
-    <main className="flex flex-col justify-center items-center gap-10 p-5 my-12">
-      <h1 className='font-font1 font-bold text-center text-primary text-5xl'>Events</h1>
-      <section className='max-w-full'>
-        <div className='flex flex-row justify-between items-center max-w-[350px] w-full mt-8'>
-          <button onClick={goToPrevMonth}><ArrowRight className='w-5 fill-extra rotate-180'/></button>
-          <p className='font-semibold text-xl font-font1'>{monthName} {currentYear}</p>
-          <button onClick={goToNextMonth}><ArrowRight className='w-5 fill-extra'/></button>
-        </div>
-        <div className='text-font1 font-font2 overflow-x-auto'>
-          <div className='w-max'>
-            {/* Weekday Headers */}
-            <div className="grid grid-cols-7">
-              {days.map((day, index) => (
-                <span key={index} className="text-center py-2 font-normal">{day}</span>
-              ))}
-            </div>
+      {session && status === "authenticated" ? (<NavDashboard user={session?.user}/>) : (<NavHome />)}
+      <main className="flex flex-col justify-center items-center gap-10 p-5 my-12">
+        <h1 className='font-font1 font-bold text-center text-primary text-5xl'>Events</h1>
+        <section className='max-w-full'>
+          <div className='flex flex-row justify-between items-center max-w-[350px] w-full mt-8'>
+            <button onClick={goToPrevMonth}><ArrowRight className='w-5 fill-extra rotate-180'/></button>
+            <p className='font-semibold text-xl font-font1'>{monthName} {currentYear}</p>
+            <button onClick={goToNextMonth}><ArrowRight className='w-5 fill-extra'/></button>
+          </div>
+          <div className='text-font1 font-font2 overflow-x-auto'>
+            <div className='w-max'>
+              {/* Weekday Headers */}
+              <div className="grid grid-cols-7">
+                {days.map((day, index) => (
+                  <span key={index} className="text-center py-2 font-normal">{day}</span>
+                ))}
+              </div>
 
-            {/* Calendar Days */}
-            <div className='calender grid grid-rows-7 p-0.5'>
-              {weeks.map((week: any, i: any) => (
-                <div key={i} className='grid grid-cols-7'>
-                  {week.map((day: any, index: any) => (
-                    <div key={index} className={`text-center outline outline-[1px] outline-offset-0 outline-inputBorder px-4 py-2.5 ${isCurrentMonth(day) ? 'bg-section' : 'text-extra bg-[#f9fafb]'}`}>
-                      <span className={`${isCurrentDay(day) ? 'text-font2 font-medium bg-secondary rounded-full p-1.5 m-[-6px]' : ''}`}>{day.day}</span>
-                    </div>
-                  ))}
-                </div>
-              ))}
+              {/* Calendar Days */}
+              <div className='calender grid grid-rows-7 p-0.5'>
+                {weeks.map((week: any, i: any) => (
+                  <div key={i} className='grid grid-cols-7'>
+                    {week.map((day: any, index: any) => (
+                      <div key={index} className={`text-center outline outline-[1px] outline-offset-0 outline-inputBorder px-4 py-2.5 ${isCurrentMonth(day) ? 'bg-section' : 'text-extra bg-[#f9fafb]'}`}>
+                        <span className={`${isCurrentDay(day) ? 'text-font2 font-medium bg-secondary rounded-full p-1.5 m-[-6px]' : ''}`}>{day.day}</span>
+                      </div>
+                    ))}
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
-        </div>
-      </section>
-      <section className='flex flex-col gap-5 font-font2 text-font1 max-w-[750px] w-full'>
-        <h2 className='font-semibold text-xl font-font1'>Aankomende evenementen</h2>
-        <div>
-          {events.map((item) => 
-          <Link key={item.id} href={item.url} className="flex sm:flex-row flex-col py-4 border-b-[1px] border-extra/20">
-            <p className='text-extra w-28 sm:p-0 pb-4'>{item.start.toLocaleDateString(local, { weekday: 'short' })}, {item.start.getDate()} {item.start.toLocaleDateString(local, { month: 'short' })}</p>
-            <p className={`grow ${item.id === -1 ? 'text-extra' : 'font-medium'}`}>{item.title}</p>
-            <p className={`${item.id === -1 ? 'hidden' : ''}`}>{item.start.toLocaleTimeString(local, { hour: '2-digit', minute: '2-digit', hour12: false })} - {item.end.toLocaleTimeString(local, { hour: '2-digit', minute: '2-digit', hour12: false })}</p>
-          </Link>
-          )}
-        </div>
-      </section>
-    </main>
-    <Footer/>
+        </section>
+        <section className='flex flex-col gap-5 font-font2 text-font1 max-w-[750px] w-full'>
+          <h2 className='font-semibold text-xl font-font1'>Aankomende evenementen</h2>
+          <div>
+            {events.map((item) => 
+            <Link key={item.id} href={item.url} className="flex sm:flex-row flex-col py-4 border-b-[1px] border-extra/20">
+              <p className='text-extra w-28 sm:p-0 pb-4'>{item.start.toLocaleDateString(local, { weekday: 'short' })}, {item.start.getDate()} {item.start.toLocaleDateString(local, { month: 'short' })}</p>
+              <p className={`grow ${item.id === -1 ? 'text-extra' : 'font-medium'}`}>{item.title}</p>
+              <p className={`${item.id === -1 ? 'hidden' : ''}`}>{item.start.toLocaleTimeString(local, { hour: '2-digit', minute: '2-digit', hour12: false })} - {item.end.toLocaleTimeString(local, { hour: '2-digit', minute: '2-digit', hour12: false })}</p>
+            </Link>
+            )}
+          </div>
+        </section>
+      </main>
+      <Footer/>
     </>
-  );
-};
+  )
+}

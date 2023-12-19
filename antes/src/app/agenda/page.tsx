@@ -1,33 +1,21 @@
 "use client"
-import React, { useState, useMemo } from 'react';
-import Footer from '@/app/components/footer';
+import React, { useState, useMemo } from 'react'
+import Footer from '@/app/components/footer'
 import { NavDashboard } from '@/app/components/dashboard/nav'
-import ArrowRight from '@/app/components/icons/arrow_right';
-import Link from 'next/link';
-
-const user = {
-  id: 1,
-  role_id: 1,
-  profile: "/img/profile.png",
-  first_name: "Sara",
-  last_name: "Leekman",
-  function_id: 3,
-  bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-  email: "saraleekman@outlook.com",
-}
+import ArrowRight from '@/app/components/icons/arrow_right'
+import Link from 'next/link'
+import { useSession } from 'next-auth/react'
+import NavHome from '@/app/components/home/nav'
+import { useRouter } from 'next/navigation'
 
 export default function Calendar() {
+  const { data: session, status } = useSession()
+  const router = useRouter()
   const timeSlots = ["08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00"];
   const dayLabels = ["Ma", "Di", "Wo", "Do", "Vr", "Za", "Zo"];
   const timeSlotHeight = 100 / timeSlots.length;
-  const currentDate = useMemo(() => {
-    return new Date();
-  }, []);
-  // const currentMonth = currentDate.toLocaleString('default', { month: 'long' }).charAt(0).toUpperCase() + currentDate.toLocaleString('default', { month: 'long' }).slice(1);
-  // const currentYear = currentDate.getFullYear()
+  const currentDate = useMemo(() => { return new Date(); }, []);
   const startDayOfWeek = getStartDayOfWeek();
-
-
   const [currentWeek, setCurrentWeek] = useState(0);
   const [currentMonth, setCurrentMonth] = useState("");
 
@@ -40,15 +28,6 @@ export default function Calendar() {
     setCurrentWeek(0);
   };
 
-  const handlePreviousWeek = () => {
-    handleWeekChange(-1);
-  };
-
-  const handleNextWeek = () => {
-    handleWeekChange(1);
-  };
-
-
   const adjustedDate = useMemo(() => {
     const date = new Date(currentDate);
     date.setDate(date.getDate() + currentWeek * 7);
@@ -60,12 +39,12 @@ export default function Calendar() {
     setCurrentMonth(month);
   }, [adjustedDate]);
 
+  if (!session && status === "loading") return <p className='text-center'>Loading data...</p>
+  if (status === "unauthenticated") { router.push('/'); return null; }
 
   return (
     <>
-      {/* Header */}
-      <NavDashboard user={user} />
-
+      <NavDashboard user={session?.user}/>
       <main className='m-auto p-5 my-12 max-w-[1280px]'>
         <section className='flex flex-col justify-center items-center gap-10'>
           {/* Title */}

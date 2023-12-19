@@ -59,8 +59,6 @@ export default function Profile() {
   if (!session && status === "loading") return <p className='text-center'>Loading data...</p>;
   if (status === "unauthenticated") { router.push('/'); return null; }
 
-  console.log(data)
-
   const handleSubmitProfile = async (e: any) => {
     e.preventDefault();
     const formData = new FormData(e.target);
@@ -73,7 +71,7 @@ export default function Profile() {
       if (register === true) {
         router.push("/login");
       } else {
-        setMessage(register);
+        setMessage("Verkeerde data.");
       }
     } else {
       setMessage("De input staat leeg.");
@@ -101,8 +99,11 @@ export default function Profile() {
     }
   }
 
-  return (<>
-    {isLoading ? (<p className='text-center'>Loading data...</p>) : ( data?.status === "error" ? (<p className='text-center'>No data find</p>) : (<>
+  if (isLoading) return <p className='text-center'>Loading data...</p>
+  if (data?.status === "error") return <p className='text-center'>No data find</p>
+
+  return (
+    <>
       <NavDashboard user={session?.user}/>
       <main className='m-auto px-5 py-12 max-w-[1000px]'>
         <section className='flex flex-col gap-5  font-font2'>
@@ -134,6 +135,6 @@ export default function Profile() {
         </section>
       </main>
       <Footer/>
-    </>))}
-  </>)
+    </>
+  )
 }
