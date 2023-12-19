@@ -62,7 +62,7 @@ export const NavDashboard = (props: Props) => {
         ))}
         </ul>
         <button className="hidden lg:flex h-[80%]" type="button" title='openMenu' onClick={() => setMobileMenuOpen(!mobileMenuOpen)} >
-          <img src={"/img/" + context.user.image} alt="profile" className="h-full w-auto rounded-full"/>
+          <img src={context.user.image} alt="profile" className="h-full w-auto rounded-full"/>
         </button>
         <div className='hidden lg:flex flex-col absolute top-14 right-6'>
           <ul className={`flex flex-col p-3 gap-y-3 w-max pr-24 bg-background shadow-cbs rounded outline outline-1 outline-font1/10 ${mobileMenuOpen ? 'block' : 'hidden'}`}>
@@ -105,7 +105,7 @@ export const NavDashboard = (props: Props) => {
             ))}
               <hr className='border-font1/20'/>
               <li className='flex items-center gap-3'>
-                <img src={"/img/" + context.user.image} alt={context.user.name} className="h-[40px] w-auto rounded-full"/>
+                <img src={context.user.image} alt={context.user.name} className="h-[40px] w-auto rounded-full"/>
                 <div className='truncate leading-5'>
                   <p className='truncate font-semibold'>{context.user.name}</p>
                   <p className='truncate'>{context.user.email}</p>

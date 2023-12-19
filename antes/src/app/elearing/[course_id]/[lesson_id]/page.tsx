@@ -1,13 +1,10 @@
+"use client"
 import React from "react";
 import Link from "next/link";
 import Footer from "@/app/components/footer";
 import { NavDashboard } from "@/app/components/dashboard/nav";
-
-const user = {
-  name: "Sara",
-  email: "saraleekman@outlook.com",
-  image: "/img/profile.png",
-}
+import { useRouter } from 'next/navigation';
+import { useSession } from 'next-auth/react';
 
 const lesson = {
   id: 1,
@@ -20,10 +17,15 @@ const lesson = {
 
 export default function ElearningLesson() {
   const embedId = "I-MmRYP9bdk"; // Extracted from the YouTube URL
-
+  const router = useRouter()
+  const { data: session, status } = useSession()
+  
+  if (!session && status === "loading") return <p className='text-center'>Loading data...</p>
+  if (status === "unauthenticated") { router.push('/'); return null; }
+  
   return (
     <>
-      <NavDashboard user={user} />
+      <NavDashboard user={session?.user}/>
       <main className="flex flex-col justify-center items-center m-auto p-5 my-12">
         <section className="max-w-[1280px]">
           <div className="aspect-w-16 aspect-h-9 shadow-2xl">

@@ -55,7 +55,7 @@ model User {
   id             String       @id @default(cuid())
   roleId         String
   userFunctionId String
-  image          String       @default("profile.png")
+  image          String       @default("/img/profile.png")
   name           String       @db.Text
   bio            String?
   email          String       @unique
@@ -91,7 +91,7 @@ model Event {
   title       String     @db.Text
   description String     @db.Text
   location    String     @db.Text
-  image       String     @default("event_card.png")
+  image       String     @default("/img/event_card.png")
   dateStart   DateTime
   dateEnd     DateTime
   calendars   Calendar[]
@@ -110,7 +110,7 @@ model QaQuestion {
   userId     String
   title      String     @db.Text
   dateCreate DateTime
-  image      String?    @default("qa_card.png")
+  image      String?    @default("/img/qa_card.png")
   tags       Json?
   user       User       @relation(fields: [userId], references: [id])
   qaAnswers  QaAnswer[]

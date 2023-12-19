@@ -128,7 +128,7 @@ export default function Chat() {
             <hr />
             {data?.data.qaAnswers.map((item, index) => (
               <div key={index} className={`flex ${session?.user?.email == item.email ? 'flex-row-reverse justify-start' : 'flex-row justify-start'} sm:gap-5 gap-2`}>
-                <img src={"/img/" + item.image} alt="profile" className='h-[40px] rounded-full'/>
+                <img src={item.image} alt="profile" className='h-[40px] rounded-full'/>
                 <div className={`flex flex-col p-3 gap-3 rounded-lg shadow-cbs-sm w-full max-w-[500px] ${session?.user?.email == item.email ? 'bg-section' : 'bg-[#F0F0F0]'}`}>
                   <p className={`font-font1 text-lg font-semibold ${session?.user?.email == item.email ? 'hidden' : 'block'}`}>{item.name}</p>
                   <p className='text-extra text-ms leading-5'>{item.comment}</p>

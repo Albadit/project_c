@@ -69,6 +69,7 @@ export default function ELearning() {
   
   if (!session && status === "loading") return <p className='text-center'>Loading data...</p>
   if (status === "unauthenticated") { router.push('/'); return null; }
+  
   return (
     <>
       <NavDashboard user={session?.user}/>

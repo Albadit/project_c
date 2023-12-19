@@ -36,7 +36,7 @@ export const QACardList = (props: Props) => {
     <Link key={props.qaData.id} href={"/qa/" + props.qaData.id}>
       <div className='flex flex-col py-6 px-7 gap-4 rounded-lg bg-section shadow-cbs'>
         <div className='flex flex-wrap items-center gap-5'>
-          <img src={"/img/" + props.qaData.image} alt="profile" className="h-[40px] rounded-full"/>
+          <img src={props.qaData.image} alt="profile" className="h-[40px] rounded-full"/>
           <div className='flex flex-col'>
             <p className='font-semibold font-font1'>{props.qaData.name}</p>
             <span className='text-sm text-extra'>{formatDate(props.qaData.dateCreate)}</span>

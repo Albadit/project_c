@@ -36,7 +36,7 @@ function formatDate(date: string): string {
 export const QACard = (props: Props) => {
   return (
     <div className="flex flex-col md:max-w-[525px] w-full gap-5 p-7 rounded-lg bg-section shadow-cbs text-base font-font1 text-font1">
-      <img src={"/img/" + props.qa.image} alt="event" className="h-[280px] object-cover object-center rounded" />
+      <img src={props.qa.image} alt="event" className="h-[280px] object-cover object-center rounded" />
       <div className="flex flex-row items-center gap-2 text-extra">
         <Calendar className="fill-extra h-5" />
         <p className="text-sm">{formatDate(props.qa.dateCreate)}</p>
@@ -53,7 +53,7 @@ export const QACard = (props: Props) => {
       <hr className="border-font1/20" />
       <div className="flex lg:flex-row flex-col lg:items-center justify-between gap-5">
         <div className="flex flex-row items-center gap-5">
-          <img src={"/img/" + props.qa.profile} alt={props.qa.name} className="rounded-full h-[44px]" />
+          <img src={props.qa.profile} alt={props.qa.name} className="rounded-full h-[44px]" />
           <p className="text-extra font-semibold">{props.qa.name}</p>
         </div>
         <Link href={"/qa/" + props.qa.id} className="flex flex-row items-center justify-center gap-2 px-4 py-3 rounded-lg bg-primary text-font2 font-semibold text-sm">
