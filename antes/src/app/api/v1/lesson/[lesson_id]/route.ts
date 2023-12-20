@@ -31,11 +31,20 @@ export async function POST(req: Request){
 }
 
 
-export async function GET(){
+export async function GET(
+  request: Request,
+  { params}: { params: { lesson_id: string } }
+) {
+  
     try {
-        const user = await prisma.lesson.findFirst()
+        const user = await prisma.lesson.findFirst({
+          where : {
+            id: params.lesson_id
+          }
+        })
         return NextResponse.json(user)
       } catch (error) {
         return NextResponse.json({body: "error"})
       }
 }
+

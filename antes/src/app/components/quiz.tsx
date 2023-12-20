@@ -52,7 +52,7 @@ export default function Quiz(props: { lesson_id: string }) {
   
   return (
     <>
-      {!data ? <div>Loading...</div>
+      {!data ? <div>Aan het laden...</div>
       : showResults ? (
         console.log(data),
         <div className='flex flex-col gap-8 w-full'>
@@ -60,13 +60,19 @@ export default function Quiz(props: { lesson_id: string }) {
           <ul className='flex flex-col gap-2'>
             {data.map((question, index) => (
               <li key={index}>
-                <strong>{question.question}</strong>
+                {
+              data.length > 0 ? (
+                <strong>{data[currentQuestion].question}</strong>
+              ) : (
+                <p>Deze quiz bestaat nog niet. Neem contact op met de IT afdeling.</p>
+              )
+            }
                 <div>
                   Uw antwoord: {userAnswers[index]}
                   {userAnswers[index] === question.correctAnswer ? (
-                    <span className="text-success font-bold">Correct!</span>
+                    <span className="text-success font-bold pl-6">Correct!</span>
                   ) : (
-                    <span className="text-error font-bold">Incorrect!</span>
+                    <span className="text-error font-bold pl-6">Incorrect!</span>
                   )}
                 </div>
               </li>
@@ -89,7 +95,7 @@ export default function Quiz(props: { lesson_id: string }) {
           </div>
 
           <div className='flex flex-row gap-12 rounded-md text-[#ffff] font-semibold'>
-            <Link href={"/elearing/1"} className='bg-primary rounded-md px-3 py-2'>
+            <Link href={"/elearing"} className='bg-primary rounded-md px-3 py-2'>
               Terug naar de cursus
             </Link>
             {!passed && (
@@ -105,25 +111,35 @@ export default function Quiz(props: { lesson_id: string }) {
       ) : (
         !isLoading ? (
           <div className='flex flex-col gap-6 w-full'>
-          <h1 className="text-primary text-3xl font-bold">Question {currentQuestion + 1}</h1>
+          <h1 className="text-primary text-3xl font-bold">Vraag {currentQuestion + 1}</h1>
           <div className='flex flex-col gap-2'>
-          <p className="text-xl font-semibold">{data[currentQuestion].question}</p>
+          {
+          data.length > 0 && data[currentQuestion] ? (
+            <p className="text-xl font-semibold">{data[currentQuestion].question}</p>
+          ) : (
+            <p>Deze quiz bestaat nog niet. Neem contact op met de IT afdeling.</p>
+          )
+        }
           <hr />
           </div>
           <div className='flex flex-col gap-4'>
-            {data[currentQuestion].options.map((option, index) => (
-              <button
-                key={index}
-                className={`${
-                  selectedOption === option
-                    ? 'bg-callToAction'
-                    : 'bg-white'
-                } py-2 px-4 border border-inputBorder rounded-lg cursor-pointer`}
-                onClick={() => setSelectedOption(option)}
-              >
-                {option}
-              </button>
-            ))}
+          {
+            data.length > 0 && data[currentQuestion] ? (
+              data[currentQuestion].options.map((option, index) => (
+                <button
+                  key={index}
+                  className={`${
+                    selectedOption === option
+                      ? 'bg-callToAction'
+                      : 'bg-white'
+                  } py-2 px-4 border border-inputBorder rounded-lg cursor-pointer`}
+                  onClick={() => setSelectedOption(option)}
+                >
+                  {option}
+                </button>
+              ))
+            ) : null
+          }
           </div>
           <button
             className="bg-secondary text-[#ffff] py-2 px-4 mt-12 rounded-md cursor-pointer"
@@ -135,7 +151,7 @@ export default function Quiz(props: { lesson_id: string }) {
         </div>
         ) : (
           <div className='flex flex-col justify-center items-center gap-6 w-full'>
-            <p className="text-xl font-semibold">Loading quiz data...</p>
+            <p className="text-xl font-semibold">quiz data aan het laden...</p>
           </div>
         )
       )}

@@ -1,4 +1,5 @@
-import React from 'react';
+'use client'
+import React, { useEffect, useState } from 'react';
 import Link from "next/link";
 import Footer from '@/app/components/footer';
 import { NavDashboard } from '@/app/components/dashboard/nav'
@@ -18,24 +19,64 @@ const user = {
   email: "saraleekman@outlook.com",
 }
 
-const elearing = {
-  id: 1,
-  image: "img/e_learing.png",
-  title: "H1. Introduction.",
-  user_chapters: 8,
-  max_chapters: 11,
-  url: "/elearing/1",
+
+type Subject = {
+  [x: string]: any;
+  id: string;
+  name: string;
+  description: string;
 }
 
 const subject = {
-  id: 1,
+  id: "1",
   image: "img/e_learing.png",
-  title: "Psychiatrie",
+  name: "Psychiatrie",
   description: "La lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae nisi eget nunc aliquam aliquet.",
   url: "/elearing/1",
 }
 
 export default function ELearning() {
+  const [data, setData] = useState<Subject | null>(null);
+  const [isLoading, setLoading] = useState(true)
+
+  async function fetchData(){
+    try{
+      console.log("fetching data");
+      const response = await fetch(`/api/v1/subject`);
+      console.log("response:", response)
+      const fetchedData: Subject = await response.json();
+      console.log("fetchedData:", fetchedData);
+      setData(fetchedData);
+      console.log("data:", fetchedData);
+      setLoading(false); 
+    } catch (error) {
+      console.log("error fetching data", error);
+    }
+  }
+
+  useEffect(() => {
+    fetchData()
+  }, [])
+
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
+
+  if (!data) {
+    return <p>No data found</p>;
+  }
+
+
+  const convertSubjectToElearing = (subject: Subject)=> {
+    return {
+      id: subject.id,
+      name: subject.name,
+      user_chapters: 0,
+      max_chapters: subject.lessons ? subject.lessons.length : 0,
+      url: `elearing/${subject.id}`,
+    };
+  };
+
   return (
     <>
     <NavDashboard user={user}/>
@@ -43,8 +84,9 @@ export default function ELearning() {
       <section className='flex flex-col gap-10 mb-12'>
         <h1 className="font-font1 font-bold text-center text-primary text-5xl">E-Learning</h1>
         <div className='flex md:flex-row flex-col justify-center gap-5 2xl:gap-10'>
-          <ELearningCard elearing={elearing} />
-          <ELearningCard elearing={elearing} />
+          {data.map((item: any, index: any) => (
+            <ELearningCard key={index} elearing={convertSubjectToElearing(item)} />
+          ))}
         </div>
         <div className='flex items-center justify-center gap-6'>
           <button className="bg-secondary hover:bg-[#0840A3] text-[#FAFAFA] font-bold py-3 px-10 rounded">
