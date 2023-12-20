@@ -21,12 +21,11 @@ export const InputDateTime = (props: Props) => {
     const newValue = e.target.value;
     setValue(newValue);
     setDisabled(newValue === 'disable');
-    setRequired(newValue === 'required');
   }
 
   return (
     <div className='w-full'>
-      <label htmlFor={props.name.toLowerCase()} className="block text-sm font-medium leading-5 text-font1">{props.label} {required === true ? "*" : ""}</label>
+      <label htmlFor={props.name.toLowerCase()} className="block text-sm font-medium leading-5 text-font1">{`${props.label} ${required === true ? "*" : ""}`}</label>
       <div className="mt-2 relative">
         <input
           disabled={disabled}

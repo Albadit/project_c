@@ -44,13 +44,11 @@ export const Input = (props: Props) => {
     const newValue = e.target.value;
     setValue(newValue);
     setDisabled(newValue === 'disable');
-    setRequired(newValue === 'required');
   }
   const handleChangeTextArea = (e: ChangeEvent<HTMLTextAreaElement>) => {
     const newValue = e.target.value;
     setValue(newValue);
     setDisabled(newValue === 'disable');
-    setRequired(newValue === 'required');
   }
 
   const togglePasswordVisibility = () => {
@@ -59,7 +57,7 @@ export const Input = (props: Props) => {
 
   return (
     <div className='w-full'>
-      <label htmlFor={props.name.toLowerCase()} className="block text-sm font-medium leading-5 text-font1">{props.label} {required === true ? "*" : ""}</label>
+      <label htmlFor={props.name.toLowerCase()} className="block text-sm font-medium leading-5 text-font1">{`${props.label} ${required === true ? "*" : ""}`}</label>
       <div className="mt-2 relative">
         {props.type === 'textarea' ? (
           <textarea
