@@ -148,7 +148,7 @@ export default function Chat() {
                   <button type="submit" className='px-2.5 py-1.5 rounded-lg bg-secondary text-font2 font-semibold text-sm'>comment</button>
                 </div>
               </form>
-              <p className='text-error'>{message}</p>
+              {message ? (<p className='text-error'>{message}</p>) : (<></>)}
             </div>
             ) : (<></>)}  
           </section>

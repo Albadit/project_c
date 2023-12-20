@@ -7,7 +7,7 @@ import { QACardList } from '@/app/components/dashboard/qa_card_list';
 import { Paginator } from '@/app/components/paginator';
 import { useEffect, useState } from 'react';
 import { useSession } from 'next-auth/react';
-import PopupQa from '@/app/components/popup_qa';
+import Modal from '@/app/components/modal';
 import { Input } from '@/app/components/input';
 
 type QAItems = {
@@ -50,7 +50,7 @@ export default function Qa() {
   const { data: session, status } = useSession()
   const [data, setData] = useState<ApiResponse<QAData> | null>(null)
   const [isLoading, setLoading] = useState(true)
-  const [isPopupOpen, setIsPopupOpen] = useState(false)
+  const [isModalOpen, setIsModalOpen] = useState(false)
   const [message, setMessage] = useState('')
 
   async function fetchData() {
@@ -83,7 +83,7 @@ export default function Qa() {
       }, "/api/v1/qa")
 
       if (newQa) {
-        setIsPopupOpen(false)
+        setIsModalOpen(false)
         form.elements['title'].value = '';
         fetchData()
       } else {
@@ -100,14 +100,14 @@ export default function Qa() {
       <main className='m-auto p-5 my-12 max-w-[750px]'>
         <section className='flex flex-col w-full gap-5 font-font2'>
           <div className='flex flex-row justify-end'>
-            <PopupQa title='Nieuw Q&A' isPopupOpen={isPopupOpen} setIsPopupOpen={setIsPopupOpen}>
+            <Modal title='Nieuw Q&A' isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}>
               <form onSubmit={handleSubmit} className='flex flex-col gap-4 items-end'>
                 <Input label='Vraag' name='title' type='textarea' value=''/>
                 {/* add image button */}
                 <button type='submit' className='w-fit px-6 py-2.5 rounded-lg bg-secondary text-font2 font-semibold text-sm'>Opslaan</button>
-                <p className='text-error'>{message}</p>
+                {message ? (<p className='text-error'>{message}</p>) : (<></>)}
               </form>
-            </PopupQa>
+            </Modal>
           </div>
           <h1 className='font-font1 font-bold text-primary text-5xl'>Q & A Vragen</h1>
           <hr />

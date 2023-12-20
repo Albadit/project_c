@@ -4,7 +4,7 @@ import Footer from '@/app/components/footer'
 import { NavDashboard } from '@/app/components/dashboard/nav'
 import { QACard } from '@/app/components/qa_card'
 import { EventCard} from '@/app/components/event_card'
-import { ELearningCard } from '@/app/components/elearning_card'
+import { ELearningCard } from '@/app/components/dashboard/elearning_card'
 import { useSession } from 'next-auth/react'
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation'

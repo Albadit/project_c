@@ -86,7 +86,7 @@ export default function Profile() {
         password: password,
         newPassword: newPassword,
       }, "/api/v1/user_update")
-      if (register === true) {
+      if (register) {
         router.push("/login");
       } else {
         setMessage(register);

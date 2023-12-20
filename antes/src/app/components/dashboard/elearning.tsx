@@ -2,8 +2,8 @@
 import Link from "next/link";
 import Arrowright from "@/app/components/icons/arrow_right";
 import ArrowLeft from "@/app/components/icons/arrow_left";
-import { ELearningCard } from '@/app/components/elearning_card'
-import { SubjectCard } from '@/app/components/subject_card';
+import { ELearningCard } from '@/app/components/dashboard/elearning_card'
+import { SubjectCard } from '@/app/components/dashboard/subject_card';
 
 const elearning = {
     id: 1,

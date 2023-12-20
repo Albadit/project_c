@@ -121,14 +121,37 @@ async function main() {
   })
 
   //// event
-  const event = await prisma.event.create({
-    data: {
-      title: "Connectiedag!",
-      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-      location: "Rotterdam",
-      dateStart: new Date(),
-      dateEnd: new Date()
-    }
+  const event = await prisma.event.createMany({
+    data: [
+      {
+        title: "Connectiedag!",
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        location: "Rotterdam",
+        dateStart: new Date(),
+        dateEnd: new Date()
+      },
+      {
+        title: "Connectiedag!",
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        location: "Rotterdam",
+        dateStart: new Date(),
+        dateEnd: new Date()
+      },
+      {
+        title: "Connectiedag!",
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        location: "Rotterdam",
+        dateStart: new Date(),
+        dateEnd: new Date()
+      },
+      {
+        title: "Connectiedag!",
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        location: "Rotterdam",
+        dateStart: new Date(),
+        dateEnd: new Date()
+      },
+    ]
   })
 
   if (!event) { console.error("event not found"); return }

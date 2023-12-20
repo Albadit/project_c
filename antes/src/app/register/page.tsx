@@ -101,7 +101,7 @@ export default function Login() {
               <label className='m-[-1px]'>Ga akkoord met de <Link href={context.register.url} className='underline underline-offset-1 text-hyperlink'>Antes-gebruikersovereenkomst en het privacybeleid</Link></label>
             </div>
             <button type="submit" title="register" className='flex flex-row items-center justify-center w-full lg:w-auto gap-2 px-4 py-3 rounded-lg bg-primary text-font2 font-semibold text-base'>{context.btn.text}</button>
-            <p className='text-error'>{message}</p>
+            {message ? (<p className='text-error'>{message}</p>) : (<></>)}
           </form>
         </>))}
       </div>
