@@ -13,7 +13,7 @@ export async function GET() {
       }
     })
 
-    if (!qaQuestion) return NextResponse.json({ status: "error" }, { status: 500 })
+    if (!qaQuestion) return NextResponse.json({ status: "error" }, { status: 401 })
 
     const transformedData = {
       status: "succes",
@@ -53,7 +53,7 @@ export async function POST(req: Request) {
       where: { email: body.userEmail }
     })
 
-    if (!user) return NextResponse.json({ status: "error" }, { status: 500 })
+    if (!user) return NextResponse.json({ status: "error" }, { status: 401 })
 
     const data: QaData = {
       userId: user.id,

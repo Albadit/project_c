@@ -3,59 +3,64 @@ import { prisma } from '@/../../prisma/index'
 
 export async function GET() {
   try {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
     const events = await prisma.event.findMany({
-      orderBy: { 
-        dateStart: 'desc',
+      where: {
+        dateStart: {
+          gte: today,
+        },
       },
-      // include: {
-      //   user: true,
-      //   qaAnswers: true,
-      // }
+      orderBy: { 
+        dateStart: 'asc',
+      }
     })
 
     if (!events) return NextResponse.json({ status: "error" }, { status: 500 })
 
+    const transformedData = {
+      status: "success",
+      data: events
+    }
 
-    return NextResponse.json(events, { status: 200 })
+    return NextResponse.json(transformedData, { status: 200 })
   } catch (error) {
     return NextResponse.json({ status: "error" }, { status: 500 })
   }
 }
 
-interface QaData {
-  userId: string;
+interface EventData {
   title: string;
-  dateCreate: Date;
-  image?: string;
-  tags?: string;
+  description: string
+  location: string
+  image?: string
+  dateStart: Date
+  dateEnd: Date
 }
 
 export async function POST(req: Request) {
   try {
     const body = await req.json()
 
-    const user = await prisma.user.findUnique({
-      where: { email: body.userEmail }
-    })
-
-    if (!user) return NextResponse.json({ status: "error" }, { status: 500 })
-
-    const data: QaData = {
-      userId: user.id,
+    const data: EventData = {
       title: body.title,
-      dateCreate: new Date(),
-    };
+      description: body.description,
+      location: body.location,
+      dateStart: new Date(body.dateStart),
+      dateEnd: new Date(body.dateEnd),
+    }
     
     // Add the image field only if it's not null
     if (body.image) {
       data.image = body.image;
     }
 
-    const newQa = await prisma.qaQuestion.create({
+    const event = await prisma.event.create({
       data: data
     })
 
-    return NextResponse.json(newQa, { status: 200 })
+    return NextResponse.json(event, { status: 200 })
   } catch (error) {
     return NextResponse.json({ status: "error" }, { status: 500 })
   }

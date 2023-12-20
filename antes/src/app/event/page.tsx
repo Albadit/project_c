@@ -10,44 +10,12 @@ import NavHome from '@/app/components/home/nav';
 import Modal from '@/app/components/modal';
 import Calendar from '@/app/components/calendar';
 
-let events = [
-  {
-    id: 0,
-    title: "Connectiedag!",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    location: "Rotterdam",
-    dateStart: new Date(2023, 11, 12, 9, 0, 0),
-    dateEnd: new Date(2023, 11, 1, 13, 0, 0),
-  },
-  {
-    id: 1,
-    title: "MS training",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    location: "Rotterdam",
-    dateStart: new Date(2024, 5, 5, 14, 0, 0),
-    dateEnd: new Date(2024, 5, 5, 16, 30, 0),
-  },
-  {
-    id: 2,
-    title: "Team lead meeting",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    location: "Rotterdam",
-    dateStart: new Date(2024, 3, 12, 8, 30, 0),
-    dateEnd: new Date(2024, 3, 12, 12, 30, 0),
-  },
-  {
-    id: 3,
-    title: "Birthday Party",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    location: "Rotterdam",
-    dateStart: new Date(2024, 4, 11, 7, 0, 0),
-    dateEnd: new Date(2024, 4, 11, 10, 30, 0),
-  }
-];
-
 type EventItems = {
   id: string
   title: string
+  description: string
+  location: string
+  image: string
   dateStart: string
   dateEnd: string
 }
@@ -55,27 +23,6 @@ type EventItems = {
 type ApiResponse<T> = {
   status: string;
   data: T;
-}
-
-function isEventCurrentDay(day: any) {
-  if (!events.some(event => event.dateStart.getDate() === day.getDate())) {
-    const placeholderEvent = {
-      id: "/event",
-      title: "Er staat niets op het programma van vandaag",
-      description: "",
-      location: "",
-      dateStart: day,
-      dateEnd: day
-    }
-  
-    events.unshift(placeholderEvent);
-  }
-
-  // Filter out events that have already passed (excluding the current day)
-  events = events.filter(event => event.dateStart > day || event.dateStart.getDate() === day.getDate());
-
-  // Sort events based on DateStart date
-  // events.sort((a: any, b: any) => a.DateStart - b.DateStart);
 }
 
 async function Post(data: any, url: string) {
@@ -94,17 +41,33 @@ async function Post(data: any, url: string) {
   }
 }
 
+function formatDate(date: string): string {
+  const convert = new Date(date)
+  const day = String(convert.getDate()).padStart(2, '0')
+  const month = String(convert.getMonth() + 1).padStart(2, '0')
+  const year = convert.getFullYear()
+
+  const hours = String(convert.getHours()).padStart(2, '0');
+  const minutes = String(convert.getMinutes()).padStart(2, '0');
+  const seconds = String(convert.getSeconds()).padStart(2, '0');
+
+  // return `${day}-${month}-${year} ${hours}:${minutes}:${seconds}`;
+  return `${day}-${month}-${year} ${hours}:${minutes}`
+}
+
 export default function Event() {
   const { data: session, status } = useSession()
-  const [data, setData] = useState<ApiResponse<EventItems> | null>(null)
+  const [data, setData] = useState<ApiResponse<EventItems[]> | null>(null)
   const [isLoading, setLoading] = useState(true)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [message, setMessage] = useState('')
 
   const currentDate = new Date();
-  const dateTime = currentDate.toISOString().split('.')[0];
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const dateTime = currentDate.toISOString();
   const local = 'nl-NL'
-  isEventCurrentDay(currentDate);
+  // isEventCurrentDay(currentDate);
 
   async function fetchData() {
     try {
@@ -125,19 +88,30 @@ export default function Event() {
     e.preventDefault();
     const formData = new FormData(e.target)
     const form = e.target
+    const image = null
     const title = formData.get('title')
-    const image = formData.get('image')
+    const description = formData.get('description')
+    const location = formData.get('location')
+    const dateStart = formData.get('date_start')
+    const dateEnd = formData.get('date_end')
 
-    if (title) {
-      const newQa = await Post({
-        userEmail: session?.user?.email,
+    if (title && description && location && dateStart && dateEnd) {
+      const newEvent = await Post({
         title: title,
+        description: description,
+        location: location,
         image: image,
+        dateStart: dateStart,
+        dateEnd: dateEnd,
       }, "/api/v1/event")
 
-      if (newQa) {
+      if (newEvent) {
         setIsModalOpen(false)
-        form.elements['title'].value = '';
+        form.elements['title'].value = ''
+        form.elements['description'].value = ''
+        form.elements['location'].value = ''
+        form.elements['date_start'].value = ''
+        form.elements['date_end'].value = ''
         fetchData()
       } else {
         setMessage('Er is iets fout gegaan')
@@ -160,8 +134,8 @@ export default function Event() {
                 <Input label='Naam' name='title' type='text' value=''/>
                 <Input label='Beschrijving' name='description' type='textarea' value=''/>
                 <Input label='Locatie' name='location' type='text' value=''/>
-                <InputDateTime label='Startdatum' name='dateStart' value='' min={dateTime} max=''/>
-                <InputDateTime label='Einddatum' name='dateEnd' value='' min={dateTime} max=''/>
+                <InputDateTime label='Startdatum' name='date_start' value='' min='' max=''/>
+                <InputDateTime label='Einddatum' name='date_end' value='' min='' max=''/>
                 {/* add image button */}
                 <button type='submit' className='w-fit px-6 py-2.5 rounded-lg bg-secondary text-font2 font-semibold text-sm'>Opslaan</button>
                 {message ? (<p className='text-error'>{message}</p>) : (<></>)}
@@ -171,11 +145,21 @@ export default function Event() {
           <h2 className='font-semibold text-xl font-font1'>Aankomende evenementen</h2>
           {isLoading ? (<p className='text-center'>Loading data...</p>) : ( data?.status === "error" ? (<p className='text-center'>No data find</p>) : (
             <div>
-              {events.map((item) => 
+              {data?.data.map((item) => 
               <Link key={item.id} href={`event/${item.id}`} className="flex sm:flex-row flex-col py-4 border-b-[1px] border-extra/20">
-                <p className='text-extra w-28 sm:p-0 pb-4'>{item.dateStart.toLocaleDateString(local, { weekday: 'short' })}, {item.dateStart.getDate()} {item.dateStart.toLocaleDateString(local, { month: 'short' })}</p>
-                <p className={`grow ${item.id === -1 ? 'text-extra' : 'font-medium'}`}>{item.title}</p>
-                <p className={`${item.id === -1 ? 'hidden' : ''}`}>{item.dateStart.toLocaleTimeString(local, { hour: '2-digit', minute: '2-digit', hour12: false })} - {item.dateEnd.toLocaleTimeString(local, { hour: '2-digit', minute: '2-digit', hour12: false })}</p>
+                <p className='text-extra w-36 sm:p-0 pb-4'>
+                  {new Date(item.dateStart).toLocaleDateString(local, { weekday: 'short' })},&nbsp;
+                  {new Date(item.dateStart).getDate()}&nbsp;
+                  {new Date(item.dateStart).toLocaleDateString(local, { month: 'short' })}&nbsp;
+                  {new Date(item.dateStart).toLocaleDateString(local, { year: 'numeric' })}
+                </p>
+                <p className='grow font-medium'>
+                  {item.title}
+                </p>
+                <p>
+                  {new Date(item.dateStart).toLocaleTimeString(local, { hour: '2-digit', minute: '2-digit', hour12: false })} -&nbsp;
+                  {new Date(item.dateEnd).toLocaleTimeString(local, { hour: '2-digit', minute: '2-digit', hour12: false })}
+                </p>
               </Link>
               )}
             </div>

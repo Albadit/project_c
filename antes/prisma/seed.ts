@@ -127,29 +127,29 @@ async function main() {
         title: "Connectiedag!",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
         location: "Rotterdam",
-        dateStart: new Date(),
-        dateEnd: new Date()
+        dateStart: new Date(2023, 11, 12, 9, 0, 0),
+        dateEnd: new Date(2023, 11, 1, 13, 0, 0),
       },
       {
-        title: "Connectiedag!",
+        title: "MS training",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
         location: "Rotterdam",
-        dateStart: new Date(),
-        dateEnd: new Date()
+        dateStart: new Date(2024, 5, 5, 14, 0, 0),
+        dateEnd: new Date(2024, 5, 5, 16, 30, 0),
       },
       {
-        title: "Connectiedag!",
+        title: "Team lead meeting",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
         location: "Rotterdam",
-        dateStart: new Date(),
-        dateEnd: new Date()
+        dateStart: new Date(2024, 3, 12, 8, 30, 0),
+        dateEnd: new Date(2024, 3, 12, 12, 30, 0),
       },
       {
-        title: "Connectiedag!",
+        title: "Birthday Party",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
         location: "Rotterdam",
-        dateStart: new Date(),
-        dateEnd: new Date()
+        dateStart: new Date(2024, 4, 11, 7, 0, 0),
+        dateEnd: new Date(2024, 4, 11, 10, 30, 0),
       },
     ]
   })

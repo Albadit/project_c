@@ -20,7 +20,7 @@ export async function GET(req: Request, { params }: { params: { qa_id: string } 
       }
     })
     
-    if (!qaQuestion) return NextResponse.json({ status: "error" }, { status: 500 })
+    if (!qaQuestion) return NextResponse.json({ status: "error" }, { status: 401 })
 
     const transformedData = {
       status: "success",

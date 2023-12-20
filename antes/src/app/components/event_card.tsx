@@ -27,7 +27,7 @@ function formatDate(date: string): string {
   const seconds = String(convert.getSeconds()).padStart(2, '0');
 
   // return `${day}-${month}-${year} ${hours}:${minutes}:${seconds}`;
-  return `${day}-${month}-${year}`
+  return `${day}-${month}-${year} ${hours}:${minutes}`
 }
 
 export const EventCard = (props: Props) => {
