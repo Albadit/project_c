@@ -1,49 +1,64 @@
 // database seed: npx prisma db seed
+// database reset and seed: npx prisma db push --force-reset && npx prisma db seed
 
 import { PrismaClient } from '@prisma/client';
+import bcrypt from 'bcrypt'
 
 const prisma = new PrismaClient();
 
 async function main() {
-  const superadmin = await prisma.role.create({
-    data: {
-      level: 1,
-      name: 'Super Admin'
-    }
+  const roles = await prisma.role.createMany({
+    data:
+      [
+        { level: 1, name: 'Super Admin' },
+        { level: 2, name: 'Eigenaar' },
+        { level: 3, name: 'Manager' },
+        { level: 4, name: 'Werknemer' }
+      ]
   });
 
-  const admin = await prisma.role.create({
-    data: {
-      level: 2,
-      name: 'Eigenaar'
-    }
+  const userFunction = await prisma.userFunction.createMany({
+    data:
+      [
+        { name: 'Behavioral neuroscience'},
+        { name: 'Behavioral psychology' },
+        { name: 'Clinical psychology' },
+        { name: 'Cognitive psychology' },
+        { name: 'Community psychology' },
+      ]
   });
+
+  const roleId = await prisma.role.findFirst({
+    where: { name: "Super Admin" }
+  })
   
-  const manager = await prisma.role.create({
-    data: {
-      level: 3,
-      name: 'Manager'
-    }
-  });
+  const userFunctionId = await prisma.userFunction.findFirst({
+    where: { name: "Behavioral neuroscience" }
+  })
 
-  const employee = await prisma.role.create({
-    data: {
-      level: 4,
-      name: 'werknemer'
-    }
-  });
-
+  if (!roleId) {
+    console.error("Role not found");
+    return;
+  }
+  
+  if (!userFunctionId) {
+    console.error("User function not found");
+    return;
+  }
+  
   const user = await prisma.user.create({
     data: {
-      roleId: 4,
-      firstName: 'Hans',
-      lastName: 'Bever',
-      userFunctionId: 1,
-      bio: 'Ik weet niks',
-      email: 'Hans@niks.com',
-      password: '1234',
+      roleId: roleId.id,
+      userFunctionId: userFunctionId.id,
+      image: "/img/profile.png",
+      firstName: 'admin',
+      lastName: 'admin',
+      bio: null,
+      email: 'admin@admin.com',
+      emailVerified: null,
+      password: await bcrypt.hash("admin", 10),
     }
-  });
+  })
   
   const quiz = await prisma.quiz.create({
     data: {
@@ -75,11 +90,7 @@ async function main() {
         }
       ]
     }
-  });
-
-  // console.log({ superadmin, admin, manager, employee });
-  // console.log({ quiz });
-  console.log({ user });
+  })
 }
 
 main()

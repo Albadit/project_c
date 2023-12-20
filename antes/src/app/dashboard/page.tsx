@@ -1,9 +1,11 @@
-import React from 'react';
-import Footer from '@/app/components/footer';
+'use client'
+import React from 'react'
+import Footer from '@/app/components/footer'
 import { NavDashboard } from '@/app/components/dashboard/nav'
-import { QACard } from '@/app/components/qa_card';
-import { EventCard} from '@/app/components/event_card';
-import { ELearningCard } from '@/app/components/elearning_card';
+import { QACard } from '@/app/components/qa_card'
+import { EventCard} from '@/app/components/event_card'
+import { ELearningCard } from '@/app/components/elearning_card'
+import { useSession } from 'next-auth/react'
 
 const qa = {
   id: 1,
@@ -48,6 +50,9 @@ const user = {
 }
 
 export default function Dashboard() {
+  const { data: session, status } = useSession()
+  console.log(session)
+  console.log(status)
   return (
     <>
       <NavDashboard user={user}/>

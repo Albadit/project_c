@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { Input } from '@/app/components/input';
 import { useRouter } from 'next/navigation'
-
+import { signIn } from 'next-auth/react';
 
 const context = {
   logo: { url: "/", img: "/img/antes_logo.png", alt: "antes logo"},
@@ -15,16 +15,27 @@ const context = {
 
 export default function Login() {
   const [message, setMessage] = useState('');
-  const router = useRouter(); 
+  const router = useRouter();
 
-  const handleSubmit = (event: any) => {
-    event.preventDefault();
-    const formData = new FormData(event.target);
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
     const email = formData.get('email');
     const password = formData.get('password');
     if (email && password) {
-      // update in database
-      router.push("/dashboard");
+      const exist = await signIn('credentials', {
+        ...{
+          email: email,
+          password: password,
+        },
+        redirect: false,
+      })
+      console.log(exist)
+      // if(exist?.status === 200) {
+      //   router.push("/dashboard");
+      // } else {
+      //   setMessage("Verkeerde email of wachtwoord.");
+      // }
     } else {
       setMessage("Verkeerde email of wachtwoord.");
     }
