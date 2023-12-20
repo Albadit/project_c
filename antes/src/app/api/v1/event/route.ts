@@ -11,8 +11,8 @@ export async function POST(req: Request) {
         data: {
           title: body.title,
           description: body.description,
-          start: body.start,
-          end: body.end
+          start: new Date(),
+          end: new Date()
         }
       })
   
