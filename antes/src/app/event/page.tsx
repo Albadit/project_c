@@ -58,6 +58,7 @@ function formatDate(date: string): string {
 export default function Event() {
   const { data: session, status } = useSession()
   const [data, setData] = useState<ApiResponse<EventItems[]> | null>(null)
+  // const [userData, setUserData] = useState<ApiResponse<EventItems[]> | null>(null)
   const [isLoading, setLoading] = useState(true)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [message, setMessage] = useState('')
@@ -105,7 +106,8 @@ export default function Event() {
         dateEnd: dateEnd,
       }, "/api/v1/event")
 
-      if (newEvent) {
+      console.log(newEvent)
+      if (newEvent.status === "success") {
         setIsModalOpen(false)
         form.elements['title'].value = ''
         form.elements['description'].value = ''
@@ -128,7 +130,7 @@ export default function Event() {
         <h1 className='font-font1 font-bold text-center text-primary text-5xl'>Events</h1>
         <Calendar/>
         <section className='flex flex-col gap-5 font-font2 text-font1 max-w-[750px] w-full'>
-        <div className='flex flex-row justify-end'>
+          <div className='flex flex-row justify-end'>
             <Modal title='Nieuw Event' isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}>
               <form onSubmit={handleSubmit} className='flex flex-col gap-4 items-end'>
                 <Input label='Naam' name='title' type='text' value=''/>

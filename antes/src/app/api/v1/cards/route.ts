@@ -43,7 +43,7 @@ export async function GET() {
           location: event[0].location,
         },
         elearing: {
-
+          // elearing
         }
       }
     }
@@ -65,7 +65,12 @@ export async function POST(req: Request) {
       },
     })
 
-    return NextResponse.json(user)
+    const transformedData = {
+      status: "success",
+      data: user
+    }
+
+    return NextResponse.json(transformedData, { status: 200 })
   } catch (error) {
     return NextResponse.json({ status: "error" }, { status: 500 })
   }

@@ -16,7 +16,7 @@ export async function GET() {
     if (!qaQuestion) return NextResponse.json({ status: "error" }, { status: 401 })
 
     const transformedData = {
-      status: "succes",
+      status: "success",
       data: {
         tags: Array.from(new Set(qaQuestion.flatMap(question => question.tags).filter(Boolean))).sort(),
         question: qaQuestion.map((item) => ({
@@ -70,7 +70,12 @@ export async function POST(req: Request) {
       data: data
     })
 
-    return NextResponse.json(newQa, { status: 200 })
+    const transformedData = {
+      status: "success",
+      data: newQa
+    }
+
+    return NextResponse.json(transformedData, { status: 200 })
   } catch (error) {
     return NextResponse.json({ status: "error" }, { status: 500 })
   }

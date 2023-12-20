@@ -1,12 +1,19 @@
 import { NextResponse } from "next/server";
 import { prisma } from '@/../../prisma/index'
 
+// testing
 export async function GET() {
   try {
     const quiz = await prisma.quiz.findFirst({})
-    return NextResponse.json(quiz?.quiz_data, { status: 200 })
+
+    const transformedData = {
+      status: "success",
+      data: quiz?.quiz_data
+    }
+
+    return NextResponse.json(transformedData, { status: 200 })
   } catch (error) {
-    return NextResponse.json({ error: "server error"}, { status: 500 })
+    return NextResponse.json({ status: "error" }, { status: 500 })
   }
 }
 
@@ -25,6 +32,6 @@ export async function GET() {
 
 //     // return NextResponse.json(user)
 //   } catch (error) {
-//     return NextResponse.json({body: "error"})
+//     return NextResponse.json({ status: "error" }, { status: 500 })
 //   }
 // }

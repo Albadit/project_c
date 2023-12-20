@@ -17,7 +17,7 @@ export async function GET() {
       }
     })
 
-    if (!events) return NextResponse.json({ status: "error" }, { status: 500 })
+    if (!events) return NextResponse.json({ status: "error" }, { status: 401 })
 
     const transformedData = {
       status: "success",
@@ -60,7 +60,12 @@ export async function POST(req: Request) {
       data: data
     })
 
-    return NextResponse.json(event, { status: 200 })
+    const transformedData = {
+      status: "success",
+      data: event
+    }
+
+    return NextResponse.json(transformedData, { status: 200 })
   } catch (error) {
     return NextResponse.json({ status: "error" }, { status: 500 })
   }

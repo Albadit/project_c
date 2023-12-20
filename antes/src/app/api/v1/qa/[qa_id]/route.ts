@@ -68,7 +68,13 @@ export async function POST(req: Request) {
       }
     })
 
-    return NextResponse.json(qaAnswers, { status: 200 })
+    const transformedData = {
+      status: "success",
+      data: qaAnswers
+    }
+
+
+    return NextResponse.json(transformedData, { status: 200 })
   } catch (error) {
     return NextResponse.json({ status: "error" }, { status: 500 })
   }

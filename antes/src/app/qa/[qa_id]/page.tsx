@@ -103,7 +103,7 @@ export default function Chat() {
         questionId: params.qa_id,
         comment: comment
       }, "/api/v1/qa/" + params.qa_id)
-      if (register) {
+      if (register.status === "success") {
         setComment('');
         fetchData()
       } else {

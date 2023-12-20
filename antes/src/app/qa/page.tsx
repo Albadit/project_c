@@ -82,7 +82,7 @@ export default function Qa() {
         image: image,
       }, "/api/v1/qa")
 
-      if (newQa) {
+      if (newQa.status === "success") {
         setIsModalOpen(false)
         form.elements['title'].value = '';
         fetchData()
