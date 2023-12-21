@@ -20,46 +20,40 @@ const elearing = {
 
 const subjects = [
   {
-    id: 1,
+    id: "1",
     image: "img/e_learing.png",
     title: "Psychiatrie",
     description: "La lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae nisi eget nunc aliquam aliquet.",
-    url: "/elearing/1",
   },
   {
-    id: 1,
+    id: "1",
     image: "img/e_learing.png",
     title: "Psychiatrie",
     description: "La lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae nisi eget nunc aliquam aliquet.",
-    url: "/elearing/1",
   },
   {
-    id: 1,
+    id: "1",
     image: "img/e_learing.png",
     title: "Psychiatrie",
     description: "La lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae nisi eget nunc aliquam aliquet.",
-    url: "/elearing/1",
   },
   {
-    id: 1,
+    id: "1",
     image: "img/e_learing.png",
     title: "Psychiatrie",
     description: "La lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae nisi eget nunc aliquam aliquet.",
-    url: "/elearing/1",
   },
   {
-    id: 1,
+    id: "1",
     image: "img/e_learing.png",
     title: "Psychiatrie",
     description: "La lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae nisi eget nunc aliquam aliquet.",
-    url: "/elearing/1",
   },
   {
-    id: 1,
+    id: "1",
     image: "img/e_learing.png",
     title: "Psychiatrie",
     description: "La lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae nisi eget nunc aliquam aliquet.",
-    url: "/elearing/1",
   },
 ]
 
