@@ -3,21 +3,6 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcrypt";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { prisma } from '@/../../prisma/index'
-import { Session } from "inspector";
-
-const status_error = {
-  "error": "CredentialsSignin",
-  "status": 401,
-  "ok": false,
-  "url": null
-}
-
-const status_succes = {
-  "error": null,
-  "status": 200,
-  "ok": true,
-  "url": "http://localhost:3000/login"
-}
 
 const handler = NextAuth({
   adapter: PrismaAdapter(prisma),
@@ -34,7 +19,8 @@ const handler = NextAuth({
         const user = await prisma.user.findUnique({
           where: { email: credentials.email.toLowerCase() },
           include: {
-            role: true
+            role: true,
+            userFunction: true
           }
         })
 
@@ -49,6 +35,7 @@ const handler = NextAuth({
           name: user.name,
           email: user.email,
           image: user.image,
+          userFunctionId: user.userFunction.id,
           level: user.role.level,
         }
       }
@@ -56,17 +43,11 @@ const handler = NextAuth({
   ],
   callbacks: {
     async jwt({ token, user }) {
-      if (user) {
-        token.user = user
-      }
+      if (user) token.user = user
       return token
     },
     async session({ session, token }) {
-      // console.log('session', session, 'token', token, 'user', user)
-      if (token.user) {
-        session.user = token.user as SessionUser
-        console.log("session user", session.user)
-      }
+      if (token.user) session.user = token.user as SessionUser
       return session;
     }
   },

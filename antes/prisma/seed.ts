@@ -15,7 +15,7 @@ async function main() {
         { level: 3, name: 'Manager' },
         { level: 4, name: 'Werknemer' }
       ]
-  });
+  })
 
   const userFunction = await prisma.userFunction.createMany({
     data:
@@ -26,7 +26,7 @@ async function main() {
         { name: 'Cognitive psychology' },
         { name: 'Community psychology' },
       ]
-  });
+  })
 
   const roleId = await prisma.role.findFirst({
     where: { name: "Super Admin" }
