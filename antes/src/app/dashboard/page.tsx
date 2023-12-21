@@ -64,6 +64,8 @@ export default function Dashboard() {
   const [data, setData] = useState<ApiResponse<HomeData> | null>(null)
   const [isLoading, setLoading] = useState(true)
 
+  console.log(session)
+
   useEffect(() => {
     fetch('/api/v1/cards')
       .then((res) => res.json())

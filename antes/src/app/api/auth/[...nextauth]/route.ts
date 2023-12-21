@@ -1,8 +1,9 @@
-import NextAuth from "next-auth";
+import NextAuth, { SessionUser } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcrypt";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { prisma } from '@/../../prisma/index'
+import { Session } from "inspector";
 
 const status_error = {
   "error": "CredentialsSignin",
@@ -31,7 +32,10 @@ const handler = NextAuth({
         if (!credentials.email || !credentials.password) { return null }
 
         const user = await prisma.user.findUnique({
-          where: { email: credentials.email.toLowerCase() }
+          where: { email: credentials.email.toLowerCase() },
+          include: {
+            role: true
+          }
         })
 
         if (!user) { return null }
@@ -40,10 +44,32 @@ const handler = NextAuth({
 
         if (!passwordMatch) { return null }
 
-        return user
+        return {
+          id: user.id,
+          name: user.name,
+          email: user.email,
+          image: user.image,
+          level: user.role.level,
+        }
       }
     })
   ],
+  callbacks: {
+    async jwt({ token, user }) {
+      if (user) {
+        token.user = user
+      }
+      return token
+    },
+    async session({ session, token }) {
+      // console.log('session', session, 'token', token, 'user', user)
+      if (token.user) {
+        session.user = token.user as SessionUser
+        console.log("session user", session.user)
+      }
+      return session;
+    }
+  },
   session: {
     strategy: "jwt",
     maxAge: 7 * 24 * 60 * 60,
