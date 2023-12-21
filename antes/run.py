@@ -10,6 +10,7 @@ install_commands = [
   'npm install @tailwindcss/forms',
   'npm install @tailwindcss/aspect-ratio',
   'npm install @tailwindcss/container-queries',
+  'npm install next-auth',
   'npm install @prisma/client @auth/prisma-adapter',
   'npm install prisma --save-dev',
   'npm install -D typescript ts-node @types/node',

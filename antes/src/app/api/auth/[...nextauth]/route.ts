@@ -5,7 +5,7 @@ import { PrismaAdapter } from "@auth/prisma-adapter";
 import { prisma } from '@/../../prisma/index'
 
 const handler = NextAuth({
-  adapter: PrismaAdapter(prisma),
+  // adapter: PrismaAdapter(prisma),
   providers: [
     CredentialsProvider({
       name: 'Credentials',
@@ -42,13 +42,13 @@ const handler = NextAuth({
     })
   ],
   callbacks: {
-    async jwt({ token, user }) {
+    async jwt({ token, user, account, profile, isNewUser }) {
       if (user) token.user = user
       return token
     },
-    async session({ session, token }) {
+    async session({ session, token, user }) {
       if (token.user) session.user = token.user as SessionUser
-      return session;
+      return session
     }
   },
   session: {
