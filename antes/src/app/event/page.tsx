@@ -68,7 +68,6 @@ export default function Event() {
   today.setHours(0, 0, 0, 0);
   const dateTime = currentDate.toISOString();
   const local = 'nl-NL'
-  // isEventCurrentDay(currentDate);
 
   async function fetchData() {
     try {
