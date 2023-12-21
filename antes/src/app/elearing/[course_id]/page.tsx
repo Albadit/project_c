@@ -60,12 +60,13 @@ export default function ElearningCourse(props : {lesson_id: string}) {
 
   useEffect(() => {
     fetchData()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const { course_id} = useParams();
   console.log("course:", course_id);
   console.log("data:", data);
-  console.log("lessinid", data?.lessons[0].id)
+  // console.log("lessinid", data?.lessons[0].id)
   // console.log("data11:", data)
 
   if (isLoading) {

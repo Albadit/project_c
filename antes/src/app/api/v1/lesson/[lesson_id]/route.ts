@@ -6,6 +6,9 @@ export async function POST(req: Request){
         const body = await req.json()
 
         const exist = await prisma.subject.findFirst({
+          where: {
+            id: body.subjectId
+          }
     })
         if (!exist){
             return NextResponse.json("Subject does not exist", {status: 400})
