@@ -79,10 +79,14 @@ export default function Dashboard() {
                 <Calendar className="fill-extra h-5" />
                 <p className="text-extra text-sm">{formatDate(data?.data.dateStart || "")}</p>
               </div>
-              <button type='button' onClick={handleSubmit} className="flex flex-row items-center justify-center lg:w-max w-full gap-2 px-4 py-3 rounded-lg bg-primary text-font2 font-semibold text-sm">
-                Meld je aan!
-              </button>
-              {message ? (<p className='text-extra'>{message}</p>) : (<></>)}
+              {session && status === "authenticated" ? (
+              <>
+                <button type='button' onClick={handleSubmit} className="flex flex-row items-center justify-center lg:w-max w-full gap-2 px-4 py-3 rounded-lg bg-primary text-font2 font-semibold text-sm">
+                  Meld je aan!
+                </button>
+                {message ? (<p className='text-extra'>{message}</p>) : (<></>)}
+              </>
+              ) : (<></>)}
             </div>
           </div>
         </section>

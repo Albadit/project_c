@@ -140,10 +140,10 @@ export default function Calendar() {
       const left = `calc(${dayIndex * (100 / 7)}%)`
 
       return (
-        <div className="flex flex-col gap-1 bg-secondary text-font2 px-2 py-1 rounded-lg absolute" style={{ top, height, left, width: 'calc(100% / 7)' }}>
+        <Link href={`event/${event.id}`} className="flex flex-col gap-1 bg-secondary text-font2 px-2 py-1 rounded-lg absolute" style={{ top, height, left, width: 'calc(100% / 7)' }}>
           <div className="font-bold">{event.title}</div>
           <div className="text-sm">{`${new Date(event.dateStart).toLocaleTimeString(local, { hour: '2-digit', minute: '2-digit', hour12: false })} - ${new Date(event.dateEnd).toLocaleTimeString(local, { hour: '2-digit', minute: '2-digit', hour12: false })}`}</div>
-        </div>
+        </Link>
       )
     }
     return null
