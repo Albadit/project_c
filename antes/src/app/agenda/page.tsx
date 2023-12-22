@@ -198,12 +198,10 @@ export default function Calendar() {
       adjustedDate.getDate() <= event.start.getDate() &&
       event.start.getDate() <= adjustedDate.getDate() + 6;
 
-      // teveel pijn aan hoofd please fix dit ik kan niet rekenen de datum is een maand en dag verkeerd dacht ik
-
     if (isSameWeek) {
       const top = `calc(${startMinutes / 60 - 8} * ${timeSlotHeight}%)`;
       const height = `calc(${(endMinutes - startMinutes) / 60 * timeSlotHeight}%)`;
-      const left = `calc(${getDayIndex(dayLabels[event.start.getDay()]) * (100 / 7)}%)`;
+      const left = `calc(${getDayIndex(dayLabels[event.start.getDay() - 1]) * (100 / 7)}%)`;
       const width = 'calc(100% / 7)';
 
       return (

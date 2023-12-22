@@ -27,8 +27,8 @@ export let events = [
   {
     id: 1,
     title: "MS training",
-    start: new Date(2024, 2, 5, 14, 0, 0),
-    end: new Date(2024, 2, 5, 16, 30, 0),
+    start: new Date(2023, 11, 21, 14, 0, 0),
+    end: new Date(2023, 11, 21, 16, 30, 0),
     url: "/event/1"
   },
   {
@@ -108,26 +108,6 @@ function getWeekDays(baseDate: Date, local: string, weekdays: "long" | "short" |
   return weekDays;
 }
 
-function isEventCurrentDay(day: any) {
-  if (!events.some(event => event.start.getDate() === day.getDate())) {
-    const placeholderEvent = {
-      id: -1,
-      title: "Er staat niets op het programma van vandaag",
-      start: day,
-      end: day,
-      url: ""
-    };
-
-    events.unshift(placeholderEvent);
-  }
-
-  // Filter out events that have already passed (excluding the current day)
-  events = events.filter(event => event.start > day || event.start.getDate() === day.getDate());
-
-  // Sort events based on start date
-  events.sort((a: any, b: any) => a.start - b.start);
-}
-
 export default function Calendar() {
   const currentDate = new Date();
   const [currentMonth, setCurrentMonth] = useState(currentDate.getMonth() + 1);
@@ -140,7 +120,7 @@ export default function Calendar() {
 
   const monthName = new Intl.DateTimeFormat(local, { month: 'long' }).format(new Date(currentYear, currentMonth - 1));
 
-  isEventCurrentDay(currentDate);
+  
 
   const isCurrentDay = (day: any) => {
     const currentDay = currentDate.getDate();
