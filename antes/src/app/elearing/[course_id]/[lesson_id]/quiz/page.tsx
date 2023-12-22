@@ -2,15 +2,9 @@
 import React, { useEffect, useState } from "react";
 import Footer from "@/app/components/footer";
 import { NavDashboard } from "@/app/components/dashboard/nav";
-import { Quiz } from "@/app/components/quiz";
+import { Quiz, QuizProps } from "@/app/components/quiz";
 import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
-
-type QuizItems = {
-  options: string[];
-  question: string;
-  correctAnswer: string;
-}
 
 type ApiResponse<T> = {
   status: string;
@@ -20,7 +14,7 @@ type ApiResponse<T> = {
 export default function ElearningQuiz() {
   const router = useRouter()
   const { data: session, status } = useSession()
-  const [data, setData] = useState<ApiResponse<QuizItems[]> | null>(null);
+  const [data, setData] = useState<ApiResponse<QuizProps[]> | null>(null);
   const [isLoading, setLoading] = useState(true)
   
   async function fetchData(api: string) {

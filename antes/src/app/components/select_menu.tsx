@@ -5,9 +5,9 @@ import { useState } from 'react';
 type SelectOption = {
   id: string;
   name: string;
-};
+}
 
-type Props = {
+type SelectProps = {
   label: string
   name: string
   index?: number
@@ -15,7 +15,7 @@ type Props = {
   options: SelectOption[]
 }
 
-export const SelectMenu = (props: Props) => {
+export const SelectMenu = (props: SelectProps) => {
   const [disabled] = useState(props.disabled);
 
   return (

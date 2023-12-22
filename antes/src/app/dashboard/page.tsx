@@ -2,12 +2,12 @@
 import React from 'react'
 import Footer from '@/app/components/footer'
 import { NavDashboard } from '@/app/components/dashboard/nav'
-import { QACard } from '@/app/components/qa_card'
-import { EventCard} from '@/app/components/event_card'
-import { ELearningCard } from '@/app/components/dashboard/elearning_card'
 import { useSession } from 'next-auth/react'
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation'
+import { QACard, QaProps } from '@/app/components/qa_card'
+import { EventCard, EventProps} from '@/app/components/event_card'
+import { ELearningCard, ElearningProps} from '@/app/components/dashboard/elearning_card'
 
 const elearning = {
   id: "1",
@@ -17,43 +17,15 @@ const elearning = {
   max_chapters: 11,
 }
 
-type EventItems = {
-  id: string
-  title: string
-  image: string
-  description: string
-  dateStart: string
-  location: string
-}
-
-type QaItems = {
-  id: string
-  title: string
-  name: string
-  profile: string
-  image: string
-  dateCreate: string
-  reactions: number
-  bio: string
-}
-
-type ElearningItems = {
-  id: string
-  image: string
-  title: string
-  user_chapters: number
-  max_chapters: number
-}
-
 type HomeData = {
-  event: EventItems;
-  qa: QaItems;
-  elearning: ElearningItems;
+  event: EventProps
+  qa: QaProps
+  elearning: ElearningProps
 }
 
 type ApiResponse<T> = {
-  status: string;
-  data: T;
+  status: string
+  data: T
 }
 
 export default function Dashboard() {

@@ -7,14 +7,14 @@ import HamburgerMenu from '@/app/components/icons/hambuger_menu';
 import Close from '@/app/components/icons/close';
 import Link from 'next/link';
 
-type UserItems = {
+type UserProps = {
   name: string
   email: string
   image: string 
 }
 
 type Props = {
-  user: UserItems | any
+  user: UserProps | any
 }
 
 export const NavDashboard = (props: Props) => {

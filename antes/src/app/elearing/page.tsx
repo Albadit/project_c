@@ -1,13 +1,12 @@
 "use client"
-import React, { useRef } from 'react';
-import Link from "next/link";
-import Footer from '@/app/components/footer';
+import React, { useRef } from 'react'
+import Footer from '@/app/components/footer'
 import { NavDashboard } from '@/app/components/dashboard/nav'
-import Arrowright from "@/app/components/icons/arrow_right";
-import { ELearningCard } from '@/app/components/dashboard/elearning_card';
-import { SubjectCard } from '@/app/components/dashboard/subject_card';
+import Arrowright from "@/app/components/icons/arrow_right"
+import { ELearningCard } from '@/app/components/dashboard/elearning_card'
+import { SubjectCard } from '@/app/components/dashboard/subject_card'
 import { useRouter } from 'next/navigation'
-import { useSession } from 'next-auth/react';
+import { useSession } from 'next-auth/react'
 
 const elearing = [
   {
@@ -101,17 +100,17 @@ export default function ELearning() {
 
   const scrollNext = () => {
     if (sliderRef.current) {
-      const currentScroll = sliderRef.current.scrollLeft;
-      const nextScroll = currentScroll + slideWidth;
-      sliderRef.current.scrollTo({ left: nextScroll, behavior: 'smooth' });
+      const currentScroll = sliderRef.current.scrollLeft
+      const nextScroll = currentScroll + slideWidth
+      sliderRef.current.scrollTo({ left: nextScroll, behavior: 'smooth' })
     }
   };
 
   const scrollPrev = () => {
     if (sliderRef.current) {
-      const currentScroll = sliderRef.current.scrollLeft;
-      const prevScroll = currentScroll - slideWidth;
-      sliderRef.current.scrollTo({ left: prevScroll, behavior: 'smooth' });
+      const currentScroll = sliderRef.current.scrollLeft
+      const prevScroll = currentScroll - slideWidth
+      sliderRef.current.scrollTo({ left: prevScroll, behavior: 'smooth' })
     }
   };
   

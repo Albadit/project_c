@@ -3,26 +3,15 @@ import React from 'react';
 import Footer from '@/app/components/footer';
 import { NavDashboard } from '@/app/components/dashboard/nav'
 import NavHome from '@/app/components/home/nav'
-import { QACardList } from '@/app/components/dashboard/qa_card_list';
-import { Paginator } from '@/app/components/paginator';
 import { useEffect, useState } from 'react';
 import { useSession } from 'next-auth/react';
 import Modal from '@/app/components/modal';
 import { Input } from '@/app/components/input';
-
-type QAItems = {
-  id: string
-  name: string
-  image: string
-  dateCreate: string
-  title: string
-  tags: string[]
-  reactions: number
-}
+import { QACardList, QaListProps } from '@/app/components/dashboard/qa_card_list';
 
 type QAData = {
   tags: string[];
-  question: QAItems[];
+  question: QaListProps[];
 }
 
 type ApiResponse<T> = {
@@ -81,7 +70,6 @@ export default function Qa() {
         title: title,
         image: image,
       }, "/api/v1/qa")
-
       if (newQa.status === "success") {
         setIsModalOpen(false)
         form.elements['title'].value = '';
@@ -119,7 +107,7 @@ export default function Qa() {
             ))}
             </div>
             {data?.data.question.map((item: any, index: any) => (
-              <QACardList key={index} qaData={item}/>
+              <QACardList key={index} qa={item}/>
             ))}
             {/* <Paginator qaList={question}/> */}
           </>))}

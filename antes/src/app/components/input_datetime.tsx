@@ -2,7 +2,7 @@
 import React from 'react';
 import { useState , ChangeEvent } from 'react';
 
-type Props = {
+type DateTimeProps = {
   label: string;
   name: string;
   required?: boolean;
@@ -12,7 +12,7 @@ type Props = {
   max: string;
 }
 
-export const InputDateTime = (props: Props) => {
+export const InputDateTime = (props: DateTimeProps) => {
   const [value, setValue] = useState(props.value);
   const [required, setRequired] = useState(props.required !== undefined ? props.required : true);
   const [disabled, setDisabled] = useState(props.disabled);

@@ -1,6 +1,6 @@
 import React from "react";
 
-type YouTubeEmbedProps = {
+export type YouTubeEmbedProps = {
   embedId: string
 }
 

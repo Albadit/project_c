@@ -4,7 +4,7 @@ import { useState , ChangeEvent } from 'react';
 import EyeClose from '@/app/components/icons/eye_close';
 import EyeOpen from '@/app/components/icons/eye_open';
 
-type Props = {
+type InputProps = {
   label: string
   name: string
   type: "text" | "password" | "email" | "textarea"
@@ -34,7 +34,7 @@ const PasswordToggle = ({ password: { visible }, onClick }: PasswordToggleProps)
   </button>
 )
 
-export const Input = (props: Props) => {
+export const Input = (props: InputProps) => {
   const [value, setValue] = useState(props.value);
   const [disabled, setDisabled] = useState(props.disabled);
   const [required, setRequired] = useState(props.required !== undefined ? props.required : true);

@@ -3,7 +3,7 @@ import Link from "next/link";
 import Calendar from "@/app/components/icons/calendar";
 import ArrowForwardRounded from "@/app/components/icons/arrow_right";
 
-type EventItems = {
+export type EventProps = {
   id: string
   title: string
   image: string
@@ -13,7 +13,7 @@ type EventItems = {
 }
 
 type Props = {
-  event: EventItems;
+  event: EventProps;
 }
 
 function formatDate(date: string): string {

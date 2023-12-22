@@ -3,14 +3,14 @@ import { useState } from 'react'
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 
-type QuizItems = {
+export type QuizProps = {
   options: string[];
   question: string;
   correctAnswer: string;
 }
 
 type Props = {
-  quiz: QuizItems[]
+  quiz: QuizProps[]
 }
 
 export const Quiz = (props: Props) => {

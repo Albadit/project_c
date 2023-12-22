@@ -1,7 +1,7 @@
 import React from "react"
 import Link from "next/link"
 
-type subjectItems = {
+type subjectProps = {
   id: string
   image: string
   title: string
@@ -9,7 +9,7 @@ type subjectItems = {
 }
 
 type Props = {
-  subject: subjectItems;
+  subject: subjectProps;
 }
 
 export const SubjectCard = (props: Props) => {

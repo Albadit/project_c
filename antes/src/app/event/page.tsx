@@ -58,7 +58,6 @@ function formatDate(date: string): string {
 export default function Event() {
   const { data: session, status } = useSession()
   const [data, setData] = useState<ApiResponse<EventItems[]> | null>(null)
-  // const [userData, setUserData] = useState<ApiResponse<EventItems[]> | null>(null)
   const [isLoading, setLoading] = useState(true)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [message, setMessage] = useState('')

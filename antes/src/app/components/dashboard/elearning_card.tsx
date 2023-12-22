@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import ArrowForwardRounded from "@/app/components/icons/arrow_right";
 
-type elearningItems = {
+export type ElearningProps = {
   id: string
   image: string
   title: string
@@ -11,7 +11,7 @@ type elearningItems = {
 }
 
 type Props = {
-  elearning: elearningItems;
+  elearning: ElearningProps;
 }
 
 export const ELearningCard = (props: Props) => {

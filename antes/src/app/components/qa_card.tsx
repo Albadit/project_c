@@ -4,7 +4,7 @@ import Calendar from "@/app/components/icons/calendar";
 import ArrowForwardRounded from "@/app/components/icons/arrow_right";
 import Chat from "@/app/components/icons/chat";
 
-type QaItems = {
+export type QaProps = {
   id: string
   title: string
   name: string
@@ -16,7 +16,7 @@ type QaItems = {
 }
 
 type Props = {
-  qa: QaItems;
+  qa: QaProps
 }
 
 function formatDate(date: string): string {
