@@ -43,7 +43,7 @@ export default function ElearningCourse() {
   const router = useRouter()
   const { data: session, status } = useSession()
   
-  if (!session && status === "loading") return <p className='text-center'>Loading data...</p>
+  if (status === "loading") return <p className='text-center'>Loading data...</p>
   if (status === "unauthenticated") { router.push('/'); return null; }
   
   return (

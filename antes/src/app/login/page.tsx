@@ -17,8 +17,6 @@ export default function Login() {
   const [message, setMessage] = useState('');
   const router = useRouter();
   const { data: session, status } = useSession()
-
-  if (session && status === "authenticated") router.push("/dashboard");
   
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -42,6 +40,8 @@ export default function Login() {
       setMessage("Verkeerde email of wachtwoord.");
     }
   }
+
+  if (session && status === "authenticated") router.push("/dashboard");
 
   return (
     <main className='flex flex-row justify-center login:h-screen h-fit'>

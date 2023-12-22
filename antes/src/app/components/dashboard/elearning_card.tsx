@@ -3,12 +3,11 @@ import Link from "next/link";
 import ArrowForwardRounded from "@/app/components/icons/arrow_right";
 
 type elearningItems = {
-  id: number;
-  image: string;
-  title: string;
-  user_chapters: number;
-  max_chapters: number;
-  url: string;
+  id: string
+  image: string
+  title: string
+  user_chapters: number
+  max_chapters: number
 }
 
 type Props = {
@@ -35,7 +34,7 @@ export const ELearningCard = (props: Props) => {
         </div>
       </div>
       <div className="flex lg:flex-row flex-col lg:items-center justify-end gap-5">
-        <Link href={props.elearning.url} className="flex flex-row items-center justify-center gap-2 px-4 py-3 rounded-lg bg-primary text-font2 font-semibold text-sm">
+        <Link href={`elearing/1/${props.elearning.id}`} className="flex flex-row items-center justify-center gap-2 px-4 py-3 rounded-lg bg-primary text-font2 font-semibold text-sm">
           Ga veder <ArrowForwardRounded className="fill-font2 h-5" />
         </Link>
       </div>

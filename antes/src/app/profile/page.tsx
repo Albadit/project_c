@@ -41,19 +41,31 @@ export default function Profile() {
   const [isLoading, setLoading] = useState(true)
   const [message, setMessage] = useState('');
 
+  async function fetchDataUserFunction(url: string) {
+    try {
+      const response = await fetch(url);
+      const fetchedData = await response.json();
+      setData(fetchedData);
+      setLoading(false);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  }
+
+  async function fetchData(url: string) {
+    try {
+      const response = await fetch(url);
+      const fetchedData = await response.json();
+      setData(fetchedData);
+      setLoading(false);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  }
+
   useEffect(() => {
-    fetch('/api/v1/user_function')
-      .then((res) => res.json())
-      .then((data) => {
-        setData(data)
-        setLoading(false)
-      })
-    fetch('/api/v1/user')
-    .then((res) => res.json())
-    .then((data) => {
-      setData(data)
-      setLoading(false)
-    })
+    fetchDataUserFunction('/api/v1/user_function')
+    fetchData('/api/v1/user')
   }, [])
 
   const handleSubmitProfile = async (e: any) => {
@@ -65,13 +77,13 @@ export default function Profile() {
       const register = await Post({
         bio: bio,
       }, "/api/v1/user_update")
-      if (register === true) {
+      if (register.status === "success") {
         router.push("/login");
       } else {
-        setMessage("Verkeerde data.");
+        setMessage("Verkeerde data");
       }
     } else {
-      setMessage("De input staat leeg.");
+      setMessage("De input staat leeg");
     }
   }
 

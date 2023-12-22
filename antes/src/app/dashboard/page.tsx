@@ -10,12 +10,11 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation'
 
 const elearning = {
-  id: 1,
+  id: "1",
   image: "img/e_learing.png",
   title: "H1. Introduction.",
   user_chapters: 8,
   max_chapters: 11,
-  url: "/elearing",
 }
 
 type EventItems = {
@@ -40,11 +39,10 @@ type QaItems = {
 
 type ElearningItems = {
   id: string
-  title: string
   image: string
-  dateCreate: string
-  reactions: number
-  bio: string
+  title: string
+  user_chapters: number
+  max_chapters: number
 }
 
 type HomeData = {
@@ -64,8 +62,6 @@ export default function Dashboard() {
   const [data, setData] = useState<ApiResponse<HomeData> | null>(null)
   const [isLoading, setLoading] = useState(true)
 
-  console.log(session)
-
   useEffect(() => {
     fetch('/api/v1/cards')
       .then((res) => res.json())
@@ -75,7 +71,7 @@ export default function Dashboard() {
       })
   }, [])
 
-  if (!session && status === "loading") return <p className='text-center'>Loading data...</p>
+  if (status === "loading") return <p className='text-center'>Loading data...</p>
   if (status === "unauthenticated") { router.push('/'); return null; }
 
   if (isLoading) return <p className='text-center'>Loading data...</p>

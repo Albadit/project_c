@@ -69,9 +69,9 @@ export default function Event() {
   const dateTime = currentDate.toISOString();
   const local = 'nl-NL'
 
-  async function fetchData() {
+  async function fetchData(api: string) {
     try {
-      const response = await fetch('/api/v1/event');
+      const response = await fetch(api);
       const fetchedData = await response.json();
       setData(fetchedData);
       setLoading(false);
@@ -81,7 +81,7 @@ export default function Event() {
   }
 
   useEffect(() => {
-    fetchData()
+    fetchData('/api/v1/event')
   }, [])
 
   const handleSubmit = async (e: any) => {
@@ -113,7 +113,7 @@ export default function Event() {
         form.elements['location'].value = ''
         form.elements['date_start'].value = ''
         form.elements['date_end'].value = ''
-        fetchData()
+        fetchData('/api/v1/event')
       } else {
         setMessage('Er is iets fout gegaan')
       }

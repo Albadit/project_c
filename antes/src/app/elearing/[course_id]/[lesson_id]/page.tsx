@@ -18,14 +18,14 @@ export default function ElearningLesson() {
   const router = useRouter()
   const { data: session, status } = useSession()
   
-  if (!session && status === "loading") return <p className='text-center'>Loading data...</p>
+  if (status === "loading") return <p className='text-center'>Loading data...</p>
   if (status === "unauthenticated") { router.push('/'); return null; }
 
   return (
     <>
       <NavDashboard user={session?.user}/>
       <main className="m-auto p-5 my-12 max-w-[1280px]">
-        <section className="flex flex-col py-8 px-10 gap-10 bg-section shadow-cbs rounded-lg font-font2">
+        <section className="flex flex-col p-10 gap-10 bg-section shadow-cbs rounded-lg font-font2">
           <div className="aspect-w-16 aspect-h-9 shadow-2xl">
             <iframe
               className="w-full h-full"
