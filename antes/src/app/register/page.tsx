@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { Input } from '@/app/components/input'
 import { useRouter } from 'next/navigation'
 import { SelectMenu } from '@/app/components/select_menu'
+import { PostData, FetchData } from '@/app/components/functions';
 
 type UserFunctionItems = {
   id: string;
@@ -21,22 +22,6 @@ const context = {
   register: { url: "/terms" }
 }
 
-async function Post(data: any, url: string) {
-  try {
-    const response = await fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    });
-    const responseData = await response.json();
-    return responseData
-  } catch (error) {
-    console.error('Error submitting form:', error);
-  }
-}
-
 export default function Login() {
   const router = useRouter(); 
   const [data, setData] = useState<ApiResponse<UserFunctionItems[]> | null>(null);
@@ -44,12 +29,7 @@ export default function Login() {
   const [message, setMessage] = useState('');
 
   useEffect(() => {
-    fetch('/api/v1/user_function')
-      .then((res) => res.json())
-      .then((data) => {
-        setData(data)
-        setLoading(false)
-      })
+    FetchData(setData, setLoading, '/api/v1/user_function')
   }, [])
 
   const handleSubmit = async (e: any) => {
@@ -63,7 +43,7 @@ export default function Login() {
     const agree = formData.get('agree');
     
     if (name && userFunction && email && password && confirmPassword && agree) {
-      const register = await Post({
+      const register = await PostData({
         userFunctionId: userFunction,
         name: name,
         email: email,

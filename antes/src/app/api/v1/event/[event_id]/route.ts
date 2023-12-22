@@ -20,27 +20,33 @@ export async function GET(req: Request, { params }: { params: { event_id: string
   }
 }
 
-// export async function POST(req: Request) {
-//   try {
-//     const body = await req.json()
+export async function POST(req: Request, { params }: { params: { event_id: string } }) {
+  try {
+    const body = await req.json()
 
-//     const userId = await prisma.user.findUnique({
-//       where: { email: body.userEmail}
-//     })
+    const calendarCheck = await prisma.calendar.findFirst({
+      where: {
+        userId: body.userId,
+        eventId: params.event_id
+      }
+    })
+    
+    if (calendarCheck) return NextResponse.json({ status: "error" }, { status: 401 })
 
-//     if (!userId) return NextResponse.json({ status: "Gebruiker niet gevonden" }, { status: 401 })
+    const calendar = await prisma.calendar.create({
+      data: {
+        userId: body.userId,
+        eventId: params.event_id
+      }
+    })
 
-//     const qaAnswers = await prisma.qaAnswer.create({
-//       data: {
-//         questionId: body.questionId,
-//         userId: userId.id,
-//         comment: body.comment,
-//         dateCreate: new Date(),
-//       }
-//     })
+    const transformedData = {
+      status: "success",
+      data: calendar
+    }
 
-//     return NextResponse.json(qaAnswers, { status: 200 })
-//   } catch (error) {
-//     return NextResponse.json({ status: "error" }, { status: 500 })
-//   }
-// }
+    return NextResponse.json(transformedData, { status: 200 })
+  } catch (error) {
+    return NextResponse.json({ status: "error" }, { status: 500 })
+  }
+}

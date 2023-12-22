@@ -3,11 +3,12 @@ import React from 'react'
 import Footer from '@/app/components/footer'
 import { NavDashboard } from '@/app/components/dashboard/nav'
 import { useSession } from 'next-auth/react'
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { QACard, QaProps } from '@/app/components/qa_card'
 import { EventCard, EventProps} from '@/app/components/event_card'
 import { ELearningCard, ElearningProps} from '@/app/components/dashboard/elearning_card'
+import { PostData, FetchData } from '@/app/components/functions'
 
 const elearning = {
   id: "1",
@@ -35,12 +36,7 @@ export default function Dashboard() {
   const [isLoading, setLoading] = useState(true)
 
   useEffect(() => {
-    fetch('/api/v1/cards')
-      .then((res) => res.json())
-      .then((data) => {
-        setData(data)
-        setLoading(false)
-      })
+    FetchData(setData, setLoading, '/api/v1/cards')
   }, [])
 
   if (status === "loading") return <p className='text-center'>Loading data...</p>

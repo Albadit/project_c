@@ -7,6 +7,7 @@ import { ELearningCard } from '@/app/components/dashboard/elearning_card'
 import { SubjectCard } from '@/app/components/dashboard/subject_card'
 import { useRouter } from 'next/navigation'
 import { useSession } from 'next-auth/react'
+import { PostData, FetchData } from '@/app/components/functions'
 
 const elearing = [
   {

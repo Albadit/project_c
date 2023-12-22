@@ -1,12 +1,13 @@
 "use client"
-import React from 'react';
-import Link from "next/link";
-import Footer from '@/app/components/footer';
+import React from 'react'
+import Link from "next/link"
+import Footer from '@/app/components/footer'
 import { NavDashboard } from '@/app/components/dashboard/nav'
-import { useRouter } from 'next/navigation';
-import { useSession } from 'next-auth/react';
-import { ProgressCircle } from '@/app/components/progress_circle';
-import { useParams } from 'next/navigation';
+import { useRouter } from 'next/navigation'
+import { useSession } from 'next-auth/react'
+import { ProgressCircle } from '@/app/components/progress_circle'
+import { useParams } from 'next/navigation'
+import { PostData, FetchData } from '@/app/components/functions'
 
 const elearning = {
   id: 1,
@@ -44,7 +45,7 @@ export default function ElearningCourse() {
   const { data: session, status } = useSession()
   
   if (status === "loading") return <p className='text-center'>Loading data...</p>
-  if (status === "unauthenticated") { router.push('/'); return null; }
+  if (status === "unauthenticated") { router.push('/'); return null }
   
   return (
     <>
@@ -101,5 +102,5 @@ export default function ElearningCourse() {
       </main>
       <Footer />
     </>
-  );
+  )
 }

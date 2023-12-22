@@ -1,30 +1,31 @@
 "use client"
-import React, { useEffect, useState } from "react";
-import Footer from "@/app/components/footer";
-import { NavDashboard } from "@/app/components/dashboard/nav";
-import { Quiz, QuizProps } from "@/app/components/quiz";
-import { useRouter } from 'next/navigation';
-import { useSession } from 'next-auth/react';
+import React, { useEffect, useState } from "react"
+import Footer from "@/app/components/footer"
+import { NavDashboard } from "@/app/components/dashboard/nav"
+import { Quiz, QuizProps } from "@/app/components/quiz"
+import { useRouter } from 'next/navigation'
+import { useSession } from 'next-auth/react'
+import { PostData, FetchData } from '@/app/components/functions'
 
 type ApiResponse<T> = {
-  status: string;
-  data: T;
+  status: string
+  data: T
 }
 
 export default function ElearningQuiz() {
   const router = useRouter()
   const { data: session, status } = useSession()
-  const [data, setData] = useState<ApiResponse<QuizProps[]> | null>(null);
+  const [data, setData] = useState<ApiResponse<QuizProps[]> | null>(null)
   const [isLoading, setLoading] = useState(true)
   
   async function fetchData(api: string) {
     try {
-      const response = await fetch(api);
-      const fetchedData = await response.json();
-      setData(fetchedData);
-      setLoading(false);
+      const response = await fetch(api)
+      const fetchedData = await response.json()
+      setData(fetchedData)
+      setLoading(false)
     } catch (error) {
-      console.error('Error fetching data:', error);
+      console.error('Error fetching data:', error)
     }
   }
 
@@ -33,7 +34,7 @@ export default function ElearningQuiz() {
   }, [])
 
   if (status === "loading") return <p className='text-center'>Loading data...</p>
-  if (status === "unauthenticated") { router.push('/'); return null; }
+  if (status === "unauthenticated") { router.push('/'); return null }
   
   return (
     <>

@@ -1,10 +1,11 @@
 "use client"
-import React from "react";
-import Link from "next/link";
-import Footer from "@/app/components/footer";
-import { NavDashboard } from "@/app/components/dashboard/nav";
-import { useParams, useRouter } from 'next/navigation';
-import { useSession } from 'next-auth/react';
+import React from "react"
+import Link from "next/link"
+import Footer from "@/app/components/footer"
+import { NavDashboard } from "@/app/components/dashboard/nav"
+import { useParams, useRouter } from 'next/navigation'
+import { useSession } from 'next-auth/react'
+import { PostData, FetchData } from '@/app/components/functions'
 
 const lesson = {
   imagecourse: "/img/lesson.png",
@@ -13,13 +14,13 @@ const lesson = {
 }
 
 export default function ElearningLesson() {
-  const embedId = "I-MmRYP9bdk";
+  const embedId = "I-MmRYP9bdk"
   const params = useParams()
   const router = useRouter()
   const { data: session, status } = useSession()
   
   if (status === "loading") return <p className='text-center'>Loading data...</p>
-  if (status === "unauthenticated") { router.push('/'); return null; }
+  if (status === "unauthenticated") { router.push('/'); return null }
 
   return (
     <>
@@ -32,7 +33,7 @@ export default function ElearningLesson() {
               src={`https://www.youtube.com/embed/${embedId}`}
               title="YouTube video player"
               frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allow="accelerometer autoplay clipboard-write encrypted-media gyroscope picture-in-picture"
               allowFullScreen
             ></iframe>
           </div>
@@ -50,5 +51,5 @@ export default function ElearningLesson() {
       </main>
       <Footer />
     </>
-  );
+  )
 }

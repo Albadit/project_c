@@ -8,6 +8,7 @@ import Smile from '@/app/components/icons/smile';
 import { useEffect, useState } from 'react';
 import { useSession } from 'next-auth/react';
 import { useParams } from 'next/navigation';
+import { PostData, FetchData } from '@/app/components/functions';
 
 type CreatorItems = {
   id: string
@@ -37,22 +38,6 @@ type ApiResponse<T> = {
   data: T;
 }
 
-async function Post(data: any, url: string) {
-  try {
-    const response = await fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    });
-    const responseData = await response.json();
-    return responseData
-  } catch (error) {
-    console.error('Error submitting form:', error);
-  }
-}
-
 function formatDate(date: string): string {
   const convert = new Date(date)
   const day = String(convert.getDate()).padStart(2, '0')
@@ -75,19 +60,8 @@ export default function Chat() {
   const [comment, setComment] = useState('');
   const [message, setMessage] = useState('');
 
-  async function fetchData() {
-    try {
-      const response = await fetch('/api/v1/qa/' + params.qa_id);
-      const fetchedData = await response.json();
-      setData(fetchedData);
-      setLoading(false);
-    } catch (error) {
-      console.error('Error fetching data:', error);
-    }
-  }
-
   useEffect(() => {
-    fetchData()
+    FetchData(setData, setLoading,`/api/v1/qa/${params.qa_id}`)
     // const interval = setInterval(fetchData, 1000);
     // return () => clearInterval(interval);
   }, [])
@@ -98,14 +72,14 @@ export default function Chat() {
     const comment = formData.get('comment')
     
     if (comment) {
-      const register = await Post({
+      const register = await PostData({
         userEmail: session?.user?.email,
         questionId: params.qa_id,
         comment: comment
       }, "/api/v1/qa/" + params.qa_id)
       if (register.status === "success") {
         setComment('');
-        fetchData()
+        FetchData(setData, setLoading,`/api/v1/qa/${params.qa_id}`)
       } else {
         setMessage('has been not send')
       }

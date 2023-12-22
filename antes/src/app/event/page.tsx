@@ -1,14 +1,15 @@
 "use client"
-import React, { useState, useEffect } from 'react';
-import Footer from '@/app/components/footer';
+import React, { useState, useEffect } from 'react'
+import Footer from '@/app/components/footer'
 import { NavDashboard } from '@/app/components/dashboard/nav'
-import { useSession } from 'next-auth/react';
-import { Input } from '@/app/components/input';
-import { InputDateTime } from '@/app/components/input_datetime';
-import Link from 'next/link';
-import NavHome from '@/app/components/home/nav';
-import Modal from '@/app/components/modal';
-import Calendar from '@/app/components/calendar';
+import { useSession } from 'next-auth/react'
+import { Input } from '@/app/components/input'
+import { InputDateTime } from '@/app/components/input_datetime'
+import Link from 'next/link'
+import NavHome from '@/app/components/home/nav'
+import Modal from '@/app/components/modal'
+import Calendar from '@/app/components/calendar'
+import { PostData, FetchData } from '@/app/components/functions'
 
 type EventItems = {
   id: string
@@ -21,38 +22,8 @@ type EventItems = {
 }
 
 type ApiResponse<T> = {
-  status: string;
-  data: T;
-}
-
-async function Post(data: any, url: string) {
-  try {
-    const response = await fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    });
-    const responseData = await response.json();
-    return responseData
-  } catch (error) {
-    console.error('Error submitting form:', error);
-  }
-}
-
-function formatDate(date: string): string {
-  const convert = new Date(date)
-  const day = String(convert.getDate()).padStart(2, '0')
-  const month = String(convert.getMonth() + 1).padStart(2, '0')
-  const year = convert.getFullYear()
-
-  const hours = String(convert.getHours()).padStart(2, '0');
-  const minutes = String(convert.getMinutes()).padStart(2, '0');
-  const seconds = String(convert.getSeconds()).padStart(2, '0');
-
-  // return `${day}-${month}-${year} ${hours}:${minutes}:${seconds}`;
-  return `${day}-${month}-${year} ${hours}:${minutes}`
+  status: string
+  data: T
 }
 
 export default function Event() {
@@ -62,29 +33,16 @@ export default function Event() {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [message, setMessage] = useState('')
 
-  const currentDate = new Date();
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
-  const dateTime = currentDate.toISOString();
+  const today = new Date()
+  today.setHours(0, 0, 0, 0)
   const local = 'nl-NL'
 
-  async function fetchData(api: string) {
-    try {
-      const response = await fetch(api);
-      const fetchedData = await response.json();
-      setData(fetchedData);
-      setLoading(false);
-    } catch (error) {
-      console.error('Error fetching data:', error);
-    }
-  }
-
   useEffect(() => {
-    fetchData('/api/v1/event')
+    FetchData(setData, setLoading, '/api/v1/event')
   }, [])
 
   const handleSubmit = async (e: any) => {
-    e.preventDefault();
+    e.preventDefault()
     const formData = new FormData(e.target)
     const form = e.target
     const image = null
@@ -95,7 +53,7 @@ export default function Event() {
     const dateEnd = formData.get('date_end')
 
     if (title && description && location && dateStart && dateEnd) {
-      const newEvent = await Post({
+      const newEvent = await PostData({
         title: title,
         description: description,
         location: location,
@@ -104,7 +62,6 @@ export default function Event() {
         dateEnd: dateEnd,
       }, "/api/v1/event")
 
-      console.log(newEvent)
       if (newEvent.status === "success") {
         setIsModalOpen(false)
         form.elements['title'].value = ''
@@ -112,7 +69,7 @@ export default function Event() {
         form.elements['location'].value = ''
         form.elements['date_start'].value = ''
         form.elements['date_end'].value = ''
-        fetchData('/api/v1/event')
+        FetchData(setData, setLoading, '/api/v1/event')
       } else {
         setMessage('Er is iets fout gegaan')
       }

@@ -1,20 +1,12 @@
 "use client"
-import React, { useEffect, useState } from 'react';
-import Footer from '@/app/components/footer';
+import React, { useEffect, useState } from 'react'
+import Footer from '@/app/components/footer'
 import { NavDashboard } from '@/app/components/dashboard/nav'
-import { useSession } from 'next-auth/react';
-import NavHome from '@/app/components/home/nav';
-import Calendar from "@/app/components/icons/calendar";
-import { useParams } from 'next/navigation';
-
-const context = {
-  image: "/img/event.png",
-  title: "Connectiedag!",
-  description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-  location: "Rotterdam",
-  date: "12-12-2024",
-  link: "#",
-}
+import { useSession } from 'next-auth/react'
+import NavHome from '@/app/components/home/nav'
+import Calendar from "@/app/components/icons/calendar"
+import { useParams, useRouter } from 'next/navigation'
+import { PostData, FetchData } from '@/app/components/functions'
 
 type EventItems = {
   id: string
@@ -27,8 +19,8 @@ type EventItems = {
 }
 
 type ApiResponse<T> = {
-  status: string;
-  data: T;
+  status: string
+  data: T
 }
 
 function formatDate(date: string): string {
@@ -37,11 +29,11 @@ function formatDate(date: string): string {
   const month = String(convert.getMonth() + 1).padStart(2, '0')
   const year = convert.getFullYear()
 
-  const hours = String(convert.getHours()).padStart(2, '0');
-  const minutes = String(convert.getMinutes()).padStart(2, '0');
-  const seconds = String(convert.getSeconds()).padStart(2, '0');
+  const hours = String(convert.getHours()).padStart(2, '0')
+  const minutes = String(convert.getMinutes()).padStart(2, '0')
+  const seconds = String(convert.getSeconds()).padStart(2, '0')
 
-  return `${day}-${month}-${year} ${hours}:${minutes}`;
+  return `${day}-${month}-${year} ${hours}:${minutes}`
   // return `${day}-${month}-${year}`
 }
 
@@ -50,23 +42,25 @@ export default function Dashboard() {
   const { data: session, status } = useSession()
   const [data, setData] = useState<ApiResponse<EventItems> | null>(null)
   const [isLoading, setLoading] = useState(true)
+  const [message, setMessage] = useState('')
 
-  async function fetchData() {
-    try {
-      const response = await fetch('/api/v1/event/' + params.event_id);
-      const fetchedData = await response.json();
-      setData(fetchedData);
-      setLoading(false);
-    } catch (error) {
-      console.error('Error fetching data:', error);
+  useEffect(() => {
+    FetchData(setData, setLoading, `/api/v1/event/${params.event_id}`)
+  }, [])
+
+  const handleSubmit = async (e: any) => {
+    e.preventDefault()
+    const addcal = await PostData({
+      userId: session?.user.id
+    }, `/api/v1/event/${params.event_id}`)
+
+    if (addcal.status === "success") {
+      setMessage('je bent aangemeld')
+    } else {
+      setMessage('je bent al aangemeld')
     }
   }
 
-  useEffect(() => {
-    fetchData()
-  }, [])
-
-  
   return (
     <>
       {session && status === "authenticated" ? (<NavDashboard user={session?.user}/>) : (<NavHome />)}
@@ -85,9 +79,10 @@ export default function Dashboard() {
                 <Calendar className="fill-extra h-5" />
                 <p className="text-extra text-sm">{formatDate(data?.data.dateStart || "")}</p>
               </div>
-              <button type='button' className="flex flex-row items-center justify-center lg:w-max w-full gap-2 px-4 py-3 rounded-lg bg-primary text-font2 font-semibold text-sm">
+              <button type='button' onClick={handleSubmit} className="flex flex-row items-center justify-center lg:w-max w-full gap-2 px-4 py-3 rounded-lg bg-primary text-font2 font-semibold text-sm">
                 Meld je aan!
               </button>
+              {message ? (<p className='text-extra'>{message}</p>) : (<></>)}
             </div>
           </div>
         </section>

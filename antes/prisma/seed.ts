@@ -159,7 +159,7 @@ async function main() {
   //// quiz
   const quiz = await prisma.quiz.create({
     data: {
-      quiz_data: [
+      quizData: [
         {
           "question": "Sinds wanneer bestaat GGZ-Nederland?",
           "options": ["1923", "1975", "1948", "1900"],

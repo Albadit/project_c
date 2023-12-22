@@ -7,6 +7,7 @@ import { SelectMenu } from '@/app/components/select_menu';
 import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
+import { PostData, FetchData } from '@/app/components/functions'
 
 type UserFunctionItems = {
   id: string;
@@ -18,22 +19,6 @@ type ApiResponse<T> = {
   data: T;
 }
 
-async function Post(data: any, url: string) {
-  try {
-    const response = await fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    });
-    const responseData = await response.json();
-    return responseData
-  } catch (error) {
-    console.error('Error submitting form:', error);
-  }
-}
-
 export default function Profile() {
   const { data: session, status } = useSession()
   const router = useRouter()
@@ -41,31 +26,9 @@ export default function Profile() {
   const [isLoading, setLoading] = useState(true)
   const [message, setMessage] = useState('');
 
-  async function fetchDataUserFunction(url: string) {
-    try {
-      const response = await fetch(url);
-      const fetchedData = await response.json();
-      setData(fetchedData);
-      setLoading(false);
-    } catch (error) {
-      console.error('Error fetching data:', error);
-    }
-  }
-
-  async function fetchData(url: string) {
-    try {
-      const response = await fetch(url);
-      const fetchedData = await response.json();
-      setData(fetchedData);
-      setLoading(false);
-    } catch (error) {
-      console.error('Error fetching data:', error);
-    }
-  }
-
   useEffect(() => {
-    fetchDataUserFunction('/api/v1/user_function')
-    fetchData('/api/v1/user')
+    FetchData(setData, setLoading, '/api/v1/user_function')
+    FetchData(setData, setLoading, '/api/v1/user')
   }, [])
 
   const handleSubmitProfile = async (e: any) => {
@@ -74,7 +37,7 @@ export default function Profile() {
     const bio = formData.get('bio');
     
     if (bio) {
-      const register = await Post({
+      const register = await PostData({
         bio: bio,
       }, "/api/v1/user_update")
       if (register.status === "success") {
@@ -94,7 +57,7 @@ export default function Profile() {
     const newPassword = formData.get('new-password');
     
     if (password && newPassword) {
-      const register = await Post({
+      const register = await PostData({
         password: password,
         newPassword: newPassword,
       }, "/api/v1/user_update")

@@ -52,21 +52,21 @@ model VerificationToken {
 }
 
 model User {
-  id             String       @id @default(cuid())
+  id             String         @id @default(cuid())
   roleId         String
   userFunctionId String
-  image          String       @default("/img/profile.png")
-  name           String       @db.Text
+  image          String         @default("/img/profile.png")
+  name           String         @db.Text
   bio            String?
-  email          String       @unique
-  emailVerified  DateTime?    @map("email_verified")
+  email          String         @unique
+  emailVerified  DateTime?      @map("email_verified")
   password       String // hash format bcrypt
-  role           Role         @relation(fields: [roleId], references: [id])
-  userFunction   UserFunction @relation(fields: [userFunctionId], references: [id])
+  role           Role           @relation(fields: [roleId], references: [id])
+  userFunction   UserFunction   @relation(fields: [userFunctionId], references: [id])
   calendars      Calendar[]
   qaQuestions    QaQuestion[]
   qaAnswers      QaAnswer[]
-  userLessons    UserLesson[]
+  userProgress   UserProgress[]
   accounts       Account[]
   sessions       Session[]
 
@@ -134,25 +134,25 @@ model Subject {
 }
 
 model Lesson {
-  id          String       @id @default(cuid())
+  id          String         @id @default(cuid())
   subjectId   String
   quizId      String?
   order       Int
-  title       String       @db.Text
-  description String       @db.Text
-  lesson_data Json
-  subject     Subject      @relation(fields: [subjectId], references: [id])
-  quiz        Quiz?        @relation(fields: [quizId], references: [id])
-  userLessons UserLesson[]
+  title       String         @db.Text
+  description String         @db.Text
+  lessonData  Json
+  subject     Subject        @relation(fields: [subjectId], references: [id])
+  quiz        Quiz?          @relation(fields: [quizId], references: [id])
+  userLessons UserProgress[]
 }
 
 model Quiz {
-  id        String   @id @default(cuid())
-  quiz_data Json
-  lessons   Lesson[]
+  id       String   @id @default(cuid())
+  quizData Json
+  lessons  Lesson[]
 }
 
-model UserLesson {
+model UserProgress {
   id         String  @id @default(cuid())
   userId     String
   lessonId   String

@@ -1,13 +1,14 @@
 'use client'
 import React from 'react';
-import Footer from '@/app/components/footer';
+import Footer from '@/app/components/footer'
 import { NavDashboard } from '@/app/components/dashboard/nav'
 import NavHome from '@/app/components/home/nav'
-import { useEffect, useState } from 'react';
-import { useSession } from 'next-auth/react';
-import Modal from '@/app/components/modal';
-import { Input } from '@/app/components/input';
-import { QACardList, QaListProps } from '@/app/components/dashboard/qa_card_list';
+import { useEffect, useState } from 'react'
+import { useSession } from 'next-auth/react'
+import Modal from '@/app/components/modal'
+import { Input } from '@/app/components/input'
+import { QACardList, QaListProps } from '@/app/components/dashboard/qa_card_list'
+import { PostData, FetchData } from '@/app/components/functions';
 
 type QAData = {
   tags: string[];
@@ -19,22 +20,6 @@ type ApiResponse<T> = {
   data: T;
 }
 
-async function Post(data: any, url: string) {
-  try {
-    const response = await fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    });
-    const responseData = await response.json();
-    return responseData
-  } catch (error) {
-    console.error('Error submitting form:', error);
-  }
-}
-
 export default function Qa() {
   const { data: session, status } = useSession()
   const [data, setData] = useState<ApiResponse<QAData> | null>(null)
@@ -42,19 +27,8 @@ export default function Qa() {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [message, setMessage] = useState('')
 
-  async function fetchData() {
-    try {
-      const response = await fetch('/api/v1/qa/');
-      const fetchedData = await response.json();
-      setData(fetchedData);
-      setLoading(false);
-    } catch (error) {
-      console.error('Error fetching data:', error);
-    }
-  }
-
   useEffect(() => {
-    fetchData()
+    FetchData(setData, setLoading, '/api/v1/qa/')
   }, [])
 
   const handleSubmit = async (e: any) => {
@@ -65,7 +39,7 @@ export default function Qa() {
     const image = formData.get('image')
 
     if (title) {
-      const newQa = await Post({
+      const newQa = await PostData({
         userEmail: session?.user?.email,
         title: title,
         image: image,
@@ -73,7 +47,7 @@ export default function Qa() {
       if (newQa.status === "success") {
         setIsModalOpen(false)
         form.elements['title'].value = '';
-        fetchData()
+        FetchData(setData, setLoading, '/api/v1/qa/')
       } else {
         setMessage('Er is iets fout gegaan')
       }

@@ -7,7 +7,7 @@ import HamburgerMenu from '@/app/components/icons/hambuger_menu';
 import Close from '@/app/components/icons/close';
 import Link from 'next/link';
 
-type UserProps = {
+export type UserProps = {
   name: string
   email: string
   image: string 
@@ -25,7 +25,7 @@ export const NavDashboard = (props: Props) => {
     login: { name: "Inloggen", url: "#"},
     navigation: [
       { name: 'Dashboard', href: '/dashboard' },
-      { name: 'Agenda', href: '/agenda' },
+      { name: 'Agenda', href: '/calendar' },
       { name: 'Event', href: '/event' },
       { name: 'E-learning', href: '/elearing' },
       { name: 'Q & A', href: '/qa' },
