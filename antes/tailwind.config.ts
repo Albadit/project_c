@@ -41,6 +41,9 @@ const config: Config = {
         'title': "var(--bg-title)",
         'info': "var(--bg-info)",
         'login': "var(--bg-login)",
+      },
+      gridTemplateRows: {
+        'day': 'repeat(1440, minmax(0, 1fr))',
       }
     },
   },
