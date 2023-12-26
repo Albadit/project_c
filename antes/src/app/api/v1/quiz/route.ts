@@ -8,7 +8,7 @@ export async function GET() {
 
     const transformedData = {
       status: "success",
-      data: quiz?.quiz_data
+      data: quiz?.quizData
     }
 
     return NextResponse.json(transformedData, { status: 200 })

@@ -126,7 +126,7 @@ export default function ELearning() {
           <h1 className="font-font1 font-bold text-center text-primary text-5xl break-words">E-Learning</h1>
           <div ref={sliderRef} className='flex flex-row overflow-x-auto snap-x snap-mandatory scrollbar-hide scroll-pl-6 py-5 gap-12'>
             {elearing.map((item, index) => 
-              <div className="snap-start shrink-0 first:pl-6 last:pr-6">
+              <div key={`el-${index}`} className="snap-start shrink-0 first:pl-6 last:pr-6">
                 <ELearningCard key={index} elearning={item} />
               </div>
             )}
