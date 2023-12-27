@@ -30,7 +30,7 @@ function formatDate(date: string): string {
   return `${hours}:${minutes}`
 }
 
-function isSameDay(date1: Date, date2: Date) {
+function isSameDay(date1: Date, date2: Date): boolean {
   return date1.getDate() === date2.getDate() && date1.getMonth() === date2.getMonth() && date1.getFullYear() === date2.getFullYear()
 }
 
@@ -51,11 +51,27 @@ export const LongCalendar = (props: Props) => {
     const formattedDate = day.getDate()
     return { abbreviated: day.toLocaleDateString(local, { weekday: 'short' }), number: formattedDate, fullDate: day }
   })
-    
-  const renderWeekDays = () => {
+
+  const singleDay = (() => {
+    const startOfWeek = new Date(currentDate)
+    const startDay = startDayMonday ? 1 : 0 // Adjust if the week starts on Monday
+    startOfWeek.setDate(currentDate.getDate() - ((currentDate.getDay() + startDay) % 1))
+  
+    const formattedDate = startOfWeek.getDate()
+  
+    return [
+      {
+        abbreviated: startOfWeek.toLocaleDateString(local, { weekday: 'short' }),
+        number: formattedDate,
+        fullDate: startOfWeek,
+      },
+    ]
+  })()
+
+  const renderWeek = () => {
     const today = new Date()
     return daysOfWeek.map(({ abbreviated, number, fullDate }, index) => (
-      <div key={`days-${index}`} className='flex flex-row justify-center items-center gap-2 text-center font-bold'>
+      <div key={`days-${index}`} className='flex lg:flex-row flex-col justify-center items-center gap-2 text-center font-bold'>
         <p>{abbreviated}</p>
         <p className={`flex justify-center items-center w-8 h-8 ${isSameDay(today, fullDate) ? 'bg-secondary rounded-full text-font2' : ''}`}>
           {number}
@@ -64,7 +80,19 @@ export const LongCalendar = (props: Props) => {
     ))
   }
 
-  const renderEvents = () => {
+  const renderDay = () => {
+    const today = new Date()
+    return daysOfWeek.map(({ abbreviated, number, fullDate }, index) => (
+      <div key={`days-${index}`} className='flex lg:flex-row flex-col justify-center items-center gap-2 text-center font-bold'>
+        <p>{abbreviated}</p>
+        <p className={`flex justify-center items-center w-8 h-8 ${isSameDay(singleDay[0].fullDate, fullDate) ? 'bg-secondary rounded-full text-font2' : ''}`}>
+          {number}
+        </p>
+      </div>
+    ))
+  }
+
+  const renderEventsWeek = () => {
     return props.events.map((event) => {
       const startDate = new Date(event.dateStart)
       const endDate = new Date(event.dateEnd)
@@ -84,7 +112,36 @@ export const LongCalendar = (props: Props) => {
       }
 
       return (
-        <div key={event.id} className="bg-secondary rounded-lg m-1 px-3 py-1" style={gridStyles}>
+        <div key={event.id} className="bg-secondary rounded-lg m-1 lg:px-3 px-2 py-1" style={gridStyles}>
+          <p className='text-font2 truncate'>{event.title}</p>
+          <p className='text-font2 truncate'>{`${formatDate(event.dateStart)} - ${formatDate(event.dateEnd)}`}</p>
+          <p className='text-font2 truncate'>{event.location}</p>
+          <p className='text-font2 truncate'>{event.description}</p>
+        </div>
+      )
+    })
+  }
+
+  const renderEventsDay = () => {
+    return props.events.map((event) => {
+      const startDate = new Date(event.dateStart)
+      const endDate = new Date(event.dateEnd)
+
+      const startRow = Math.floor(startDate.getHours() * 60 + startDate.getMinutes())
+      const endRow = Math.ceil(endDate.getHours() * 60 + endDate.getMinutes())
+      const spanRows = endRow - startRow
+      const dayIndex = singleDay.findIndex((day) => isSameDay(startDate, day.fullDate))
+
+      if (dayIndex < 0 || dayIndex >= daysOfWeek.length) {
+        return null
+      }
+
+      const gridStyles: React.CSSProperties = {
+        gridRow: `${startRow + 1} / span ${spanRows}`,
+      }
+
+      return (
+        <div key={event.id} className="bg-secondary rounded-lg m-1 lg:px-3 px-2 py-1" style={gridStyles}>
           <p className='text-font2 truncate'>{event.title}</p>
           <p className='text-font2 truncate'>{`${formatDate(event.dateStart)} - ${formatDate(event.dateEnd)}`}</p>
           <p className='text-font2 truncate'>{event.location}</p>
@@ -106,27 +163,56 @@ export const LongCalendar = (props: Props) => {
     setCurrentDate(newDate)
   }
 
+  const handlePrevDay = () => {
+    const newDate = new Date(currentDate)
+    newDate.setDate(currentDate.getDate() - 1)
+    setCurrentDate(newDate)
+  }
+
+  const handleNextDay = () => {
+    const newDate = new Date(currentDate)
+    newDate.setDate(currentDate.getDate() + 1)
+    setCurrentDate(newDate)
+  }
+
   const handleResetToToday = () => {
     setCurrentDate(new Date())
   }
 
   return (
-    <div className="flex flex-col p-5 gap-5 w-full">
-      <div className="flex justify-end gap-5">
-        <button className='w-fit px-6 py-2.5 rounded-lg bg-secondary text-font2 font-semibold text-sm' onClick={handlePrevWeek}>
-          <ArrowRight className="rotate-180 fill-font2 h-5" />
-        </button>
-        <button className='w-fit px-4 py-2.5 rounded-lg bg-secondary text-font2 font-semibold text-sm' onClick={handleResetToToday}>
-          {currentDate.toLocaleDateString(local, { month: 'long', year: 'numeric' })}
-        </button>
-        <button className='w-fit px-6 py-2.5 rounded-lg bg-secondary text-font2 font-semibold text-sm' onClick={handleNextWeek}>
-          <ArrowRight className="fill-font2 h-5" />
-        </button>
+    <div className="flex flex-col md:p-5 gap-6 w-full">
+      <div className="flex md:flex-row flex-col md:justify-between items-center gap-5">
+        <p onClick={handleResetToToday} className='font-semibold text-xl font-font1'>{currentDate.toLocaleDateString(local, { month: 'long', year: 'numeric' })}</p>
+        <div className="md:flex hidden gap-5">
+          {/* <button onClick={handlePrevWeek}><ArrowRight className='w-5 fill-extra rotate-180'/></button>
+          <button onClick={handleNextWeek}><ArrowRight className='w-5 fill-extra'/></button> */}
+          <button className='w-fit px-6 py-2.5 rounded-lg bg-secondary text-font2 font-semibold text-sm' onClick={handlePrevWeek}>
+            <ArrowRight className="rotate-180 fill-font2 h-5" />
+          </button>
+          <button className='w-fit px-6 py-2.5 rounded-lg bg-secondary text-font2 font-semibold text-sm' onClick={handleNextWeek}>
+            <ArrowRight className="fill-font2 h-5" />
+          </button>
+        </div>
+
+        <div className="flex md:hidden gap-5">
+          {/* <button onClick={handlePrevWeek}><ArrowRight className='w-5 fill-extra rotate-180'/></button>
+          <button onClick={handleNextWeek}><ArrowRight className='w-5 fill-extra'/></button> */}
+          <button className='w-fit px-6 py-2.5 rounded-lg bg-secondary text-font2 font-semibold text-sm' onClick={handlePrevDay}>
+            <ArrowRight className="rotate-180 fill-font2 h-5" />
+          </button>
+          <button className='w-fit px-6 py-2.5 rounded-lg bg-secondary text-font2 font-semibold text-sm' onClick={handleNextDay}>
+            <ArrowRight className="fill-font2 h-5" />
+          </button>
+        </div>
       </div>
 
-      <div className="flex flex-row w-full">
+      <div className="md:flex hidden flex-row w-full">
         <div className="w-20"></div>
-        <div className="grid grid-cols-7 w-full">{renderWeekDays()}</div>
+        <div className="grid grid-cols-7 w-full">{renderWeek()}</div>
+      </div>
+
+      <div className="flex md:hidden flex-row w-full">
+        <div className="grid grid-cols-7 w-full">{renderDay()}</div>
       </div>
 
       <div className='flex flex-row h-fit'>
@@ -140,19 +226,24 @@ export const LongCalendar = (props: Props) => {
           ))}
         </div>
         <div className='relative w-full'>
-          <div className='absolute top-0 left-0 grid grid-rows-day grid-cols-7 w-full h-full'>
-            {renderEvents()}
+          <div className='absolute top-0 left-0 md:grid hidden grid-rows-day grid-cols-7 w-full h-full'>
+            {renderEventsWeek()}
           </div>
-          <div className='grid grid-cols-7 w-full'>
+          <div className='absolute top-0 left-0 grid md:hidden grid-rows-day w-full h-full'>
+            {renderEventsDay()}
+          </div>
+          <div className='md:grid hidden grid-cols-7 w-full'>
             {Array.from({ length: timesOfDayGrid }).map((_, rowIndex) => (
               <React.Fragment key={rowIndex}>
                 {daysOfWeek.map((day, colIndex) => (
-                  <div
-                    key={`${rowIndex}-${colIndex}`}
-                    className={`h-14 outline outline-1 outline-offset-[-0.5px] ${isSameDay(currentDate, day.fullDate) ? 'highlighted-day' : ''}`}
-                  ></div>
+                  <div key={`${rowIndex}-${colIndex}`} className='h-14 outline outline-1 outline-offset-[-0.5px]'></div>
                 ))}
               </React.Fragment>
+            ))}
+          </div>
+          <div className='grid md:hidden grid-rows-7 w-full'>
+            {Array.from({ length: timesOfDayGrid }).map((_, rowIndex) => (
+              <div key={rowIndex} className='h-14 outline outline-1 outline-offset-[-0.5px]'></div>
             ))}
           </div>
         </div>
