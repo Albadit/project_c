@@ -85,20 +85,22 @@ export default function Event() {
         <h1 className='font-font1 font-bold text-center text-primary text-5xl'>Events</h1>
         <Calendar/>
         <section className='flex flex-col gap-5 font-font2 text-font1 max-w-[750px] w-full'>
-          <div className='flex flex-row justify-end'>
-            <Modal title='Nieuw Event' isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}>
-              <form onSubmit={handleSubmit} className='flex flex-col gap-4 items-end'>
-                <Input label='Naam' name='title' type='text' value=''/>
-                <Input label='Beschrijving' name='description' type='textarea' value=''/>
-                <Input label='Locatie' name='location' type='text' value=''/>
-                <InputDateTime label='Startdatum' name='date_start' value='' min='' max=''/>
-                <InputDateTime label='Einddatum' name='date_end' value='' min='' max=''/>
-                {/* add image button */}
-                <button type='submit' className='w-fit px-6 py-2.5 rounded-lg bg-secondary text-font2 font-semibold text-sm'>Opslaan</button>
-                {message ? (<p className='text-error'>{message}</p>) : (<></>)}
-              </form>
-            </Modal>
-          </div>
+          {(session?.user?.level ?? 0) <= 3 ? (
+            <div className='flex flex-row justify-end'>
+              <Modal title='Nieuw Event' isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}>
+                <form onSubmit={handleSubmit} className='flex flex-col gap-4 items-end'>
+                  <Input label='Naam' name='title' type='text' value=''/>
+                  <Input label='Beschrijving' name='description' type='textarea' value=''/>
+                  <Input label='Locatie' name='location' type='text' value=''/>
+                  <InputDateTime label='Startdatum' name='date_start' value='' min='' max=''/>
+                  <InputDateTime label='Einddatum' name='date_end' value='' min='' max=''/>
+                  {/* add image button */}
+                  <button type='submit' className='w-fit px-6 py-2.5 rounded-lg bg-secondary text-font2 font-semibold text-sm'>Opslaan</button>
+                  {message ? (<p className='text-error'>{message}</p>) : (<></>)}
+                </form>
+              </Modal>
+            </div>
+          ) : (<></>) }
           <h2 className='font-semibold text-xl font-font1'>Aankomende evenementen</h2>
           {isLoading ? (<p className='text-center'>Loading data...</p>) : ( data?.status === "error" ? (<p className='text-center'>No data find</p>) : (
             <div>

@@ -109,7 +109,7 @@ export default function Calender() {
 
   return (
     <div className='max-w-full'>
-      <div className='flex flex-row justify-between items-center max-w-[350px] w-full mt-8'>
+      <div className='flex flex-row justify-between items-center w-full mt-8'>
         <button onClick={goToPrevMonth}><ArrowRight className='w-5 fill-extra rotate-180'/></button>
         <p onClick={resetToCurrentDate} className='font-semibold text-xl font-font1'>{monthName} {currentYear}</p>
         <button onClick={goToNextMonth}><ArrowRight className='w-5 fill-extra'/></button>
@@ -129,7 +129,7 @@ export default function Calender() {
               <div key={i} className='grid grid-cols-7'>
                 {week.map((day: any, index: any) => (
                   <div key={index} className={`text-center outline outline-[1px] outline-offset-0 outline-inputBorder px-4 py-2.5 ${isCurrentMonth(day) ? 'bg-section' : 'text-extra bg-[#f9fafb]'}`}>
-                    <span className={`${isCurrentDay(day) ? 'text-font2 font-medium bg-secondary rounded-full p-1.5 m-[-6px]' : ''}`}>{day.day}</span>
+                    <span className={`flex justify-center items-center w-8 h-8 ${isCurrentDay(day) ? 'text-font2 font-medium bg-secondary rounded-full' : ''}`}>{day.day}</span>
                   </div>
                 ))}
               </div>

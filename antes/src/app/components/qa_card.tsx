@@ -35,7 +35,7 @@ function formatDate(date: string): string {
 
 export const QACard = (props: Props) => {
   return (
-    <div className="flex flex-col md:max-w-[525px] w-full gap-5 p-7 rounded-lg bg-section shadow-cbs text-base font-font1 text-font1">
+    <div className="flex flex-col max-w-[525px] w-full gap-5 p-7 rounded-lg bg-section shadow-cbs text-base font-font1 text-font1">
       <img src={props.qa.image} alt="event" className="h-[280px] object-cover object-center rounded" />
       <div className="flex flex-row items-center gap-2 text-extra">
         <Calendar className="fill-extra h-5" />

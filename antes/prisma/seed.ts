@@ -32,12 +32,16 @@ async function main() {
     where: { name: "Super Admin" }
   })
   
+  const roleId2 = await prisma.role.findFirst({
+    where: { name: "Werknemer" }
+  })
+  
   const userFunctionId = await prisma.userFunction.findFirst({
     where: { name: "Behavioral neuroscience" }
   })
 
   if (!roleId) { console.error("roleId not found"); return }
-  
+  if (!roleId2) { console.error("roleId not found"); return }
   if (!userFunctionId) { console.error("userFunctionId not found"); return }
   
   const user = await prisma.user.create({
@@ -53,7 +57,7 @@ async function main() {
 
   const user2 = await prisma.user.create({
     data: {
-      roleId: roleId.id,
+      roleId: roleId2.id,
       userFunctionId: userFunctionId.id,
       name: 'Ayoeb El Bali',
       email: 'ayoeb@ayoeb.com',

@@ -180,10 +180,10 @@ export const LongCalendar = (props: Props) => {
   }
 
   return (
-    <div className="flex flex-col md:p-5 gap-6 w-full">
-      <div className="flex md:flex-row flex-col md:justify-between items-center gap-5">
+    <div className="flex flex-col lg:p-5 gap-6 w-full text-font1">
+      <div className="flex lg:flex-row flex-col lg:justify-between items-center gap-5">
         <p onClick={handleResetToToday} className='font-semibold text-xl font-font1'>{currentDate.toLocaleDateString(local, { month: 'long', year: 'numeric' })}</p>
-        <div className="md:flex hidden gap-5">
+        <div className="lg:flex hidden gap-5">
           {/* <button onClick={handlePrevWeek}><ArrowRight className='w-5 fill-extra rotate-180'/></button>
           <button onClick={handleNextWeek}><ArrowRight className='w-5 fill-extra'/></button> */}
           <button className='w-fit px-6 py-2.5 rounded-lg bg-secondary text-font2 font-semibold text-sm' onClick={handlePrevWeek}>
@@ -194,7 +194,7 @@ export const LongCalendar = (props: Props) => {
           </button>
         </div>
 
-        <div className="flex md:hidden gap-5">
+        <div className="flex lg:hidden gap-5">
           {/* <button onClick={handlePrevWeek}><ArrowRight className='w-5 fill-extra rotate-180'/></button>
           <button onClick={handleNextWeek}><ArrowRight className='w-5 fill-extra'/></button> */}
           <button className='w-fit px-6 py-2.5 rounded-lg bg-secondary text-font2 font-semibold text-sm' onClick={handlePrevDay}>
@@ -206,12 +206,12 @@ export const LongCalendar = (props: Props) => {
         </div>
       </div>
 
-      <div className="md:flex hidden flex-row w-full">
+      <div className="lg:flex hidden flex-row w-full">
         <div className="w-20"></div>
         <div className="grid grid-cols-7 w-full">{renderWeek()}</div>
       </div>
 
-      <div className="flex md:hidden flex-row w-full">
+      <div className="flex lg:hidden flex-row w-full">
         <div className="grid grid-cols-7 w-full">{renderDay()}</div>
       </div>
 
@@ -226,25 +226,28 @@ export const LongCalendar = (props: Props) => {
           ))}
         </div>
         <div className='relative w-full'>
-          <div className='absolute top-0 left-0 md:grid hidden grid-rows-day grid-cols-7 w-full h-full'>
+          <div className='relative lg:grid hidden grid-cols-7 w-full h-full border'>
+            <div className={`absolute grid grid-rows-hour w-full`}>
+              {Array.from({ length: timesOfDayGrid }).map((_, rowIndex) => (
+                <div key={`row-${rowIndex}`} className={`${timesOfDayGrid - 1 === rowIndex ? ('') : ('border-b-[1px]')}`}></div>
+              ))} 
+            </div>
+            <div className={`absolute grid grid-cols-7 w-full h-full`}>
+              {daysOfWeek.map((day, colIndex) => (
+                <div key={`col-${colIndex}`} className={`h-full ${daysOfWeek.length - 1 === colIndex ? ('') : ('border-r-[1px]')}`}></div>
+              ))}
+            </div>
+          </div>
+          <div className='grid lg:hidden grid-rows-hour border w-full'>
+            {Array.from({ length: timesOfDayGrid }).map((_, rowIndex) => (
+              <div key={`row-${rowIndex}`} className={`${timesOfDayGrid - 1 === rowIndex ? ('') : ('border-b-[1px]')}`}></div>
+            ))}
+          </div>
+          <div className='absolute top-0 left-0 lg:grid hidden grid-rows-day grid-cols-7 w-full h-full'>
             {renderEventsWeek()}
           </div>
-          <div className='absolute top-0 left-0 grid md:hidden grid-rows-day w-full h-full'>
+          <div className='absolute top-0 left-0 grid lg:hidden grid-rows-day w-full h-full'>
             {renderEventsDay()}
-          </div>
-          <div className='md:grid hidden grid-cols-7 w-full'>
-            {Array.from({ length: timesOfDayGrid }).map((_, rowIndex) => (
-              <React.Fragment key={rowIndex}>
-                {daysOfWeek.map((day, colIndex) => (
-                  <div key={`${rowIndex}-${colIndex}`} className='h-14 outline outline-1 outline-offset-[-0.5px]'></div>
-                ))}
-              </React.Fragment>
-            ))}
-          </div>
-          <div className='grid md:hidden grid-rows-7 w-full'>
-            {Array.from({ length: timesOfDayGrid }).map((_, rowIndex) => (
-              <div key={rowIndex} className='h-14 outline outline-1 outline-offset-[-0.5px]'></div>
-            ))}
           </div>
         </div>
       </div>

@@ -44,6 +44,7 @@ const config: Config = {
       },
       gridTemplateRows: {
         'day': 'repeat(1440, minmax(0, 1fr))',
+        'hour': 'repeat(48, minmax(3.5rem, 1fr))',
       }
     },
   },
