@@ -27,7 +27,7 @@ export const NavDashboard = (props: Props) => {
       { name: 'Dashboard', href: '/dashboard' },
       { name: 'Agenda', href: '/calendar' },
       { name: 'Event', href: '/event' },
-      { name: 'E-learning', href: '/elearing' },
+      { name: 'E-learning', href: '/elearning' },
       { name: 'Q & A', href: '/qa' },
     ],
     user: {

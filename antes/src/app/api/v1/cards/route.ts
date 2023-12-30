@@ -54,24 +54,24 @@ export async function GET() {
   }
 }
 
-export async function POST(req: Request) {
-  try {
-    const body = await req.json()
+// export async function POST(req: Request) {
+//   try {
+//     const body = await req.json()
 
-    const user = await prisma.user.findMany({
-      where: { email: body.email },
-      include: {
-        qaQuestions: true
-      },
-    })
+//     const user = await prisma.user.findMany({
+//       where: { email: body.email },
+//       include: {
+//         qaQuestions: true
+//       },
+//     })
 
-    const transformedData = {
-      status: "success",
-      data: user
-    }
+//     const transformedData = {
+//       status: "success",
+//       data: user
+//     }
 
-    return NextResponse.json(transformedData, { status: 200 })
-  } catch (error) {
-    return NextResponse.json({ status: "error" }, { status: 500 })
-  }
-}
+//     return NextResponse.json(transformedData, { status: 200 })
+//   } catch (error) {
+//     return NextResponse.json({ status: "error" }, { status: 500 })
+//   }
+// }

@@ -12,10 +12,10 @@ import { PostData, FetchData } from '@/app/components/functions'
 
 const elearning = {
   id: "1",
-  image: "img/e_learing.png",
+  image: "img/elearning.png",
   title: "H1. Introduction.",
-  user_chapters: 8,
-  max_chapters: 11,
+  userProgress: 8,
+  lessons: 11,
 }
 
 type HomeData = {

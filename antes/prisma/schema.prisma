@@ -110,7 +110,7 @@ model QaQuestion {
   userId     String
   title      String     @db.Text
   dateCreate DateTime
-  image      String?    @default("/img/qa_card.png")
+  image      String     @default("/img/qa_card.png")
   tags       Json?
   user       User       @relation(fields: [userId], references: [id])
   qaAnswers  QaAnswer[]
@@ -128,22 +128,22 @@ model QaAnswer {
 
 model Subject {
   id          String   @id @default(cuid())
-  name        String   @db.Text
+  title       String   @db.Text
   description String   @db.Text
+  image       String   @default("/img/elearning.png")
   lessons     Lesson[]
 }
 
 model Lesson {
-  id          String         @id @default(cuid())
-  subjectId   String
-  quizId      String?
-  order       Int
-  title       String         @db.Text
-  description String         @db.Text
-  lessonData  Json
-  subject     Subject        @relation(fields: [subjectId], references: [id])
-  quiz        Quiz?          @relation(fields: [quizId], references: [id])
-  userLessons UserProgress[]
+  id           String         @id @default(cuid())
+  subjectId    String
+  quizId       String?
+  order        Int
+  title        String         @db.Text
+  lessonData   Json
+  subject      Subject        @relation(fields: [subjectId], references: [id])
+  quiz         Quiz?          @relation(fields: [quizId], references: [id])
+  userProgress UserProgress[]
 }
 
 model Quiz {
@@ -153,10 +153,9 @@ model Quiz {
 }
 
 model UserProgress {
-  id         String  @id @default(cuid())
-  userId     String
-  lessonId   String
-  completion Boolean
-  user       User    @relation(fields: [userId], references: [id])
-  lesson     Lesson  @relation(fields: [lessonId], references: [id])
+  id       String @id @default(cuid())
+  userId   String
+  lessonId String
+  user     User   @relation(fields: [userId], references: [id])
+  lesson   Lesson @relation(fields: [lessonId], references: [id])
 }
