@@ -61,7 +61,7 @@ export const Quiz = (props: Props) => {
         const userProgress = await PostData({
           userId: session.user.id,
           lessonId: params.lesson_id,
-        }, `/api/v1/elearning/${params.subject_id}/${params.lesson_id}/${params.quiz_id}`)
+        }, `/api/v1/elearning/${session.user.id}/${params.subject_id}/${params.lesson_id}/${params.quiz_id}`)
         console.log(userProgress)
       }
     }
