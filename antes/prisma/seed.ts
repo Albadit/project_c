@@ -220,6 +220,7 @@ async function main() {
 
   const quiz = await prisma.quiz.create({
     data: {
+      
       quizData: [
         {
           "question": "Sinds wanneer bestaat GGZ-Nederland?",
@@ -247,6 +248,15 @@ async function main() {
           "correctAnswer": "365"
         }
       ]
+    }
+  })
+
+  const lessonupdate = await prisma.lesson.update({
+    where: {
+      id: lesson2.id
+    },
+    data: {
+      quizId: quiz.id
     }
   })
 

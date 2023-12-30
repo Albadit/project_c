@@ -1,6 +1,5 @@
 "use client"
 import React, { useEffect, useState } from 'react'
-import Link from "next/link"
 import Footer from '@/app/components/footer'
 import { NavDashboard } from '@/app/components/dashboard/nav'
 import { useRouter } from 'next/navigation'
@@ -8,36 +7,6 @@ import { useSession } from 'next-auth/react'
 import { ProgressCircle } from '@/app/components/progress_circle'
 import { useParams } from 'next/navigation'
 import { PostData, FetchData } from '@/app/components/functions'
-
-const elearning = {
-  id: 1,
-  image: "/img/elearning.png",
-  title: "H1. Introduction",
-  description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmodadipiscing elit, sed do eiusmodLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmodadipiscing elit, sed do eiusmod Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmodadipiscing elit, sed do eiusmodLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmodadipiscing elit, sed do eiusmod",
-  user_chapters: 3,
-  max_chapters: 11,
-  progress: 85,
-}
-
-const course = [
-  {
-    id: "1",
-    name: "Introduction to the course sdfsd",
-  },
-  {
-    id: "1",
-    name: "Introduction to the course",
-  },
-  {
-    id: "1",
-    name: "Introduction to the course",
-  },
-  {
-    id: "1",
-    name: "Introduction to the course",
-  },
-]
-
 
 type UserProgress = {
   id: string
@@ -55,14 +24,20 @@ type Lesson = {
   userProgress: UserProgress[]
 }
 
+type Progression = {
+  totalLessons: number
+  userProgress: number
+  procent: number
+}
+
 type Subject = {
   id: string
   title: string
   description: string
   image: string
   lessons: Lesson[]
+  progression: Progression
 }
-
 
 type ApiResponse<T> = {
   status: string
@@ -85,31 +60,37 @@ export default function ElearningCourse() {
 
   if (status === "loading") return <p className='text-center'>Loading data...</p>
   if (status === "unauthenticated") { router.push('/'); return null }
-  
-  console.log(`/api/v1/elearning/${session?.user.id}/${params.subject_id}`)
-  console.log(data)
+
+  const isLessonCompleted = (lessonId: string) => {
+    if (data?.data.lessons) {
+      const userProgress = data.data.lessons.find((lesson) => lesson.id === lessonId)?.userProgress
+      return userProgress && userProgress.length > 0
+    }
+    return false;
+  }
   
   return (
     <>
       <NavDashboard user={session?.user}/>
       <main className='m-auto p-5 my-12 max-w-[1280px]'>
+      {isLoading ? (<p className='text-center'>Loading data...</p>) : ( data?.status === "error" ? (<p className='text-center'>No data find</p>) : (
         <section className="flex md:flex-row flex-col gap-5 font-font2 text-font1">
           <div className="flex flex-col bg-section border border-inputBorder shadow-cbs rounded-lg max-w-[400px]">
             <img className="w-full rounded-t-lg" src={data?.data.image} alt="/" />
             <div className="flex flex-row items-center justify-between gap-4 py-6 px-6">
-              <img className="h-[50px] rounded-full" src={session?.user?.image || ""} alt="/" />
+              <img className="h-[50px] rounded-full" src={session?.user?.image || ""} alt="profile" />
               <p className='font-font1 text-lg font-bold text-primary'>{session?.user?.name}</p>
             </div>
             <div className="flex flex-row justify-between border-extra border-t py-4 px-6">
-              <p className="font-semibold">Lessons completed</p>
-              <p>{elearning.user_chapters}</p>
+              <p className="font-semibold">Lessen voltooid</p>
+              <p>{data?.data.progression.userProgress}</p>
             </div>
             <div className="flex flex-row justify-between border-extra border-t py-4 px-6">
-              <p className="font-semibold">Total lessons</p>
-              <p>{elearning.max_chapters}</p>
+              <p className="font-semibold">Totale lessen</p>
+              <p>{data?.data.progression.totalLessons}</p>
             </div>
             <div className="flex flex-row justify-center border-extra border-t py-4 px-6">
-              <ProgressCircle progress={elearning.progress} />
+              <ProgressCircle progress={data?.data.progression.procent || 100} />
             </div>
           </div>
 
@@ -121,14 +102,20 @@ export default function ElearningCourse() {
               <p className="border-primary border-b-2 w-fit">Course</p>
               <div className='flex flex-col gap-5 w-fit'>
                 {data?.data.lessons.map((item: Lesson, index: any) => (
-                  <Link key={`course-${index}`} href={`/elearing/${params.subject_id}/${item.id}`} className="px-6 py-2.5 rounded-lg bg-primary text-font2 font-semibold text-md">
-                    {`Lees ${index + 1} - ${item.title}`}
-                  </Link>
+                  <button
+                    key={`course-${index}`}
+                    onClick={() => {!isLessonCompleted(item.id) && (router.push(`/elearning/${params.subject_id}/${item.id}`))}}
+                    disabled={isLessonCompleted(item.id)}
+                    className={`px-6 py-2.5 rounded-lg bg-primary text-left text-font2 font-semibold text-md disabled:bg-primary/60`}
+                  >
+                    {`Lees ${index + 1} - ${item.title} ${isLessonCompleted(item.id) ? ('(Voltooid)') : ('')}`}
+                  </button>
                 ))}
               </div>
             </div>
           </div>
         </section>
+      ))}
       </main>
       <Footer />
     </>

@@ -31,9 +31,21 @@ export async function GET(req: Request, { params }: { params: { user_id: string,
 
     if (!subject) return NextResponse.json({ status: "error" }, { status: 401 })
 
+    const totalLessons = subject.lessons.length;
+    const completedLessons = subject.lessons.filter(lesson => lesson.userProgress.length > 0).length;
+
+    const progression = {
+      ...subject,
+      progression: {
+        totalLessons,
+        userProgress: completedLessons,
+        procent: Math.ceil(100 / totalLessons * completedLessons)
+      }
+    }
+
     const transformedData = {
       status: "success",
-      data: subject
+      data: progression
     };
 
     return NextResponse.json(transformedData, { status: 200 })
