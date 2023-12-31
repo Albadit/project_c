@@ -26,19 +26,19 @@ export async function POST(req: Request, { params }: { params: { user_id: string
   try {
     const body = await req.json()
 
-    // const userProgress = await prisma.userProgress.create({
-    //   data: {
-    //     userId: body.userId,
-    //     lessonId: body.lessonId
-    //   },
-    // })
+    const userProgress = await prisma.userProgress.create({
+      data: {
+        userId: params.user_id,
+        lessonId: body.lessonId
+      },
+    })
 
-    // const transformedData = {
-    //   status: "success",
-    //   data: userProgress
-    // }
+    const transformedData = {
+      status: "success",
+      data: userProgress
+    }
 
-    return NextResponse.json(body, { status: 200 })
+    return NextResponse.json(transformedData, { status: 200 })
   } catch (error) {
     return NextResponse.json({ status: "error" }, { status: 500 })
   }
