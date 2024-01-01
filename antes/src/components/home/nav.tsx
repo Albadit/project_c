@@ -1,11 +1,10 @@
 "use client";
-
 import React from "react";
 import Link from "next/link";
 import { useState } from "react";
-import HamburgerMenu from "@/app/components/icons/hambuger_menu";
-import ArrowForwardRounded from "@/app/components/icons/arrow_right";
-import Close from "@/app/components/icons/close";
+import HamburgerMenu from "@/components/icons/hambuger_menu";
+import ArrowForwardRounded from "@/components/icons/arrow_right";
+import Close from "@/components/icons/close";
 
 
 const context = {

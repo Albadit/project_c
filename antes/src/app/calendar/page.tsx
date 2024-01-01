@@ -2,10 +2,11 @@
 import React, { useEffect, useState } from 'react'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
-import { PostData, FetchData } from '@/app/components/functions'
-import { LongCalendar, EventItems } from '../components/long_calendar'
-import { NavDashboard } from '../components/dashboard/nav'
-import Footer from '../components/footer'
+import { PostData, FetchData } from '@/components/functions'
+import { LongCalendar, EventItems } from '@/components/long_calendar'
+import { NavDashboard } from '@/components/dashboard/nav'
+import Footer from '@/components/footer'
+import { LoadingScreen, LoadingData, NoDataFind } from '@/components/loader'
 
 type ApiResponse<T> = {
   status: string
@@ -22,12 +23,12 @@ export default function Calendar() {
     FetchData(setData, setLoading, `/api/v1/calendar/${session?.user.id}`)
   }, [session])
 
-  if (status === "loading") return <p className='text-center'>Loading data...</p>
+  if (status === "loading") return <LoadingScreen/>
   if (status === "unauthenticated") { router.push('/'); return null }
 
-  if (isLoading) return <p className='text-center'>Loading data...</p>
-  if (data?.status === "error") return <p className='text-center'>No data find</p>
-  
+  if (isLoading) return <LoadingScreen/> 
+  if (data?.status === "error") return <NoDataFind/>
+
   return (
     <>
     <NavDashboard user={session?.user} />

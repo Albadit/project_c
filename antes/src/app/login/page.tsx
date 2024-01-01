@@ -1,7 +1,7 @@
 "use client"
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { Input } from '@/app/components/input';
+import { Input } from '@/components/input';
 import { useRouter } from 'next/navigation'
 import { signIn } from 'next-auth/react';
 import { useSession } from 'next-auth/react';

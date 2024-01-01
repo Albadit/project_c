@@ -1,12 +1,13 @@
 "use client"
 import React, { useEffect, useState } from "react"
 import Link from "next/link"
-import Footer from "@/app/components/footer"
-import { NavDashboard } from "@/app/components/dashboard/nav"
+import Footer from "@/components/footer"
+import { NavDashboard } from "@/components/dashboard/nav"
 import { useParams, useRouter } from 'next/navigation'
 import { useSession } from 'next-auth/react'
-import { PostData, FetchData } from '@/app/components/functions'
-import { Video } from "@/app/components/video"
+import { PostData, FetchData } from '@/components/functions'
+import { Video } from "@/components/video"
+import { LoadingScreen, LoadingData, NoDataFind } from '@/components/loader'
 
 const lesson = {
   imagecourse: "/img/lesson.png",
@@ -42,14 +43,16 @@ export default function ElearningLesson() {
     }
   }, [status, session?.user.id])
 
-  if (status === "loading") return <p className='text-center'>Loading data...</p>
+  if (status === "loading") return <LoadingScreen/>
   if (status === "unauthenticated") { router.push('/'); return null }
+
+  if (isLoading) return <LoadingScreen/> 
+  if (data?.status === "error") return <NoDataFind/>
 
   return (
     <>
       <NavDashboard user={session?.user}/>
       <main className="m-auto p-5 my-12 max-w-[1280px]">
-      {isLoading ? (<p className='text-center'>Loading data...</p>) : ( data?.status === "error" ? (<p className='text-center'>No data find</p>) : (
         <section className="flex flex-col p-10 gap-10 bg-section shadow-cbs rounded-lg font-font2 text-font1">
           <h1 className="font-font1 text-primary font-bold text-5xl break-words">{data?.data.title}</h1>
           <div className="flex flex-col gap-8">
@@ -72,7 +75,6 @@ export default function ElearningLesson() {
             )}
           </div>
         </section>
-      ))}
       </main>
       <Footer />
     </>

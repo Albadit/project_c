@@ -1,12 +1,13 @@
 "use client"
 import React, { useEffect, useState } from 'react'
-import Footer from '@/app/components/footer'
-import { NavDashboard } from '@/app/components/dashboard/nav'
+import Footer from '@/components/footer'
+import { NavDashboard } from '@/components/dashboard/nav'
 import { useRouter } from 'next/navigation'
 import { useSession } from 'next-auth/react'
-import { ProgressCircle } from '@/app/components/progress_circle'
+import { ProgressCircle } from '@/components/progress_circle'
 import { useParams } from 'next/navigation'
-import { PostData, FetchData } from '@/app/components/functions'
+import { PostData, FetchData } from '@/components/functions'
+import { LoadingScreen, LoadingData, NoDataFind } from '@/components/loader'
 
 type UserProgress = {
   id: string
@@ -58,8 +59,11 @@ export default function ElearningCourse() {
   }, [status, session?.user.id])
 
 
-  if (status === "loading") return <p className='text-center'>Loading data...</p>
+  if (status === "loading") return <LoadingScreen/>
   if (status === "unauthenticated") { router.push('/'); return null }
+
+  if (isLoading) return <LoadingScreen/> 
+  if (data?.status === "error") return <NoDataFind/>
 
   const isLessonCompleted = (lessonId: string) => {
     if (data?.data.lessons) {
@@ -73,7 +77,6 @@ export default function ElearningCourse() {
     <>
       <NavDashboard user={session?.user}/>
       <main className='m-auto p-5 my-12 max-w-[1280px]'>
-      {isLoading ? (<p className='text-center'>Loading data...</p>) : ( data?.status === "error" ? (<p className='text-center'>No data find</p>) : (
         <section className="flex md:flex-row flex-col gap-5 font-font2 text-font1">
           <div className="flex flex-col bg-section border border-inputBorder shadow-cbs rounded-lg max-w-[400px]">
             <img className="w-full rounded-t-lg" src={data?.data.image} alt="/" />
@@ -115,7 +118,6 @@ export default function ElearningCourse() {
             </div>
           </div>
         </section>
-      ))}
       </main>
       <Footer />
     </>

@@ -1,14 +1,15 @@
 'use client'
 import React from 'react'
-import Footer from '@/app/components/footer'
-import { NavDashboard } from '@/app/components/dashboard/nav'
+import Footer from '@/components/footer'
+import { NavDashboard } from '@/components/dashboard/nav'
 import { useSession } from 'next-auth/react'
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { QACard, QaProps } from '@/app/components/qa_card'
-import { EventCard, EventProps} from '@/app/components/event_card'
-import { ELearningCard, ElearningProps} from '@/app/components/dashboard/elearning_card'
-import { PostData, FetchData } from '@/app/components/functions'
+import { QACard, QaProps } from '@/components/qa_card'
+import { EventCard, EventProps} from '@/components/event_card'
+import { ELearningCard, ElearningProps} from '@/components/dashboard/elearning_card'
+import { PostData, FetchData } from '@/components/functions'
+import { LoadingScreen, LoadingData, NoDataFind } from '@/components/loader'
 
 const elearning = {
   id: "1",
@@ -39,11 +40,11 @@ export default function Dashboard() {
     FetchData(setData, setLoading, '/api/v1/cards')
   }, [])
 
-  if (status === "loading") return <p className='text-center'>Loading data...</p>
-  if (status === "unauthenticated") { router.push('/'); return null; }
+  if (status === "loading") return <LoadingScreen/>
+  if (status === "unauthenticated") { router.push('/'); return null }
 
-  if (isLoading) return <p className='text-center'>Loading data...</p>
-  if (data?.status === "error") return <p className='text-center'>No data find</p>
+  if (isLoading) return <LoadingScreen/> 
+  if (data?.status === "error") return <NoDataFind/>
 
   return (
     <>

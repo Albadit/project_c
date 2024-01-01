@@ -1,11 +1,12 @@
 "use client"
 import React, { useEffect, useRef, useState } from 'react'
-import Footer from '@/app/components/footer'
-import { NavDashboard } from '@/app/components/dashboard/nav'
-import { ELearningCard, ElearningProps } from '@/app/components/dashboard/elearning_card'
+import Footer from '@/components/footer'
+import { NavDashboard } from '@/components/dashboard/nav'
+import { ELearningCard, ElearningProps } from '@/components/dashboard/elearning_card'
 import { useRouter } from 'next/navigation'
 import { useSession } from 'next-auth/react'
-import { PostData, FetchData } from '@/app/components/functions'
+import { PostData, FetchData } from '@/components/functions'
+import { LoadingScreen, LoadingData, NoDataFind } from '@/components/loader'
 
 type ApiResponse<T> = {
   status: string
@@ -24,8 +25,11 @@ export default function ELearning() {
     }
   }, [status, session?.user.id])
 
-  if (status === "loading") return <p className='text-center'>Loading data...</p>
-  if (status === "unauthenticated") { router.push('/'); return null; }
+  if (status === "loading") return <LoadingScreen/>
+  if (status === "unauthenticated") { router.push('/'); return null }
+
+  if (isLoading) return <LoadingScreen/> 
+  if (data?.status === "error") return <NoDataFind/>
   
   return (
     <>
@@ -33,7 +37,6 @@ export default function ELearning() {
       <main className='m-auto p-5 my-12 max-w-[1280px]'>
         <section className='flex flex-col gap-20'>
           <h1 className="font-font1 font-bold text-center text-primary text-5xl break-words">E-Learning</h1>
-          {isLoading ? (<p className='text-center'>Loading data...</p>) : ( data?.status === "error" ? (<p className='text-center'>No data find</p>) : (
             <div className='flex flex-wrap justify-center gap-8'>
               {data?.data.map((item: ElearningProps, index: number) => 
                 <div key={index} className="w-full max-w-[390px]">
@@ -41,7 +44,6 @@ export default function ELearning() {
                 </div>
               )}
             </div>
-          ))}
         </section>
       </main>
       <Footer/>

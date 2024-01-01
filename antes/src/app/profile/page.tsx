@@ -1,81 +1,98 @@
 'use client'
-import React from 'react';
-import Footer from '@/app/components/footer';
-import { NavDashboard } from '@/app/components/dashboard/nav';
-import { Input } from '@/app/components/input';
-import { SelectMenu } from '@/app/components/select_menu';
-import { useRouter } from 'next/navigation';
-import { useSession } from 'next-auth/react';
-import { useEffect, useState } from 'react';
-import { PostData, FetchData } from '@/app/components/functions'
+import React from 'react'
+import Footer from '@/components/footer'
+import { NavDashboard } from '@/components/dashboard/nav'
+import { Input } from '@/components/input'
+import { SelectMenu, SelectOption } from '@/components/select_menu'
+import { useRouter } from 'next/navigation'
+import { useSession } from 'next-auth/react'
+import { useEffect, useState } from 'react'
+import { PostData, FetchData } from '@/components/functions'
+import { LoadingScreen, LoadingData, NoDataFind } from '@/components/loader'
 
-type UserFunctionItems = {
-  id: string;
-  name: string;
+type User = {
+  id: string
+  roleId: string
+  userFunctionId: string
+  image: string
+  name: string
+  bio: string
+  email: string
+  emailVerified: null | boolean
+  password: string
 }
 
 type ApiResponse<T> = {
-  status: string;
-  data: T;
+  status: string
+  data: T
 }
 
 export default function Profile() {
   const { data: session, status } = useSession()
   const router = useRouter()
-  const [data, setData] = useState<ApiResponse<UserFunctionItems> | null>(null)
-  const [isLoading, setLoading] = useState(true)
-  const [message, setMessage] = useState('');
-
-  useEffect(() => {
-    FetchData(setData, setLoading, '/api/v1/user_function')
-    FetchData(setData, setLoading, '/api/v1/user')
-  }, [])
+  const [dataUserFunction, setDataUserFunction] = useState<ApiResponse<SelectOption[]> | null>(null)
+  const [isLoadingUserFunction, setLoadingUserFunction] = useState(true)
+  const [dataUser, setDataUser] = useState<ApiResponse<User> | null>(null)
+  const [isLoadingUser, setLoadingUser] = useState(true)
+  const [messageProfile, setMessageProfile] = useState('')
+  const [messagePassword, setMessagePassword] = useState('')
 
   const handleSubmitProfile = async (e: any) => {
-    e.preventDefault();
-    const formData = new FormData(e.target);
-    const bio = formData.get('bio');
+    e.preventDefault()
+    const formData = new FormData(e.target)
+    const userFunctionId = formData.get('user_function')
+    const bio = formData.get('bio')
     
     if (bio) {
-      const register = await PostData({
+      const update = await PostData({
+        userId: session?.user.id,
+        userFunctionId: userFunctionId,
         bio: bio,
-      }, "/api/v1/user_update")
-      if (register.status === "success") {
-        router.push("/login");
+      }, `/api/v1/user/${session?.user.id}`)
+      if (update.status === "success") {
+        setMessageProfile("Profiel is opgeslagen")
       } else {
-        setMessage("Verkeerde data");
+        setMessageProfile("Verkeerde data")
       }
     } else {
-      setMessage("De input staat leeg");
+      setMessageProfile("De input staat leeg")
     }
   }
 
   const handleSubmitPassword = async (e: any) => {
-    e.preventDefault();
-    const formData = new FormData(e.target);
-    const password = formData.get('password');
-    const newPassword = formData.get('new-password');
+    e.preventDefault()
+    const formData = new FormData(e.target)
+    const form = e.target
+    const currentPassword = formData.get('password')
+    const newPassword = formData.get('new-password')
     
-    if (password && newPassword) {
-      const register = await PostData({
-        password: password,
+    if (currentPassword && newPassword) {
+      const password = await PostData({
+        currentPassword: currentPassword,
         newPassword: newPassword,
-      }, "/api/v1/user_update")
-      if (register.status === "success") {
-        router.push("/login");
+      }, `/api/v1/user/${session?.user.id}`)
+      if (password.status === "success") {
+        setMessagePassword("Wachtwoord is geupdate")
+        form.elements['password'].value = ''
+        form.elements['new-password'].value = ''
       } else {
-        setMessage(register);
+        setMessagePassword(password.status)
       }
     } else {
-      setMessage("De input staat leeg.");
+      setMessagePassword("De input staat leeg.")
     }
   }
 
-  if (!session && status === "loading") return <p className='text-center'>Loading data...</p>
-  if (status === "unauthenticated") { router.push('/'); return null; }
+  useEffect(() => {
+    FetchData(setDataUserFunction, setLoadingUserFunction, '/api/v1/user_function')
+    FetchData(setDataUser, setLoadingUser, `/api/v1/user/${session?.user.id}`)
+  }, [status, session?.user.id])
 
-  if (isLoading) return <p className='text-center'>Loading data...</p>
-  if (data?.status === "error") return <p className='text-center'>No data find</p>
+  if (status === "loading") return <LoadingScreen/>
+  if (status === "unauthenticated") { router.push('/'); return null }
+
+  if (isLoadingUserFunction && isLoadingUser) return <LoadingScreen/> 
+  if (dataUserFunction?.status === "error" && dataUser?.status === "error") return <NoDataFind/>
 
   return (
     <>
@@ -94,11 +111,12 @@ export default function Profile() {
                 <p className='text-sm text-font1'>JPG, GIF or PNG. 1MB max.</p>
               </div>
             </div>
-            {/* <Input label='Naam' name='name' type='text' value={session?.user.name}/> */}
-            {/* <SelectMenu label='User Function' name="user_function" options={data?.data || []} index={2}/> */}
-            {/* <Input label='Email' name='email' type='email' value={session?.user.email}/> */}
-            {/* <Input label='Bio' name='bio' type='textarea' value={user.bio}/> */}
+            <Input label='Naam' name='name' type='text' value={dataUser?.data?.name || ''} disabled={true}/>
+            <Input label='Email' name='email' type='email' value={dataUser?.data?.email || ''} disabled={true}/>
+            <SelectMenu label='Gebruiker Functie' name="user_function" options={dataUserFunction?.data as SelectOption[]} index={dataUser?.data?.userFunctionId}/>
+            <Input label='Bio' name='bio' type='textarea' value={dataUser?.data?.bio || ''}/>
             <button type='submit' className='w-fit px-6 py-2.5 rounded-lg bg-secondary text-font2 font-semibold text-sm'>Opslaan</button>
+            {messageProfile ? (<p className='text-success'>{messageProfile}</p>) : (<></>)}
           </form>
           <hr />
           <form onSubmit={handleSubmitPassword} className='flex flex-col gap-5'>
@@ -106,6 +124,7 @@ export default function Profile() {
             <Input label='Huidig Wachtwoord' name='password' type='password' value=''/>
             <Input label='Nieuw Wachtwoord' name='new-password' type='password' value=''/>
             <button type='submit' className='w-fit px-6 py-2.5 rounded-lg bg-secondary text-font2 font-semibold text-sm'>Opslaan</button>
+            {messagePassword ? (<p className='text-success'>{messagePassword}</p>) : (<></>)}
           </form>
         </section>
       </main>

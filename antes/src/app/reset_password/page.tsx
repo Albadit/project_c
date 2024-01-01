@@ -1,7 +1,7 @@
 "use client"
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { Input } from '@/app/components/input';
+import { Input } from '@/components/input';
 import { useRouter } from 'next/navigation'
 
 const context = {
@@ -19,7 +19,6 @@ export default function ResetPassword() {
     const password = formData.get('password');
     const confirmPassword = formData.get('confirm_password');
     if (password === confirmPassword) {
-      // update in database
       router.push("/login");
     } else {
       setMessage("Wachtwoorden komen niet overeen.");

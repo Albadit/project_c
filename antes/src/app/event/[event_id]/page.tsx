@@ -1,12 +1,13 @@
 "use client"
 import React, { useEffect, useState } from 'react'
-import Footer from '@/app/components/footer'
-import { NavDashboard } from '@/app/components/dashboard/nav'
+import Footer from '@/components/footer'
+import { NavDashboard } from '@/components/dashboard/nav'
 import { useSession } from 'next-auth/react'
-import NavHome from '@/app/components/home/nav'
-import Calendar from "@/app/components/icons/calendar"
+import NavHome from '@/components/home/nav'
+import Calendar from "@/components/icons/calendar"
 import { useParams, useRouter } from 'next/navigation'
-import { PostData, FetchData } from '@/app/components/functions'
+import { PostData, FetchData } from '@/components/functions'
+import { LoadingScreen, LoadingData, NoDataFind } from '@/components/loader'
 
 type EventItems = {
   id: string
@@ -61,11 +62,14 @@ export default function Dashboard() {
     }
   }
 
+  if (status === "loading") return <LoadingScreen/>
+  if (isLoading) return <LoadingScreen/> 
+  if (data?.status === "error") return <NoDataFind/>
+
   return (
     <>
       {session && status === "authenticated" ? (<NavDashboard user={session?.user}/>) : (<NavHome />)}
       <main className='flex justify-center m-auto lg:p-12 p-5'>
-      {isLoading ? (<p className='text-center'>Loading data...</p>) : ( data?.status === "error" ? (<p className='text-center'>No data find</p>) : (
         <section className="flex lg:flex-row-reverse flex-col justify-between lg:w-full w-[600px] gap-5 p-7 rounded-lg bg-section shadow-cbs text-base font-font1 text-font1">
           <img src={data?.data.image} alt="event" className="lg:w-[60%] w-full lg:min-h-[580px] h-[280px] object-cover object-center rounded"/>
           <div className="flex flex-col justify-center gap-5">
@@ -90,7 +94,6 @@ export default function Dashboard() {
             </div>
           </div>
         </section>
-      ))}
       </main>
       <Footer/>
     </>

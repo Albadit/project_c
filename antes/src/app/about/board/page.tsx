@@ -1,8 +1,8 @@
 "use client";
 import Link from "next/link";
-import { BoardCard } from '@/app/components/home/board_card';
+import { BoardCard } from '@/components/home/board_card';
 import SideMenu from '@/app/about/side_menu_about/page';
-import Nav from '@/app/components/home/nav'
+import Nav from '@/components/home/nav'
 
 const bestuur1 = {
     id: 1,

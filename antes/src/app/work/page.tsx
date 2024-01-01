@@ -1,9 +1,9 @@
 "use client";
 import Link from "next/link";
-import { AboutCard } from '@/app/components/home/about_card';
+import { AboutCard } from '@/components/home/about_card';
 import SideMenuWork from '@/app/work/side_menu_work/page';
-import Nav from '@/app/components/home/nav'
-import { Video } from '@/app/components/video'
+import Nav from '@/components/home/nav'
+import { Video } from '@/components/video'
 
 const workwithus1 = {
   id: 1,

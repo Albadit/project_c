@@ -1,6 +1,6 @@
 // components/Calendar.js
 import React, { useState } from 'react'
-import ArrowRight from '@/app/components/icons/arrow_right'
+import ArrowRight from '@/components/icons/arrow_right'
 
 export type EventItems = {
   id: string

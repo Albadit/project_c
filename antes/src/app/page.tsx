@@ -1,13 +1,13 @@
 'use client'
-import React from 'react';
-import NavHome from '@/app/components/home/nav'
-import Footer from '@/app/components/footer'
-import Title from '@/app/components/home/title'
-import Work from '@/app/components/home/work'
-import { QACard } from '@/app/components/qa_card'
-import { EventCard } from '@/app/components/event_card'
-import Info from '@/app/components/home/info'
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react'
+import NavHome from '@/components/home/nav'
+import Footer from '@/components/footer'
+import Title from '@/components/home/title'
+import Work from '@/components/home/work'
+import { QACard } from '@/components/qa_card'
+import { EventCard } from '@/components/event_card'
+import Info from '@/components/home/info'
+import { LoadingScreen, LoadingData, NoDataFind } from '@/components/loader'
 
 type EventItems = {
   id: string
@@ -62,6 +62,9 @@ export default function Home() {
       })
   }, [])
 
+  if (isLoading) return <LoadingScreen/> 
+  if (data?.status === "error") return <NoDataFind/>
+
   return (<>
     <NavHome />
     <Title />
@@ -69,12 +72,10 @@ export default function Home() {
       <Work />
       <section className='flex flex-col w-full gap-10 my-12 '>
         <h2 className='font-font1 font-semibold text-center text-primary text-5xl'>ANTES NIEUWS</h2>
-        {isLoading ? (<p className='text-center'>Loading data...</p>) : (data?.status === "error" ? (<p className='text-center'>No data find</p>) : (
         <div className='flex flex-wrap xl:justify-between justify-center gap-10'>
           {data?.data.qa ? <QACard qa={data.data.qa} /> : <p>No Q&A data available</p>}
           {data?.data.event ? <EventCard event={data.data.event} /> : <p>No Event data available</p>}
         </div>
-        ))}
       </section>
       <Info />
     </main>

@@ -3,8 +3,8 @@
 import React from 'react';
 import { signOut } from 'next-auth/react';
 import { useState } from 'react'
-import HamburgerMenu from '@/app/components/icons/hambuger_menu';
-import Close from '@/app/components/icons/close';
+import HamburgerMenu from '@/components/icons/hambuger_menu';
+import Close from '@/components/icons/close';
 import Link from 'next/link';
 
 export type UserProps = {

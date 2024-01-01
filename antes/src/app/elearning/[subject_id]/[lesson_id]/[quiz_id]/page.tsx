@@ -1,11 +1,12 @@
 "use client"
 import React, { useEffect, useState } from "react"
-import Footer from "@/app/components/footer"
-import { NavDashboard } from "@/app/components/dashboard/nav"
-import { Quiz, QuizProps } from "@/app/components/quiz"
+import Footer from "@/components/footer"
+import { NavDashboard } from "@/components/dashboard/nav"
+import { Quiz, QuizProps } from "@/components/quiz"
 import { useParams, useRouter } from 'next/navigation'
 import { useSession } from 'next-auth/react'
-import { PostData, FetchData } from '@/app/components/functions'
+import { PostData, FetchData } from '@/components/functions'
+import { LoadingScreen, LoadingData, NoDataFind } from '@/components/loader'
 
 type ApiResponse<T> = {
   status: string
@@ -25,17 +26,18 @@ export default function ElearningQuiz() {
     }
   }, [status, session?.user.id])
 
-  if (status === "loading") return <p className='text-center'>Loading data...</p>
+  if (status === "loading") return <LoadingScreen/>
   if (status === "unauthenticated") { router.push('/'); return null }
+
+  if (isLoading) return <LoadingScreen/> 
+  if (data?.status === "error") return <NoDataFind/>
   
   return (
     <>
       <NavDashboard user={session?.user}/>
       <main className="m-auto p-5 my-12 max-w-[1280px]">
         <section className="flex flex-col justify-center items-center font-font2">
-        {isLoading ? (<p className='text-center'>Loading data...</p>) : ( data?.status === "error" ? (<p className='text-center'>No data find</p>) : (
           <Quiz quiz={data?.data || { id: "0", quizData: [] }}/>
-        ))}
         </section>
       </main>
       <Footer />

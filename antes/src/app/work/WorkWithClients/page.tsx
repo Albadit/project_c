@@ -1,9 +1,8 @@
 "use client";
-
 import Link from "next/link";
 import SideMenuWork from '@/app/work/side_menu_work/page';
-import Nav from '@/app/components/home/nav'
-import { Video} from '@/app/components/video'
+import Nav from '@/components/home/nav'
+import { Video} from '@/components/video'
 
 export default function WorkWithClients() {
     return (

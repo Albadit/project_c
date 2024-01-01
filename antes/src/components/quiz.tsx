@@ -3,7 +3,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
 import { useSession } from 'next-auth/react'
-import { PostData, FetchData } from '@/app/components/functions'
+import { PostData, FetchData } from '@/components/functions'
 
 export type QuizDataProps = {
   options: string[]

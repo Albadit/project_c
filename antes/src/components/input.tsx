@@ -1,8 +1,8 @@
 "use client"
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useState , ChangeEvent } from 'react';
-import EyeClose from '@/app/components/icons/eye_close';
-import EyeOpen from '@/app/components/icons/eye_open';
+import EyeClose from '@/components/icons/eye_close';
+import EyeOpen from '@/components/icons/eye_open';
 
 type InputProps = {
   label: string
@@ -39,6 +39,11 @@ export const Input = (props: InputProps) => {
   const [disabled, setDisabled] = useState(props.disabled);
   const [required, setRequired] = useState(props.required !== undefined ? props.required : true);
   const [showPassword, setShowPassword] = useState(false);
+
+  useEffect(() => {
+    setValue(props.value);
+  }, [props.value]);
+
 
   const handleChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value;

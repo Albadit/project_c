@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import Chat from "@/app/components/icons/chat";
+import Chat from "@/components/icons/chat";
 
 export type QaListProps = {
   id: string

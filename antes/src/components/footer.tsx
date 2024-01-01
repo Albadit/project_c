@@ -1,10 +1,10 @@
 import React from "react";
 import Link from "next/link";
-import Facebook from "@/app/components/icons/facebook";
-import Linkedin from "@/app/components/icons/linkedin";
-import Twitter from "@/app/components/icons/twitter";
-import Youtube from "@/app/components/icons/youtube";
-import Instagram from "@/app/components/icons/instagram";
+import Facebook from "@/components/icons/facebook";
+import Linkedin from "@/components/icons/linkedin";
+import Twitter from "@/components/icons/twitter";
+import Youtube from "@/components/icons/youtube";
+import Instagram from "@/components/icons/instagram";
 
 const context = {
   navigation: [

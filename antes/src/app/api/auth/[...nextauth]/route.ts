@@ -1,6 +1,6 @@
-import NextAuth, { SessionUser } from "next-auth";
-import CredentialsProvider from "next-auth/providers/credentials";
-import bcrypt from "bcrypt";
+import NextAuth, { SessionUser } from "next-auth"
+import CredentialsProvider from "next-auth/providers/credentials"
+import bcrypt from "bcrypt"
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { prisma } from '@/../../prisma/index'
 
@@ -20,7 +20,6 @@ const handler = NextAuth({
           where: { email: credentials.email.toLowerCase() },
           include: {
             role: true,
-            userFunction: true
           }
         })
 
@@ -35,7 +34,6 @@ const handler = NextAuth({
           name: user.name,
           email: user.email,
           image: user.image,
-          userFunctionId: user.userFunction.id,
           level: user.role.level,
         }
       }

@@ -1,8 +1,8 @@
 import React from "react";
 import Link from "next/link";
-import Calendar from "@/app/components/icons/calendar";
-import ArrowForwardRounded from "@/app/components/icons/arrow_right";
-import Chat from "@/app/components/icons/chat";
+import Calendar from "@/components/icons/calendar";
+import ArrowForwardRounded from "@/components/icons/arrow_right";
+import Chat from "@/components/icons/chat";
 
 export type QaProps = {
   id: string

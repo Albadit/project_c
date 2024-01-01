@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import ArrowForwardRounded from "@/app/components/icons/arrow_right";
+import ArrowForwardRounded from "@/components/icons/arrow_right";
 
 const context = {
   title: "Vind jouw talent",

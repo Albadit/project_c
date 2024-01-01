@@ -1,5 +1,5 @@
 import React, { ReactNode, useState } from 'react';
-import Close from '@/app/components/icons/close';
+import Close from '@/components/icons/close';
 
 interface ModalProps {
   children: ReactNode

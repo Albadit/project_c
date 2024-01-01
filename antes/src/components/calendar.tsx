@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react'
-import ArrowRight from '@/app/components/icons/arrow_right'
+import ArrowRight from '@/components/icons/arrow_right'
 
 function generateMonth(year: number, month: number, startOnMonday = false) {
   const daysInMonth = new Date(year, month, 0).getDate()

@@ -1,15 +1,16 @@
 "use client"
 import React, { useState, useEffect } from 'react'
-import Footer from '@/app/components/footer'
-import { NavDashboard } from '@/app/components/dashboard/nav'
+import Footer from '@/components/footer'
+import { NavDashboard } from '@/components/dashboard/nav'
 import { useSession } from 'next-auth/react'
-import { Input } from '@/app/components/input'
-import { InputDateTime } from '@/app/components/input_datetime'
+import { Input } from '@/components/input'
+import { InputDateTime } from '@/components/input_datetime'
 import Link from 'next/link'
-import NavHome from '@/app/components/home/nav'
-import Modal from '@/app/components/modal'
-import Calendar from '@/app/components/calendar'
-import { PostData, FetchData } from '@/app/components/functions'
+import NavHome from '@/components/home/nav'
+import Modal from '@/components/modal'
+import Calendar from '@/components/calendar'
+import { PostData, FetchData } from '@/components/functions'
+import { LoadingScreen, LoadingData, NoDataFind } from '@/components/loader'
 
 type EventItems = {
   id: string
@@ -78,6 +79,10 @@ export default function Event() {
     }
   }
 
+  if (status === "loading") return <LoadingScreen/>
+  if (isLoading) return <LoadingScreen/> 
+  if (data?.status === "error") return <NoDataFind/>
+
   return (
     <>
       {session && status === "authenticated" ? (<NavDashboard user={session?.user}/>) : (<NavHome />)}
@@ -102,7 +107,6 @@ export default function Event() {
             </div>
           ) : (<></>) }
           <h2 className='font-semibold text-xl font-font1'>Aankomende evenementen</h2>
-          {isLoading ? (<p className='text-center'>Loading data...</p>) : ( data?.status === "error" ? (<p className='text-center'>No data find</p>) : (
             <div>
               {data?.data.map((item) => 
               <Link key={item.id} href={`event/${item.id}`} className="flex sm:flex-row flex-col py-4 border-b-[1px] border-extra/20">
@@ -122,7 +126,6 @@ export default function Event() {
               </Link>
               )}
             </div>
-          ))}
         </section>
       </main>
       <Footer/>

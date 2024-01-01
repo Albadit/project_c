@@ -1,5 +1,5 @@
 "use client"
-import styles from "@/app/utils.module.css";
+import styles from "@/css/utils.module.css";
 import Link from 'next/link';
 import React, { useState } from "react";
 
