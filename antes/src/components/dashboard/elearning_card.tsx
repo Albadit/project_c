@@ -4,10 +4,14 @@ import ArrowForwardRounded from "@/components/icons/arrow_right";
 
 export type ElearningProps = {
   id: string
-  image: string
   title: string
-  userProgress: number
-  lessons: number
+  description: string
+  image: string
+  progression: {
+    totalLessons: number
+    userProgress: number
+    percent: number
+  }
 }
 
 type Props = {
@@ -15,8 +19,7 @@ type Props = {
 }
 
 export const ELearningCard = (props: Props) => {
-  const progression = Math.ceil(100 / props.elearning.lessons * props.elearning.userProgress)
-  const progressBarStyle = { width: `${progression}%` };
+  const progressBarStyle = { width: `${props.elearning.progression.percent}%` };
 
   return (
     <div className="flex flex-col justify-between w-full max-w-[525px] gap-5 p-7 rounded-lg bg-section shadow-cbs text-base font-font1 text-font1">
@@ -29,8 +32,8 @@ export const ELearningCard = (props: Props) => {
           <div style={progressBarStyle} className='h-full bg-secondary rounded'></div>
         </div>
         <div className="flex felx-row justify-between gap-5">
-          <p>{Number.isNaN(progression) ? ("100") : (progression)} %</p>
-          <p>les {props.elearning.userProgress} van {props.elearning.lessons}</p>
+          <p>{props.elearning.progression.percent} %</p>
+          <p>les {props.elearning.progression.userProgress} van {props.elearning.progression.totalLessons}</p>
         </div>
       </div>
       <div className="flex lg:flex-row flex-col lg:items-center justify-end gap-5">

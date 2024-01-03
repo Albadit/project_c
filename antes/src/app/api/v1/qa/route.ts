@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import { NextResponse } from "next/server"
 import { prisma } from '@/../../prisma/index'
 
 export async function GET() {
@@ -38,11 +38,11 @@ export async function GET() {
 }
 
 interface QaData {
-  userId: string;
-  title: string;
-  dateCreate: Date;
-  image?: string;
-  tags?: string;
+  userId: string
+  title: string
+  dateCreate: Date
+  image?: string
+  tags?: string
 }
 
 export async function POST(req: Request) {
@@ -59,11 +59,10 @@ export async function POST(req: Request) {
       userId: user.id,
       title: body.title,
       dateCreate: new Date(),
-    };
+    }
     
-    // Add the image field only if it's not null
     if (body.image) {
-      data.image = body.image;
+      data.image = body.image
     }
 
     const newQa = await prisma.qaQuestion.create({

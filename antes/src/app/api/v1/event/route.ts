@@ -51,7 +51,6 @@ export async function POST(req: Request) {
       dateEnd: new Date(body.dateEnd),
     }
     
-    // Add the image field only if it's not null
     if (body.image) {
       data.image = body.image;
     }

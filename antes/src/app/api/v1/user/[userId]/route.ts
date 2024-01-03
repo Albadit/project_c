@@ -2,17 +2,21 @@ import { NextResponse } from "next/server";
 import { prisma } from '@/../../prisma/index'
 import bcrypt from "bcrypt"
 
-export async function GET(req: Request, { params }: { params: { user_id: string } }) {
+function generateStaticParams(data: any) {
+  return data
+}
+
+export async function GET(req: Request, { params }: { params: { userId: string } }) {
   try {
     const user = await prisma.user.findUnique({
       where: {
-        id: params.user_id
+        id: params.userId
       }
     })
 
     const transformedData = {
       status: "success",
-      data: user
+      data: generateStaticParams(user)
     }
     return NextResponse.json(transformedData, { status: 200 })
   } catch (error) {
@@ -20,14 +24,14 @@ export async function GET(req: Request, { params }: { params: { user_id: string 
   }
 }
 
-export async function POST(req: Request, { params }: { params: { user_id: string } }) {
+export async function POST(req: Request, { params }: { params: { userId: string } }) {
   try {
     const body = await req.json()
     let data = {}
 
     const user = await prisma.user.findUnique({
       where: {
-        id: params.user_id
+        id: params.userId
       }
     })
 
@@ -44,7 +48,7 @@ export async function POST(req: Request, { params }: { params: { user_id: string
     }
 
     const userUpdate = await prisma.user.update({
-      where: { id: params.user_id },
+      where: { id: params.userId },
       data: data
     })
 

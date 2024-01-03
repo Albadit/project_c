@@ -46,14 +46,14 @@ export default function Dashboard() {
   const [message, setMessage] = useState('')
 
   useEffect(() => {
-    FetchData(setData, setLoading, `/api/v1/event/${params.event_id}`)
+    FetchData(setData, setLoading, `/api/v1/event/${params.eventId}`)
   }, [])
 
   const handleSubmit = async (e: any) => {
     e.preventDefault()
     const addcal = await PostData({
       userId: session?.user.id
-    }, `/api/v1/event/${params.event_id}`)
+    }, `/api/v1/event/${params.eventId}`)
 
     if (addcal.status === "success") {
       setMessage('je bent aangemeld')

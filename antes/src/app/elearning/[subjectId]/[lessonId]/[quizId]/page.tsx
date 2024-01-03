@@ -22,7 +22,7 @@ export default function ElearningQuiz() {
 
   useEffect(() => {
     if (status === "authenticated") {
-      FetchData(setData, setLoading, `/api/v1/elearning/${session?.user.id}/${params.subject_id}/${params.lesson_id}/${params.quiz_id}`)
+      FetchData(setData, setLoading, `/api/v1/elearning/${session?.user.id}/${params.subjectId}/${params.lessonId}/${params.quizId}`)
     }
   }, [status, session?.user.id])
 

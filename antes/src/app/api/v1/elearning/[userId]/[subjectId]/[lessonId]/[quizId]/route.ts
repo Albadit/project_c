@@ -1,11 +1,11 @@
 import { NextResponse } from "next/server";
 import { prisma } from '@/../../prisma/index'
 
-export async function GET(req: Request, { params }: { params: { user_id: string, subject_id: string, lesson_id: string, quiz_id: string } }) {
+export async function GET(req: Request, { params }: { params: { userId: string, subjectId: string, lessonId: string, quizId: string } }) {
   try {
     const quiz = await prisma.quiz.findUnique({
       where: {
-        id: params.quiz_id
+        id: params.quizId
       }
     })
 
@@ -22,13 +22,13 @@ export async function GET(req: Request, { params }: { params: { user_id: string,
   }
 }
 
-export async function POST(req: Request, { params }: { params: { user_id: string, subject_id: string, lesson_id: string, quiz_id: string } }) {
+export async function POST(req: Request, { params }: { params: { userId: string, subjectId: string, lessonId: string, quizId: string } }) {
   try {
     const body = await req.json()
 
     const userProgress = await prisma.userProgress.create({
       data: {
-        userId: params.user_id,
+        userId: params.userId,
         lessonId: body.lessonId
       },
     })

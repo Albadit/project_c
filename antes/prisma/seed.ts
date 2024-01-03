@@ -187,24 +187,18 @@ async function main() {
   })
   const subject5 = await prisma.subject.create({
     data: {
-      title: "Cognitive psychology",
-      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    },
-  })
-  const subject6 = await prisma.subject.create({
-    data: {
       title: "Community psychology",
       description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
     },
   })
 
-  if (!subject1 || !subject2 || !subject3 || !subject4 || !subject5 || !subject6) { console.error("event not found"); return }
+  if (!subject1 || !subject2 || !subject3 || !subject4 || !subject5) { console.error("event not found"); return }
 
   const lesson1 = await prisma.lesson.create({
     data: {
       subjectId: subject1.id,
       title: "test",
-      order: 2,
+      order: 1,
       lessonData: []
     }
   })
@@ -213,7 +207,7 @@ async function main() {
     data: {
       subjectId: subject1.id,
       title: "work",
-      order: 1,
+      order: 2,
       lessonData: []
     }
   })
@@ -252,6 +246,15 @@ async function main() {
   })
 
   const lessonupdate = await prisma.lesson.update({
+    where: {
+      id: lesson1.id
+    },
+    data: {
+      quizId: quiz.id
+    }
+  })
+
+  const lessonupdate2 = await prisma.lesson.update({
     where: {
       id: lesson2.id
     },

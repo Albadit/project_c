@@ -19,7 +19,7 @@ export async function GET() {
       }
     })
 
-    if (!qaQuestion || !event) return NextResponse.json({ status: "error" }, { status: 500 })
+    if (!qaQuestion || !event) return NextResponse.json({ status: "error" }, { status: 401 })
 
     const transformedData = {
       status: "succes",
@@ -41,9 +41,6 @@ export async function GET() {
           description: event[0].description,
           dateStart: event[0].dateStart,
           location: event[0].location,
-        },
-        elearing: {
-          // elearing
         }
       }
     }
@@ -53,25 +50,3 @@ export async function GET() {
     return NextResponse.json({ status: "error" }, { status: 500 })
   }
 }
-
-// export async function POST(req: Request) {
-//   try {
-//     const body = await req.json()
-
-//     const user = await prisma.user.findMany({
-//       where: { email: body.email },
-//       include: {
-//         qaQuestions: true
-//       },
-//     })
-
-//     const transformedData = {
-//       status: "success",
-//       data: user
-//     }
-
-//     return NextResponse.json(transformedData, { status: 200 })
-//   } catch (error) {
-//     return NextResponse.json({ status: "error" }, { status: 500 })
-//   }
-// }

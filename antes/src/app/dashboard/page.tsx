@@ -11,14 +11,6 @@ import { ELearningCard, ElearningProps} from '@/components/dashboard/elearning_c
 import { PostData, FetchData } from '@/components/functions'
 import { LoadingScreen, LoadingData, NoDataFind } from '@/components/loader'
 
-const elearning = {
-  id: "1",
-  image: "img/elearning.png",
-  title: "H1. Introduction.",
-  userProgress: 8,
-  lessons: 11,
-}
-
 type HomeData = {
   event: EventProps
   qa: QaProps
@@ -37,8 +29,8 @@ export default function Dashboard() {
   const [isLoading, setLoading] = useState(true)
 
   useEffect(() => {
-    FetchData(setData, setLoading, '/api/v1/cards')
-  }, [])
+    FetchData(setData, setLoading, `/api/v1/cards/${session?.user.id}`)
+  }, [status, session?.user.id])
 
   if (status === "loading") return <LoadingScreen/>
   if (status === "unauthenticated") { router.push('/'); return null }
@@ -61,10 +53,12 @@ export default function Dashboard() {
               <h2 className='font-font1 font-semibold text-center text-primary text-3xl'>Nieuwste Evenement</h2>
               {data && data.data.event && <EventCard event={data.data.event} />}
             </div>
-            <div className='flex flex-col items-center justify-top gap-10'>
-              <h2 className='font-font1 font-semibold text-center text-primary text-3xl'>E-learing progressie</h2>
-              <ELearningCard elearning={elearning}/>
-            </div>
+            {data && data.data.elearning ? (
+              <div className='flex flex-col items-center justify-top gap-10'>
+                <h2 className='font-font1 font-semibold text-center text-primary text-3xl'>E-learing progressie</h2>
+                {data && data.data.elearning && <ELearningCard elearning={data.data.elearning} />}
+              </div>
+            ) : (<></>)}
           </div>
         </section> 
       </main>

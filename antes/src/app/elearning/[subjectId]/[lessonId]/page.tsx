@@ -39,7 +39,7 @@ export default function ElearningLesson() {
   
   useEffect(() => {
     if (status === "authenticated") {
-      FetchData(setData, setLoading, `/api/v1/elearning/${session?.user.id}/${params.subject_id}/${params.lesson_id}`)
+      FetchData(setData, setLoading, `/api/v1/elearning/${session?.user.id}/${params.subjectId}/${params.lessonId}`)
     }
   }, [status, session?.user.id])
 
@@ -64,7 +64,7 @@ export default function ElearningLesson() {
             {data?.data.quizId ? (
             <>
               <p className="font-light font-font2 text-extra text-ms">Nadat je deze video hebt afgerond, moet je een aantal vragen over de les beantwoorden om door te gaan naar de volgende les.</p>
-              <Link href={`/elearning/${params.subject_id}/${params.lesson_id}/${data?.data.quizId}`} className="w-fit px-6 py-2.5 rounded-lg bg-primary text-font2 font-semibold text-md">
+              <Link href={`/elearning/${params.subjectId}/${params.lessonId}/${data?.data.quizId}`} className="w-fit px-6 py-2.5 rounded-lg bg-primary text-font2 font-semibold text-md">
                 Quiz doen
               </Link>
             </>

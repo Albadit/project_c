@@ -28,7 +28,7 @@ type Lesson = {
 type Progression = {
   totalLessons: number
   userProgress: number
-  procent: number
+  percent: number
 }
 
 type Subject = {
@@ -54,10 +54,9 @@ export default function ElearningCourse() {
   
   useEffect(() => {
     if (status === "authenticated") {
-      FetchData(setData, setLoading, `/api/v1/elearning/${session?.user.id}/${params.subject_id}`)
+      FetchData(setData, setLoading, `/api/v1/elearning/${session?.user.id}/${params.subjectId}`)
     }
   }, [status, session?.user.id])
-
 
   if (status === "loading") return <LoadingScreen/>
   if (status === "unauthenticated") { router.push('/'); return null }
@@ -93,7 +92,7 @@ export default function ElearningCourse() {
               <p>{data?.data.progression.totalLessons}</p>
             </div>
             <div className="flex flex-row justify-center border-extra border-t py-4 px-6">
-              <ProgressCircle progress={data?.data.progression.procent || 100} />
+              <ProgressCircle progress={data?.data.progression.percent} />
             </div>
           </div>
 
@@ -107,7 +106,7 @@ export default function ElearningCourse() {
                 {data?.data.lessons.map((item: Lesson, index: any) => (
                   <button
                     key={`course-${index}`}
-                    onClick={() => {!isLessonCompleted(item.id) && (router.push(`/elearning/${params.subject_id}/${item.id}`))}}
+                    onClick={() => {!isLessonCompleted(item.id) && (router.push(`/elearning/${params.subjectId}/${item.id}`))}}
                     disabled={isLessonCompleted(item.id)}
                     className={`px-6 py-2.5 rounded-lg bg-primary text-left text-font2 font-semibold text-md disabled:bg-primary/60`}
                   >

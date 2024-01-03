@@ -8,6 +8,7 @@ import { QACard } from '@/components/qa_card'
 import { EventCard } from '@/components/event_card'
 import Info from '@/components/home/info'
 import { LoadingScreen, LoadingData, NoDataFind } from '@/components/loader'
+import { PostData, FetchData } from '@/components/functions'
 
 type EventItems = {
   id: string
@@ -29,24 +30,14 @@ type QaItems = {
   bio: string
 }
 
-type ElearningItems = {
-  id: string
-  title: string
-  image: string
-  dateCreate: string
-  reactions: number
-  bio: string
-}
-
 type HomeData = {
-  event: EventItems;
-  qa: QaItems;
-  elearning: ElearningItems;
+  event: EventItems
+  qa: QaItems
 }
 
 type ApiResponse<T> = {
-  status: string;
-  data: T;
+  status: string
+  data: T
 }
 
 export default function Home() {
@@ -54,12 +45,7 @@ export default function Home() {
   const [isLoading, setLoading] = useState(true)
 
   useEffect(() => {
-    fetch('/api/v1/cards')
-      .then((res) => res.json())
-      .then((data) => {
-        setData(data)
-        setLoading(false)
-      })
+    FetchData(setData, setLoading, `/api/v1/cards`)
   }, [])
 
   if (isLoading) return <LoadingScreen/> 

@@ -62,7 +62,7 @@ export default function Chat() {
   const [message, setMessage] = useState('')
 
   useEffect(() => {
-    FetchData(setData, setLoading,`/api/v1/qa/${params.qa_id}`)
+    FetchData(setData, setLoading,`/api/v1/qa/${params.qaId}`)
     // const interval = setInterval(fetchData, 1000)
     // return () => clearInterval(interval)
   }, [])
@@ -75,12 +75,12 @@ export default function Chat() {
     if (comment) {
       const register = await PostData({
         userEmail: session?.user?.email,
-        questionId: params.qa_id,
+        questionId: params.qaId,
         comment: comment
-      }, "/api/v1/qa/" + params.qa_id)
+      }, "/api/v1/qa/" + params.qaId)
       if (register.status === "success") {
         setComment('')
-        FetchData(setData, setLoading,`/api/v1/qa/${params.qa_id}`)
+        FetchData(setData, setLoading,`/api/v1/qa/${params.qaId}`)
       } else {
         setMessage('has been not send')
       }

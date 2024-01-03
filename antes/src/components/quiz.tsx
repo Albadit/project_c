@@ -59,8 +59,8 @@ export const Quiz = (props: Props) => {
       
       if (newPassed && session) {
         const userProgress = await PostData({
-          lessonId: params.lesson_id,
-        }, `/api/v1/elearning/${session.user.id}/${params.subject_id}/${params.lesson_id}/${params.quiz_id}`)
+          lessonId: params.lessonId,
+        }, `/api/v1/elearning/${session.user.id}/${params.subjectId}/${params.lessonId}/${params.quizId}`)
       }
     }
   }
@@ -101,7 +101,7 @@ export const Quiz = (props: Props) => {
               Retry Quiz
             </button>
           )}
-          <Link href={`/elearning/${params.subject_id}`} className="px-6 py-2.5 rounded-lg bg-primary text-font2 font-semibold text-md">
+          <Link href={`/elearning/${params.subjectId}`} className="px-6 py-2.5 rounded-lg bg-primary text-font2 font-semibold text-md">
             Ga terug naar de course
           </Link>
         </div>
