@@ -112,11 +112,11 @@ export const LongCalendar = (props: Props) => {
       }
 
       return (
-        <div key={event.id} className="bg-secondary rounded-lg m-1 lg:px-3 px-2 py-1" style={gridStyles}>
-          <p className='text-font2 truncate'>{event.title}</p>
-          <p className='text-font2 truncate'>{`${formatDate(event.dateStart)} - ${formatDate(event.dateEnd)}`}</p>
-          <p className='text-font2 truncate'>{event.location}</p>
-          <p className='text-font2 truncate'>{event.description}</p>
+        <div key={event.id} className="flex flex-col gap-2 bg-secondary rounded-lg m-1 lg:px-3 px-2 py-1" style={gridStyles}>
+          <p className='text-font2 break-words line-clamp-5'>{event.title}</p>
+          <p className='text-font2 break-words line-clamp-5'>{`${formatDate(event.dateStart)} - ${formatDate(event.dateEnd)}`}</p>
+          <p className='text-font2 break-words line-clamp-5'>{event.location}</p>
+          <p className='text-font2 break-words line-clamp-5'>{event.description}</p>
         </div>
       )
     })
@@ -141,11 +141,11 @@ export const LongCalendar = (props: Props) => {
       }
 
       return (
-        <div key={event.id} className="bg-secondary rounded-lg m-1 lg:px-3 px-2 py-1" style={gridStyles}>
-          <p className='text-font2 truncate'>{event.title}</p>
-          <p className='text-font2 truncate'>{`${formatDate(event.dateStart)} - ${formatDate(event.dateEnd)}`}</p>
-          <p className='text-font2 truncate'>{event.location}</p>
-          <p className='text-font2 truncate'>{event.description}</p>
+        <div key={event.id} className="flex flex-col gap-2 bg-secondary rounded-lg m-1 lg:px-3 px-2 py-1" style={gridStyles}>
+          <p className='text-font2 break-words line-clamp-5'>{event.title}</p>
+          <p className='text-font2 break-words line-clamp-5'>{`${formatDate(event.dateStart)} - ${formatDate(event.dateEnd)}`}</p>
+          <p className='text-font2 break-words line-clamp-5'>{event.location}</p>
+          <p className='text-font2 break-words line-clamp-5'>{event.description}</p>
         </div>
       )
     })
