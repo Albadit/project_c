@@ -1,6 +1,6 @@
 'use client'
-import React from 'react';
-import Footer from '@/app/components/footer';
+import React from 'react'
+import Footer from '@/app/components/footer'
 import NavHome from '@/app/components/home/nav'
 
 export default function Terms() {

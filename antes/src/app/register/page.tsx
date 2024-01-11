@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Input } from '@/app/components/input';
 import { useRouter } from 'next/navigation'
-import { SelectMenu } from '../components/select_menu';
+import { SelectMenu } from '@/app/components/select_menu';
 
 type UserFuntionItems = {
   id: string;

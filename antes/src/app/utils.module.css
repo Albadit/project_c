@@ -1,0 +1,91 @@
+.sidebar {
+    margin: 0;
+    padding: 0;
+    width: fit-content;
+    background-color: #FFFFFF;
+    position: left;
+    height: fit-content;
+    overflow: auto;
+    border: 2px solid #8D0C33;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    font-weight: 500;
+}
+
+/* #8D0C33 red*/
+/* #0850A3  blue*/
+.sidebar p {
+    display: block;
+    color: #8D0C33;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 400;
+}
+
+.sidebar button {
+    display: block;
+    color: #8D0C33;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 400;
+    background-color: #FFFFFF;
+    border: none;
+    cursor: pointer;
+    width: fit-content;
+}
+
+.sidebar p:hover:not(.active) {
+    display: block;
+    color: #FAFAFA;
+}
+
+.sidebar a {
+    display: block;
+    color: #8D0C33;
+    padding: 16px;
+    text-decoration: none;
+}
+
+.sidebar a:hover:not(.active) {
+    background-color: #8D0C33;
+    color: #FFFFFF;
+}
+
+.content {
+    margin-left: 200px;
+    padding: 1px 16px;
+    height: 10px;
+}
+
+@media screen and (max-width: 500px) {
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+    }
+
+    .sidebar {
+        display: flex;
+    }
+
+    .content {
+        margin-left: 0;
+    }
+}
+
+@media screen and (max-width: 300px) {
+    .sidebar {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+/* Dropdown Button */
+.dropbtn {
+    background-color: #04AA6D;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+}

@@ -30,12 +30,11 @@ export default function Login() {
         },
         redirect: false,
       })
-      console.log(exist)
-      // if(exist?.status === 200) {
-      //   router.push("/dashboard");
-      // } else {
-      //   setMessage("Verkeerde email of wachtwoord.");
-      // }
+      if(exist?.status === 200) {
+        router.push("/dashboard");
+      } else {
+        setMessage("Verkeerde email of wachtwoord.");
+      }
     } else {
       setMessage("Verkeerde email of wachtwoord.");
     }

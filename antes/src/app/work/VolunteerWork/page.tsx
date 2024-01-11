@@ -13,8 +13,10 @@ export default function VolunteerWork() {
                     <p className="text-center text-primary text-5xl font-bold drop-shadow-lg">Vrijwilligerswerk</p>
                 </div>
                 <div className='flex justify-center gap-5 2xl:gap-10'>
-                    <SideMenuWork />
+                    {/* <SideMenuWork /> */}
+                    <div className='hidden sm:flex'><SideMenuWork /></div>
                     <div className='flex flex-col shadow-2xl justify-between w-full md:w-[900px] gap-5 p-7 rounded-lg bg-section text-base font-font1 text-font1'>
+                        <div className='md:hidden'><SideMenuWork /></div>
                         <div className='flex gap-5 4xl:gap-10 text-extra'>
                             <div className='text-secondary text-left text-2xl'>Bij Antes helpen tal van vrijwilligers onze cliënten binding te houden met de samenleving. Door het geven van positieve aandacht laten vrijwilligers cliënten merken dat ze ertoe doen en dat ze de moeite waard zijn. Vrijwilligers dragen zo bij aan het verbeteren van de kwaliteit van leven en herstel van psychiatrische cliënten. Ben je geïnteresseerd in zinvol vrijwilligerswerk? Je kunt van onschatbare waarde zijn voor mensen met psychische problemen bij jou in de buurt.</div>
                         </div>
