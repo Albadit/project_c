@@ -10,16 +10,25 @@ import Link from 'next/link';
 export type UserProps = {
   name: string
   email: string
-  image: string 
+  image: string
+  level: number
 }
 
 type Props = {
   user: UserProps | any
 }
 
+type NavigationItem = {
+  name: string;
+  href: string;
+  redirect?: string;
+};
+
 export const NavDashboard = (props: Props) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  
+
+  const admin = props.user.level <= 2 ? { name: 'Gebruikers', href: '/admin' } : null
+
   const context = {
     logo: { img: "/img/antes_logo.png", url: "/" },
     login: { name: "Inloggen", url: "#"},
@@ -35,12 +44,13 @@ export const NavDashboard = (props: Props) => {
       email: props.user.email,
       image: props.user.image,
       navigation: [
-        { name: 'Jouw Profiel', href: '/profile/' },
+        { name: 'Jouw Profiel', href: '/profile' },
+        ...(admin ? [admin] : []),
         { name: 'Uitloggen', href: '/logout', redirect: '/' },
-      ]
+      ] as NavigationItem[]
     }
   }
-  
+
   return (
     <header>
       <nav className="z-50 flex items-center justify-between py-2 px-5 lg:px-8 h-[64px] text-font1 font-font1 text-base bg-section shadow-cbs">
@@ -111,16 +121,16 @@ export const NavDashboard = (props: Props) => {
                   <p className='truncate'>{context.user.email}</p>
                 </div>
               </li>
-            {context.user.navigation.map((item) => (
-              <li key={item.name}>
-                {item.href === "/logout" ? (
-                  <button onClick={() => signOut({ callbackUrl: item.redirect })}>{item.name}</button>
-                  ) : (
-                  <Link href={item.href}>{item.name}</Link>
-                  )
-                }
-              </li>
-            ))}
+              {context.user.navigation.map((item) => (
+                <li key={item.name}>
+                  {item.href === "/logout" ? (
+                    <button onClick={() => signOut({ callbackUrl: item.redirect })}>{item.name}</button>
+                    ) : (
+                    <Link href={item.href}>{item.name}</Link>
+                    )
+                  }
+                </li>
+              ))}
             </ul>
           </div>
         </div>

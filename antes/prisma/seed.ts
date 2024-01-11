@@ -66,7 +66,43 @@ async function main() {
     },
   })
 
-  
+  const user3 = await prisma.user.createMany({
+    data: [
+      {
+        roleId: roleId2.id,
+        userFunctionId: userFunctionId.id,
+        name: 'test',
+        email: 'test1@test.com',
+        emailVerified: null,
+        password: await bcrypt.hash("admin", 10),
+      },
+      {
+        roleId: roleId2.id,
+        userFunctionId: userFunctionId.id,
+        name: 'test',
+        email: 'test2@test.com',
+        emailVerified: null,
+        password: await bcrypt.hash("admin", 10),
+      },
+      {
+        roleId: roleId2.id,
+        userFunctionId: userFunctionId.id,
+        name: 'test',
+        email: 'test3@test.com',
+        emailVerified: null,
+        password: await bcrypt.hash("admin", 10),
+      },
+      {
+        roleId: roleId2.id,
+        userFunctionId: userFunctionId.id,
+        name: 'test',
+        email: 'test4@test.com',
+        emailVerified: null,
+        password: await bcrypt.hash("admin", 10),
+      },
+    ]
+  })
+
   if (!user && !user2) { console.error("user not found"); return }
   
   const updateUser = await prisma.user.update({
