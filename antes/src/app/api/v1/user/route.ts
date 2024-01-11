@@ -3,15 +3,10 @@ import { prisma } from '@/../../prisma/index'
 
 export async function GET() {
   try {
-    const user = await prisma.user.findUnique({
-      where: {
-        id: "1",
-        firstName: "aridt"
-      },
-    })
+    const user = await prisma.user.findMany({})
     return NextResponse.json(user, { status: 200 })
   } catch (error) {
-    return NextResponse.json({ error: "server error"}, { status: 500 })
+    return NextResponse.json({ error: "server error" }, { status: 500 })
   }
 }
 
@@ -28,6 +23,6 @@ export async function POST(req: Request) {
 
     return NextResponse.json(user)
   } catch (error) {
-    return NextResponse.json({body: "error"})
+    return NextResponse.json({ body: "error" })
   }
 }
