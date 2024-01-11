@@ -17,11 +17,11 @@ const user = {
 }
 
 const functies = [
-  { id: "1", name: 'Behavioral neuroscience' },
-  { id: "2", name: 'Behavioral psychology' },
-  { id: "3", name: 'Clinical psychology' },
-  { id: '4', name: 'Cognitive psychology'},
-  { id: "5", name: 'Community psychology'},
+  { id: 1, name: 'Behavioral neuroscience' },
+  { id: 2, name: 'Behavioral psychology' },
+  { id: 3, name: 'Clinical psychology' },
+  { id: 4, name: 'Cognitive psychology'},
+  { id: 5, name: 'Community psychology'},
 ]
 
 export default function Profile() {
@@ -46,7 +46,7 @@ export default function Profile() {
               <Input label='Voornaam' name='first_name' type='text' value={user.first_name}/>
               <Input label='Achternaam' name='last_name' type='text' value={user.last_name}/>
             </div>
-            <SelectMenu label='User Function' name="user_function" options={functies}/>
+            <SelectMenu name="Functie" value={functies}/>
             <Input label='Email' name='email' type='email' value={user.email}/>
             <Input label='Bio' name='bio' type='textarea' value={user.bio}/>
             <button className='w-fit px-6 py-2.5 rounded-lg bg-secondary text-font2 font-semibold text-sm'>Opslaan</button>
