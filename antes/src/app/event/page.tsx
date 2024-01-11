@@ -17,19 +17,19 @@ const user = {
   email: "saraleekman@outlook.com",
 }
 
-let events = [
+export let events = [
   {
     id: 0,
     title: "Connectiedag!",
     start: new Date(2023, 11, 12, 9, 0, 0),
-    end: new Date(2023, 11, 1, 13, 0, 0),
+    end: new Date(2023, 11, 12, 13, 0, 0),
     url: "/event/1"
   },
   {
     id: 1,
     title: "MS training",
-    start: new Date(2024, 2, 5, 14, 0, 0),
-    end: new Date(2024, 2, 5, 16, 30, 0),
+    start: new Date(2023, 11, 21, 14, 0, 0),
+    end: new Date(2023, 11, 21, 16, 30, 0),
     url: "/event/1"
   },
   {
@@ -42,8 +42,8 @@ let events = [
   {
     id: 3,
     title: "Birthday Party",
-    start: new Date(2024, 4, 11, 7, 0, 0),
-    end: new Date(2024, 4, 11, 10, 30, 0),
+    start: new Date(2024, 4, 11, 9, 0, 0),
+    end: new Date(2024, 4, 11, 12, 30, 0),
     url: "/event/1"
   }
 ];
@@ -109,26 +109,6 @@ function getWeekDays(baseDate: Date, local: string, weekdays: "long" | "short" |
   return weekDays;
 }
 
-function isEventCurrentDay(day: any) {
-  if (!events.some(event => event.start.getDate() === day.getDate())) {
-    const placeholderEvent = {
-      id: -1,
-      title: "Er staat niets op het programma van vandaag",
-      start: day,
-      end: day,
-      url: ""
-    };
-  
-    events.unshift(placeholderEvent);
-  }
-
-  // Filter out events that have already passed (excluding the current day)
-  events = events.filter(event => event.start > day || event.start.getDate() === day.getDate());
-
-  // Sort events based on start date
-  events.sort((a: any, b: any) => a.start - b.start);
-}
-
 export default function Calendar() {
   const currentDate = new Date();
   const [currentMonth, setCurrentMonth] = useState(currentDate.getMonth() + 1);
@@ -141,13 +121,13 @@ export default function Calendar() {
 
   const monthName = new Intl.DateTimeFormat(local, { month: 'long' }).format(new Date(currentYear, currentMonth - 1));
 
-  isEventCurrentDay(currentDate);
+  
 
   const isCurrentDay = (day: any) => {
     const currentDay = currentDate.getDate();
     const currentMonth = currentDate.getMonth() + 1;
     const currentYear = currentDate.getFullYear();
-    
+
     return day.day === currentDay && day.month === currentMonth && day.year === currentYear;
   };
 
@@ -171,53 +151,53 @@ export default function Calendar() {
 
   return (
     <>
-    <NavDashboard user={user}/>
-    <main className="flex flex-col justify-center items-center gap-10 p-5 my-12">
-      <h1 className='font-font1 font-bold text-center text-primary text-5xl'>Events</h1>
-      <section className='max-w-full'>
-        <div className='flex flex-row justify-between items-center max-w-[350px] w-full mt-8'>
-          <button onClick={goToPrevMonth}><ArrowRight className='w-5 fill-extra rotate-180'/></button>
-          <p className='font-semibold text-xl font-font1'>{monthName} {currentYear}</p>
-          <button onClick={goToNextMonth}><ArrowRight className='w-5 fill-extra'/></button>
-        </div>
-        <div className='text-font1 font-font2 overflow-x-auto'>
-          <div className='w-max'>
-            {/* Weekday Headers */}
-            <div className="grid grid-cols-7">
-              {days.map((day, index) => (
-                <span key={index} className="text-center py-2 font-normal">{day}</span>
-              ))}
-            </div>
+      <NavDashboard user={user} />
+      <main className="flex flex-col justify-center items-center gap-10 p-5 my-12">
+        <h1 className='font-font1 font-bold text-center text-primary text-5xl'>Events</h1>
+        <section className='max-w-full'>
+          <div className='flex flex-row justify-between items-center max-w-[350px] w-full mt-8'>
+            <button onClick={goToPrevMonth}><ArrowRight className='w-5 fill-extra rotate-180' /></button>
+            <p className='font-semibold text-xl font-font1'>{monthName} {currentYear}</p>
+            <button onClick={goToNextMonth}><ArrowRight className='w-5 fill-extra' /></button>
+          </div>
+          <div className='text-font1 font-font2 overflow-x-auto'>
+            <div className='w-max'>
+              {/* Weekday Headers */}
+              <div className="grid grid-cols-7">
+                {days.map((day, index) => (
+                  <span key={index} className="text-center py-2 font-normal">{day}</span>
+                ))}
+              </div>
 
-            {/* Calendar Days */}
-            <div className='calender grid grid-rows-7 p-0.5'>
-              {weeks.map((week: any, i: any) => (
-                <div key={i} className='grid grid-cols-7'>
-                  {week.map((day: any, index: any) => (
-                    <div key={index} className={`text-center outline outline-[1px] outline-offset-0 outline-inputBorder px-4 py-2.5 ${isCurrentMonth(day) ? 'bg-section' : 'text-extra bg-[#f9fafb]'}`}>
-                      <span className={`${isCurrentDay(day) ? 'text-font2 font-medium bg-secondary rounded-full p-1.5 m-[-6px]' : ''}`}>{day.day}</span>
-                    </div>
-                  ))}
-                </div>
-              ))}
+              {/* Calendar Days */}
+              <div className='calender grid grid-rows-7 p-0.5'>
+                {weeks.map((week: any, i: any) => (
+                  <div key={i} className='grid grid-cols-7'>
+                    {week.map((day: any, index: any) => (
+                      <div key={index} className={`text-center outline outline-[1px] outline-offset-0 outline-inputBorder px-4 py-2.5 ${isCurrentMonth(day) ? 'bg-section' : 'text-extra bg-[#f9fafb]'}`}>
+                        <span className={`${isCurrentDay(day) ? 'text-font2 font-medium bg-secondary rounded-full p-1.5 m-[-6px]' : ''}`}>{day.day}</span>
+                      </div>
+                    ))}
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
-        </div>
-      </section>
-      <section className='flex flex-col gap-5 font-font2 text-font1 max-w-[750px] w-full'>
-        <h2 className='font-semibold text-xl font-font1'>Aankomende evenementen</h2>
-        <div>
-          {events.map((item) => 
-          <Link key={item.id} href={item.url} className="flex sm:flex-row flex-col py-4 border-b-[1px] border-extra/20">
-            <p className='text-extra w-28 sm:p-0 pb-4'>{item.start.toLocaleDateString(local, { weekday: 'short' })}, {item.start.toLocaleDateString(local, { month: 'short' })} {item.start.getDate()}</p>
-            <p className={`grow ${item.id === -1 ? 'text-extra' : 'font-medium'}`}>{item.title}</p>
-            <p className={`${item.id === -1 ? 'hidden' : ''}`}>{item.start.toLocaleTimeString(local, { hour: '2-digit', minute: '2-digit', hour12: false })} - {item.end.toLocaleTimeString(local, { hour: '2-digit', minute: '2-digit', hour12: false })}</p>
-          </Link>
-          )}
-        </div>
-      </section>
-    </main>
-    <Footer/>
+        </section>
+        <section className='flex flex-col gap-5 font-font2 text-font1 max-w-[750px] w-full'>
+          <h2 className='font-semibold text-xl font-font1'>Aankomende evenementen</h2>
+          <div>
+            {events.map((item) =>
+              <Link key={item.id} href={item.url} className="flex sm:flex-row flex-col py-4 border-b-[1px] border-extra/20">
+                <p className='text-extra w-28 sm:p-0 pb-4'>{item.start.toLocaleDateString(local, { weekday: 'short' })}, {item.start.toLocaleDateString(local, { month: 'short' })} {item.start.getDate()}</p>
+                <p className={`grow ${item.id === -1 ? 'text-extra' : 'font-medium'}`}>{item.title}</p>
+                <p className={`${item.id === -1 ? 'hidden' : ''}`}>{item.start.toLocaleTimeString(local, { hour: '2-digit', minute: '2-digit', hour12: false })} - {item.end.toLocaleTimeString(local, { hour: '2-digit', minute: '2-digit', hour12: false })}</p>
+              </Link>
+            )}
+          </div>
+        </section>
+      </main>
+      <Footer />
     </>
   );
 };
