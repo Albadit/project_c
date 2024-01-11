@@ -14,7 +14,6 @@ import { EventCard } from '@/app/components/event_card'
 import Info from '@/app/components/home/info'
 import UserAddCard from '@/app/admin/UserAddCard/page'
 import UserDeleteCard from './UserDeleteCard/page';
-import UserInfo from './UserDeleteCard/UserInfo/page';
 
 export default function Admin() {
     return (
