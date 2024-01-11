@@ -47,7 +47,7 @@ export default function ClientCouncil() {
                             <p className='text-secondary text-xl'>De cliëntenraad vergadert regelmatig. Ze bespreekt dan onderwerpen die op dat moment relevant zijn. Regelmatig is de directie of het bestuur van Antes aanwezig om te overleggen.</p>
                         </div>
                         <div className='flex justify-start gap-5 2xl:gap-10'>
-                            <p className='text-secondary text-xl'>Verder bezoekt de raad regelmatig de afdelingen. Of er is daar een spreekuur. Tijdens zo&apos;n spreekuur evalueren we de zorg en wat er beter kan. Ook horen we graag wat jij belangrijk vindt. Heb je vragen? Deze beantwoorden we graag. Als we het antwoord niet hebben, word je gekkoppeld aan de juiste persoon. </p>
+                            <p className='text-secondary text-xl'>Verder bezoekt de raad regelmatig de afdelingen. Of er is daar een spreekuur. Tijdens zo'n spreekuur evalueren we de zorg en wat er beter kan. Ook horen we graag wat jij belangrijk vindt. Heb je vragen? Deze beantwoorden we graag. Als we het antwoord niet hebben, word je gekkoppeld aan de juiste persoon. </p>
                         </div>
                         <div className='flex justify-start gap-5 2xl:gap-10'>
                             <p className='font-bold text-secondary text-xl'>Wat doet de cliëntenraad niet?</p>

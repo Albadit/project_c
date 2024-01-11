@@ -33,7 +33,7 @@ const Modal = () => {
                   <form className="bg-[#e5e7eb30]  shadow-md rounded px-8 pt-6 pb-8 w-full">
                   <div className="py-2 items-start">
                       <label className="flex text-[#000000] text-sm font-bold mb-1">
-                          Titel
+                         Titel
                       </label>
                       <input className="shadow appearance-none border rounded w-full py-2 text-[#000000]" />
                     </div>

@@ -2,11 +2,10 @@ import React from 'react';
 import Link from "next/link";
 import Footer from '@/app/components/footer';
 import { NavDashboard } from '@/app/components/dashboard/nav'
+
 import Arrowright from "@/app/components/icons/arrow_right";
 import { ELearingCard } from '@/app/components/e_learn_card';
 import { SubjectCard } from '@/app/components/dashboard/subject_card';
-import { useRouter } from 'next/navigation'
-
 
 const user = {
   id: 1,

@@ -91,7 +91,6 @@ model Event {
   id          String     @id @default(cuid())
   title       String     @db.Text
   description String     @db.Text
-  location    String     @db.Text
   start       DateTime
   end         DateTime
   calendars   Calendar[]
