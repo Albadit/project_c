@@ -6,12 +6,10 @@ import { useSession } from 'next-auth/react'
 import { Input } from '@/components/input'
 import { SelectMenu, SelectOption } from '@/components/select_menu'
 import Link from 'next/link'
-import NavHome from '@/components/home/nav'
 import Modal from '@/components/modal'
-import { PostData, FetchData } from '@/components/functions'
+import { PostData, PatchData, DeleteData, FetchData } from '@/components/functions'
 import { LoadingScreen, LoadingData, NoDataFind } from '@/components/loader'
 import { useRouter } from 'next/navigation'
-import { tree } from 'next/dist/build/templates/app-page'
 
 type UserItems = {
   id: string
@@ -44,15 +42,20 @@ export default function Admin() {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [message, setMessage] = useState('')
 
-  const [modalStates, setModalStates] = useState<ModalStates>({});
+  const [modalStates, setModalStates] = useState<ModalStates>({})
+  const [deleteModalStates, setDeleteModalStates] = useState<ModalStates>({})
 
-  const openModal = (userId: number) => {
-    setModalStates(prev => ({ ...prev, [userId]: true }));
+  const openEditModal = (userId: number) => {
+    setModalStates(prev => ({ ...prev, [userId]: true }))
   }
   
-  const closeModal = (userId: number) => {
-    setModalStates(prev => ({ ...prev, [userId]: false }));
+  const closeEditModal = (userId: number) => {
+    setModalStates(prev => ({ ...prev, [userId]: false }))
   }
+
+  const toggleDeleteModal = (userId: number) => {
+    setDeleteModalStates(prev => ({ ...prev, [userId]: !prev[userId] }));
+  };
 
   useEffect(() => {
     FetchData(setDataRole, setLoadingRole, '/api/v1/role')
@@ -73,8 +76,8 @@ export default function Admin() {
       const newUser = await PostData({
         name: name,
         email: email,
-        userFunction: userFunction,
-        userRole: userRole,
+        userFunctionId: userFunction,
+        userRoleId: userRole,
       }, `/api/v1/user`)
 
       if (newUser.status === "success") {
@@ -92,7 +95,7 @@ export default function Admin() {
     }
   }
 
-  const handleSubmitUpdate = async (e: any, userId: string) => {
+  const handleSubmitUpdate = async (e: any, userId: string, index: number) => {
     e.preventDefault()
     const formData = new FormData(e.target)
     const name = formData.get(`name_${userId}`)
@@ -101,15 +104,16 @@ export default function Admin() {
     const userRole = formData.get(`user_role_${userId}`)
 
     if (name && email && userFunction && userRole) {
-      const newUser = await PostData({
+      const newUser = await PatchData({
+        id: userId,
         name: name,
         email: email,
-        userFunction: userFunction,
-        userRole: userRole,
+        userFunctionId: userFunction,
+        userRoleId: userRole,
       }, `/api/v1/user`)
 
       if (newUser.status === "success") {
-        setIsModalOpen(false)
+        closeEditModal(index)
         FetchData(setDataUser, setLoadingUser, '/api/v1/user')
       } else {
         setMessage('Er is iets fout gegaan')
@@ -119,12 +123,24 @@ export default function Admin() {
     }
   }
 
+  const handleSubmitDelete = async (e: any, userId: string, index: number) => {
+    const newDelete = await DeleteData({
+      id: userId,
+    }, `/api/v1/user`)
+
+    if (newDelete.status === "success") {
+      toggleDeleteModal(index)
+      FetchData(setDataUser, setLoadingUser, '/api/v1/user')
+    } else {
+      setMessage('Er is iets fout gegaan')
+    }
+  }
+
   if (status === "loading") return <LoadingScreen/>
   if (status === "unauthenticated") { router.push('/'); return null }
   if (isLoadingUser && isLoadingUserFunction && isLoadingRole) return <LoadingScreen/> 
   if (dataUser?.status === "error") return <NoDataFind/>
-  // fix to session user level under 2
-  if ((session?.user?.level ?? 0) <= 2) { router.push('/'); return null }
+  if ((session?.user?.level ?? 0) >= 2) { router.push('/'); return null }
 
   return (
     <>
@@ -163,9 +179,9 @@ export default function Admin() {
                     <td>{user.userFunctionName}</td>
                     <td>{user.roleName}</td>
                     <td className='flex flex-row gap-5'>
-                    <button onClick={() => openModal(index)} className='bg-[#ffc107] text-font1 w-fit px-6 py-2.5 rounded-lg font-semibold text-sm'>Aanpassen</button>
-                      <Modal title='Aanpassen' bgcolor='bg-[#ffc107]' visibility={true} isModalOpen={modalStates[index]} setIsModalOpen={() => closeModal(index)}>
-                        <form onSubmit={(e) => handleSubmitUpdate(e, user.id)} className='flex flex-col gap-4 items-end'>
+                    <button onClick={() => openEditModal(index)} className='bg-[#ffc107] text-font1 w-fit px-6 py-2.5 rounded-lg font-semibold text-sm'>Aanpassen</button>
+                      <Modal title='Aanpassen' bgcolor='bg-[#ffc107]' visibility={true} isModalOpen={modalStates[index]} setIsModalOpen={() => closeEditModal(index)}>
+                        <form onSubmit={(e) => handleSubmitUpdate(e, user.id, index)} className='flex flex-col gap-4 items-end'>
                           <Input label='Naam' name={`name_${user.id}`} type='text' value={user.name}/>
                           <Input label='Email' name={`email_${user.id}`} type='email' value={user.email}/>
                           <SelectMenu label='Functie' name={`user_function_${user.id}`} options={dataUserFunction?.data as SelectOption[]} index={user.userFunctionId}/>
@@ -174,7 +190,16 @@ export default function Admin() {
                           {message ? (<p className='text-error'>{message}</p>) : (<></>)}
                         </form>
                       </Modal>
-                      <button type='button' className='w-fit px-6 py-2.5 rounded-lg bg-error text-font2 font-semibold text-sm'>Verwijderen</button>
+                      <button onClick={() => toggleDeleteModal(index)} className='w-fit px-6 py-2.5 rounded-lg bg-error text-font2 font-semibold text-sm'>Verwijderen</button>
+                      <Modal title='Gebruiker verwijderen' visibility={true} isModalOpen={deleteModalStates[index]} setIsModalOpen={() => toggleDeleteModal(index)}>
+                        <form onSubmit={(e) => handleSubmitDelete(e, user.id, index)} className='flex flex-col gap-4 w-full'>
+                          <p className='text-left'>Weet je zeker dat je <span className='font-bold'>{user.email}</span> wilt verwijderen?</p>
+                          <div className='flex justify-end gap-4'>
+                            <button type='submit' className='w-fit px-6 py-2.5 rounded-lg bg-error text-font2 font-semibold text-sm'>Verwijderen</button>
+                            <button onClick={() => toggleDeleteModal(index)} className='w-fit px-6 py-2.5 rounded-lg bg-secondary text-font2 font-semibold text-sm'>Annuleren</button>
+                          </div>
+                        </form>
+                      </Modal>
                     </td>
                   </tr>
                 ))}
