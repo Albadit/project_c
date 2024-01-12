@@ -1,0 +1,17 @@
+# Install all dependencies
+npm install
+
+# dependencies
+npm install next@latest react@latest react-dom@latest
+npm install tailwindcss@latest
+npm install @tailwindcss/typography
+npm install @tailwindcss/forms
+npm install @tailwindcss/aspect-ratio
+npm install @tailwindcss/container-queries
+npm install @prisma/client @auth/prisma-adapter
+npm install prisma --save-dev
+npm install -D typescript ts-node @types/node
+npm i next-auth bcrypt
+npm i --save-dev @types/bcrypt
+
+docker compose -f "docker-compose-postgres.yaml" up -d --build

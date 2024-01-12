@@ -66,8 +66,6 @@ export async function PATCH(req: Request) {
   try {
     const body = await req.json()
 
-    console.log(body)
-
     const userUpdate = await prisma.user.update({
       where: {
         id: body.id
