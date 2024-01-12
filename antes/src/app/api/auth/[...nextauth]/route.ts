@@ -1,25 +1,11 @@
-import NextAuth from "next-auth";
-import CredentialsProvider from "next-auth/providers/credentials";
-import bcrypt from "bcrypt";
+import NextAuth, { SessionUser } from "next-auth"
+import CredentialsProvider from "next-auth/providers/credentials"
+import bcrypt from "bcrypt"
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { prisma } from '@/../../prisma/index'
 
-const status_error = {
-  "error": "CredentialsSignin",
-  "status": 401,
-  "ok": false,
-  "url": null
-}
-
-const status_succes = {
-  "error": null,
-  "status": 200,
-  "ok": true,
-  "url": "http://localhost:3000/login"
-}
-
 const handler = NextAuth({
-  adapter: PrismaAdapter(prisma),
+  // adapter: PrismaAdapter(prisma),
   providers: [
     CredentialsProvider({
       name: 'Credentials',
@@ -27,11 +13,14 @@ const handler = NextAuth({
         password: { label: "Password", type: "password" },
         email: { label: "Email", type: "email" },
       },
-      async authorize(credentials: any, req: any) {
+      async authorize(credentials: any) {
         if (!credentials.email || !credentials.password) { return null }
 
         const user = await prisma.user.findUnique({
-          where: { email: credentials.email }
+          where: { email: credentials.email.toLowerCase() },
+          include: {
+            role: true,
+          }
         })
 
         if (!user) { return null }
@@ -40,14 +29,29 @@ const handler = NextAuth({
 
         if (!passwordMatch) { return null }
 
-        return user
+        return {
+          id: user.id,
+          name: user.name,
+          email: user.email,
+          image: user.image,
+          level: user.role.level,
+        }
       }
     })
   ],
+  callbacks: {
+    async jwt({ token, user, account, profile, isNewUser }) {
+      if (user) token.user = user
+      return token
+    },
+    async session({ session, token, user }) {
+      if (token.user) session.user = token.user as SessionUser
+      return session
+    }
+  },
   session: {
     strategy: "jwt",
-    // strategy: "database",
-    maxAge: 1 * 24 * 60 * 60,
+    maxAge: 7 * 24 * 60 * 60,
     updateAge: 24 * 60 * 60,
   },
   secret: process.env.NEXTAUTH_SECRECT,

@@ -1,6 +1,5 @@
 "use client";
-
-import Nav from '@/app/components/home/nav'
+import Nav from '@/components/home/nav'
 import SideMenuWork from '@/app/work/side_menu_work/page';
 
 export default function Flexpool() {

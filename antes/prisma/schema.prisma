@@ -52,22 +52,21 @@ model VerificationToken {
 }
 
 model User {
-  id             String       @id @default(cuid())
+  id             String         @id @default(cuid())
   roleId         String
   userFunctionId String
-  image          String?
-  firstName      String       @db.Text
-  lastName       String       @db.Text
-  bio            String?      @db.Text
-  email          String       @unique
-  emailVerified  DateTime?    @map("email_verified")
-  password       String // assuming hash format
-  role           Role         @relation(fields: [roleId], references: [id])
-  userFunction   UserFunction @relation(fields: [userFunctionId], references: [id])
+  image          String         @default("/img/profile.png")
+  name           String         @db.Text
+  bio            String?
+  email          String         @unique
+  emailVerified  DateTime?      @map("email_verified")
+  password       String? // hash format bcrypt
+  role           Role           @relation(fields: [roleId], references: [id])
+  userFunction   UserFunction   @relation(fields: [userFunctionId], references: [id])
   calendars      Calendar[]
   qaQuestions    QaQuestion[]
   qaAnswers      QaAnswer[]
-  userLessons    UserLesson[]
+  userProgress   UserProgress[]
   accounts       Account[]
   sessions       Session[]
 
@@ -91,8 +90,10 @@ model Event {
   id          String     @id @default(cuid())
   title       String     @db.Text
   description String     @db.Text
-  start       DateTime
-  end         DateTime
+  location    String     @db.Text
+  image       String     @default("/img/event_card.png")
+  dateStart   DateTime
+  dateEnd     DateTime
   calendars   Calendar[]
 }
 
@@ -104,35 +105,22 @@ model Calendar {
   event   Event  @relation(fields: [eventId], references: [id])
 }
 
-model Tag {
-  id     String  @id @default(cuid())
-  name   String  @db.Text
-  qaTags QaTag[]
-}
-
-model QaTag {
-  id           String     @id @default(cuid())
-  qaQuestionId String
-  tagId        String
-  qaQuestion   QaQuestion @relation(fields: [qaQuestionId], references: [id])
-  tag          Tag        @relation(fields: [tagId], references: [id])
-}
-
 model QaQuestion {
   id         String     @id @default(cuid())
   userId     String
-  question   String     @db.Text
+  title      String     @db.Text
   dateCreate DateTime
+  image      String     @default("/img/qa_card.png")
+  tags       Json?
   user       User       @relation(fields: [userId], references: [id])
   qaAnswers  QaAnswer[]
-  qaTags     QaTag[]
 }
 
 model QaAnswer {
   id         String     @id @default(cuid())
   questionId String
   userId     String
-  answer     String     @db.Text
+  comment    String     @db.Text
   dateCreate DateTime
   qaQuestion QaQuestion @relation(fields: [questionId], references: [id])
   user       User       @relation(fields: [userId], references: [id])
@@ -140,35 +128,34 @@ model QaAnswer {
 
 model Subject {
   id          String   @id @default(cuid())
-  name        String   @db.Text
+  title       String   @db.Text
   description String   @db.Text
+  image       String   @default("/img/elearning.png")
   lessons     Lesson[]
 }
 
 model Lesson {
-  id          String       @id @default(cuid())
-  subjectId   String
-  quizId      String?
-  order       Int
-  title       String       @db.Text
-  description String       @db.Text
-  lesson_data Json
-  subject     Subject      @relation(fields: [subjectId], references: [id])
-  quiz        Quiz?        @relation(fields: [quizId], references: [id])
-  userLessons UserLesson[]
+  id           String         @id @default(cuid())
+  subjectId    String
+  quizId       String?
+  order        Int
+  title        String         @db.Text
+  lessonData   Json
+  subject      Subject        @relation(fields: [subjectId], references: [id])
+  quiz         Quiz?          @relation(fields: [quizId], references: [id])
+  userProgress UserProgress[]
 }
 
 model Quiz {
-  id        String   @id @default(cuid())
-  quiz_data Json
-  lessons   Lesson[]
+  id       String   @id @default(cuid())
+  quizData Json
+  lessons  Lesson[]
 }
 
-model UserLesson {
-  id         String  @id @default(cuid())
-  userId     String
-  lessonId   String
-  completion Boolean
-  user       User    @relation(fields: [userId], references: [id])
-  lesson     Lesson  @relation(fields: [lessonId], references: [id])
+model UserProgress {
+  id       String @id @default(cuid())
+  userId   String
+  lessonId String
+  user     User   @relation(fields: [userId], references: [id])
+  lesson   Lesson @relation(fields: [lessonId], references: [id])
 }

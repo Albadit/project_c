@@ -1,10 +1,10 @@
 "use client"
-
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { Input } from '@/app/components/input';
+import { Input } from '@/components/input';
 import { useRouter } from 'next/navigation'
 import { signIn } from 'next-auth/react';
+import { useSession } from 'next-auth/react';
 
 const context = {
   logo: { url: "/", img: "/img/antes_logo.png", alt: "antes logo"},
@@ -15,8 +15,9 @@ const context = {
 
 export default function Login() {
   const [message, setMessage] = useState('');
-  const router = useRouter();
-
+  const router = useRouter()
+  const { data: session, status } = useSession()
+  
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     const formData = new FormData(e.target);
@@ -31,7 +32,7 @@ export default function Login() {
         redirect: false,
       })
       if(exist?.status === 200) {
-        router.push("/dashboard");
+        router.push("/dashboard")
       } else {
         setMessage("Verkeerde email of wachtwoord.");
       }
@@ -39,6 +40,8 @@ export default function Login() {
       setMessage("Verkeerde email of wachtwoord.");
     }
   }
+
+  if (session && status === "authenticated") router.push("/dashboard")
 
   return (
     <main className='flex flex-row justify-center login:h-screen h-fit'>

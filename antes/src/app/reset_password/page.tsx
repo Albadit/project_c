@@ -1,8 +1,7 @@
 "use client"
-
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { Input } from '@/app/components/input';
+import { Input } from '@/components/input';
 import { useRouter } from 'next/navigation'
 
 const context = {
@@ -20,7 +19,6 @@ export default function ResetPassword() {
     const password = formData.get('password');
     const confirmPassword = formData.get('confirm_password');
     if (password === confirmPassword) {
-      // update in database
       router.push("/login");
     } else {
       setMessage("Wachtwoorden komen niet overeen.");
@@ -38,7 +36,7 @@ export default function ResetPassword() {
           <Input label="Wachtwoord" name="password" type="password" value=""/>
           <Input label="Bevestigen Wachtwoord" name="confirm_password" type="password" value=""/>
           <button type="submit" title="reset_password" className='flex flex-row items-center justify-center w-full lg:w-auto gap-2 px-4 py-3 rounded-lg bg-primary text-font2 font-semibold text-base'>{context.btn.text}</button>
-          <p className='text-error'>{message}</p>
+          {message ? (<p className='text-error'>{message}</p>) : (<></>)}
         </form>
       </div>
     </main>
