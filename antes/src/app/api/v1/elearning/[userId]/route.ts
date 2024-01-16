@@ -35,6 +35,7 @@ export async function GET(req: Request, { params }: { params: { userId: string }
     const progression = elearning.map(subject => {
       const totalLessons = subject.lessons.length
       const completedLessons = subject.lessons.filter(lesson => lesson.userProgress.length > 0).length
+      const percent = completedLessons === totalLessons ? 100 : Math.ceil(100 / totalLessons * completedLessons)
     
       return {
         id: subject.id,
@@ -44,7 +45,11 @@ export async function GET(req: Request, { params }: { params: { userId: string }
         progression: {
           totalLessons,
           userProgress: completedLessons,
+<<<<<<< Updated upstream
           percent: Math.ceil(100 / totalLessons * completedLessons)
+=======
+          percent: percent
+>>>>>>> Stashed changes
         }
       }
     })

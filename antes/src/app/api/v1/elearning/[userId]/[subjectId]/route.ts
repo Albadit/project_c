@@ -33,13 +33,15 @@ export async function GET(req: Request, { params }: { params: { userId: string, 
 
     const totalLessons = subject.lessons.length
     const completedLessons = subject.lessons.filter(lesson => lesson.userProgress.length > 0).length
+    const percent = completedLessons === totalLessons ? 100 : Math.ceil(100 / totalLessons * completedLessons)
+
 
     const progression = {
       ...subject,
       progression: {
         totalLessons,
         userProgress: completedLessons,
-        percent: Math.ceil(100 / totalLessons * completedLessons) || 100
+        percent: percent
       }
     }
 

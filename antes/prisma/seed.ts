@@ -299,12 +299,12 @@ async function main() {
     }
   })
 
-  const userProgress = await prisma.userProgress.create({
-    data: {
-      userId: user.id,
-      lessonId: lesson1.id,
-    }
-  })
+  // const userProgress = await prisma.userProgress.create({
+  //   data: {
+  //     userId: user.id,
+  //     lessonId: lesson1.id,
+  //   }
+  // })
 }
 
 main()
