@@ -38,7 +38,7 @@ export const ELearningCard = (props: Props) => {
       </div>
       <div className="flex lg:flex-row flex-col lg:items-center justify-end gap-5">
         <Link href={`elearning/${props.elearning.id}`} className="flex flex-row items-center justify-center gap-2 px-4 py-3 rounded-lg bg-primary text-font2 font-semibold text-sm">
-          Ga veder <ArrowForwardRounded className="fill-font2 h-5" />
+          Ga verder <ArrowForwardRounded className="fill-font2 h-5" />
         </Link>
       </div>
     </div>

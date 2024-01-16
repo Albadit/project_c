@@ -72,13 +72,13 @@ export const Quiz = (props: Props) => {
     <>
       {showResults ? (
         <div className='flex flex-col gap-8'>
-        <h1 className="text-3xl font-bold">Quiz Results</h1>
+        <h1 className="text-3xl font-bold">Quiz Resultaten</h1>
         <ul className='flex flex-col gap-2'>
           {props.quiz.quizData.map((question: any, index: number) => (
             <li key={index}>
               <strong>{question.question}</strong>
               <div>
-                Your answer: {userAnswers[index]}
+                Uw antwoord: {userAnswers[index]}
                 {userAnswers[index] === question.correctAnswer ? (
                   <span className="text-success font-bold"> Correct!</span>
                 ) : (
@@ -90,15 +90,15 @@ export const Quiz = (props: Props) => {
         </ul>
         <div className='flex flex-col gap-4'>
           <p className={`font-bold text-xl ${passed ? 'text-success' : 'text-error'}`}>
-            {passed ? 'Congratulations! You passed!' : 'Sorry, you did not pass.'}
+            {passed ? 'Gefeliciteerd! U hebt de quiz behaald!' : 'Helaas, u heeft de quiz niet behaald.'}
           </p>
-          <p className='font-semibold'>You answered {correctAnswers.length} out of {props.quiz.quizData.length} questions correctly</p>
-          <p className={`font-semibold ${passed ? 'text-success' : 'text-error'}`}>Your score: {score.toFixed(2)}%</p>
+          <p className='font-semibold'>U heeft {correctAnswers.length} van de {props.quiz.quizData.length} vragen correct.</p>
+          <p className={`font-semibold ${passed ? 'text-success' : 'text-error'}`}>Uw score: {score.toFixed(2)}%</p>
         </div>
         <div className='flex flex-row gap-12 rounded-md text-[#ffff] font-semibold'>
           {!passed && (
             <button onClick={retryQuiz} className="px-6 py-2.5 rounded-lg bg-primary text-font2 font-semibold text-md">
-              Retry Quiz
+              Quiz hernemen
             </button>
           )}
           <Link href={`/elearning/${params.subjectId}`} className="px-6 py-2.5 rounded-lg bg-primary text-font2 font-semibold text-md">
@@ -108,7 +108,7 @@ export const Quiz = (props: Props) => {
       </div>
       ) : (
         <div className='flex flex-col gap-6 max-w-[500px] w-full'>
-          <h1 className="text-primary text-3xl font-bold">Question {currentQuestion + 1}</h1>
+          <h1 className="text-primary text-3xl font-bold">Vraag {currentQuestion + 1}</h1>
           <div className='flex flex-col gap-2'>
             <p className="text-xl font-semibold">{props.quiz.quizData[currentQuestion].question}</p>
             <hr />
@@ -121,7 +121,7 @@ export const Quiz = (props: Props) => {
             ))}
           </div>
           <button className="px-6 py-2.5 rounded-lg bg-secondary text-font2 font-semibold text-md" onClick={handleOptionSelect}>
-            Next Question
+            Volgende vraag
           </button>
         </div>
       )}

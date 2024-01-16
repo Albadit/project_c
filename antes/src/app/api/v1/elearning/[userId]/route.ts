@@ -44,7 +44,7 @@ export async function GET(req: Request, { params }: { params: { userId: string }
         progression: {
           totalLessons,
           userProgress: completedLessons,
-          percent: Math.ceil(100 / totalLessons * completedLessons) || 100
+          percent: Math.ceil(100 / totalLessons * completedLessons)
         }
       }
     })
