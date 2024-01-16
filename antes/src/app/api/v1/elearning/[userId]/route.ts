@@ -45,11 +45,7 @@ export async function GET(req: Request, { params }: { params: { userId: string }
         progression: {
           totalLessons,
           userProgress: completedLessons,
-<<<<<<< Updated upstream
-          percent: Math.ceil(100 / totalLessons * completedLessons)
-=======
           percent: percent
->>>>>>> Stashed changes
         }
       }
     })
