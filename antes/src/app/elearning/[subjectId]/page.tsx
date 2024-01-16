@@ -110,7 +110,7 @@ export default function ElearningCourse() {
                     disabled={isLessonCompleted(item.id)}
                     className={`px-6 py-2.5 rounded-lg bg-primary text-left text-font2 font-semibold text-md disabled:bg-primary/60`}
                   >
-                    {`Lees ${index + 1} - ${item.title} ${isLessonCompleted(item.id) ? ('(Voltooid)') : ('')}`}
+                    {`Les ${index + 1} - ${item.title} ${isLessonCompleted(item.id) ? ('(Voltooid)') : ('')}`}
                   </button>
                 ))}
               </div>
