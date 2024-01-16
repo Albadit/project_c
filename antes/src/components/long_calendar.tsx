@@ -163,8 +163,9 @@ export const LongCalendar = (props: Props) => {
   return (
     <div className="flex flex-col lg:p-5 gap-6 w-full text-font1">
       <div className="flex lg:flex-row flex-col lg:justify-between items-center gap-5">
-        <p onClick={handleResetToToday} className='font-semibold text-xl font-font1'>{currentDate.toLocaleDateString(local, { month: 'long', year: 'numeric' })}</p>
-        <div className="lg:flex hidden gap-5">
+        <p onClick={handleResetToToday} data-testid="current-date" className='font-semibold text-xl font-font1'>
+          {currentDate.toLocaleDateString(local, { month: 'long', year: 'numeric' })} </p>        
+          <div className="lg:flex hidden gap-5">
           <button data-testid="prev-button" className='w-fit px-6 py-2.5 rounded-lg bg-secondary text-font2 font-semibold text-sm' onClick={handlePrevWeek}>
             <ArrowRight className="rotate-180 fill-font2 h-5" />
           </button>
