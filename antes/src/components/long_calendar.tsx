@@ -18,15 +18,8 @@ type Props = {
 
 function formatDate(date: string): string {
   const convert = new Date(date)
-  const day = String(convert.getDate()).padStart(2, '0')
-  const month = String(convert.getMonth() + 1).padStart(2, '0')
-  const year = convert.getFullYear()
-
   const hours = String(convert.getHours()).padStart(2, '0')
   const minutes = String(convert.getMinutes()).padStart(2, '0')
-  const seconds = String(convert.getSeconds()).padStart(2, '0')
-
-  // return `${day}-${month}-${year} ${hours}:${minutes}:${seconds}`
   return `${hours}:${minutes}`
 }
 
@@ -56,9 +49,9 @@ export const LongCalendar = (props: Props) => {
     const startOfWeek = new Date(currentDate)
     const startDay = startDayMonday ? 1 : 0 // Adjust if the week starts on Monday
     startOfWeek.setDate(currentDate.getDate() - ((currentDate.getDay() + startDay) % 1))
-  
+
     const formattedDate = startOfWeek.getDate()
-  
+
     return [
       {
         abbreviated: startOfWeek.toLocaleDateString(local, { weekday: 'short' }),
@@ -163,18 +156,6 @@ export const LongCalendar = (props: Props) => {
     setCurrentDate(newDate)
   }
 
-  const handlePrevDay = () => {
-    const newDate = new Date(currentDate)
-    newDate.setDate(currentDate.getDate() - 1)
-    setCurrentDate(newDate)
-  }
-
-  const handleNextDay = () => {
-    const newDate = new Date(currentDate)
-    newDate.setDate(currentDate.getDate() + 1)
-    setCurrentDate(newDate)
-  }
-
   const handleResetToToday = () => {
     setCurrentDate(new Date())
   }
@@ -184,23 +165,10 @@ export const LongCalendar = (props: Props) => {
       <div className="flex lg:flex-row flex-col lg:justify-between items-center gap-5">
         <p onClick={handleResetToToday} className='font-semibold text-xl font-font1'>{currentDate.toLocaleDateString(local, { month: 'long', year: 'numeric' })}</p>
         <div className="lg:flex hidden gap-5">
-          {/* <button onClick={handlePrevWeek}><ArrowRight className='w-5 fill-extra rotate-180'/></button>
-          <button onClick={handleNextWeek}><ArrowRight className='w-5 fill-extra'/></button> */}
-          <button className='w-fit px-6 py-2.5 rounded-lg bg-secondary text-font2 font-semibold text-sm' onClick={handlePrevWeek}>
+          <button data-testid="prev-button" className='w-fit px-6 py-2.5 rounded-lg bg-secondary text-font2 font-semibold text-sm' onClick={handlePrevWeek}>
             <ArrowRight className="rotate-180 fill-font2 h-5" />
           </button>
-          <button className='w-fit px-6 py-2.5 rounded-lg bg-secondary text-font2 font-semibold text-sm' onClick={handleNextWeek}>
-            <ArrowRight className="fill-font2 h-5" />
-          </button>
-        </div>
-
-        <div className="flex lg:hidden gap-5">
-          {/* <button onClick={handlePrevWeek}><ArrowRight className='w-5 fill-extra rotate-180'/></button>
-          <button onClick={handleNextWeek}><ArrowRight className='w-5 fill-extra'/></button> */}
-          <button className='w-fit px-6 py-2.5 rounded-lg bg-secondary text-font2 font-semibold text-sm' onClick={handlePrevDay}>
-            <ArrowRight className="rotate-180 fill-font2 h-5" />
-          </button>
-          <button className='w-fit px-6 py-2.5 rounded-lg bg-secondary text-font2 font-semibold text-sm' onClick={handleNextDay}>
+          <button data-testid="next-button" className='w-fit px-6 py-2.5 rounded-lg bg-secondary text-font2 font-semibold text-sm' onClick={handleNextWeek}>
             <ArrowRight className="fill-font2 h-5" />
           </button>
         </div>
@@ -230,7 +198,7 @@ export const LongCalendar = (props: Props) => {
             <div className={`absolute grid grid-rows-hour w-full`}>
               {Array.from({ length: timesOfDayGrid }).map((_, rowIndex) => (
                 <div key={`row-${rowIndex}`} className={`${timesOfDayGrid - 1 === rowIndex ? ('') : ('border-b-[1px]')}`}></div>
-              ))} 
+              ))}
             </div>
             <div className={`absolute grid grid-cols-7 w-full h-full`}>
               {daysOfWeek.map((day, colIndex) => (

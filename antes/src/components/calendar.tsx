@@ -78,7 +78,7 @@ export default function Calender() {
     const currentDay = currentDate.getDate()
     const currentMonth = currentDate.getMonth() + 1
     const currentYear = currentDate.getFullYear()
-    
+
     return day.day === currentDay && day.month === currentMonth && day.year === currentYear
   }
 
@@ -110,9 +110,9 @@ export default function Calender() {
   return (
     <div className='max-w-full'>
       <div className='flex flex-row justify-between items-center w-full mt-8'>
-        <button onClick={goToPrevMonth}><ArrowRight className='w-5 fill-extra rotate-180'/></button>
-        <p onClick={resetToCurrentDate} className='font-semibold text-xl font-font1'>{monthName} {currentYear}</p>
-        <button onClick={goToNextMonth}><ArrowRight className='w-5 fill-extra'/></button>
+        <button data-testid="prev-button" onClick={goToPrevMonth}><ArrowRight className='w-5 fill-extra rotate-180' /></button>
+        <p data-testid="month-name" onClick={resetToCurrentDate} className='font-semibold text-xl font-font1'>{monthName} {currentYear}</p>
+        <button data-testid="next-button" onClick={goToNextMonth}><ArrowRight className='w-5 fill-extra' /></button>
       </div>
       <div className='text-font1 font-font2 overflow-x-auto'>
         <div className='w-max'>
