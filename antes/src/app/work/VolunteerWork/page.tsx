@@ -1,8 +1,7 @@
 "use client";
-
 import Link from "next/link";
 import SideMenuWork from '@/app/work/side_menu_work/page';
-import Nav from '@/app/components/home/nav'
+import Nav from '@/components/home/nav'
 
 export default function VolunteerWork() {
     return (

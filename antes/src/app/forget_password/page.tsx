@@ -1,10 +1,8 @@
 "use client"
-
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { Input } from '@/app/components/input';
+import { Input } from '@/components/input';
 import { useRouter } from 'next/navigation'
-
 
 const context = {
   logo: { url: "/", img: "/img/antes_logo.png", alt: "antes logo"},
@@ -22,7 +20,6 @@ export default function ResetPassword() {
     const email = formData.get('email');
     if (email) {
       setMessage("Email is verzonden.");
-      // update in database
       setTimeout(() => {
         router.push("/login");
       }, 2000)

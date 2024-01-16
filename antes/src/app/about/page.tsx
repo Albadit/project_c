@@ -1,8 +1,8 @@
 "use client";
 import Link from "next/link";
-import { AboutCard } from '@/app/components/home/about_card';
+import { AboutCard } from '@/components/home/about_card';
 import SideMenu from '@/app/about/side_menu_about/page';
-import Nav from '@/app/components/home/nav'
+import Nav from '@/components/home/nav'
 
 const aboutus1 = {
     id: 1,

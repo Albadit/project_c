@@ -1,77 +1,64 @@
 'use client'
 import React from 'react'
-import Footer from '@/app/components/footer'
-import { NavDashboard } from '@/app/components/dashboard/nav'
-import { QACard } from '@/app/components/qa_card'
-import { EventCard} from '@/app/components/event_card'
-import { ELearningCard } from '@/app/components/elearning_card'
+import Footer from '@/components/footer'
+import { NavDashboard } from '@/components/dashboard/nav'
 import { useSession } from 'next-auth/react'
+import { useEffect, useState } from 'react'
+import { useRouter } from 'next/navigation'
+import { QACard, QaProps } from '@/components/qa_card'
+import { EventCard, EventProps} from '@/components/event_card'
+import { ELearningCard, ElearningProps} from '@/components/dashboard/elearning_card'
+import { PostData, FetchData } from '@/components/functions'
+import { LoadingScreen, LoadingData, NoDataFind } from '@/components/loader'
 
-const qa = {
-  id: 1,
-  name: "Sara Leekman",
-  image: "/img/qa.png",
-  datetime: "12-12-2024",
-  title: "Suggesties voor beginner?",
-  latest_comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-  reactions: 12,
-  profile: "/img/profile.png",
-  url: "/qa/1",
+type HomeData = {
+  event: EventProps
+  qa: QaProps
+  elearning: ElearningProps
 }
 
-const event = {
-  id: 1,
-  image: "/img/event.png",
-  title: "Connectiedag!",
-  description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-  location: "Rotterdam",
-  date: "12-12-2024",
-  url: "/event",
-}
-
-const elearning = {
-  id: 1,
-  image: "img/e_learing.png",
-  title: "H1. Introduction.",
-  user_chapters: 8,
-  max_chapters: 11,
-  url: "/elearing",
-}
-
-const user = {
-  id: 1,
-  role_id: 1,
-  profile: "/img/profile.png",
-  first_name: "Sara",
-  last_name: "Leekman",
-  function_id: 3,
-  bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-  email: "saraleekman@outlook.com",
+type ApiResponse<T> = {
+  status: string
+  data: T
 }
 
 export default function Dashboard() {
+  const router = useRouter()
   const { data: session, status } = useSession()
-  console.log(session)
-  console.log(status)
+  const [data, setData] = useState<ApiResponse<HomeData> | null>(null)
+  const [isLoading, setLoading] = useState(true)
+
+  useEffect(() => {
+    FetchData(setData, setLoading, `/api/v1/cards/${session?.user.id}`)
+  }, [status, session?.user.id])
+
+  if (status === "loading") return <LoadingScreen/>
+  if (status === "unauthenticated") { router.push('/'); return null }
+
+  if (isLoading) return <LoadingScreen/> 
+  if (data?.status === "error") return <NoDataFind/>
+
   return (
     <>
-      <NavDashboard user={user}/>
+      <NavDashboard user={session?.user}/>
       <main className='flex flex-wrap justify-center m-auto p-5 my-12 max-w-[1280px]'>
         <section className='flex flex-col w-full gap-20'>
-          <h1 className='font-font1 font-bold text-center text-primary text-5xl'>Goeiedag {`${user.first_name} ${user.last_name}`}</h1>
+          <h1 className='font-font1 font-bold text-center text-primary text-5xl break-words'>Goedemorgen {session?.user?.name}</h1>
           <div className='flex flex-wrap justify-between gap-10 gap-y-20 [&>*]:flex-[1_1_525px]'>
-            <div className='flex flex-col items-center justify-center gap-10'>
+            <div className='flex flex-col items-center justify-top gap-10'>
               <h2 className='font-font1 font-semibold text-center text-primary text-3xl'>Nieuwste Q & A</h2>
-              <QACard qa={qa} />
+              {data && data.data.qa && <QACard qa={data.data.qa} />}
             </div>
-            <div className='flex flex-col items-center justify-center gap-10'>
+            <div className='flex flex-col items-center justify-top gap-10'>
               <h2 className='font-font1 font-semibold text-center text-primary text-3xl'>Nieuwste Evenement</h2>
-              <EventCard event={event}/>
+              {data && data.data.event && <EventCard event={data.data.event} />}
             </div>
-            <div className='flex flex-col items-center justify-center gap-10'>
-              <h2 className='font-font1 font-semibold text-center text-primary text-3xl'>E-learing progressie</h2>
-              <ELearningCard elearning={elearning}/>
-            </div>
+            {data && data.data.elearning ? (
+              <div className='flex flex-col items-center justify-top gap-10'>
+                <h2 className='font-font1 font-semibold text-center text-primary text-3xl'>E-learing progressie</h2>
+                {data && data.data.elearning && <ELearningCard elearning={data.data.elearning} />}
+              </div>
+            ) : (<></>)}
           </div>
         </section> 
       </main>

@@ -1,6 +1,6 @@
 "use client";
 import SideMenu from '@/app/about/side_menu_about/page';
-import Nav from '@/app/components/home/nav'
+import Nav from '@/components/home/nav'
 
 export default function Organogram() {
   return (
