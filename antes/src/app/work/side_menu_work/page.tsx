@@ -23,17 +23,19 @@ export default function SideMenuWork() {
   ];
 
   return (
-    <div className='flex flex-col gap-4'>
-      <div className={`${styles.sidebar}`}>
-        {links.map((l, i) => {
-          return (
-            <div key={i}>
-              <Link href={l.path}>
-                <span>{l.label}</span>
-              </Link>
-            </div>
-          );
-        })}
+    <div className='WorkSideMenu' data-testid="work-side-menu">
+      <div className='flex flex-col gap-4'>
+        <div className={`${styles.sidebar}`}>
+          {links.map((l, i) => {
+            return (
+              <div key={i} data-testid={`link-item-${l.label.toLowerCase().replace(/ /g, '-')}`}>
+                <Link href={l.path}>
+                  <span>{l.label}</span>
+                </Link>
+              </div>
+            );
+          })}
+        </div>
       </div>
     </div>
   );
