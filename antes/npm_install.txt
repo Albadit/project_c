@@ -14,4 +14,8 @@ npm install -D typescript ts-node @types/node
 npm i next-auth bcrypt
 npm i --save-dev @types/bcrypt
 
+npm install -D jest jest-environment-jsdom @testing-library/react @testing-library/jest-dom
+npm init jest@latest
+npm i --save-dev @types/jest
+
 docker compose -f "docker-compose-postgres.yaml" up -d --build
