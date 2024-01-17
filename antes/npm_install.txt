@@ -8,6 +8,7 @@ npm install @tailwindcss/typography
 npm install @tailwindcss/forms
 npm install @tailwindcss/aspect-ratio
 npm install @tailwindcss/container-queries
+npm install autoprefixer
 npm install @prisma/client @auth/prisma-adapter
 npm install prisma --save-dev
 npm install -D typescript ts-node @types/node
@@ -18,4 +19,5 @@ npm install -D jest jest-environment-jsdom @testing-library/react @testing-libra
 npm init jest@latest
 npm i --save-dev @types/jest
 
+# docker
 docker compose -f "docker-compose-postgres.yaml" up -d --build
