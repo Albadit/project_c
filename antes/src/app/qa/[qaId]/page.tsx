@@ -63,9 +63,7 @@ export default function Chat() {
 
   useEffect(() => {
     FetchData(setData, setLoading,`/api/v1/qa/${params.qaId}`)
-    // const interval = setInterval(fetchData, 1000)
-    // return () => clearInterval(interval)
-  }, [])
+  }, [params.qaId])
 
   const handleSubmit = async (e: any) => {
     e.preventDefault()

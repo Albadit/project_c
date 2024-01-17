@@ -41,7 +41,7 @@ export default function ElearningLesson() {
     if (status === "authenticated") {
       FetchData(setData, setLoading, `/api/v1/elearning/${session?.user.id}/${params.subjectId}/${params.lessonId}`)
     }
-  }, [status, session?.user.id])
+  }, [status, session?.user.id, params.subjectId, params.lessonId])
 
   if (status === "loading") return <LoadingScreen/>
   if (status === "unauthenticated") { router.push('/'); return null }

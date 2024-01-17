@@ -24,7 +24,7 @@ export default function ElearningQuiz() {
     if (status === "authenticated") {
       FetchData(setData, setLoading, `/api/v1/elearning/${session?.user.id}/${params.subjectId}/${params.lessonId}/${params.quizId}`)
     }
-  }, [status, session?.user.id])
+  }, [status, session?.user.id, params.subjectId, params.lessonId, params.quizId])
 
   if (status === "loading") return <LoadingScreen/>
   if (status === "unauthenticated") { router.push('/'); return null }

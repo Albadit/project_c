@@ -47,7 +47,7 @@ export default function Dashboard() {
 
   useEffect(() => {
     FetchData(setData, setLoading, `/api/v1/event/${params.eventId}`)
-  }, [])
+  }, [params.eventId])
 
   const handleSubmit = async (e: any) => {
     e.preventDefault()
