@@ -47,7 +47,7 @@ export async function POST(req: Request) {
         bio: null,
         email: body.email.toLowerCase(),
         emailVerified: null,
-        password: body.password,
+        password: null,
       }
     })
 
@@ -73,7 +73,6 @@ export async function PATCH(req: Request) {
       data: {
         name: body.name,
         email: body.email,
-        password: body.password,
         userFunctionId: body.userFunctionId,
         roleId: body.userRoleId,
       }
