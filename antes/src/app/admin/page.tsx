@@ -47,7 +47,7 @@ export default function Admin() {
   const openEditModal = (userId: number) => {
     setModalStates(prev => ({ ...prev, [userId]: true }))
   }
-  
+
   const closeEditModal = (userId: number) => {
     setModalStates(prev => ({ ...prev, [userId]: false }))
   }
@@ -61,13 +61,14 @@ export default function Admin() {
     FetchData(setDataUserFunction, setLoadingUserFunction, '/api/v1/user_function')
     FetchData(setDataUser, setLoadingUser, '/api/v1/user')
   }, [])
-  
+
   const handleSubmitAdd = async (e: any) => {
     e.preventDefault()
     const formData = new FormData(e.target)
     const form = e.target
     const name = formData.get('name')
     const email = formData.get('email')
+    const password = formData.get('password')
     const userFunction = formData.get('user_function')
     const userRole = formData.get('user_role')
 
@@ -75,6 +76,7 @@ export default function Admin() {
       const newUser = await PostData({
         name: name,
         email: email,
+        password: password,
         userFunctionId: userFunction,
         userRoleId: userRole,
       }, `/api/v1/user`)
@@ -99,6 +101,7 @@ export default function Admin() {
     const formData = new FormData(e.target)
     const name = formData.get(`name_${userId}`)
     const email = formData.get(`email_${userId}`)
+    const password = formData.get(`password_${userId}`)
     const userFunction = formData.get(`user_function_${userId}`)
     const userRole = formData.get(`user_role_${userId}`)
 
@@ -107,6 +110,7 @@ export default function Admin() {
         id: userId,
         name: name,
         email: email,
+        password: password,
         userFunctionId: userFunction,
         userRoleId: userRole,
       }, `/api/v1/user`)
@@ -135,23 +139,24 @@ export default function Admin() {
     }
   }
 
-  if (status === "loading") return <LoadingScreen/>
+  if (status === "loading") return <LoadingScreen />
   if (status === "unauthenticated") { router.push('/'); return null }
-  if (isLoadingUser && isLoadingUserFunction && isLoadingRole) return <LoadingScreen/> 
-  if (dataUser?.status === "error") return <NoDataFind/>
+  if (isLoadingUser && isLoadingUserFunction && isLoadingRole) return <LoadingScreen />
+  if (dataUser?.status === "error") return <NoDataFind />
   if ((session?.user?.level ?? 0) >= 2) { router.push('/'); return null }
 
   return (
     <>
-      <NavDashboard user={session?.user}/>
+      <NavDashboard user={session?.user} />
       <main className="flex flex-col justify-center items-center gap-8 p-5 my-12 ">
         <h1 className='font-font1 font-bold text-center text-primary text-5xl'>Gebruikers</h1>
         <section className='flex flex-col gap-5 font-font2 text-font1 max-w-[1000px] w-full'>
           <div className='flex flex-row justify-end'>
             <Modal title='Nieuw Gebruiker' isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}>
               <form onSubmit={handleSubmitAdd} className='flex flex-col gap-4 items-end'>
-                <Input label='Naam' name='name' type='text' value=''/>
-                <Input label='Email' name='email' type='email' value=''/>
+                <Input label='Naam' name='name' type='text' value='' />
+                <Input label='Email' name='email' type='email' value='' />
+                <Input label='Wachtwoord' name='password' type='password' value='' />
                 <SelectMenu label='Functie' name="user_function" options={dataUserFunction?.data as SelectOption[]} />
                 <SelectMenu label='Rol' name="user_role" options={dataRole?.data as SelectOption[]} />
                 <button type='submit' className='w-fit px-6 py-2.5 rounded-lg bg-secondary text-font2 font-semibold text-sm'>Opslaan</button>
@@ -178,13 +183,13 @@ export default function Admin() {
                     <td>{user.userFunctionName}</td>
                     <td>{user.roleName}</td>
                     <td className='flex flex-row gap-5'>
-                    <button onClick={() => openEditModal(index)} className='bg-[#ffc107] text-font1 w-fit px-6 py-2.5 rounded-lg font-semibold text-sm'>Aanpassen</button>
+                      <button onClick={() => openEditModal(index)} className='bg-[#ffc107] text-font1 w-fit px-6 py-2.5 rounded-lg font-semibold text-sm'>Aanpassen</button>
                       <Modal title='Aanpassen' bgcolor='bg-[#ffc107]' visibility={true} isModalOpen={modalStates[index]} setIsModalOpen={() => closeEditModal(index)}>
                         <form onSubmit={(e) => handleSubmitUpdate(e, user.id, index)} className='flex flex-col gap-4 items-end'>
-                          <Input label='Naam' name={`name_${user.id}`} type='text' value={user.name}/>
-                          <Input label='Email' name={`email_${user.id}`} type='email' value={user.email}/>
-                          <SelectMenu label='Functie' name={`user_function_${user.id}`} options={dataUserFunction?.data as SelectOption[]} index={user.userFunctionId}/>
-                          <SelectMenu label='Rol' name={`user_role_${user.id}`} options={dataRole?.data as SelectOption[]} index={user.roleId}/>
+                          <Input label='Naam' name={`name_${user.id}`} type='text' value={user.name} />
+                          <Input label='Email' name={`email_${user.id}`} type='email' value={user.email} />
+                          <SelectMenu label='Functie' name={`user_function_${user.id}`} options={dataUserFunction?.data as SelectOption[]} index={user.userFunctionId} />
+                          <SelectMenu label='Rol' name={`user_role_${user.id}`} options={dataRole?.data as SelectOption[]} index={user.roleId} />
                           <button type='submit' className='w-fit px-6 py-2.5 rounded-lg bg-secondary text-font2 font-semibold text-sm'>Opslaan</button>
                           {message ? (<p className='text-error'>{message}</p>) : (<></>)}
                         </form>
@@ -207,7 +212,7 @@ export default function Admin() {
           </div>
         </section>
       </main>
-      <Footer/>
+      <Footer />
     </>
   )
 }
