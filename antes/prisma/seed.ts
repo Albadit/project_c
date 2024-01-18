@@ -48,7 +48,7 @@ async function main() {
     data: {
       roleId: roleId.id,
       userFunctionId: userFunctionId.id,
-      name: 'Ardit Fazliji',
+      name: 'Pieter van Helder',
       email: 'admin@admin.com',
       emailVerified: null,
       password: await bcrypt.hash("admin", 10),
