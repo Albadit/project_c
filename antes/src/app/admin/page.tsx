@@ -53,8 +53,8 @@ export default function Admin() {
   }
 
   const toggleDeleteModal = (userId: number) => {
-    setDeleteModalStates(prev => ({ ...prev, [userId]: !prev[userId] }));
-  };
+    setDeleteModalStates(prev => ({ ...prev, [userId]: !prev[userId] }))
+  }
 
   useEffect(() => {
     FetchData(setDataRole, setLoadingRole, '/api/v1/role')
